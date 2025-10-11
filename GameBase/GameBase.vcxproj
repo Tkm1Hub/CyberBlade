@@ -139,6 +139,7 @@
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemySmall.cpp" />
     <ClCompile Include="EnemySmallDamageState.cpp" />
     <ClCompile Include="EnemySmall_FallState.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="EnemySmall.h" />
     <ClInclude Include="EnemySmallDamageState.h" />
     <ClInclude Include="EnemySmallStateBase.h" />

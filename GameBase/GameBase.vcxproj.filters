@@ -140,6 +140,9 @@
     <Filter Include="ソース ファイル\Scenes\ResultScene">
       <UniqueIdentifier>{2a87fa3f-cf15-49f5-ba8a-4c23b2dec287}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\EnemyManager">
+      <UniqueIdentifier>{5c0049dc-b355-40e5-a404-942f0d53f25d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -246,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>ソース ファイル\Scenes\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>ソース ファイル\EnemyManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -371,6 +377,9 @@
     </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>ソース ファイル\Scenes\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>ソース ファイル\EnemyManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
