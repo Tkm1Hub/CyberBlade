@@ -143,6 +143,9 @@
     <Filter Include="ソース ファイル\EnemyManager">
       <UniqueIdentifier>{5c0049dc-b355-40e5-a404-942f0d53f25d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameObject\Character\Enemy">
+      <UniqueIdentifier>{ea5f7754-2a75-49f1-9aad-5e666e890405}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -252,6 +255,9 @@
     </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
       <Filter>ソース ファイル\EnemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBase.cpp">
+      <Filter>ソース ファイル\GameObject\Character\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -380,6 +386,9 @@
     </ClInclude>
     <ClInclude Include="EnemyManager.h">
       <Filter>ソース ファイル\EnemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBase.h">
+      <Filter>ソース ファイル\GameObject\Character\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
