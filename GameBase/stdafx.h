@@ -1,0 +1,11 @@
+#pragma once
+#include <iostream>
+#include <fstream>
+#include <cassert>
+#include <memory>
+#include <vector>
+#include <unordered_map>
+#include <string_view>
+#include <algorithm>
+#include "DxLib.h"
+#include "EffekseerForDXLib.h"

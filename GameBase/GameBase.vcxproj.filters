@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\Include">
+      <UniqueIdentifier>{0af9f530-1010-49ae-8bea-733682a46338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scenes">
+      <UniqueIdentifier>{4f28e340-bfb5-46a3-b8f7-d33f75b26d96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\SceneLibrary">
+      <UniqueIdentifier>{54c5d2a0-daee-4c1a-b26d-078c703eea28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject">
+      <UniqueIdentifier>{f8a5ae9e-9166-4773-8852-2c111d8f3cd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Stage">
+      <UniqueIdentifier>{336fe2e2-ebe3-4a6c-b772-a311470c35a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ObjectManager">
+      <UniqueIdentifier>{35d94c7c-3d3d-4b6a-9b88-00ce3026042e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\SkyDome">
+      <UniqueIdentifier>{e5e621b2-f803-4996-be2f-06698306c296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Character">
+      <UniqueIdentifier>{f7f876e4-04d4-41b5-91f4-0246d8f516eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Character\Player">
+      <UniqueIdentifier>{a7c90c65-72b4-47ca-bea0-b1adcb8febb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Camera">
+      <UniqueIdentifier>{bba79c2c-8268-432d-95e8-2f988057e8fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Camera\MainCamera">
+      <UniqueIdentifier>{c9c684bf-aae2-4cfc-9c2c-c28a4d729b5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Camera\VirtualCamera">
+      <UniqueIdentifier>{cb94cb89-a238-45c9-afa5-0a0629d83193}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Camera\VirtualCamera\FreeCamera">
+      <UniqueIdentifier>{e63067cc-98ae-4f7a-8586-e23e1848b0fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Input">
+      <UniqueIdentifier>{91950adc-c156-408e-88c5-ec90138a7c62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CameraManager">
+      <UniqueIdentifier>{e9f226b0-c3b3-4bdf-907b-26d7ce5cd71a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Debug">
+      <UniqueIdentifier>{1f10b1b1-9c84-4b89-bac0-5493dfbb5bec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State">
+      <UniqueIdentifier>{32d399ca-8198-48bc-8046-9d77037af4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\StateMachine">
+      <UniqueIdentifier>{be46c1d3-5cac-4bfe-9a9b-6ee1f1ba022a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState">
+      <UniqueIdentifier>{75c1acf0-78ff-407f-b008-731d8dbaf62c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Stand">
+      <UniqueIdentifier>{5236d403-d58c-4ac1-8154-58f7e3839f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Jump">
+      <UniqueIdentifier>{e948ef37-f086-41be-8652-5453ad945786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Walk">
+      <UniqueIdentifier>{7a0ecb1a-8e82-419c-90e5-b7c6be2f47c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CameraManager\CameraSelector">
+      <UniqueIdentifier>{26d4197e-9320-4d73-a944-e88ac78e69e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CollisionManager">
+      <UniqueIdentifier>{0aa61170-7bad-486f-aca0-5a0bbadbb23f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CollisionManager\StageCollision">
+      <UniqueIdentifier>{67d2399f-7dfa-43a6-8777-d3bdd53cb2c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Fall">
+      <UniqueIdentifier>{f3b435b8-0825-4309-a1c5-1c8b925790e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ShadowManager">
+      <UniqueIdentifier>{aa266adc-f009-4807-b97b-f0420010d7a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Animation">
+      <UniqueIdentifier>{6e5c803a-a453-4780-ba31-305f075cfe89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Run">
+      <UniqueIdentifier>{71f673f2-98f6-4eeb-8cad-b3a61fd1f595}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Attack">
+      <UniqueIdentifier>{5c3a0efa-faa2-4131-80c8-885bf5092e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Attack\Attack2">
+      <UniqueIdentifier>{7e240232-3c88-4964-af96-fb2190ef83ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Character\EnemySmall">
+      <UniqueIdentifier>{17a10ecb-b650-4495-b13f-9a975c80fce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy">
+      <UniqueIdentifier>{aa63a537-2ed4-4517-876c-43dc4fdcc251}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemySmallState">
+      <UniqueIdentifier>{d25c8524-1423-4522-9c19-e25e310f8a53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemySmallState\Stand">
+      <UniqueIdentifier>{6691404e-34bd-4b14-894c-820703f16c9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Sword">
+      <UniqueIdentifier>{22330ca2-82b0-4837-a939-cf276c4ea348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemySmallState\Fall">
+      <UniqueIdentifier>{8c0e7637-ab77-4bd3-a3e0-88a2ca0e4f32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Attack\Attack1">
+      <UniqueIdentifier>{a90c7bbd-8e6f-4234-bd93-b4fc0f720264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Attack\Attack3">
+      <UniqueIdentifier>{15b1caf3-046c-44d4-98d1-adbbd16f5838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Attack\AttackDash">
+      <UniqueIdentifier>{65f78af6-4696-4539-a0f3-51a1e5378d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemySmallState\Damage">
+      <UniqueIdentifier>{7664f7ae-31dd-4b83-b4d5-967c4f7959e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\CheckPoint">
+      <UniqueIdentifier>{4bba9e66-6c69-49f5-bad9-6602a1358fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scenes\GameScene">
+      <UniqueIdentifier>{1558b165-e127-4f65-8a66-31e4618afff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scenes\TitleScene">
+      <UniqueIdentifier>{dcff5a39-fb4f-4c52-82dc-5bd891ea1bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scenes\ResultScene">
+      <UniqueIdentifier>{2a87fa3f-cf15-49f5-ba8a-4c23b2dec287}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>ソース ファイル\Include</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>ソース ファイル\SceneLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>ソース ファイル\SceneLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>ソース ファイル\GameObject\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>ソース ファイル\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCamera.cpp">
+      <Filter>ソース ファイル\GameObject\Camera\MainCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyDome.cpp">
+      <Filter>ソース ファイル\GameObject\SkyDome</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeCamera.cpp">
+      <Filter>ソース ファイル\GameObject\Camera\VirtualCamera\FreeCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraSelector.cpp">
+      <Filter>ソース ファイル\CameraManager\CameraSelector</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>ソース ファイル\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>ソース ファイル\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_StandState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Stand</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_JumpState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_WalkState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Walk</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>ソース ファイル\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StageCollision.cpp">
+      <Filter>ソース ファイル\CollisionManager\StageCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_FallState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Fall</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowManager.cpp">
+      <Filter>ソース ファイル\ShadowManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>ソース ファイル\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_RunState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Run</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Attack1State.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Attack\Attack1</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Attack2State.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Attack\Attack2</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySmall.cpp">
+      <Filter>ソース ファイル\GameObject\Character\EnemySmall</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySmall_StandState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Stand</Filter>
+    </ClCompile>
+    <ClCompile Include="Sword.cpp">
+      <Filter>ソース ファイル\GameObject\Sword</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySmall_FallState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Fall</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Attack3State.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Attack\Attack3</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_AttackDashState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Attack\AttackDash</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySmallDamageState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckPoint.cpp">
+      <Filter>ソース ファイル\GameObject\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソース ファイル\Scenes\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>ソース ファイル\Scenes\TitleScene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>ソース ファイル\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>ソース ファイル\SceneLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>ソース ファイル\SceneLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>ソース ファイル\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>ソース ファイル\GameObject\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>ソース ファイル\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MainCamera.h">
+      <Filter>ソース ファイル\GameObject\Camera\MainCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyDome.h">
+      <Filter>ソース ファイル\GameObject\SkyDome</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>ソース ファイル\GameObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ソース ファイル\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeCamera.h">
+      <Filter>ソース ファイル\GameObject\Camera\VirtualCamera\FreeCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraSelector.h">
+      <Filter>ソース ファイル\CameraManager\CameraSelector</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualCameraBase.h">
+      <Filter>ソース ファイル\GameObject\Camera\VirtualCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>ソース ファイル\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>ソース ファイル\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="StateBase.h">
+      <Filter>ソース ファイル\State</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>ソース ファイル\State\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStateBase.h">
+      <Filter>ソース ファイル\State\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_StandState.h">
+      <Filter>ソース ファイル\State\PlayerState\Stand</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_JumpState.h">
+      <Filter>ソース ファイル\State\PlayerState\Jump</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_WalkState.h">
+      <Filter>ソース ファイル\State\PlayerState\Walk</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>ソース ファイル\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StageCollision.h">
+      <Filter>ソース ファイル\CollisionManager\StageCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_FallState.h">
+      <Filter>ソース ファイル\State\PlayerState\Fall</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowManager.h">
+      <Filter>ソース ファイル\ShadowManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>ソース ファイル\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_RunState.h">
+      <Filter>ソース ファイル\State\PlayerState\Run</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Attack1State.h">
+      <Filter>ソース ファイル\State\PlayerState\Attack\Attack1</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Attack2State.h">
+      <Filter>ソース ファイル\State\PlayerState\Attack\Attack2</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySmall.h">
+      <Filter>ソース ファイル\GameObject\Character\EnemySmall</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySmallStateBase.h">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySmall_StandState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Stand</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.h">
+      <Filter>ソース ファイル\GameObject\Sword</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySmall_FallState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Fall</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Attack3State.h">
+      <Filter>ソース ファイル\State\PlayerState\Attack\Attack3</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_AttackDashState.h">
+      <Filter>ソース ファイル\State\PlayerState\Attack\AttackDash</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySmallDamageState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckPoint.h">
+      <Filter>ソース ファイル\GameObject\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ソース ファイル\Scenes\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>ソース ファイル\Scenes\TitleScene</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
