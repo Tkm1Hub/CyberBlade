@@ -27,6 +27,6 @@ private:
 	VECTOR offsetRot = { 0.0f,0.0f,0.0f };
 	std::shared_ptr<Player> owner = nullptr;
 
-	float HitRadius = 0.5f;
+	float HitRadius = 1.5f;
 	float HitHeight = 10.0f;
 };
