@@ -34,6 +34,11 @@ void Debug::Draw()
                 obj->GetHitHeight(), 32, GetColor(50, 50, 255));
         }
 	}
+
+    for (auto enemy : m_enemies)
+    {
+        DrawCapsule(enemy);
+    }
 }
 
 

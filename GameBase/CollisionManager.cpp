@@ -2,6 +2,7 @@
 #include "CollisionManager.h"
 #include "StageCollision.h"
 #include "Player.h"
+#include "EnemyManager.h"
 #include "EnemySmall.h"
 #include "Sword.h"
 #include "Stage.h"
@@ -55,21 +56,29 @@ void CollisionManager::Update()
 			obj->SetNextPosition(nextPos);
 		}
 	}
+
+    for (auto enemy : m_pEnemies)
+    {
+        VECTOR nextPos = stageCollision->CheckCollision(*enemy, enemy->GetNextPosition());
+        enemy->SetNextPosition(nextPos);
+    }
 }
 
 // “G‚Æ“‚Ì“–‚½‚è”»’è
 void CollisionManager::CheckSwordEnemyCollision()
 {
-    if (CheckCapsuleCollision(m_pEnemySmall, m_pSword))
+    for (auto enemy : m_pEnemies)
     {
-        if (!m_pEnemySmall->GetDamageFlag())
+        if (CheckCapsuleCollision(enemy, m_pSword))
         {
-            m_pEnemySmall->SetDamageFlag(true);
-            VECTOR knockBackDirection = CulcKnockBackDirection();
-            m_pEnemySmall->SetKnockBackDir(knockBackDirection);
+            if (!enemy->GetDamageFlag())
+            {
+                enemy->SetDamageFlag(true);
+                VECTOR knockBackDirection = CulcKnockBackDirection(enemy);
+                enemy->SetKnockBackDir(knockBackDirection);
+            }
         }
     }
-
 }
 
 // ƒJƒvƒZƒ‹“¯Žm‚Ì“–‚½‚è”»’è
@@ -163,12 +172,13 @@ float CollisionManager::DistanceSegmentToSegment(VECTOR p1, VECTOR q1, VECTOR p2
     return VSize(VSub(c1, c2));
 }
 
-VECTOR CollisionManager::CulcKnockBackDirection()
+VECTOR CollisionManager::CulcKnockBackDirection(const std::shared_ptr<EnemyBase>& enemy)
 {
     VECTOR playerPos = m_pPlayer->GetPosition();
-    VECTOR enemyPos = m_pEnemySmall->GetPosition();
+    VECTOR enemyPos = enemy->GetPosition();
 
     VECTOR directionEnemyToPlayer = VSub(playerPos, enemyPos);
+    directionEnemyToPlayer.y = 0.0f;
     directionEnemyToPlayer = VNorm(directionEnemyToPlayer);
     
     VECTOR knockBackDirection = VScale(directionEnemyToPlayer, -1.0f);

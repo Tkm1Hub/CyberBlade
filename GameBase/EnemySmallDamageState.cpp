@@ -6,6 +6,8 @@
 void EnemySmall_DamageState::OnStart()
 {
 	m_moveSpeed = m_pEnemySmall->GetParams().DamageSpeed;
+
+
 }
 
 void EnemySmall_DamageState::OnUpdate()

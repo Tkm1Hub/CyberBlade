@@ -1,5 +1,5 @@
 #pragma once
-#include "Character.h"
+#include "EnemyBase.h"
 #include "StateMachine.h"
 
 // ÉpÉâÉÅÅ[É^
@@ -13,15 +13,14 @@ struct EnemySmall_Params
 };
 
 class EnemySmallStateBase;
-class EnemySmall :public Character
+class EnemySmall :public EnemyBase
 {
 public:
-	EnemySmall(const std::string& name):Character(name){}
+	EnemySmall(const std::string& name):EnemyBase(name){}
 
 	void Init() override;
 	void Load() override;
 	void Update() override;
-	void Draw() override;
 
 	void SetDamageFlag(bool flag) { isDamage = flag; }
 	const bool GetDamageFlag() const { return isDamage; }
@@ -47,5 +46,4 @@ private:
 
 	bool isDamage = false;
 
-	void Move();
 };

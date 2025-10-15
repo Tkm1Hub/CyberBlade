@@ -39,9 +39,11 @@ void GameScene::Init()
 	objectMgr->LoadAll();
 
 	collisionMgr->SetObjects(objectMgr->GetObjects());
+	collisionMgr->SetEnemies(objectMgr->GetEnemies());
 	collisionMgr->Init();
 
 	debug->SetObjects(objectMgr->GetObjects());
+	debug->SetEnemies(objectMgr->GetEnemies());
 
 	shadowMgr->Init();
 }

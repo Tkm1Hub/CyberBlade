@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ObjectManager.h"
+#include "EnemyManager.h"
 #include "MainCamera.h"
 #include "FreeCamera.h"
 #include "SkyDome.h"
@@ -14,8 +15,8 @@ void ObjectManager::Create()
 	stage = std::make_shared<Stage>("Stage");
 	player = std::make_shared<Player>("Player");
 	sword = std::make_shared<Sword>("Sword");
-	enemySmall = std::make_shared<EnemySmall>("EnemySmall");
 	checkPoint = std::make_shared<CheckPoint>("CheckPoint");
+	enemyMgr = std::make_shared<EnemyManager>();
 
 
 	sword->SetOwner(player);
@@ -25,8 +26,14 @@ void ObjectManager::Create()
 	AddObject(stage);
 	AddObject(player);
 	AddObject(sword);
-	AddObject(enemySmall);
 	AddObject(checkPoint);
+
+	enemyMgr->AddEnemy(std::make_shared<EnemySmall>("EnemySmall1"), VGet(0, 0, 30));
+}
+
+const std::vector<std::shared_ptr<EnemyBase>>& ObjectManager::GetEnemies() const
+{
+	return enemyMgr->GetEnemies();
 }
 
 void ObjectManager::AddObject(std::shared_ptr<IGameObject> obj)
@@ -58,6 +65,8 @@ void ObjectManager::InitAll()
 	{
 		obj->Init();
 	}
+
+	enemyMgr->Init();
 }
 
 /// <summary>
@@ -69,6 +78,8 @@ void ObjectManager::LoadAll()
 	{
 		obj->Load();
 	}
+
+	enemyMgr->Load();
 }
 
 /// <summary>
@@ -80,6 +91,8 @@ void ObjectManager::UpdateAll()
 	{
 		obj->Update();
 	}
+
+	enemyMgr->Update();
 }
 
 
@@ -99,6 +112,8 @@ void ObjectManager::ApplyCollision()
 			}
 		}
 	}
+
+	enemyMgr->ApplyCollision();
 }
 
 /// <summary>
@@ -110,4 +125,6 @@ void ObjectManager::DrawAll()
 	{
 		obj->Draw();
 	}
+
+	enemyMgr->Draw();
 }
