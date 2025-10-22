@@ -29,6 +29,7 @@ void ObjectManager::Create()
 	AddObject(checkPoint);
 
 	enemyMgr->AddEnemy(std::make_shared<EnemySmall>("EnemySmall1"), VGet(0, 0, 30));
+	enemyMgr->AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 40));
 }
 
 const std::vector<std::shared_ptr<EnemyBase>>& ObjectManager::GetEnemies() const
@@ -93,6 +94,8 @@ void ObjectManager::UpdateAll()
 	}
 
 	enemyMgr->Update();
+
+	enemyMgr->RemoveDeadEnemies();
 }
 
 

@@ -18,6 +18,7 @@ struct PlayerParams
 	float Accel = 0.01f;		// 移動加速度
 	float decel = 0.03f;		// 移動減速度
 	float AngleSpeed = 0.2f;	// 移動時のモデル回転速度
+	float lockOnRange = 60.0f;	// ロックオン可能距離
 	float HitRadius = 3.0f;		// 当たり判定半径
 	float HitHeight = 16.5f;	// 当たり判定高さ
 	VECTOR InitPos = { 0.0f,0.0f,0.0f };	// 初期座標
@@ -41,6 +42,7 @@ enum class PlayerAnimState :int
 	AttackDash = 12,	// 走り攻撃
 };
 
+class EnemyBase;
 class PayerStateBase;
 class Player :public Character
 {
@@ -82,14 +84,18 @@ private:
 
 	MATRIX handMatrix;
 
+	std::shared_ptr<EnemyBase> lockOnTarget = nullptr;	// ロックオン対象
+
 	int handBoneIndex = -1;		// 手のボーンの番号
 
 	bool isRunning = false;		// 走っているか
 	bool isAttack = false;		// 攻撃中か
+	bool isLockOn = false;		// ロックオン常態か
 
 	void Move();	// モデルの移動
 	void CulcMoveSpeed();	// 移動速度の計算
 
 	void UpdateAngle();			// モデルの角度更新
-
+	void ToggleLockOn(const std::vector<std::shared_ptr<EnemyBase>>& enemies);		// ロックオン切り替え
+	void SearchNearestEnemy(const std::vector<std::shared_ptr<EnemyBase>>& enemies);
 };

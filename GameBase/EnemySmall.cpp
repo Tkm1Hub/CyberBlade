@@ -9,8 +9,7 @@ void EnemySmall::Init()
 	isStageCollisionEnabled = true;
 	isCollisionEnabled = true;
 	isShadowEnabled = true;
-
-	pos = params.InitPos;
+	hp = params.max_hp;
 
 	auto spStandState = std::make_shared<EnemySmall_StandState>();
 	ChangeState(spStandState);
@@ -36,6 +35,11 @@ void EnemySmall::Update()
 
 	// Ÿ‚ÌÀ•W‚ğŒvZ
 	Move();
+
+	if (hp <= 0)
+	{
+		isDead = true;
+	}
 }
 
 

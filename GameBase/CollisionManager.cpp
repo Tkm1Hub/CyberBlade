@@ -74,6 +74,7 @@ void CollisionManager::CheckSwordEnemyCollision()
             if (!enemy->GetDamageFlag())
             {
                 enemy->SetDamageFlag(true);
+                enemy->ApplyDamage(20);
                 VECTOR knockBackDirection = CulcKnockBackDirection(enemy);
                 enemy->SetKnockBackDir(knockBackDirection);
             }

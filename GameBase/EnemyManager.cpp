@@ -43,3 +43,27 @@ void EnemyManager::RemoveDeadEnemies()
             }),
         enemies.end());
 }
+
+VECTOR EnemyManager::GetNearestEnemyPos(const VECTOR& playerPos)const
+{
+    VECTOR nearestPos = VGet(0.0f, 0.0f, 0.0f);
+    float nearestDist = FLT_MAX;    // ˆê”Ô¬‚³‚¢‹——£‚ð•Û‘¶
+
+    for (const auto& enemy : enemies)
+    {
+        // –³Œø or Ž€–S‚µ‚½“G‚ÍƒXƒLƒbƒv
+        if (!enemy || enemy->GetIsDead()) continue;
+
+        // ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ðŒvŽZ
+        float dist = VSize(VSub(enemy->GetPosition(), playerPos));
+
+        // ‚æ‚è‹ß‚¢“G‚ð”­Œ©
+        if (dist < nearestDist)
+        {
+            nearestDist = dist;
+            nearestPos = enemy->GetPosition();
+        }
+    }
+
+    return nearestPos;
+}

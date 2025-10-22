@@ -5,6 +5,8 @@
 // パラメータ
 struct EnemySmall_Params
 {
+	int max_hp = 120;
+
 	float Gravity = 0.08f;		// 重力
 	float DamageSpeed = 1.5f;	// ダメージ中ノックバックの速度
 	float HitRadius = 4.0f;		// 当たり判定半径
@@ -22,13 +24,7 @@ public:
 	void Load() override;
 	void Update() override;
 
-	void SetDamageFlag(bool flag) { isDamage = flag; }
-	const bool GetDamageFlag() const { return isDamage; }
-
 	void ChangeState(std::shared_ptr<EnemySmallStateBase> a_spState);
-
-	VECTOR GetKnockBackDir()const { return knockBackDir; }
-	void SetKnockBackDir(const VECTOR& direction) { knockBackDir = direction; }
 
 	const float GetHitRadius() const override { return params.HitRadius; }
 	const float GetHitHeight() const override { return params.HitHeight; }
@@ -41,9 +37,5 @@ public:
 private:
 	EnemySmall_Params params;	// パラメータ
 	StateMachine stateMachine;	// ステートマシン
-
-	VECTOR knockBackDir = { 0.0f,0.0f,0.0f };
-
-	bool isDamage = false;
 
 };

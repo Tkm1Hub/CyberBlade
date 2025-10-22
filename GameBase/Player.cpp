@@ -42,6 +42,8 @@ void Player::Update()
 		moveVec = GetMoveInput();
 	}
 
+
+
 	// ステートの更新
 	stateMachine.Update();
 
@@ -262,4 +264,18 @@ VECTOR Player::GetMoveInput()
 	}
 
 	return mVec;
+}
+
+void Player::ToggleLockOn(const std::vector<std::shared_ptr<EnemyBase>>& enemies)
+{
+	// Lボタンで切り替え
+	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_5)
+	{
+		isLockOn != isLockOn;
+	}
+}
+
+void Player::SearchNearestEnemy(const std::vector<std::shared_ptr<EnemyBase>>& enemies)
+{
+
 }

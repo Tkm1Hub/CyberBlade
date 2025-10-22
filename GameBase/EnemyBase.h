@@ -13,6 +13,8 @@ public:
 	void SetDamageFlag(bool flag) { isDamage = flag; }
 	const bool GetDamageFlag() const { return isDamage; }
 
+	void SetHp(int newHp) { hp = newHp; }
+	const int GetHp() const { return hp; }
 
 	VECTOR GetKnockBackDir()const { return knockBackDir; }
 	void SetKnockBackDir(const VECTOR& direction) { knockBackDir = direction; }

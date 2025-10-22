@@ -12,8 +12,9 @@ void EnemySmall_StandState::OnStart()
 
 void EnemySmall_StandState::OnUpdate()
 {
+	bool damageFlag = m_pEnemySmall->GetDamageFlag();
 	// ダメージを食らったらステート変更
-	if (m_pEnemySmall->GetDamageFlag())
+	if (damageFlag)
 	{
 		auto spDamageState = std::make_shared<EnemySmall_DamageState>();
 		m_pEnemySmall->ChangeState(spDamageState);
