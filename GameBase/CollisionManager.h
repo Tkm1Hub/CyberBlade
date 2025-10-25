@@ -33,7 +33,6 @@ private:
 	std::shared_ptr<EnemySmall> m_pEnemySmall = nullptr;
 	std::shared_ptr<Sword> m_pSword = nullptr;
 	std::shared_ptr<Stage> m_pStage = nullptr;
-	std::shared_ptr<EnemyManager> m_pEnemyMgr = nullptr;
 
 	// “G‚Æ“‚Ì“–‚½‚è”»’è
 	void CheckSwordEnemyCollision();

@@ -5,6 +5,7 @@
 #include "CameraManager.h"
 #include "Input.h"
 #include "ShadowManager.h"
+#include "EnemyManager.h"
 #include "Debug.h"
 GameScene::GameScene(SceneManager& manager)
 	: Scene{manager}{
@@ -39,11 +40,10 @@ void GameScene::Init()
 	objectMgr->LoadAll();
 
 	collisionMgr->SetObjects(objectMgr->GetObjects());
-	collisionMgr->SetEnemies(objectMgr->GetEnemies());
+	collisionMgr->SetEnemies(EnemyManager::GetEnemyManager().GetEnemies());
 	collisionMgr->Init();
 
 	debug->SetObjects(objectMgr->GetObjects());
-	debug->SetEnemies(objectMgr->GetEnemies());
 
 	shadowMgr->Init();
 }

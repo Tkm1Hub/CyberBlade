@@ -16,7 +16,6 @@ void ObjectManager::Create()
 	player = std::make_shared<Player>("Player");
 	sword = std::make_shared<Sword>("Sword");
 	checkPoint = std::make_shared<CheckPoint>("CheckPoint");
-	enemyMgr = std::make_shared<EnemyManager>();
 
 
 	sword->SetOwner(player);
@@ -28,13 +27,8 @@ void ObjectManager::Create()
 	AddObject(sword);
 	AddObject(checkPoint);
 
-	enemyMgr->AddEnemy(std::make_shared<EnemySmall>("EnemySmall1"), VGet(0, 0, 30));
-	enemyMgr->AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 40));
-}
-
-const std::vector<std::shared_ptr<EnemyBase>>& ObjectManager::GetEnemies() const
-{
-	return enemyMgr->GetEnemies();
+	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall1"), VGet(0, 0, 30));
+	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 40));
 }
 
 void ObjectManager::AddObject(std::shared_ptr<IGameObject> obj)
@@ -67,7 +61,7 @@ void ObjectManager::InitAll()
 		obj->Init();
 	}
 
-	enemyMgr->Init();
+	EnemyManager::GetEnemyManager().Init();
 }
 
 /// <summary>
@@ -80,7 +74,7 @@ void ObjectManager::LoadAll()
 		obj->Load();
 	}
 
-	enemyMgr->Load();
+	EnemyManager::GetEnemyManager().Load();
 }
 
 /// <summary>
@@ -93,9 +87,9 @@ void ObjectManager::UpdateAll()
 		obj->Update();
 	}
 
-	enemyMgr->Update();
+	EnemyManager::GetEnemyManager().Update();
 
-	enemyMgr->RemoveDeadEnemies();
+	EnemyManager::GetEnemyManager().RemoveDeadEnemies();
 }
 
 
@@ -116,7 +110,7 @@ void ObjectManager::ApplyCollision()
 		}
 	}
 
-	enemyMgr->ApplyCollision();
+	EnemyManager::GetEnemyManager().ApplyCollision();
 }
 
 /// <summary>
@@ -129,5 +123,5 @@ void ObjectManager::DrawAll()
 		obj->Draw();
 	}
 
-	enemyMgr->Draw();
+	EnemyManager::GetEnemyManager().Draw();
 }

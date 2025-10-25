@@ -27,11 +27,6 @@ void CollisionManager::Init()
 		{
 			m_pPlayer = std::dynamic_pointer_cast<Player>(obj);
 		}
-		// “G‚Ìƒ|ƒCƒ“ƒ^‚ð“n‚·
-		if (obj->GetName() == "EnemySmall")
-		{
-			m_pEnemySmall = std::dynamic_pointer_cast<EnemySmall>(obj);
-		}
 		// “‚Ìƒ|ƒCƒ“ƒ^‚ð“n‚·
 		if (obj->GetName() == "Sword")
 		{

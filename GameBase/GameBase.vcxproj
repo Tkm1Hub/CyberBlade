@@ -145,6 +145,7 @@
     <ClCompile Include="EnemySmallDamageState.cpp" />
     <ClCompile Include="EnemySmall_FallState.cpp" />
     <ClCompile Include="EnemySmall_StandState.cpp" />
+    <ClCompile Include="LockOnCamera.cpp" />
     <ClCompile Include="Player_Attack1State.cpp" />
     <ClCompile Include="Player_Attack2State.cpp" />
     <ClCompile Include="Player_Attack3State.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="EnemySmallStateBase.h" />
     <ClInclude Include="EnemySmall_FallState.h" />
     <ClInclude Include="EnemySmall_StandState.h" />
+    <ClInclude Include="LockOnCamera.h" />
     <ClInclude Include="PlayerStateBase.h" />
     <ClInclude Include="Player_Attack1State.h" />
     <ClInclude Include="Player_Attack2State.h" />

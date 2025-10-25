@@ -7,6 +7,7 @@
 #include "Player_JumpState.h"
 #include "Player_FallState.h"
 #include "Player_RunState.h"
+#include "EnemyManager.h"
 
 void Player::Init()
 {
@@ -275,7 +276,14 @@ void Player::ToggleLockOn(const std::vector<std::shared_ptr<EnemyBase>>& enemies
 	}
 }
 
-void Player::SearchNearestEnemy(const std::vector<std::shared_ptr<EnemyBase>>& enemies)
+VECTOR Player::GetNearestEnemyDir()
 {
+	VECTOR playerPos = pos;
+	VECTOR enemyPos = EnemyManager::GetEnemyManager().GetNearestEnemyPos(playerPos);
 
+	VECTOR direction = VSub(enemyPos, playerPos);
+	direction = VNorm(direction);
+	direction.y = 0;
+
+	return direction;
 }

@@ -77,6 +77,7 @@ public:
 
 	Animation animation;		// アニメーション
 	const PlayerParams GetParams() const { return params; }
+	VECTOR GetNearestEnemyDir();
 
 private:
 	StateMachine stateMachine;	// ステートマシン
@@ -97,5 +98,4 @@ private:
 
 	void UpdateAngle();			// モデルの角度更新
 	void ToggleLockOn(const std::vector<std::shared_ptr<EnemyBase>>& enemies);		// ロックオン切り替え
-	void SearchNearestEnemy(const std::vector<std::shared_ptr<EnemyBase>>& enemies);
 };

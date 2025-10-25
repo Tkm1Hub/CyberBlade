@@ -146,6 +146,9 @@
     <Filter Include="ソース ファイル\GameObject\Character\Enemy">
       <UniqueIdentifier>{ea5f7754-2a75-49f1-9aad-5e666e890405}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameObject\Camera\VirtualCamera\LockOnCamera">
+      <UniqueIdentifier>{ff010e72-953c-4ba8-b6ad-8ca899b60219}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -258,6 +261,9 @@
     </ClCompile>
     <ClCompile Include="EnemyBase.cpp">
       <Filter>ソース ファイル\GameObject\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="LockOnCamera.cpp">
+      <Filter>ソース ファイル\GameObject\Camera\VirtualCamera\LockOnCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -389,6 +395,9 @@
     </ClInclude>
     <ClInclude Include="EnemyBase.h">
       <Filter>ソース ファイル\GameObject\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="LockOnCamera.h">
+      <Filter>ソース ファイル\GameObject\Camera\VirtualCamera\LockOnCamera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

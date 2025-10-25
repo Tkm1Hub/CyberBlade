@@ -3,7 +3,25 @@
 class EnemyBase;
 class EnemyManager
 {
+private:
+	// コンストラクタを非公開にする
+	EnemyManager(){}
+
+	// コピーコンストラクタと代入演算子を削除
+	EnemyManager(const EnemyManager&) = delete;
+	EnemyManager& operator=(const EnemyManager&) = delete;
+
+	//プライベートデストラクタ
+	~EnemyManager() {}
 public:
+
+	// インスタンスを取得するためのメソッド
+	static EnemyManager& GetEnemyManager()
+	{
+		static EnemyManager instance;      // 静的変数としてインスタンスを定義
+		return instance;
+	}
+
 	void AddEnemy(std::shared_ptr<EnemyBase> enemy,const VECTOR& initPos);
 
 	void Init();
