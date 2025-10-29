@@ -25,6 +25,9 @@ void GameScene::Init()
 	// オブジェクトの生成
 	objectMgr->Create();
 
+	// オブジェクトの初期化
+	objectMgr->InitAll();
+	objectMgr->LoadAll();
 	// shared_ptr -> weak_ptr に変換
 	std::vector<std::weak_ptr<IGameObject>> weakObjects;
 	for (auto& obj : objectMgr->GetObjects()) {
@@ -35,9 +38,6 @@ void GameScene::Init()
 	CameraManager::GetCameraManager().SetObjects(weakObjects);
 	CameraManager::GetCameraManager().Create();
 
-	// オブジェクトの初期化
-	objectMgr->InitAll();
-	objectMgr->LoadAll();
 
 	collisionMgr->SetObjects(objectMgr->GetObjects());
 	collisionMgr->SetEnemies(EnemyManager::GetEnemyManager().GetEnemies());

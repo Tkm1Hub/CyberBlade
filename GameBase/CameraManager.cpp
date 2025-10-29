@@ -1,10 +1,18 @@
 #include "stdafx.h"
 #include "CameraManager.h"
 #include "CameraSelector.h"
+#include "LockOnCamera.h"
 #include "Player.h"
 
 void CameraManager::Create()
 {
+	// 二重作成を防ぐ
+	//if (!cameras.empty())
+	//{
+	//	printf("CameraManager::Create() が複数回呼ばれました！スキップします。\n");
+	//	return;
+	//}
+
 	for (auto& objWeak : objects)
 	{
 		if (auto obj = objWeak.lock())
@@ -24,9 +32,12 @@ void CameraManager::Create()
 	freeCamera = std::make_shared<FreeCamera>("FreeCamera");
 	freeCamera->Init();
 	freeCamera->SetPlayer(player);
+	lockOnCamera = std::make_shared<LockOnCamera>("LockOnCamera");
+	lockOnCamera->SetPlayer(player);
 
 	// カメラをリストに追加
 	AddCamera(freeCamera);
+	AddCamera(lockOnCamera);
 
 	auto cameraList = std::make_shared<std::vector<std::shared_ptr<VirtualCameraBase>>>(cameras);
 
@@ -35,7 +46,12 @@ void CameraManager::Create()
 
 void CameraManager::AddCamera(std::shared_ptr<VirtualCameraBase> camera)
 {
-	cameras.push_back(camera);
+	// 既に同じカメラが登録済みなら追加しない
+	//auto it = std::find(cameras.begin(), cameras.end(), camera);
+	//if (it == cameras.end())
+	//{
+		cameras.push_back(camera);
+	//}
 }
 
 void CameraManager::Init()
@@ -52,4 +68,9 @@ void CameraManager::Update()
 
 	cameraSelector->Update(mainCamera);
 	mainCamera->Update();
+}
+
+void CameraManager::ChangeCamera(int cameraIndex)
+{
+	cameraSelector->SetCurrentIndex(cameraIndex);
 }

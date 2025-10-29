@@ -11,12 +11,18 @@
 #include "CheckPoint.h"
 void ObjectManager::Create()
 {
+	// 二重作成を防ぐ
+	if (!objects.empty())
+	{
+		printf("ObjectManager::Create() が複数回呼ばれました！スキップします。\n");
+		return;
+	}
+
 	skyDome = std::make_shared<SkyDome>("SkyDome");
 	stage = std::make_shared<Stage>("Stage");
 	player = std::make_shared<Player>("Player");
 	sword = std::make_shared<Sword>("Sword");
 	checkPoint = std::make_shared<CheckPoint>("CheckPoint");
-
 
 	sword->SetOwner(player);
 	skyDome->SetOwner(player);

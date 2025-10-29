@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CameraSelector.h"
 #include "FreeCamera.h"
 #include "MainCamera.h"
@@ -6,16 +6,20 @@
 void CameraSelector::Update(std::shared_ptr<MainCamera>& mainCamera)
 {
     if (!cameraList) {
-        // cameraList‚ªnullptr‚Ìê‡A‚±‚±‚ÅŒxƒƒbƒZ[ƒW‚ğo‚·
+        // cameraListãŒnullptrã®å ´åˆã€ã“ã“ã§è­¦å‘Šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºã™
         std::cerr << "cameraList is nullptr!" << std::endl;
         return;
     }
 
     if (cameraList->empty()) {
-        // cameraList‚ª‹ó‚Ìê‡A‚±‚±‚ÅŒxƒƒbƒZ[ƒW‚ğo‚·
+        // cameraListãŒç©ºã®å ´åˆã€ã“ã“ã§è­¦å‘Šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºã™
         std::cerr << "cameraList is empty!" << std::endl;
         return;
     }
+
+    // å…¥åŠ›ã§ã‚«ãƒ¡ãƒ©åˆ‡ã‚Šæ›¿ãˆï¼ˆä¾‹ï¼š1ã‚­ãƒ¼ã€œ2ã‚­ãƒ¼ï¼‰
+    if (CheckHitKey(KEY_INPUT_1)) currentIndex =2;
+    if (CheckHitKey(KEY_INPUT_2)) currentIndex = 3;
 
 	auto& currentCam = (*cameraList)[currentIndex];
 

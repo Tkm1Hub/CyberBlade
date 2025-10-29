@@ -31,6 +31,8 @@ public:
 	void ApplyCollision();
 	void RemoveDeadEnemies();
 	VECTOR GetNearestEnemyPos(const VECTOR& playerPos)const;
+	std::shared_ptr<EnemyBase> GetNearestEnemy(const VECTOR& playerPos);
+
 
 	const std::vector<std::shared_ptr<EnemyBase>>& GetEnemies() const { return enemies; }
 

@@ -48,6 +48,7 @@ class Player :public Character
 {
 public:
 	Player(const std::string& name) : Character(name){}
+	virtual ~Player() {}
 
 	void Init() override;
 	void Load() override;
@@ -62,11 +63,15 @@ public:
 	void SetAttackFrag(bool flag) { isAttack = flag; }
 
 	const bool GetIsAttack()const { return isAttack; }
+	const bool GetIsLockOn() const { return isLockOn; }
 
 	const float GetHitRadius() const override { return params.HitRadius; }
 	const float GetHitHeight() const override { return params.HitHeight; }
 
 	const MATRIX GetHandMatrix()const { return handMatrix; }
+
+	const VECTOR GetAttackDir() const { return attackDir; }
+	const std::shared_ptr<EnemyBase> GetLockOnTarget() { return lockOnTarget; }
 
 	void OnHitRoof() override;       // 天井に当たった時
 	void OnHitFloor() override;      // 床に当たった時
@@ -77,15 +82,15 @@ public:
 
 	Animation animation;		// アニメーション
 	const PlayerParams GetParams() const { return params; }
-	VECTOR GetNearestEnemyDir();
 
 private:
 	StateMachine stateMachine;	// ステートマシン
 	PlayerParams params;		// パラメータ
 
+	std::shared_ptr<EnemyBase> lockOnTarget = nullptr;	// ロックオン対象
 	MATRIX handMatrix;
 
-	std::shared_ptr<EnemyBase> lockOnTarget = nullptr;	// ロックオン対象
+	VECTOR attackDir;
 
 	int handBoneIndex = -1;		// 手のボーンの番号
 
@@ -97,5 +102,6 @@ private:
 	void CulcMoveSpeed();	// 移動速度の計算
 
 	void UpdateAngle();			// モデルの角度更新
-	void ToggleLockOn(const std::vector<std::shared_ptr<EnemyBase>>& enemies);		// ロックオン切り替え
+	void ToggleLockOn();		// ロックオン切り替え
+	VECTOR GetNearestEnemyDir();	// 一番近くの敵への方向ベクトル取得
 };

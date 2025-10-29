@@ -21,7 +21,7 @@ void Player_Attack2State::OnUpdate()
 	m_frameCount++;
 
 	// 向いている方向を移動ベクトルとして保存
-	VECTOR moveVec = m_pPlayer->GetTargetMoveDirection();
+	VECTOR moveVec = m_pPlayer->GetAttackDir();
 	m_pPlayer->SetMoveVec(moveVec);
 	// 攻撃中の移動速度を付与
 	if (moveSpeed > 0.0f) moveSpeed -= 0.02f;

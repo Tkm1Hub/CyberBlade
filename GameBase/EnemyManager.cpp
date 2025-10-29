@@ -67,3 +67,24 @@ VECTOR EnemyManager::GetNearestEnemyPos(const VECTOR& playerPos)const
 
     return nearestPos;
 }
+
+std::shared_ptr<EnemyBase> EnemyManager::GetNearestEnemy(const VECTOR& playerPos)
+{
+    std::shared_ptr<EnemyBase> nearestEnemy = nullptr;  // ‰Šú‚Í nullptr
+    float nearestDist = FLT_MAX;                        // Å¬‹——£‚ð‰Šú‰»
+
+    for (const auto& enemy : enemies)
+    {
+        if (!enemy || enemy->GetIsDead()) continue;    // –³Œø‚È“G‚âŽ€‚ñ‚Å‚é“G‚ÍƒXƒLƒbƒv
+
+        float dist = VSize(VSub(enemy->GetPosition(), playerPos));
+
+        if (dist < nearestDist)
+        {
+            nearestDist = dist;
+            nearestEnemy = enemy;  // ˆê”Ô‹ß‚¢“G‚ð•Û‘¶
+        }
+    }
+
+    return nearestEnemy;  // nullptr ‚©AÅ‚à‹ß‚¢“G‚Ì shared_ptr
+}

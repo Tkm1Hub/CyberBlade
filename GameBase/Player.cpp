@@ -43,7 +43,12 @@ void Player::Update()
 		moveVec = GetMoveInput();
 	}
 
-
+	// ロックオン切り替え
+	// Lボタンで切り替え
+	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_5)
+	{
+		ToggleLockOn();
+	}
 
 	// ステートの更新
 	stateMachine.Update();
@@ -267,12 +272,27 @@ VECTOR Player::GetMoveInput()
 	return mVec;
 }
 
-void Player::ToggleLockOn(const std::vector<std::shared_ptr<EnemyBase>>& enemies)
+void Player::ToggleLockOn()
 {
-	// Lボタンで切り替え
-	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_5)
+	// フラグ切り替え
+	isLockOn = !isLockOn;
+
+	if (isLockOn)
 	{
-		isLockOn != isLockOn;
+		lockOnTarget = EnemyManager::GetEnemyManager().GetNearestEnemy(pos);
+
+		CameraManager::GetCameraManager().ChangeCamera(3);
+
+		// 攻撃の方向ベクトルをロックオン対象方向に変更
+		attackDir = GetNearestEnemyDir();
+	}
+	else
+	{
+		lockOnTarget = nullptr;
+		CameraManager::GetCameraManager().ChangeCamera(2);
+
+		// 攻撃の方向ベクトルをモデルの向きに変更
+		attackDir = targetMoveDirection;
 	}
 }
 
