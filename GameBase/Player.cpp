@@ -8,6 +8,7 @@
 #include "Player_FallState.h"
 #include "Player_RunState.h"
 #include "EnemyManager.h"
+#include "EnemyBase.h"
 
 void Player::Init()
 {
@@ -58,6 +59,7 @@ void Player::Update()
 
 	// モデルの方向更新
 	UpdateAngle();
+	UpdateAttackDir();
 
 	// アニメーションの更新
 	animation.Update();
@@ -279,12 +281,20 @@ void Player::ToggleLockOn()
 
 	if (isLockOn)
 	{
+		// 一番近くの敵を取得
 		lockOnTarget = EnemyManager::GetEnemyManager().GetNearestEnemy(pos);
+
+		// 敵がいない場合はロックオン解除して終了
+		if (!lockOnTarget)
+		{
+			isLockOn = false;           // ロックオンを無効化
+			return;                     // 以降の処理をスキップ
+		}
 
 		CameraManager::GetCameraManager().ChangeCamera(3);
 
 		// 攻撃の方向ベクトルをロックオン対象方向に変更
-		attackDir = GetNearestEnemyDir();
+		attackDir = GetTargetDir();
 	}
 	else
 	{
@@ -296,14 +306,26 @@ void Player::ToggleLockOn()
 	}
 }
 
-VECTOR Player::GetNearestEnemyDir()
+VECTOR Player::GetTargetDir()
 {
 	VECTOR playerPos = pos;
-	VECTOR enemyPos = EnemyManager::GetEnemyManager().GetNearestEnemyPos(playerPos);
+	VECTOR targetPos = lockOnTarget->GetPosition();
 
-	VECTOR direction = VSub(enemyPos, playerPos);
+	VECTOR direction = VSub(targetPos, playerPos);
 	direction = VNorm(direction);
 	direction.y = 0;
 
 	return direction;
+}
+
+void Player::UpdateAttackDir()
+{
+	if (isLockOn)
+	{
+		attackDir = GetTargetDir();
+	}
+	else
+	{
+		attackDir = targetMoveDirection;
+	}
 }

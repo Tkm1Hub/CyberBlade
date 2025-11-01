@@ -80,6 +80,7 @@ public:
 	VECTOR GetMoveInput();		// スティックによる移動ベクトルの取得
 	const VECTOR GetTargetMoveDirection() const { return targetMoveDirection; }	// モデルが向くべき方向を取得
 
+	VECTOR GetTargetDir();	// 一番近くの敵への方向ベクトル取得
 	Animation animation;		// アニメーション
 	const PlayerParams GetParams() const { return params; }
 
@@ -103,5 +104,5 @@ private:
 
 	void UpdateAngle();			// モデルの角度更新
 	void ToggleLockOn();		// ロックオン切り替え
-	VECTOR GetNearestEnemyDir();	// 一番近くの敵への方向ベクトル取得
+	void UpdateAttackDir();		// 攻撃の方向を更新
 };

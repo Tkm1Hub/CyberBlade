@@ -12,6 +12,7 @@ public:
 	void SetMoveVec(VECTOR newMoveVec) { moveVec = newMoveVec; }
 	void SetJumpPower(float newJumpPower) { currentJumpPower = newJumpPower; }
 	void SetMoveSpeed(float newMoveSpeed) { currentMoveSpeed = newMoveSpeed; }
+	void SetTargetMoveDirection(VECTOR newDir) { targetMoveDirection = newDir; }
 
 	void SetMoveFlag(bool IsMove) { isMove = IsMove; }
 	void SetIsJumping(bool Isjumping) { isJumping = Isjumping; }
