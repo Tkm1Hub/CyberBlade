@@ -16,8 +16,8 @@ public:
 	const float GetHitRadius() const override { return HitRadius; }
 	const float GetHitHeight() const override { return HitHeight; }
 
-	const VECTOR GetCapsuleAPos() override;
-	const VECTOR GetCapsuleBPos() override;
+	const VECTOR GetTopPos() override;
+	const VECTOR GetBottomPos() override;
 
 private:
 	int bladeStartIndex = -1;

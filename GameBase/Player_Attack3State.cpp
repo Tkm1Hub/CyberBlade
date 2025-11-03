@@ -18,7 +18,7 @@ void Player_Attack3State::OnStart()
 
 void Player_Attack3State::OnUpdate()
 {
-	m_frameCount++;
+	frameCount++;
 
 	// Œü‚¢‚Ä‚¢‚é•ûŒü‚ðˆÚ“®ƒxƒNƒgƒ‹‚Æ‚µ‚Ä•Û‘¶
 	VECTOR moveVec = m_pPlayer->GetAttackDir();
@@ -29,7 +29,7 @@ void Player_Attack3State::OnUpdate()
 	m_pPlayer->SetMoveSpeed(moveSpeed);
 
 	// ‚P‚SƒtƒŒ[ƒ€‚ÅUŒ‚I—¹
-	if (m_frameCount >= 50)
+	if (frameCount >= 50)
 	{
 		if (Input::GetInput().GetIsMoveLStick())
 		{

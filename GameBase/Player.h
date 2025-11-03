@@ -7,16 +7,16 @@
 // パラメータ
 struct PlayerParams
 {
-	float JumpPower = 2.5f;		// ジャンプ力
-	float Gravity = 0.08f;		// 重力
-	float WalkSpeed = 0.5f;		// 歩き移動速度
+	float JumpPower = 3.0f;		// ジャンプ力
+	float Gravity = 0.12f;		// 重力
+	float WalkSpeed = 0.8f;		// 歩き移動速度
 	float RunSpeed = 1.5f;		// 走り移動速度
 	float Attack1MoveSpeed = 0.7f;	// 攻撃1段階目での前方移動速度
 	float Attack2MoveSpeed = 0.9f;	// 攻撃2段階目での前方移動速度
 	float Attack3MoveSpeed = 0.5f;	// 攻撃3段階目での前方移動速度
 	float AttackDashMoveSpeed = 1.5f;	// 走り攻撃での前方移動速度
-	float Accel = 0.01f;		// 移動加速度
-	float decel = 0.03f;		// 移動減速度
+	float Accel = 0.03f;		// 移動加速度
+	float decel = 0.1f;		// 移動減速度
 	float AngleSpeed = 0.2f;	// 移動時のモデル回転速度
 	float lockOnRange = 60.0f;	// ロックオン可能距離
 	float HitRadius = 3.0f;		// 当たり判定半径
@@ -64,6 +64,7 @@ public:
 
 	const bool GetIsAttack()const { return isAttack; }
 	const bool GetIsLockOn() const { return isLockOn; }
+	void SetIsLockOn(bool flag) { isLockOn = flag; }
 
 	const float GetHitRadius() const override { return params.HitRadius; }
 	const float GetHitHeight() const override { return params.HitHeight; }

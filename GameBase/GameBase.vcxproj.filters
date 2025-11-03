@@ -71,9 +71,6 @@
     <Filter Include="ソース ファイル\State\PlayerState\Walk">
       <UniqueIdentifier>{7a0ecb1a-8e82-419c-90e5-b7c6be2f47c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\CameraManager\CameraSelector">
-      <UniqueIdentifier>{26d4197e-9320-4d73-a944-e88ac78e69e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\CollisionManager">
       <UniqueIdentifier>{0aa61170-7bad-486f-aca0-5a0bbadbb23f}</UniqueIdentifier>
     </Filter>
@@ -183,9 +180,6 @@
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>ソース ファイル\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraSelector.cpp">
-      <Filter>ソース ファイル\CameraManager\CameraSelector</Filter>
     </ClCompile>
     <ClCompile Include="CameraManager.cpp">
       <Filter>ソース ファイル\CameraManager</Filter>
@@ -302,9 +296,6 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>ソース ファイル\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraSelector.h">
-      <Filter>ソース ファイル\CameraManager\CameraSelector</Filter>
     </ClInclude>
     <ClInclude Include="VirtualCameraBase.h">
       <Filter>ソース ファイル\GameObject\Camera\VirtualCamera</Filter>

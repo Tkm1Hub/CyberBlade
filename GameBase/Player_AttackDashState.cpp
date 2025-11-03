@@ -19,7 +19,7 @@ void Player_AttackDashState::OnStart()
 
 void Player_AttackDashState::OnUpdate()
 {
-	m_frameCount++;
+	frameCount++;
 
 	if (!m_doNextAttack)
 	{
@@ -30,7 +30,7 @@ void Player_AttackDashState::OnUpdate()
 	}
 
 
-	if (m_frameCount >= 20)
+	if (frameCount >= 20)
 	{
 		if (m_doNextAttack)
 		{
@@ -38,7 +38,7 @@ void Player_AttackDashState::OnUpdate()
 			m_pPlayer->ChangeState(spAttack3State);
 		}
 
-		if (m_frameCount >= 30)
+		if (frameCount >= 30)
 		{
 			if (Input::GetInput().GetIsMoveLStick())
 			{

@@ -24,8 +24,6 @@ private:
 
 	// 変数
 	float currentAngleSpeed = 0.0f;						// 現在のカメラ旋回速度
-	float angleH = 0.0f;								// 水平角度
-	float angleV = 0.0f;								// 垂直角度
 	bool isMoveAngle = false;							// カメラが移動中か
 
 	std::weak_ptr<Player> player;

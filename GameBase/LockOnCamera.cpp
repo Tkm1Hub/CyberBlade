@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "EnemyManager.h"
 #include "EnemyBase.h"
+#include "CameraManager.h"
 
 void LockOnCamera::Init()
 {
@@ -11,6 +12,7 @@ void LockOnCamera::Init()
 
 void LockOnCamera::Update()
 {
+	// プレイヤーがnullptrの場合早期リターン
 	if (!m_pPlayer)
 	{
 		printf("LockOnCamera: Player is nullptr!\n");
@@ -19,6 +21,16 @@ void LockOnCamera::Update()
 
 	if (m_pPlayer->GetIsLockOn())
 	{
+		lockOnTarget = m_pPlayer->GetLockOnTarget();
+		// ロックオン対象が死亡している場合はカメラ切り替えをして早期リターン
+		if (lockOnTarget->GetIsDead())
+		{
+			CameraManager::GetCameraManager().ChangeCamera(2);
+			m_pPlayer->SetIsLockOn(false);	// ロックオンフラグをFalseに変更
+			return;
+		}
+
+		// 注視点とカメラ位置の更新
 		target = CulcTargetPos();
 		pos = CulcCameraPos();
 	}
@@ -31,13 +43,11 @@ void LockOnCamera::Update()
 VECTOR LockOnCamera::CulcTargetPos()
 {
 	// プレイヤーと敵の座標を取得
-	VECTOR playerPos = m_pPlayer->GetPosition();
-	lockOnTarget = m_pPlayer->GetLockOnTarget();
-	VECTOR enemyPos = lockOnTarget->GetPosition();
+	VECTOR playerPos = m_pPlayer->GetTopPos();
+	VECTOR enemyPos = lockOnTarget->GetTopPos();
 
 	// 中点の座標
 	VECTOR midPos = VScale(VAdd(playerPos, enemyPos), 0.5f);
-	midPos.y += CameraHeight;
 
 	return midPos;
 }
@@ -46,9 +56,8 @@ VECTOR LockOnCamera::CulcTargetPos()
 VECTOR LockOnCamera::CulcCameraPos()
 {
 	// プレイヤーと敵の座標を取得
-	VECTOR playerPos = m_pPlayer->GetPosition();
-	lockOnTarget = m_pPlayer->GetLockOnTarget();
-	VECTOR enemyPos = lockOnTarget->GetPosition();
+	VECTOR playerPos = m_pPlayer->GetTopPos();
+	VECTOR enemyPos = lockOnTarget->GetTopPos();
 
 	// 敵とプレイヤーの距離を計算
 	VECTOR diff = VSub(playerPos, enemyPos);
@@ -57,9 +66,11 @@ VECTOR LockOnCamera::CulcCameraPos()
 	// 敵からプレイヤーへの方向ベクトル
 	VECTOR dir = VNorm(diff);
 
+	angleH = static_cast<float>(atan2(dir.z, -dir.x));
+
 	// カメラの座標（playerPos + dir * dist）
-	VECTOR CameraPos = VGet(playerPos.x, playerPos.y + CameraHeight, playerPos.z);
-	CameraPos = VAdd(CameraPos, VScale(dir, CameraDist));
+	VECTOR CameraPos = VGet(playerPos.x, playerPos.y + HEIGHT_OFFSET, playerPos.z);
+	CameraPos = VAdd(CameraPos, VScale(dir, DISTANCE_OFFSET));
 
 	return CameraPos;
 }

@@ -8,6 +8,5 @@ public:
 	void OnExit() override;
 
 private:
-	int m_frameCount = 0;
 	float moveSpeed = 0.0f;
 };

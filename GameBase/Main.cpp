@@ -66,7 +66,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     std::shared_ptr<SceneManager> sceneManager = std::make_shared<SceneManager>();
 
-    sceneManager->Add<TitleScene>("Title");
+    //sceneManager->Add<TitleScene>("Title");
     sceneManager->Add<GameScene>("Game");
 
     // メインゲームループ（ESCキー or ウィンドウ閉じる まで続く）

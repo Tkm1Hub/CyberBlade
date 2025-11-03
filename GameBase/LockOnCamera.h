@@ -13,8 +13,9 @@ public:
 	void Update() override;
 
 private:
-	static constexpr float CameraDist = 40.0f;
-	static constexpr float CameraHeight = 30.0f;
+	// 定数
+	static constexpr float DISTANCE_OFFSET = 30.0f;	// プレイヤーからの距離
+	static constexpr float HEIGHT_OFFSET = 8.0f;	// カメラの高さ
 
 	std::shared_ptr<Player> m_pPlayer;
 	std::shared_ptr<EnemyBase> lockOnTarget = nullptr;

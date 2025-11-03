@@ -149,7 +149,7 @@ void Player::UpdateAngle()
 
 	// 目標の角度と現在の角度との差を割り出す
 	// 最初は単純に引き算
-	difference = targetAngle - angle;
+	difference = targetAngle - angleH;
 
 	// ある方向からある方向の差が１８０度以上になることは無いので
 	// 差の値が１８０度以上になっていたら修正する
@@ -183,9 +183,9 @@ void Player::UpdateAngle()
 	}
 
 	// モデルの角度を更新
-	angle = targetAngle - difference;
+	angleH = targetAngle - difference;
 
-	MV1SetRotationXYZ(modelHandle, VGet(0.0f, angle + DX_PI_F, 0.0f));
+	MV1SetRotationXYZ(modelHandle, VGet(0.0f, angleH + DX_PI_F, 0.0f));
 }
 
 /// <summary>

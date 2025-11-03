@@ -13,6 +13,11 @@ public:
 
 	VECTOR GetPosition() const { return pos; }
 	VECTOR GetNextPosition() const { return nextPos; }
+	float GetAngleH() const { return angleH; }
+	void SetAngleH(float dir) { angleH = dir; }
+	const float GetAngleV() const { return angleV; }
+	void SetAngleV(float dir) { angleV = dir; }
+
 	bool GetIsJumping() { return isJumping; }
 
 	void SetPosition(const VECTOR& newPos) { pos = newPos; }
@@ -32,8 +37,8 @@ public:
 	virtual void OnHitFloor() {/*デフォルトでは何も実装しない*/ }
 	virtual void OnHitRoof() {/*デフォルトでは何も実装しない*/ }
 
-	virtual const VECTOR GetCapsuleAPos() { return VGet(0.0f, 0.0f, 0.0f); }
-	virtual const VECTOR GetCapsuleBPos(){ return VGet(0.0f, 0.0f, 0.0f); }
+	virtual const VECTOR GetTopPos() { return VGet(0.0f, 0.0f, 0.0f); }
+	virtual const VECTOR GetBottomPos(){ return VGet(0.0f, 0.0f, 0.0f); }
 
 protected:
 	std::string name = "null";
@@ -46,4 +51,7 @@ protected:
 	bool isCollisionEnabled = false;						// 当たり判定を有効にするか
 	bool isShadowEnabled = false;							// 影の描画を有効にするか
 	bool isJumping = false;									// ジャンプ中か
+	float angleH = 0.0f;									// 水平角度
+	float angleV = 0.0f;									// 垂直角度
+
 };

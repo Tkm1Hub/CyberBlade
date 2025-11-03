@@ -12,4 +12,5 @@ public:
 
 protected:
 	Player* m_pPlayer = nullptr;
+	int frameCount = 0;
 };

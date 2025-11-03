@@ -10,7 +10,7 @@ void FreeCamera::SetPlayer(const std::weak_ptr<Player>& playerPtr)
 
 void FreeCamera::Init()
 {
-	name = "FreeCamera";
+	angleV = 0.0f;
 }
 
 void FreeCamera::Update()

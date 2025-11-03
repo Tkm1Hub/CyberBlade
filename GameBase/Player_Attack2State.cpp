@@ -18,7 +18,7 @@ void Player_Attack2State::OnStart()
 
 void Player_Attack2State::OnUpdate()
 {
-	m_frameCount++;
+	frameCount++;
 
 	// Œü‚¢‚Ä‚¢‚é•ûŒü‚ðˆÚ“®ƒxƒNƒgƒ‹‚Æ‚µ‚Ä•Û‘¶
 	VECTOR moveVec = m_pPlayer->GetAttackDir();
@@ -37,7 +37,7 @@ void Player_Attack2State::OnUpdate()
 	}
 
 	// ‚P‚SƒtƒŒ[ƒ€‚ÅUŒ‚I—¹
-	if (m_frameCount >= 18)
+	if (frameCount >= 18)
 	{
 		if (m_doNextAttack)
 		{

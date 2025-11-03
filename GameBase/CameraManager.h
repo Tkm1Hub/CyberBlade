@@ -3,7 +3,6 @@
 #include "MainCamera.h"
 #include "FreeCamera.h"
 
-class CameraSelector;
 class Player;
 class LockOnCamera;
 class CameraManager
@@ -39,11 +38,11 @@ public:
 
 	std::shared_ptr<MainCamera> GetMainCamera() const { return mainCamera; }
 private:
-	std::shared_ptr<CameraSelector> cameraSelector = nullptr;
 	std::vector<std::weak_ptr<IGameObject>>objects;
 	std::shared_ptr<Player> player = nullptr;
 	std::vector<std::shared_ptr<VirtualCameraBase>> cameras;
 	std::shared_ptr<MainCamera> mainCamera = nullptr;
 	std::shared_ptr<FreeCamera> freeCamera = nullptr;
 	std::shared_ptr<LockOnCamera> lockOnCamera = nullptr;
+	std::shared_ptr<VirtualCameraBase> currentCamera = nullptr;
 };

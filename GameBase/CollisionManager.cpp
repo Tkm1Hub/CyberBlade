@@ -85,11 +85,11 @@ bool CollisionManager::CheckCapsuleCollision(const std::shared_ptr<IGameObject> 
 	float RadiusB = objB->GetHitRadius();    // 半径
     
     // カプセルの上下の座標を取得
-    VECTOR TopA = objA->GetCapsuleAPos();
-    VECTOR BottomA = objA->GetCapsuleBPos();
+    VECTOR TopA = objA->GetTopPos();
+    VECTOR BottomA = objA->GetBottomPos();
 
-    VECTOR TopB = objB->GetCapsuleAPos();
-    VECTOR BottomB = objB->GetCapsuleBPos();
+    VECTOR TopB = objB->GetTopPos();
+    VECTOR BottomB = objB->GetBottomPos();
 
 	// カプセル間の最近接距離を計算（線分同士）
 	float distance = DistanceSegmentToSegment(BottomA, TopA, BottomB, TopB);

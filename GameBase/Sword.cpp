@@ -37,20 +37,20 @@ void Sword::Draw()
 	MV1DrawModel(modelHandle);
 }
 
-const VECTOR Sword::GetCapsuleAPos()
-{
-    // 刀身のボーンの初めのマトリックスを取得
-    MATRIX BladeStartMatrix = MV1GetFrameLocalWorldMatrix(modelHandle, bladeStartIndex);
-    // 座標をベクトル型に変換
-    VECTOR CapsuleAPos = VGet(BladeStartMatrix.m[3][0], BladeStartMatrix.m[3][1], BladeStartMatrix.m[3][2]);
-    return CapsuleAPos;   
-}
-
-const VECTOR Sword::GetCapsuleBPos()
+const VECTOR Sword::GetTopPos()
 {
     // 刀身のボーンの先端のマトリックスを取得
     MATRIX BladeEndMatrix = MV1GetFrameLocalWorldMatrix(modelHandle, bladeEndIndex);
     // 座標をベクトル型に変換
-    VECTOR CapsuleBPos = VGet(BladeEndMatrix.m[3][0], BladeEndMatrix.m[3][1], BladeEndMatrix.m[3][2]);
+    VECTOR CapsuleAPos = VGet(BladeEndMatrix.m[3][0], BladeEndMatrix.m[3][1], BladeEndMatrix.m[3][2]);
+    return CapsuleAPos;   
+}
+
+const VECTOR Sword::GetBottomPos()
+{
+    // 刀身のボーンの持ち手側のマトリックスを取得
+    MATRIX BladeStartMatrix = MV1GetFrameLocalWorldMatrix(modelHandle, bladeStartIndex);
+    // 座標をベクトル型に変換
+    VECTOR CapsuleBPos = VGet(BladeStartMatrix.m[3][0], BladeStartMatrix.m[3][1], BladeStartMatrix.m[3][2]);
     return CapsuleBPos;
 }
