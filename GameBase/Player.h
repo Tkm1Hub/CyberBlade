@@ -31,8 +31,8 @@ enum class PlayerAnimState :int
 	TPose = 0,      // 不明
 	Idle = 1,       // アイドル
 	Walk = 2,       // 歩き
-	Run = 3,        // 走り
-	RunPose = 4,    // ダッシュポーズ
+	Run = 3,        // 小走り
+	RunPose = 4,    // ダッシュ
 	RunStop = 6,    // ストップ
 	Jump = 7,       // ジャンプ
 	Fall = 8,       // 落下中
@@ -97,8 +97,9 @@ private:
 	int handBoneIndex = -1;		// 手のボーンの番号
 
 	bool isRunning = false;		// 走っているか
+	bool isSlowRun = false;		// 小走り状態か
 	bool isAttack = false;		// 攻撃中か
-	bool isLockOn = false;		// ロックオン常態か
+	bool isLockOn = false;		// ロックオン状態か
 
 	void Move();	// モデルの移動
 	void CulcMoveSpeed();	// 移動速度の計算

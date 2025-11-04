@@ -39,6 +39,9 @@ void Debug::Draw()
     {
         DrawCapsule(enemy);
     }
+
+    printfDx("LeftStickX : %f \n", Input::GetInput().GetLeftStickX());
+    printfDx("LeftStickY : %f \n", Input::GetInput().GetLeftStickY());
 }
 
 
