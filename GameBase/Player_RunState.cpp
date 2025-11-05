@@ -3,9 +3,10 @@
 #include "Player_StandState.h"
 #include "Player_JumpState.h"
 #include "Player_AttackDashState.h"
-#include "CameraManager.h"
 #include "Player.h"
 #include "Input.h"
+#include "Player_FallState.h"
+
 
 void Player_RunState::OnStart()
 {
@@ -17,13 +18,21 @@ void Player_RunState::OnStart()
 	// 速度変更
 	float currentMoveSpeed = m_pPlayer->GetParams().RunSpeed;
 	m_pPlayer->SetMoveSpeed(currentMoveSpeed);
+	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().RunSpeed);
 
 	// 歩きアニメを再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Run));
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Run),true);
 }
 
 void Player_RunState::OnUpdate()
 {
+	// 空中にいれば落下に移行
+	if (m_pPlayer->GetIsJumping())
+	{
+		auto spFallState = std::make_shared<Player_FallState>();
+		m_pPlayer->ChangeState(spFallState);
+		return;
+	}
 
 	// スティック入力がない場合Standに戻る
 	if (!Input::GetInput().GetIsMoveLStick())
@@ -52,4 +61,5 @@ void Player_RunState::OnUpdate()
 
 void Player_RunState::OnExit()
 {
+	m_pPlayer->SetRunFlag(false);
 }

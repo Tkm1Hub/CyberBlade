@@ -3,9 +3,12 @@ class Animation
 {
 public:
     void LoadAnimation(int mHandle);
-    void Play(int animIndex);
+    void Play(int animIndex,bool loop);
     void Update();
     void SetBlendRate(float newBrendRate) { animBlendRate = newBrendRate; }
+    bool GetIsAnimFinished() const { return isAnimFinished; }
+
+    float GetCurrentAnimCount() const { return currentAnimCount; }
 
 private:
     int modelHandle;
@@ -16,4 +19,7 @@ private:
     float animBlendRate = 1.0f;
     static constexpr float ANIM_PLAY_SPEED = 0.4f;  // アニメーションの再生速度
     static constexpr float ANIM_BLEND_SPEED = 0.1f; // アニメーションのブレンド率変化速度
+
+    bool isLoop = false;            // ループ再生するか
+    bool isAnimFinished = false;    // 再生が終わったか
 };

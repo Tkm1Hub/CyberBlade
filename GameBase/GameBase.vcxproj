@@ -143,12 +143,15 @@
     <ClCompile Include="EnemySmall.cpp" />
     <ClCompile Include="EnemySmallDamageState.cpp" />
     <ClCompile Include="EnemySmall_FallState.cpp" />
+    <ClCompile Include="EnemySmall_ChaseState.cpp" />
     <ClCompile Include="EnemySmall_StandState.cpp" />
     <ClCompile Include="LockOnCamera.cpp" />
     <ClCompile Include="Player_Attack1State.cpp" />
     <ClCompile Include="Player_Attack2State.cpp" />
     <ClCompile Include="Player_Attack3State.cpp" />
     <ClCompile Include="Player_AttackDashState.cpp" />
+    <ClCompile Include="Player_AttackJump1State.cpp" />
+    <ClCompile Include="Player_DodgeState.cpp" />
     <ClCompile Include="Player_FallState.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -159,6 +162,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player_JumpState.cpp" />
     <ClCompile Include="Player_RunState.cpp" />
+    <ClCompile Include="Player_SlowRunState.cpp" />
     <ClCompile Include="Player_StandState.cpp" />
     <ClCompile Include="Player_WalkState.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -186,6 +190,7 @@
     <ClInclude Include="EnemySmallDamageState.h" />
     <ClInclude Include="EnemySmallStateBase.h" />
     <ClInclude Include="EnemySmall_FallState.h" />
+    <ClInclude Include="EnemySmall_ChaseState.h" />
     <ClInclude Include="EnemySmall_StandState.h" />
     <ClInclude Include="LockOnCamera.h" />
     <ClInclude Include="PlayerStateBase.h" />
@@ -193,11 +198,14 @@
     <ClInclude Include="Player_Attack2State.h" />
     <ClInclude Include="Player_Attack3State.h" />
     <ClInclude Include="Player_AttackDashState.h" />
+    <ClInclude Include="Player_AttackJump1State.h" />
+    <ClInclude Include="Player_DodgeState.h" />
     <ClInclude Include="Player_JumpState.h" />
     <ClInclude Include="Player_RunState.h" />
     <ClInclude Include="Player_StandState.h" />
     <ClInclude Include="Player_WalkState.h" />
     <ClInclude Include="ShadowManager.h" />
+    <ClInclude Include="Player_SlowRunState.h" />
     <ClInclude Include="StageCollision.h" />
     <ClInclude Include="StateBase.h" />
     <ClInclude Include="Debug.h" />

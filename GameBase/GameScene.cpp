@@ -7,6 +7,7 @@
 #include "ShadowManager.h"
 #include "EnemyManager.h"
 #include "Debug.h"
+#include "Player.h"
 GameScene::GameScene(SceneManager& manager)
 	: Scene{manager}{
 	Init();
@@ -28,6 +29,17 @@ void GameScene::Init()
 	// オブジェクトの初期化
 	objectMgr->InitAll();
 	objectMgr->LoadAll();
+
+	auto playerObj = objectMgr->FindObject("Player");
+
+	// IGameObject → Player へキャスト
+	auto player = std::dynamic_pointer_cast<Player>(playerObj);
+
+	if (player)
+	{
+		EnemyManager::GetEnemyManager().SetPlayer(player);
+	}
+
 	// shared_ptr -> weak_ptr に変換
 	std::vector<std::weak_ptr<IGameObject>> weakObjects;
 	for (auto& obj : objectMgr->GetObjects()) {
@@ -44,6 +56,7 @@ void GameScene::Init()
 	collisionMgr->Init();
 
 	debug->SetObjects(objectMgr->GetObjects());
+	debug->SetEnemies(EnemyManager::GetEnemyManager().GetEnemies());
 
 	shadowMgr->Init();
 }

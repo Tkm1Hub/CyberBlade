@@ -62,7 +62,9 @@ void Input::CalcStickInput()
     }
 
     //スティックの傾き度合いを計算
-    RStickAngle = fabs(sqrtf(rightStickX * rightStickX + rightStickY * rightStickY));
-    LStickAngle = fabs(sqrtf(leftStickX * leftStickX + leftStickY * leftStickY));
-
+    rightStickPower = fabs(sqrtf(rightStickX * rightStickX + rightStickY * rightStickY));
+    leftStickPower = fabs(sqrtf(leftStickX * leftStickX + leftStickY * leftStickY));
+    // 1000を上限にクランプ（超えたら1000にする）
+    if (rightStickPower > 1000.0f) rightStickPower = 1000.0f;
+    if (leftStickPower > 1000.0f) leftStickPower = 1000.0f;
 }

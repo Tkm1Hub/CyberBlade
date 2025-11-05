@@ -1,4 +1,7 @@
 #include "stdafx.h"
+#include "Player.h"
+#include "Input.h"
+#include "Player_SlowRunState.h"
 #include "Player_WalkState.h"
 #include "Player_StandState.h"
 #include "Player_JumpState.h"
@@ -6,20 +9,21 @@
 #include "Player_RunState.h"
 #include "Player_Attack1State.h"
 #include "Player_FallState.h"
-#include "Player.h"
-#include "Input.h"
 
-void Player_WalkState::OnStart()
+
+
+void Player_SlowRunState::OnStart()
 {
-	// 歩きアニメを再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Walk),true);
-	// 歩きフラグを立てる
+	// アニメーション再生
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::SlowRun),true);
+	// 移動フラグを立てる
 	m_pPlayer->SetMoveFlag(true);
-	// 最大移動速度を設定
-	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().WalkSpeed);
+	// 移動速度を設定
+	m_pPlayer->SetMoveSpeed(m_pPlayer->GetParams().SlowRunSpeed);
+	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().SlowRunSpeed);
 }
 
-void Player_WalkState::OnUpdate()
+void Player_SlowRunState::OnUpdate()
 {
 	// 空中にいれば落下に移行
 	if (m_pPlayer->GetIsJumping())
@@ -37,15 +41,15 @@ void Player_WalkState::OnUpdate()
 		return;
 	}
 
-	// スティックの傾きが一定数以上で小走り状態に変更
-	if (Input::GetInput().GetLeftStickPower() >= m_pPlayer->GetParams().StickTiltSlowRun + m_pPlayer->GetParams().StickMargin)
+	// スティックの傾きが一定数以下で歩き状態に変更
+	if (Input::GetInput().GetLeftStickPower() <= m_pPlayer->GetParams().StickTiltSlowRun - m_pPlayer->GetParams().StickMargin)
 	{
-		auto spSlowRunState = std::make_shared<Player_SlowRunState>();
-		m_pPlayer->ChangeState(spSlowRunState);
+		auto spWalkState = std::make_shared<Player_WalkState>();
+		m_pPlayer->ChangeState(spWalkState);
 		return;
 	}
 
-	// R（8）ボタンでダッシュ
+	// RT（8）ボタンでダッシュ
 	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_6)
 	{
 		auto spRunState = std::make_shared<Player_RunState>();
@@ -68,9 +72,10 @@ void Player_WalkState::OnUpdate()
 		m_pPlayer->ChangeState(spAttack1State);
 		return;
 	}
+
 }
 
-void Player_WalkState::OnExit()
+void Player_SlowRunState::OnExit()
 {
 	m_pPlayer->SetMoveFlag(false);
 }

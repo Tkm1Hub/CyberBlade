@@ -5,13 +5,16 @@
 #include "Player_Attack3State.h"
 #include "Player_RunState.h"
 #include "Player_StandState.h"
+#include "Player_DodgeState.h"
+#include "Player_JumpState.h"
+
 
 void Player_AttackDashState::OnStart()
 {
 	m_pPlayer->SetAttackFrag(true);
 
 	// アニメを再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackDash));
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackDash),false);
 
 	moveSpeed = m_pPlayer->GetParams().AttackDashMoveSpeed;
 
@@ -53,6 +56,22 @@ void Player_AttackDashState::OnUpdate()
 				return;
 			}
 		}
+	}
+
+	// A（３）ボタンでジャンプ
+	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_3)
+	{
+		auto spJumpState = std::make_shared<Player_JumpState>();
+		m_pPlayer->ChangeState(spJumpState);
+		return;
+	}
+
+	// R（8）ボタンで回避
+	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_6)
+	{
+		auto spDodgeState = std::make_shared<Player_DodgeState>();
+		m_pPlayer->ChangeState(spDodgeState);
+		return;
 	}
 }
 

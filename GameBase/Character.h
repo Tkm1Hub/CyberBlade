@@ -6,8 +6,10 @@ class Character :public IGameObject
 public:
 	Character(const std::string& name):IGameObject(name){}
 
-	float GetCurrentJumpPower() { return currentJumpPower; }
-	float GetCurrentMoveSpeed() { return currentMoveSpeed; }
+	const float GetCurrentJumpPower() const { return currentJumpPower; }
+	const float GetCurrentMoveSpeed() const { return currentMoveSpeed; }
+
+
 
 	void SetMoveVec(VECTOR newMoveVec) { moveVec = newMoveVec; }
 	void SetJumpPower(float newJumpPower) { currentJumpPower = newJumpPower; }
@@ -26,17 +28,21 @@ public:
 		return CapsuleB;
 	}
 
+	const VECTOR& GetModelForward() const { return modelForward; }
+
 protected:
 	// 定数
 	static constexpr float	FallUpPower = 0.05f;			// 足を踏み外した時のジャンプ力
 
 	// キャラクター用変数
 	VECTOR moveVec = VGet(0.0f, 0.0f, 0.0f);				// 移動ベクトル
-	VECTOR targetMoveDirection = VGet(0.0f, 0.0f, 0.0f);	// モデルが向くべき方向のベクトル
+	VECTOR targetMoveDirection = VGet(0.0f, 0.0f, 0.0f);	// 目標の移動方向のベクトル
+	VECTOR modelForward = VGet(0.0f, 0.0f, 0.0f);			// モデルの方向ベクトル
 	float currentMoveSpeed = 0.0f;							// 現在の移動速度
 	float currentJumpPower = 0.0f;							// Y軸方向の速度
 	float hitHeight = 0.0f;
 	float hitRadius = 0.0f;
 
-	bool isMove = false;
+	bool isMove = false;									// 移動中か
+	bool isAttack = false;									// 攻撃中か
 };

@@ -140,11 +140,26 @@
     <Filter Include="ソース ファイル\EnemyManager">
       <UniqueIdentifier>{5c0049dc-b355-40e5-a404-942f0d53f25d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\GameObject\Character\Enemy">
-      <UniqueIdentifier>{ea5f7754-2a75-49f1-9aad-5e666e890405}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\GameObject\Camera\VirtualCamera\LockOnCamera">
       <UniqueIdentifier>{ff010e72-953c-4ba8-b6ad-8ca899b60219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\SlowRun">
+      <UniqueIdentifier>{4d3d9db1-61c2-4bf7-82b4-99c1e4229751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemySmallState\Chase">
+      <UniqueIdentifier>{d3dd0c34-c127-400a-a665-0f26800828b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Character\EnemyBase">
+      <UniqueIdentifier>{ea5f7754-2a75-49f1-9aad-5e666e890405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Dodge">
+      <UniqueIdentifier>{590f7f4b-00ae-4926-bc53-42d52f6e0c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Attack\AttackJump1">
+      <UniqueIdentifier>{02ee9f0c-8f0c-4e4b-8a4b-da99e1371653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Attack\AttackJump2">
+      <UniqueIdentifier>{506b0f37-4512-446b-b617-ebe5f02dfce9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -254,10 +269,22 @@
       <Filter>ソース ファイル\EnemyManager</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBase.cpp">
-      <Filter>ソース ファイル\GameObject\Character\Enemy</Filter>
+      <Filter>ソース ファイル\GameObject\Character\EnemyBase</Filter>
     </ClCompile>
     <ClCompile Include="LockOnCamera.cpp">
       <Filter>ソース ファイル\GameObject\Camera\VirtualCamera\LockOnCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_SlowRunState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\SlowRun</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySmall_ChaseState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Chase</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_DodgeState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Dodge</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_AttackJump1State.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Attack\AttackJump1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,10 +412,22 @@
       <Filter>ソース ファイル\EnemyManager</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBase.h">
-      <Filter>ソース ファイル\GameObject\Character\Enemy</Filter>
+      <Filter>ソース ファイル\GameObject\Character\EnemyBase</Filter>
     </ClInclude>
     <ClInclude Include="LockOnCamera.h">
       <Filter>ソース ファイル\GameObject\Camera\VirtualCamera\LockOnCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_SlowRunState.h">
+      <Filter>ソース ファイル\State\PlayerState\SlowRun</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySmall_ChaseState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Chase</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_DodgeState.h">
+      <Filter>ソース ファイル\State\PlayerState\Dodge</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_AttackJump1State.h">
+      <Filter>ソース ファイル\State\PlayerState\Attack\AttackJump1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

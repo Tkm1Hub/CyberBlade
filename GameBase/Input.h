@@ -56,8 +56,8 @@ public:
     float GetRightStickX() const { return rightStickX; }
     float GetRightStickY() const { return rightStickY; }
 
-    float GetRStickAngle() const { return RStickAngle; }
-    float GetLStickAngle() const { return LStickAngle; }
+    float GetRightStickPower() const { return rightStickPower; }
+    float GetLeftStickPower() const { return leftStickPower; }
 private:
     static constexpr int DEADZONE = 10;     // スティックを倒してもすぐ反応しない領域
 
@@ -70,8 +70,8 @@ private:
     float leftStickY = 0.0f;        // 左スティックのY軸の傾き
     float rightStickX = 0.0f;       // 右スティックのX軸の傾き
     float rightStickY = 0.0f;       // 右スティックのY軸の傾き
-    float LStickAngle = 0.0f;       // 左スティックの傾き度
-    float RStickAngle = 0.0f;       // 右スティックの傾き度
+    float leftStickPower = 0.0f;       // 左スティックの傾き度
+    float rightStickPower = 0.0f;       // 右スティックの傾き度
 
     void CalcStickInput();
 

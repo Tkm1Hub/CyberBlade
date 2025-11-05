@@ -1,7 +1,7 @@
 #pragma once
-#include "PlayerStateBase.h"
+#include "EnemySmallStateBase.h"
 
-class Player_StandState : public PlayerStateBase
+class EnemySmall_ChaseState : public EnemySmallStateBase
 {
 public:
 	void OnStart() override;

@@ -21,6 +21,7 @@ void EnemySmall_DamageState::OnUpdate()
 	{
 		auto spStandState = std::make_shared<EnemySmall_StandState>();
 		m_pEnemySmall->ChangeState(spStandState);
+		return;
 	}
 }
 

@@ -6,6 +6,23 @@ void EnemyManager::AddEnemy(std::shared_ptr<EnemyBase> enemy,const VECTOR& initP
 {
     enemies.push_back(enemy);
     enemy->SetPosition(initPos);
+
+    // ƒvƒŒƒCƒ„[‚ª“o˜^Ï‚İ‚È‚ç‘¦ƒZƒbƒg
+    if (auto p = m_pPlayer.lock())
+    {
+        enemy->SetPlayer(p);
+    }
+}
+
+void EnemyManager::SetPlayer(const std::shared_ptr<Player>& player)
+{
+    m_pPlayer = player;
+
+    // ‚·‚Å‚É¶¬Ï‚İ‚Ì“G‚É‚à‚Ü‚Æ‚ß‚ÄƒZƒbƒg
+    for (auto& e : enemies)
+    {
+        if (e) e->SetPlayer(m_pPlayer);
+    }
 }
 
 void EnemyManager::Init() {
@@ -34,6 +51,7 @@ void EnemyManager::ApplyCollision() {
     }
 }
 
+// €‚ñ‚Å‚¢‚é“G‚ğíœ
 void EnemyManager::RemoveDeadEnemies()
 {
     enemies.erase(
@@ -44,6 +62,7 @@ void EnemyManager::RemoveDeadEnemies()
         enemies.end());
 }
 
+// Å’Z‹——£‚Ì“G‚ÌÀ•W‚ğæ“¾
 VECTOR EnemyManager::GetNearestEnemyPos(const VECTOR& playerPos)const
 {
     VECTOR nearestPos = VGet(0.0f, 0.0f, 0.0f);
@@ -68,6 +87,7 @@ VECTOR EnemyManager::GetNearestEnemyPos(const VECTOR& playerPos)const
     return nearestPos;
 }
 
+// Å’Z‹——£‚Ì“G‚ğæ“¾
 std::shared_ptr<EnemyBase> EnemyManager::GetNearestEnemy(const VECTOR& playerPos)
 {
     std::shared_ptr<EnemyBase> nearestEnemy = nullptr;  // ‰Šú‚Í nullptr

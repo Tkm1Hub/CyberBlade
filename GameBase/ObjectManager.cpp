@@ -33,6 +33,7 @@ void ObjectManager::Create()
 	AddObject(sword);
 	AddObject(checkPoint);
 
+	// “G‚Ì¶¬
 	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall1"), VGet(0, 0, 30));
 	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 40));
 }

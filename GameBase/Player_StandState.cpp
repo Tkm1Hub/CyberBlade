@@ -3,6 +3,8 @@
 #include "Player_WalkState.h"
 #include "Player_JumpState.h"
 #include "Player_Attack1State.h"
+#include "Player_DodgeState.h"
+#include "Player_FallState.h"
 #include "Player.h"
 #include "Input.h"
 
@@ -16,11 +18,19 @@ void Player_StandState::OnStart()
 	m_pPlayer->SetMoveFlag(false);
 
 	// アイドルアニメを再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Idle));
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Idle),true);
 }
 
 void Player_StandState::OnUpdate()
 {
+	// 空中にいれば落下に移行
+	if (m_pPlayer->GetIsJumping())
+	{
+		auto spFallState = std::make_shared<Player_FallState>();
+		m_pPlayer->ChangeState(spFallState);
+		return;
+	}
+
 	// 左スティックが入力中なら移動
 	if (Input::GetInput().GetIsMoveLStick())
 	{
@@ -45,6 +55,13 @@ void Player_StandState::OnUpdate()
 		return;
 	}
 
+	// R（8）ボタンで回避
+	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_6)
+	{
+		auto spDodgeState = std::make_shared<Player_DodgeState>();
+		m_pPlayer->ChangeState(spDodgeState);
+		return;
+	}
 }
 
 void Player_StandState::OnExit()

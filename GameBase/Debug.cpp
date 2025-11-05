@@ -2,6 +2,7 @@
 #include "Debug.h"
 #include "Input.h"
 #include "Player.h"
+#include "EnemyBase.h"
 #include "EnemySmall.h"
 #include "ObjectManager.h"
 
@@ -17,7 +18,9 @@ void Debug::Update()
 }
 void Debug::Draw()
 {
-	// F1が押されていなかったら早期リターン
+    clsDx();
+
+    // F1が押されていなかったら早期リターン
 	if (!isDebugMode) return;
 
 	for (auto obj : owner)
@@ -27,6 +30,11 @@ void Debug::Draw()
 			DrawCapsule(obj);
 
 		}
+
+        if (obj->GetName() == "Player")
+        {
+            DrawCylinder(obj->GetPosition(), 30, 10, 32, GetColor(255, 0, 0));
+        }
 
         if (obj->GetName() == "CheckPoint")
         {
@@ -38,19 +46,25 @@ void Debug::Draw()
     for (auto enemy : m_enemies)
     {
         DrawCapsule(enemy);
+        DrawCylinder(enemy->GetPosition(), 60, 10, 32, GetColor(255, 255, 0));
+        DrawCylinder(enemy->GetPosition(), 30, 10, 32, GetColor(255, 0, 0));
     }
 
-    printfDx("LeftStickX : %f \n", Input::GetInput().GetLeftStickX());
-    printfDx("LeftStickY : %f \n", Input::GetInput().GetLeftStickY());
+    printfDx("LeftStickX : %.0f \n", Input::GetInput().GetLeftStickX());
+    printfDx("LeftStickY : %.0f \n", Input::GetInput().GetLeftStickY());
+    printfDx("LeftStickPower : %.0f \n", Input::GetInput().GetLeftStickPower());
+
+
 }
 
-
+// カプセルの描画
 void Debug::DrawCapsule(const std::shared_ptr<IGameObject>& obj)
 {
 	DrawCapsule3D(obj->GetTopPos(), obj->GetBottomPos()
 		, obj->GetHitRadius(), 8, GetColor(0, 255, 0), GetColor(255, 255, 255), FALSE);
 }
 
+// 円柱の描画
 void Debug::DrawCylinder(VECTOR pos, float radius, float height, float division, unsigned int color)
 {
     float yTop = pos.y + height / 2.0f;

@@ -12,5 +12,6 @@ public:
 
 protected:
 	Player* m_pPlayer = nullptr;
-	int frameCount = 0;
+	int frameCount = 0;				// フレームカウント
+	bool isInputAttack = false;		// 攻撃ボタンが押されたか
 };

@@ -79,7 +79,7 @@ void FreeCamera::CalcCameraAngle()
 
 float FreeCamera::CalcAngleSpeed()
 {
-	float stickAngle = Input::GetInput().GetRStickAngle();
+	float stickAngle = Input::GetInput().GetRightStickPower();
 	float stickPower = abs(stickAngle) / 1000.0f;
 
 	// ŒX‚«‚É‰‚¶‚½Å‘å‘¬“x‚ğŒvZ

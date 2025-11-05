@@ -6,7 +6,7 @@ void Animation::LoadAnimation(int mHandle)
 	modelHandle = mHandle;
 }
 
-void Animation::Play(int animIndex)
+void Animation::Play(int animIndex,bool loop)
 {
 	// HACK: 指定した番号のアニメーションをアタッチし、直前に再生していたアニメーションの情報をprevに移行している
 	// 入れ替えを行うので、１つ前のモーションがが有効だったらデタッチする
@@ -17,12 +17,23 @@ void Animation::Play(int animIndex)
 	}
 
 	// 今まで再生中のモーションだったものの情報をPrevに移動する
-	prevPlayAnim = currentPlayAnim;
-	prevAnimCount = currentAnimCount;
+	if (currentPlayAnim != -1)
+	{
+		prevPlayAnim = currentPlayAnim;
+		prevAnimCount = MV1GetAttachAnimTime(modelHandle, currentPlayAnim);
+	}
+	else
+	{
+		prevPlayAnim = -1;
+		prevAnimCount = 0.0f;
+	}
 
 	// 新たに指定のモーションをモデルにアタッチして、アタッチ番号を保存する
 	currentPlayAnim = MV1AttachAnim(modelHandle, animIndex);
 	currentAnimCount = 0.0f;
+
+	isLoop = loop;
+	isAnimFinished = false;
 
 	// ブレンド率はPrevが有効ではない場合は１．０ｆ( 現在モーションが１００％の状態 )にする
 	animBlendRate = prevPlayAnim == -1 ? 1.0f : 0.0f;
@@ -51,10 +62,19 @@ void Animation::Update()
 		// 再生時間を進める
 		currentAnimCount += ANIM_PLAY_SPEED;
 
-		//	// 通常はループさせる
 		if (currentAnimCount >= animTotalTime)
 		{
-			currentAnimCount = static_cast<float>(fmod(currentAnimCount, animTotalTime));
+			if (isLoop)
+			{
+				// ループ再生
+				currentAnimCount = static_cast<float>(fmod(currentAnimCount, animTotalTime));
+			}
+			else
+			{
+				// 再生終了フラグを立てて止める
+				currentAnimCount = animTotalTime - 3.0f;
+				isAnimFinished = true;
+			}
 		}
 
 		// 変更した再生時間をモデルに反映させる
@@ -62,6 +82,9 @@ void Animation::Update()
 
 		// アニメーション１のモデルに対する反映率をセット
 		MV1SetAttachAnimBlendRate(modelHandle, currentPlayAnim, animBlendRate);
+
+		printf("currentAnimTotalTime : %f\n", animTotalTime);
+		printf("currentAnimCount : %f\n", currentAnimCount);
 	}
 
 	// 再生しているアニメーション２の処理

@@ -33,12 +33,12 @@ void Player::Load()
 	// アニメーションのロード
 	animation.LoadAnimation(modelHandle);
 	// アイドルを再生
-	animation.Play(static_cast<int>(PlayerAnimState::Idle));
+	animation.Play(static_cast<int>(PlayerAnimState::Idle),true);
 }
 
 void Player::Update()
 {
-	if (!isAttack)
+	if (!isAttack&&!isDodge)
 	{
 		// スティックでの移動入力
 		moveVec = GetMoveInput();
@@ -54,12 +54,12 @@ void Player::Update()
 	// ステートの更新
 	stateMachine.Update();
 
-	// 次の座標を計算
-	Move();
-
 	// モデルの方向更新
 	UpdateAngle();
 	UpdateAttackDir();
+
+	// 次の座標を計算
+	Move();
 
 	// アニメーションの更新
 	animation.Update();
@@ -81,7 +81,7 @@ void Player::ChangeState(std::shared_ptr<PlayerStateBase> a_spState)
 void Player::Move()
 {
 	// HACK: 移動距離が0.01未満で微妙に移動していた場合はじんわり移動してバグる
-// x軸かy軸方向に 0.01f 以上移動した場合は「移動した」フラグを１にする
+	// x軸かy軸方向に 0.01f 以上移動した場合は「移動した」フラグを１にする
 	if (fabs(moveVec.x) > 0.01f || fabs(moveVec.z) > 0.01f)
 	{
 		isMove = true;
@@ -92,16 +92,20 @@ void Player::Move()
 	}
 
 	// 移動速度を計算
-	if (!isAttack)
+	if (!isAttack&&!isDodge)
 	{
 		CulcMoveSpeed();
 	}
-	moveVec = VScale(targetMoveDirection, currentMoveSpeed);
+
+
+	// モデルの方向に移動
+	moveVec = VScale(modelForward, currentMoveSpeed);
 
 	// 移動ベクトルのＹ成分をＹ軸方向の速度にする
 	moveVec.y = currentJumpPower;
 
 	nextPos = VAdd(pos,moveVec);
+
 
 	//Y座標が-100以下になったら座標を初期化する
 	if (pos.y < -1000.0f || pos.y>500)
@@ -112,6 +116,7 @@ void Player::Move()
 
 	printf("targetMoveDirection [ %.2f,%.2f,%.2f ]\n", targetMoveDirection.x, targetMoveDirection.y, targetMoveDirection.z);
 	printf("currentMoveSpeed : %f\n", currentMoveSpeed);
+	printf("currentMaxSpeed : %f\n", currentMaxSpeed);
 }
 
 void Player::CulcMoveSpeed()
@@ -122,22 +127,22 @@ void Player::CulcMoveSpeed()
 	}
 	else
 	{
-		currentMoveSpeed -= params.decel;
+		currentMoveSpeed -= params.Decel;
 	}
 
 	// 限界値を超えたら修正
-	if (isRunning)
-	{
-		currentMoveSpeed = std::clamp(currentMoveSpeed, 0.0f, params.RunSpeed);
-	}
-	else
-	{
-		currentMoveSpeed = std::clamp(currentMoveSpeed, 0.0f, params.WalkSpeed);
-	}
+	currentMoveSpeed = std::clamp(currentMoveSpeed, 0.0f, currentMaxSpeed);
 }
 
 void Player::UpdateAngle()
 {
+	// 回避中、または回避後の入力なし時は回転しない
+	if (isDodge || keepForwardAfterDodge)
+	{
+		modelForward = VGet(sinf(angleH), 0.0f, cosf(angleH));
+		return;
+	}
+
 	// プレイヤーの移動方向にモデルの方向を近づける
 	float targetAngle;			// 目標角度
 	float difference;			// 目標角度と現在の角度との差
@@ -186,6 +191,9 @@ void Player::UpdateAngle()
 	angleH = targetAngle - difference;
 
 	MV1SetRotationXYZ(modelHandle, VGet(0.0f, angleH + DX_PI_F, 0.0f));
+
+	// 現在のモデルの向きを保存（XZ平面の単位ベクトル）
+	modelForward = VGet(sinf(angleH), 0.0f, cosf(angleH));
 }
 
 /// <summary>
@@ -241,13 +249,19 @@ void Player::OnFall()
 {
 	if (!isJumping)
 	{
-		// ジャンプ中(落下中）にする
-		auto spFallState = std::make_shared<Player_FallState>();
-		ChangeState(spFallState);
-		isJumping = true;
+		if (isAttack)	// 攻撃中の場合
+		{
+			currentJumpPower = -params.AttackFallSpeed;
+			isJumping = true;
+		}
+		else
+		{
+			// ジャンプ中(落下中）にする
+			isJumping = true;
 
-		// ちょっとだけジャンプする
-		currentJumpPower = FallUpPower;
+			// ちょっとだけジャンプする
+			currentJumpPower = FallUpPower;
+		}
 	}
 }
 
@@ -255,22 +269,25 @@ VECTOR Player::GetMoveInput()
 {
 	VECTOR mVec = VGet(0.0f, 0.0f, 0.0f);
 
-	// カメラの前方向ベクトルを取得
-	VECTOR camForward = CameraManager::GetCameraManager().GetMainCamera()->GetForward();
-	VECTOR camRight = VCross(camForward, VGet(0.0f, 1.0f, 0.0f));
-	camRight = VNorm(camRight);
-
 	// スティック入力
 	float stickX = Input::GetInput().GetLeftStickX();
 	float stickY = Input::GetInput().GetLeftStickY();
 
-	// 移動ベクトル
-	mVec = VAdd(VScale(camRight, stickX), VScale(camForward, stickY));
-	if (VSize(mVec) != 0.0f)
+	if (fabs(stickX) > 0.01f || fabs(stickY) > 0.01f)
 	{
-		targetMoveDirection = VNorm(mVec);
-	}
+		// 入力があったら回避後の正面維持を解除
+		keepForwardAfterDodge = false;
 
+		// カメラ基準の移動ベクトルを計算
+		VECTOR camForward = CameraManager::GetCameraManager().GetMainCamera()->GetForward();
+		VECTOR camRight = VCross(camForward, VGet(0.0f, 1.0f, 0.0f));
+		camRight = VNorm(camRight);
+		mVec = VAdd(VScale(camRight, stickX), VScale(camForward, stickY));
+		if (VSize(mVec) != 0.0f)
+		{
+			targetMoveDirection = VNorm(mVec);
+		}
+	}
 	return mVec;
 }
 

@@ -9,7 +9,7 @@ void EnemySmall::Init()
 	isStageCollisionEnabled = true;
 	isCollisionEnabled = true;
 	isShadowEnabled = true;
-	hp = params.max_hp;
+	hp = params.MaxHp;
 
 	auto spStandState = std::make_shared<EnemySmall_StandState>();
 	ChangeState(spStandState);
@@ -23,7 +23,6 @@ void EnemySmall::Load()
 	// ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹Žæ“¾
 	modelHandle = MV1LoadModel("data/model/character/robot.mv1");
 	MV1SetScale(modelHandle, modelScale);
-	MV1SetPosition(modelHandle, params.InitPos);
 }
 
 void EnemySmall::Update()

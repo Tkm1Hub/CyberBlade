@@ -1,6 +1,7 @@
 #pragma once
 
 class EnemyBase;
+class Player;
 class EnemyManager
 {
 private:
@@ -33,10 +34,13 @@ public:
 	VECTOR GetNearestEnemyPos(const VECTOR& playerPos)const;
 	std::shared_ptr<EnemyBase> GetNearestEnemy(const VECTOR& playerPos);
 
+	void SetPlayer(const std::shared_ptr<Player>& player);
+
 
 	const std::vector<std::shared_ptr<EnemyBase>>& GetEnemies() const { return enemies; }
 
 private:
 	static constexpr int ENEMY_NUM = 10;
 	std::vector<std::shared_ptr<EnemyBase>> enemies;
+	std::weak_ptr<Player> m_pPlayer;
 };

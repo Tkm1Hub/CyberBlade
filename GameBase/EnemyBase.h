@@ -2,7 +2,7 @@
 #include "Character.h"
 #include "StateMachine.h"
 
-class EnemySmallStateBase;
+class Player;
 class EnemyBase :public Character
 {
 public:
@@ -26,16 +26,23 @@ public:
 	const bool GetIsDead()const { return isDead; }
 	void Kill() { isDead = true; }
 
+	VECTOR GetToPlayerDirection();
+	bool IsPlayerInRange(float range);
+
+	void SetPlayer(const std::weak_ptr<Player>& player) { m_pPlayer = player; }
+
 protected:
 	void Move();				// 移動処理
 
 	StateMachine stateMachine;	// ステートマシン
 
-	VECTOR knockBackDir = { 0.0f,0.0f,0.0f };
+	VECTOR knockBackDir = { 0.0f,0.0f,0.0f };	// ノックバックの方向
 
 	bool isDamage = false;
 	bool isDead = false;
 
 	int hp = 0;
+
+	std::weak_ptr<Player> m_pPlayer;
 
 };

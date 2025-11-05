@@ -5,13 +5,16 @@
 #include "Player_Attack2State.h"
 #include "Player_StandState.h"
 #include "Player_WalkState.h"
+#include "Player_DodgeState.h"
+#include "Player_JumpState.h"
+#include "Player_FallState.h"
 
 void Player_Attack1State::OnStart()
 {
 	m_pPlayer->SetAttackFrag(true);
 
 	// 攻撃１アニメを再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Attack1));
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackJump1),false);
 
 	moveSpeed = m_pPlayer->GetParams().Attack1MoveSpeed;
 
@@ -29,35 +32,76 @@ void Player_Attack1State::OnUpdate()
 	moveSpeed = max(moveSpeed, 0.0f);
 	m_pPlayer->SetMoveSpeed(moveSpeed);
 
-	if (!m_doNextAttack)
+	if (!isInputAttack)
 	{
 		if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
 		{
-			m_doNextAttack = true;
+			isInputAttack = true;
 		}
 	}
 
-	// ２４フレームで攻撃終了
-	if (frameCount >= 20)
+	// 攻撃の待機時間経過
+	if (frameCount >= m_pPlayer->GetParams().ATTACK_1_NEXT_ATTACK_WAIT_FRAMES)
 	{
-		if (m_doNextAttack)
+		// 空中にいる場合
+		if (m_pPlayer->GetIsJumping())
 		{
-			auto spAttack2State = std::make_shared<Player_Attack2State>();
-			m_pPlayer->ChangeState(spAttack2State);	// 次の攻撃に移行
+
+		}
+		else
+		{
+			// 地上にいる場合
+			if (isInputAttack)
+			{
+				auto spAttack2State = std::make_shared<Player_Attack2State>();
+				m_pPlayer->ChangeState(spAttack2State);	// 次の攻撃に移行
+				return;
+			}
+		}
+
+	}
+
+	// 移動硬直終了
+	if (frameCount >= m_pPlayer->GetParams().ATTACK_1_RECOVERY_FRAMES)
+	{
+		// 空中にいれば落下に移行
+		if (m_pPlayer->GetIsJumping())
+		{
+			auto spFallState = std::make_shared<Player_FallState>();
+			m_pPlayer->ChangeState(spFallState);
 			return;
 		}
-		else if (Input::GetInput().GetIsMoveLStick())
+
+		if (Input::GetInput().GetIsMoveLStick())
 		{
 			auto spWalkState = std::make_shared<Player_WalkState>();
 			m_pPlayer->ChangeState(spWalkState);	// スティック入力があれば歩きに戻す
 			return;
 		}
-		else if(!Input::GetInput().GetIsMoveLStick())
+
+		// アニメの再生が終わったら
+		if (m_pPlayer->animation.GetIsAnimFinished())
 		{
 			auto spStandState = std::make_shared<Player_StandState>();
 			m_pPlayer->ChangeState(spStandState);	// スティック入力がなければ立ち止まりに戻す
 			return;
 		}
+	}
+
+	// A（３）ボタンでジャンプ
+	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_3)
+	{
+		auto spJumpState = std::make_shared<Player_JumpState>();
+		m_pPlayer->ChangeState(spJumpState);
+		return;
+	}
+
+	// R（8）ボタンで回避
+	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_6)
+	{
+		auto spDodgeState = std::make_shared<Player_DodgeState>();
+		m_pPlayer->ChangeState(spDodgeState);
+		return;
 	}
 }
 

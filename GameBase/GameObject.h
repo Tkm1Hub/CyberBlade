@@ -17,8 +17,7 @@ public:
 	void SetAngleH(float dir) { angleH = dir; }
 	const float GetAngleV() const { return angleV; }
 	void SetAngleV(float dir) { angleV = dir; }
-
-	bool GetIsJumping() { return isJumping; }
+	const bool GetIsJumping() const { return isJumping; }
 
 	void SetPosition(const VECTOR& newPos) { pos = newPos; }
 	void SetNextPosition(const VECTOR& newNextPos) { nextPos = newNextPos; }
@@ -50,8 +49,8 @@ protected:
 	bool isStageCollisionEnabled = false;					// ステージとの当たり判定を有効にするか
 	bool isCollisionEnabled = false;						// 当たり判定を有効にするか
 	bool isShadowEnabled = false;							// 影の描画を有効にするか
-	bool isJumping = false;									// ジャンプ中か
 	float angleH = 0.0f;									// 水平角度
 	float angleV = 0.0f;									// 垂直角度
+	bool isJumping = false;									// ジャンプ中か
 
 };
