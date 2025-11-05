@@ -18,9 +18,8 @@ void Sword::Load()
 
 void Sword::Update()
 {
-    // 手の行列を取得（位置+回転）
-    MATRIX handMat = owner->GetHandMatrix();
-
+    // Player の手のボーンの行列を毎フレーム取得
+    MATRIX handMat = MV1GetFrameLocalWorldMatrix(owner->GetModelHandle(), owner->GetHandBoneIndex());
     // 武器用のスケール行列を作成
     MATRIX scaleMat = MGetScale(modelScale);
 

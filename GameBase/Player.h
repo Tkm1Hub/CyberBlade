@@ -123,6 +123,7 @@ public:
 	const void SetCurrentMaxSpeed(float maxSpeed) { currentMaxSpeed = maxSpeed; }
 
 	const MATRIX GetHandMatrix()const { return handMatrix; }
+	const int GetHandBoneIndex() const { return handBoneIndex; }
 
 	const VECTOR GetAttackDir() const { return attackDir; }
 

@@ -5,13 +5,13 @@
 // パラメータ
 struct EnemySmall_Params
 {
-	int MaxHp = 120;						// 最大HP
+	int MaxHp = 320;						// 最大HP
 
 	float Gravity = 0.08f;					// 重力
 	float DamageSpeed = 1.5f;				// ダメージ中ノックバックの速度
 	float HitRadius = 4.0f;					// 当たり判定半径
 	float HitHeight = 14.0f;				// 当たり判定高さ
-	float ChaseTriggerDistance = 60.0f;		// 追跡を開始するプレイヤーとの距離
+	float ChaseTriggerDistance = 80.0f;		// 追跡を開始するプレイヤーとの距離
 	float AttackTriggerDistance = 30.0f;	// 攻撃を開始するプレイヤーとの距離
 	float Accel = 0.03f;					// 移動加速度
 	float Decel = 0.1f;						// 移動減速度

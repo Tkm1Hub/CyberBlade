@@ -34,8 +34,10 @@ void ObjectManager::Create()
 	AddObject(checkPoint);
 
 	// “G‚Ì¶¬
-	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall1"), VGet(0, 0, 30));
-	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 40));
+	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall1"), VGet(0, 0, 70));
+	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 50));
+	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 0));
+	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 30));
 }
 
 void ObjectManager::AddObject(std::shared_ptr<IGameObject> obj)
@@ -112,7 +114,6 @@ void ObjectManager::ApplyCollision()
 			if (obj->GetName() == "Player")
 			{
 				printf("PlayerPos [ %.2f,%.2f,%.2f ] \n", obj->GetPosition().x, obj->GetPosition().y, obj->GetPosition().z);
-
 			}
 		}
 	}
