@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player_StandState.h"
 #include "Player_WalkState.h"
-#include "Player_JumpState.h"
+#include "Player_Jump1State.h"
 #include "Player_Attack1State.h"
 #include "Player_DodgeState.h"
 #include "Player_FallState.h"
@@ -42,7 +42,7 @@ void Player_StandState::OnUpdate()
 	// A（３）ボタンでジャンプ
 	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_3)
 	{
-		auto spJumpState = std::make_shared<Player_JumpState>();
+		auto spJumpState = std::make_shared<Player_Jump1State>();
 		m_pPlayer->ChangeState(spJumpState);
 		return;
 	}

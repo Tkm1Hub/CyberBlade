@@ -151,6 +151,7 @@
     <ClCompile Include="Player_Attack3State.cpp" />
     <ClCompile Include="Player_AttackDashState.cpp" />
     <ClCompile Include="Player_AttackJump1State.cpp" />
+    <ClCompile Include="Player_AttackJump2State.cpp" />
     <ClCompile Include="Player_DodgeState.cpp" />
     <ClCompile Include="Player_FallState.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
@@ -160,7 +161,8 @@
     <ClCompile Include="MainCamera.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Player_JumpState.cpp" />
+    <ClCompile Include="Player_Jump2State.cpp" />
+    <ClCompile Include="Player_Jump1State.cpp" />
     <ClCompile Include="Player_RunState.cpp" />
     <ClCompile Include="Player_SlowRunState.cpp" />
     <ClCompile Include="Player_StandState.cpp" />
@@ -199,8 +201,10 @@
     <ClInclude Include="Player_Attack3State.h" />
     <ClInclude Include="Player_AttackDashState.h" />
     <ClInclude Include="Player_AttackJump1State.h" />
+    <ClInclude Include="Player_AttackJump2State.h" />
     <ClInclude Include="Player_DodgeState.h" />
-    <ClInclude Include="Player_JumpState.h" />
+    <ClInclude Include="Player_Jump2State.h" />
+    <ClInclude Include="Player_Jump1State.h" />
     <ClInclude Include="Player_RunState.h" />
     <ClInclude Include="Player_StandState.h" />
     <ClInclude Include="Player_WalkState.h" />

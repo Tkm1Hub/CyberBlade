@@ -2,30 +2,28 @@
 #include "Input.h"
 #include "Player.h"
 #include "Player_FallState.h"
-#include "Player_JumpState.h"
+#include "Player_Jump2State.h"
 #include "Player_AttackJump1State.h"
 #include "Player_DodgeState.h"
 
 
-void Player_JumpState::OnStart()
+void Player_Jump2State::OnStart()
 {
 	// ジャンプアニメを再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Jump),false);
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Jump), false);
 
+	// ジャンプ力を加算
+	m_pPlayer->SetJumpPower(m_pPlayer->GetParams().Jump2Power);
+	// ジャンプフラグを更新
+	m_pPlayer->SetIsJumping(true);
+
+	// ジャンプ回数を加算
+	m_pPlayer->AddJumpCount();
 }
 
-void Player_JumpState::OnUpdate()
+void Player_Jump2State::OnUpdate()
 {
 	frameCount++;
-
-	// フレーム遅延を入れてからジャンプ力を加算
-	if (frameCount == 8)
-	{
-		// ジャンプ力を加算
-		m_pPlayer->SetJumpPower(m_pPlayer->GetParams().JumpPower);
-		// ジャンプフラグを更新
-		m_pPlayer->SetIsJumping(true);
-	}
 
 	// 重力を適応
 	if (m_pPlayer->GetCurrentJumpPower() > 0.0f)
@@ -60,7 +58,7 @@ void Player_JumpState::OnUpdate()
 	}
 }
 
-void Player_JumpState::OnExit()
+void Player_Jump2State::OnExit()
 {
 
 }

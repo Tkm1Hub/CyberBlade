@@ -3,10 +3,11 @@
 #include "Input.h"
 #include "Player_Attack1State.h"
 #include "Player_Attack2State.h"
+#include "Player_AttackJump2State.h"
 #include "Player_StandState.h"
 #include "Player_WalkState.h"
 #include "Player_DodgeState.h"
-#include "Player_JumpState.h"
+#include "Player_Jump1State.h"
 #include "Player_FallState.h"
 
 void Player_Attack1State::OnStart()
@@ -46,7 +47,10 @@ void Player_Attack1State::OnUpdate()
 		// 空中にいる場合
 		if (m_pPlayer->GetIsJumping())
 		{
-
+			// 空中攻撃2に移行する
+			auto spAttackJump2State = std::make_shared<Player_AttackJump2State>();
+			m_pPlayer->ChangeState(spAttackJump2State);
+			return;
 		}
 		else
 		{
@@ -91,7 +95,7 @@ void Player_Attack1State::OnUpdate()
 	// A（３）ボタンでジャンプ
 	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_3)
 	{
-		auto spJumpState = std::make_shared<Player_JumpState>();
+		auto spJumpState = std::make_shared<Player_Jump1State>();
 		m_pPlayer->ChangeState(spJumpState);
 		return;
 	}

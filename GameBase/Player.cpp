@@ -4,7 +4,7 @@
 #include "CameraManager.h"
 #include "Player_StandState.h"
 #include "Player_WalkState.h"
-#include "Player_JumpState.h"
+#include "Player_Jump1State.h"
 #include "Player_FallState.h"
 #include "Player_RunState.h"
 #include "EnemyManager.h"
@@ -92,14 +92,24 @@ void Player::Move()
 	}
 
 	// 移動速度を計算
-	if (!isAttack&&!isDodge)
+	if (!isAttack)
 	{
 		CulcMoveSpeed();
 	}
 
 
-	// モデルの方向に移動
-	moveVec = VScale(modelForward, currentMoveSpeed);
+	// 回避方向に移動
+	if (isDodge)
+	{
+		// 回避方向に移動
+		moveVec = VScale(dodgeDir, currentDodgeSpeed);
+	}
+	else
+	{
+		moveVec = VScale(modelForward, currentMoveSpeed);
+	}
+	printf("dodgeDir[%f , %f , %f]\n", dodgeDir.x, dodgeDir.y, dodgeDir.z);
+
 
 	// 移動ベクトルのＹ成分をＹ軸方向の速度にする
 	moveVec.y = currentJumpPower;
@@ -117,10 +127,12 @@ void Player::Move()
 	printf("targetMoveDirection [ %.2f,%.2f,%.2f ]\n", targetMoveDirection.x, targetMoveDirection.y, targetMoveDirection.z);
 	printf("currentMoveSpeed : %f\n", currentMoveSpeed);
 	printf("currentMaxSpeed : %f\n", currentMaxSpeed);
+	printf("currentDodgeSpeed : %f\n",currentDodgeSpeed);
 }
 
 void Player::CulcMoveSpeed()
 {
+	// 移動中
 	if (isMove)
 	{
 		currentMoveSpeed += params.Accel;
@@ -130,19 +142,33 @@ void Player::CulcMoveSpeed()
 		currentMoveSpeed -= params.Decel;
 	}
 
+	// 回避中
+	if (isDodge)
+	{
+		dodgeFrameCount++;
+
+		if (dodgeFrameCount < params.DODGE_BACK_BOOST_WAIT_FRAMES)
+		{
+			currentDodgeSpeed = params.DodgeStartSpeed;
+		}
+		else if (dodgeFrameCount >= params.DODGE_BACK_BOOST_WAIT_FRAMES &&
+			dodgeFrameCount < params.DODGE_RECOVERY_FRAMES)
+		{
+			currentDodgeSpeed = params.DodgeSpeed;
+		}
+		else if(dodgeFrameCount >= params.DODGE_RECOVERY_FRAMES)
+		{
+			currentDodgeSpeed -= params.DodgeSpeedDecel;
+			currentDodgeSpeed = max(currentDodgeSpeed, 0.0f);
+		}
+	}
+	
 	// 限界値を超えたら修正
 	currentMoveSpeed = std::clamp(currentMoveSpeed, 0.0f, currentMaxSpeed);
 }
 
 void Player::UpdateAngle()
 {
-	// 回避中、または回避後の入力なし時は回転しない
-	if (isDodge || keepForwardAfterDodge)
-	{
-		modelForward = VGet(sinf(angleH), 0.0f, cosf(angleH));
-		return;
-	}
-
 	// プレイヤーの移動方向にモデルの方向を近づける
 	float targetAngle;			// 目標角度
 	float difference;			// 目標角度と現在の角度との差
@@ -213,6 +239,9 @@ void Player::OnHitFloor()
 	// Ｙ軸方向の移動速度は０に
 	currentJumpPower = 0.0f;
 
+	// ジャンプ回数をリセット
+	ResetJumpCount();
+
 	// もしジャンプ中だった場合は着地状態にする
 	if (isJumping)
 	{
@@ -275,9 +304,6 @@ VECTOR Player::GetMoveInput()
 
 	if (fabs(stickX) > 0.01f || fabs(stickY) > 0.01f)
 	{
-		// 入力があったら回避後の正面維持を解除
-		keepForwardAfterDodge = false;
-
 		// カメラ基準の移動ベクトルを計算
 		VECTOR camForward = CameraManager::GetCameraManager().GetMainCamera()->GetForward();
 		VECTOR camRight = VCross(camForward, VGet(0.0f, 1.0f, 0.0f));
@@ -345,4 +371,19 @@ void Player::UpdateAttackDir()
 	{
 		attackDir = targetMoveDirection;
 	}
+}
+
+void Player::AddJumpCount()
+{
+	jumpCount++;
+
+	if (jumpCount > params.JUMP_MAX_COUNT)
+	{
+		jumpCount = params.JUMP_MAX_COUNT;
+	}
+}
+
+void Player::ResetJumpCount()
+{
+	jumpCount = 0;
 }

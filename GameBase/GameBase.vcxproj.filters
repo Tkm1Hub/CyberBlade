@@ -65,9 +65,6 @@
     <Filter Include="ソース ファイル\State\PlayerState\Stand">
       <UniqueIdentifier>{5236d403-d58c-4ac1-8154-58f7e3839f39}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\State\PlayerState\Jump">
-      <UniqueIdentifier>{e948ef37-f086-41be-8652-5453ad945786}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\State\PlayerState\Walk">
       <UniqueIdentifier>{7a0ecb1a-8e82-419c-90e5-b7c6be2f47c0}</UniqueIdentifier>
     </Filter>
@@ -161,6 +158,12 @@
     <Filter Include="ソース ファイル\State\PlayerState\Attack\AttackJump2">
       <UniqueIdentifier>{506b0f37-4512-446b-b617-ebe5f02dfce9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Jump1">
+      <UniqueIdentifier>{e948ef37-f086-41be-8652-5453ad945786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Jump2">
+      <UniqueIdentifier>{1621bc14-d72c-451a-bfe1-83144123cda2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -205,8 +208,8 @@
     <ClCompile Include="Player_StandState.cpp">
       <Filter>ソース ファイル\State\PlayerState\Stand</Filter>
     </ClCompile>
-    <ClCompile Include="Player_JumpState.cpp">
-      <Filter>ソース ファイル\State\PlayerState\Jump</Filter>
+    <ClCompile Include="Player_Jump1State.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Jump1</Filter>
     </ClCompile>
     <ClCompile Include="Player_WalkState.cpp">
       <Filter>ソース ファイル\State\PlayerState\Walk</Filter>
@@ -286,6 +289,12 @@
     <ClCompile Include="Player_AttackJump1State.cpp">
       <Filter>ソース ファイル\State\PlayerState\Attack\AttackJump1</Filter>
     </ClCompile>
+    <ClCompile Include="Player_AttackJump2State.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Attack\AttackJump2</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Jump2State.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Jump2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -345,8 +354,8 @@
     <ClInclude Include="Player_StandState.h">
       <Filter>ソース ファイル\State\PlayerState\Stand</Filter>
     </ClInclude>
-    <ClInclude Include="Player_JumpState.h">
-      <Filter>ソース ファイル\State\PlayerState\Jump</Filter>
+    <ClInclude Include="Player_Jump1State.h">
+      <Filter>ソース ファイル\State\PlayerState\Jump1</Filter>
     </ClInclude>
     <ClInclude Include="Player_WalkState.h">
       <Filter>ソース ファイル\State\PlayerState\Walk</Filter>
@@ -428,6 +437,12 @@
     </ClInclude>
     <ClInclude Include="Player_AttackJump1State.h">
       <Filter>ソース ファイル\State\PlayerState\Attack\AttackJump1</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_AttackJump2State.h">
+      <Filter>ソース ファイル\State\PlayerState\Attack\AttackJump2</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Jump2State.h">
+      <Filter>ソース ファイル\State\PlayerState\Jump2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

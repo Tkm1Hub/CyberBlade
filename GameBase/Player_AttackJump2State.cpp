@@ -6,22 +6,23 @@
 #include "Player.h"
 #include "Input.h"
 
-void Player_AttackJump1State::OnStart()
+void Player_AttackJump2State::OnStart()
 {
 	// 攻撃フラグ
 	m_pPlayer->SetAttackFrag(true);
-	
+
 	// アニメ再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Attack1), false);
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackJump2), false);
 
 	// 移動速度を設定
 	frontMoveSpeed = m_pPlayer->GetParams().AttackJump1MoveSpeed;
 
 	// ジャンプ力を0に設定
 	m_pPlayer->SetJumpPower(0.0f);
+
 }
 
-void Player_AttackJump1State::OnUpdate()
+void Player_AttackJump2State::OnUpdate()
 {
 	frameCount++;
 
@@ -44,9 +45,9 @@ void Player_AttackJump1State::OnUpdate()
 	{
 		if (isInputAttack)
 		{
-			// 空中攻撃2に移行する
-			auto spAttackJump2State = std::make_shared<Player_AttackJump2State>();
-			m_pPlayer->ChangeState(spAttackJump2State);
+			// 空中攻撃1に移行する
+			auto spAttackJump1State = std::make_shared<Player_AttackJump1State>();
+			m_pPlayer->ChangeState(spAttackJump1State);
 			return;
 		}
 	}
@@ -72,7 +73,7 @@ void Player_AttackJump1State::OnUpdate()
 	}
 }
 
-void Player_AttackJump1State::OnExit()
+void Player_AttackJump2State::OnExit()
 {
 	m_pPlayer->SetAttackFrag(false);
 }

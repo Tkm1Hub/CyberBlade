@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "Player_WalkState.h"
 #include "Player_StandState.h"
-#include "Player_JumpState.h"
+#include "Player_Jump1State.h"
 #include "Player_SlowRunState.h"
-#include "Player_RunState.h"
 #include "Player_Attack1State.h"
 #include "Player_FallState.h"
+#include "Player_DodgeState.h"
 #include "Player.h"
 #include "Input.h"
 
@@ -45,18 +45,18 @@ void Player_WalkState::OnUpdate()
 		return;
 	}
 
-	// R（8）ボタンでダッシュ
+	// R（8）ボタンで回避
 	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_6)
 	{
-		auto spRunState = std::make_shared<Player_RunState>();
-		m_pPlayer->ChangeState(spRunState);
+		auto spDodgeState = std::make_shared<Player_DodgeState>();
+		m_pPlayer->ChangeState(spDodgeState);
 		return;
 	}
 
 	// A（３）ボタンでジャンプ
 	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_3)
 	{
-		auto spJumpState = std::make_shared<Player_JumpState>();
+		auto spJumpState = std::make_shared<Player_Jump1State>();
 		m_pPlayer->ChangeState(spJumpState);
 		return;
 	}

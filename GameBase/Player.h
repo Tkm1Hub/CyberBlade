@@ -17,20 +17,26 @@ struct PlayerParams
 	static constexpr int ATTACK_DASH_RECOVERY_FRAMES = 48;		// ダッシュ攻撃の硬直時間
 	static constexpr int ATTACK_JUMP_1_RECOVERY_FRAMES = 48;	// ジャンプ攻撃１の硬直時間
 
+	static constexpr int JUMP_MAX_COUNT = 2;					// 連続ジャンプの最大数
+	static constexpr int JUMP_START_WAIT_FRAMES = 8;			// ジャンプするまでの待機時間
+	static constexpr int JUMP_1_TO_2_WAIT_FRAMES = 24;			// 二段ジャンプの待機時間
+
 	static constexpr int ATTACK_DODGE_INPUT_WINDOW_FRAMES = 5;	// 回避攻撃の入力受付時間
 
 	static constexpr int DODGE_BACK_BOOST_WAIT_FRAMES = 14;	// 後方回避のブーストまでの待機時間
 	static constexpr int DODGE_RECOVERY_FRAMES = 24;		// 回避の硬直時間
 
 	// パラメータ
-	float JumpPower = 3.0f;				// ジャンプ力
+	float Jump1Power = 3.0f;			// ジャンプ力（1段目）
+	float Jump2Power = 3.5f;			// ジャンプ力（2段目）
 	float Gravity = 0.12f;				// 重力
 	float WalkSpeed = 0.4f;				// 歩き最大移動速度
 	float SlowRunSpeed = 0.9f;			// 小走り最大移動速度
 	float RunSpeed = 1.5f;				// 走り最大移動速度
 	float FallMaxMoveSpeed = 1.5f;		// 落下中の最大移動速度
-	float DodgeStartSpeed = 1.0f;		// 回避開始速度
+	float DodgeStartSpeed = 1.8f;		// 回避開始速度
 	float DodgeSpeed = 2.0f;			// 回避最大速度
+	float DodgeSpeedDecel = 0.1f;		// 回避スピードの減速度
 	float Attack1MoveSpeed = 0.7f;		// 攻撃1段階目での前方移動速度
 	float Attack2MoveSpeed = 0.9f;		// 攻撃2段階目での前方移動速度
 	float Attack3MoveSpeed = 0.5f;		// 攻撃3段階目での前方移動速度
@@ -40,7 +46,7 @@ struct PlayerParams
 	float StickTiltSlowRun = 900;		// 歩きから小走りへ変更するスティックの傾きの基準値
 	float StickMargin = 50.0f;			// スティックの傾きに使用するマージン
 	float Accel = 0.03f;				// 移動加速度
-	float Decel = 0.05f;					// 移動減速度
+	float Decel = 0.1f;				// 移動減速度
 	float AngleSpeed = 0.2f;			// 移動時のモデル回転速度
 	float lockOnRange = 60.0f;			// ロックオン可能距離
 	float HitRadius = 3.0f;				// 当たり判定半径
@@ -57,6 +63,7 @@ enum class PlayerAnimState :int
 	Walk = 2,			// 歩き
 	SlowRun = 3,        // 小走り
 	Run = 4,			// ダッシュ
+	RunPose = 5,		// ダッシュポーズ
 	RunStop = 6,		// ストップ
 	Jump = 7,			// ジャンプ
 	Fall = 8,			// 落下中
@@ -100,7 +107,14 @@ public:
 	// 回避フラグ
 	const bool GetIsDodge() const { return isDodge; }
 	void SetIsDodge(bool flag) { isDodge = flag; }
-	void SetKeepForwardAfterDodge(bool flag) { keepForwardAfterDodge = flag; }
+	const float GetCurrentDodgeSpeed() const { return currentDodgeSpeed; }
+	void SetDodgeSpeed(float speed) { currentDodgeSpeed = speed; }
+	void ResetDodgeFrameCount() { dodgeFrameCount = 0; }
+
+	// ジャンプ
+	const int GetCurrentJumpCount() const { return jumpCount; }
+	void AddJumpCount();
+	void ResetJumpCount();
 
 	const float GetHitRadius() const override { return params.HitRadius; }
 	const float GetHitHeight() const override { return params.HitHeight; }
@@ -138,14 +152,18 @@ private:
 	VECTOR dodgeDir = { 0.0f,0.0f,0.0f };			// 回避の方向ベクトル
 
 	float currentMaxSpeed = 0.0f;				// 最大移動速度
+	float currentDodgeSpeed = 0.0f;				// 現在の回避速度
 
 	int handBoneIndex = -1;		// 手のボーンの番号
+
+	int dodgeFrameCount = 0;	// 回避中のフレームカウント
+
+	int jumpCount = 0;			// ジャンプカウンター
 
 	bool isRunning = false;		// 走っているか
 	bool isSlowRun = false;		// 小走り状態か
 	bool isLockOn = false;		// ロックオン状態か
 	bool isDodge = false;		// 回避中か
-	bool keepForwardAfterDodge = false;	// 回避後、正面を維持する
 
 	void Move();	// モデルの移動
 	void CulcMoveSpeed();	// 移動速度の計算

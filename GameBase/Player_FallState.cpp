@@ -2,6 +2,7 @@
 #include "Input.h"
 #include "Player.h"
 #include "Player_FallState.h"
+#include "Player_Jump2State.h"
 #include "Player_AttackJump1State.h"
 #include "Player_DodgeState.h"
 #include "Player_StandState.h"
@@ -29,6 +30,17 @@ void Player_FallState::OnUpdate()
 	float currentJumpPower = m_pPlayer->GetCurrentJumpPower();
 	currentJumpPower -= m_pPlayer->GetParams().Gravity;
 	m_pPlayer->SetJumpPower(currentJumpPower);
+
+	// ジャンプ2に移行
+	if (m_pPlayer->GetCurrentJumpCount() < m_pPlayer->GetParams().JUMP_MAX_COUNT)
+	{
+		if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_3)
+		{
+			auto spJumpState = std::make_shared<Player_Jump2State>();
+			m_pPlayer->ChangeState(spJumpState);
+			return;
+		}
+	}
 
 	// 空中攻撃に移行
 	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
