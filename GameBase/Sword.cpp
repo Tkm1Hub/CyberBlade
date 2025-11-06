@@ -20,11 +20,14 @@ void Sword::Update()
 {
     // Player の手のボーンの行列を毎フレーム取得
     MATRIX handMat = MV1GetFrameLocalWorldMatrix(owner->GetModelHandle(), owner->GetHandBoneIndex());
+    // Playerの鞘のボーンの行列を取得
+    MATRIX swordSocketMat = MV1GetFrameLocalWorldMatrix(owner->GetModelHandle(), owner->GetSwordSocketBoneIndex());
+
     // 武器用のスケール行列を作成
     MATRIX scaleMat = MGetScale(modelScale);
 
     // 行列を合成（スケール → 手の行列）
-    MATRIX finalMat = MMult(scaleMat, handMat);
+    MATRIX finalMat = MMult(scaleMat, swordSocketMat);
 
     // 武器にセット
     MV1SetMatrix(modelHandle, finalMat);

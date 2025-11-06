@@ -20,6 +20,7 @@ public:
 	const VECTOR GetBottomPos() override;
 
 private:
+	// “‚Ìƒ{[ƒ“”Ô† 
 	int bladeStartIndex = -1;
 	int bladeEndIndex = -1;
 
@@ -27,6 +28,8 @@ private:
 	VECTOR offsetRot = { 0.0f,0.0f,0.0f };
 	std::shared_ptr<Player> owner = nullptr;
 
+	// “–‚½‚è”»’è
 	float HitRadius = 1.5f;
 	float HitHeight = 10.0f;
+
 };

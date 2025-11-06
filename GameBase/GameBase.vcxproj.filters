@@ -164,6 +164,9 @@
     <Filter Include="ソース ファイル\State\PlayerState\Jump2">
       <UniqueIdentifier>{1621bc14-d72c-451a-bfe1-83144123cda2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Timer">
+      <UniqueIdentifier>{e7f4490d-cdf0-4068-b622-229cfd301ab7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -294,6 +297,9 @@
     </ClCompile>
     <ClCompile Include="Player_Jump2State.cpp">
       <Filter>ソース ファイル\State\PlayerState\Jump2</Filter>
+    </ClCompile>
+    <ClCompile Include="Timercpp.cpp">
+      <Filter>ソース ファイル\Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -443,6 +449,9 @@
     </ClInclude>
     <ClInclude Include="Player_Jump2State.h">
       <Filter>ソース ファイル\State\PlayerState\Jump2</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>ソース ファイル\Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

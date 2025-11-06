@@ -27,6 +27,7 @@ void Player::Load()
 	// ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹Žæ“¾
 	modelHandle = MV1LoadModel("data/model/character/Hideron.mv1");
 	handBoneIndex = MV1SearchFrame(modelHandle, "Hand_R.001");
+	swordSocketBoneIndex = MV1SearchFrame(modelHandle, "SwordSocket");
 	MV1SetScale(modelHandle, modelScale);
 	MV1SetPosition(modelHandle, pos);
 
@@ -65,6 +66,7 @@ void Player::Update()
 	animation.Update();
 
 	handMatrix = MV1GetFrameLocalWorldMatrix(modelHandle, handBoneIndex);
+	swordSocketMatrix = MV1GetFrameLocalWorldMatrix(modelHandle, swordSocketBoneIndex);
 }
 
 void Player::Draw()

@@ -111,6 +111,10 @@ public:
 	void SetDodgeSpeed(float speed) { currentDodgeSpeed = speed; }
 	void ResetDodgeFrameCount() { dodgeFrameCount = 0; }
 
+	// 装備フラグ
+	const bool GetIsSwordEpuipped() const { return isSwordEquipped; }
+	void SetIsSwordEquipped(bool frag) { isSwordEquipped = frag; }
+
 	// ジャンプ
 	const int GetCurrentJumpCount() const { return jumpCount; }
 	void AddJumpCount();
@@ -122,8 +126,13 @@ public:
 	const float GetCurrentMaxSpeed()const { return currentMaxSpeed; }
 	const void SetCurrentMaxSpeed(float maxSpeed) { currentMaxSpeed = maxSpeed; }
 
+	// 手のボーン
 	const MATRIX GetHandMatrix()const { return handMatrix; }
 	const int GetHandBoneIndex() const { return handBoneIndex; }
+
+	// 鞘のボーン
+	const MATRIX GetSwordSocketMatrix() const { return swordSocketMatrix; }
+	const int GetSwordSocketBoneIndex() const { return swordSocketBoneIndex; }
 
 	const VECTOR GetAttackDir() const { return attackDir; }
 
@@ -147,7 +156,12 @@ private:
 	PlayerParams params;		// パラメータ
 
 	std::shared_ptr<EnemyBase> lockOnTarget = nullptr;	// ロックオン対象
-	MATRIX handMatrix;
+
+	int handBoneIndex = -1;		// 手のボーンの番号
+	MATRIX handMatrix;			// 手のボーンのマトリックス
+
+	int swordSocketBoneIndex = -1;	// 鞘のボーンの番号
+	MATRIX swordSocketMatrix;		// 鞘のマトリックス
 
 	VECTOR attackDir = { 0.0f,0.0f,0.0f };			// 攻撃の方向ベクトル
 	VECTOR dodgeDir = { 0.0f,0.0f,0.0f };			// 回避の方向ベクトル
@@ -155,7 +169,6 @@ private:
 	float currentMaxSpeed = 0.0f;				// 最大移動速度
 	float currentDodgeSpeed = 0.0f;				// 現在の回避速度
 
-	int handBoneIndex = -1;		// 手のボーンの番号
 
 	int dodgeFrameCount = 0;	// 回避中のフレームカウント
 
@@ -165,6 +178,7 @@ private:
 	bool isSlowRun = false;		// 小走り状態か
 	bool isLockOn = false;		// ロックオン状態か
 	bool isDodge = false;		// 回避中か
+	bool isSwordEquipped = false;	// 剣を手に持っているか
 
 	void Move();	// モデルの移動
 	void CulcMoveSpeed();	// 移動速度の計算
