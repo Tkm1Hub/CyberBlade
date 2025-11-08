@@ -95,10 +95,6 @@ public:
 	void SetRunFlag(bool flag) { isRunning = flag; }
 	void SetMoveFrag(bool flag) { isMove = flag; }
 
-	// 攻撃フラグ
-	void SetAttackFrag(bool flag) { isAttack = flag; }
-	const bool GetIsAttack()const { return isAttack; }
-
 	// ロックオンフラグ
 	const bool GetIsLockOn() const { return isLockOn; }
 	void SetIsLockOn(bool flag) { isLockOn = flag; }

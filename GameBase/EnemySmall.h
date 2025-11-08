@@ -8,14 +8,16 @@ struct EnemySmall_Params
 	int MaxHp = 320;						// 最大HP
 
 	float Gravity = 0.08f;					// 重力
+	float AttackMoveSpeed = 0.4f;			// 攻撃中前進速度
 	float DamageSpeed = 1.5f;				// ダメージ中ノックバックの速度
-	float HitRadius = 4.0f;					// 当たり判定半径
+	float HitRadius = 5.0f;					// 当たり判定半径
 	float HitHeight = 14.0f;				// 当たり判定高さ
+	float HPBarHeight = 18.0f;				// HPバーを表示する高さ
 	float ChaseTriggerDistance = 80.0f;		// 追跡を開始するプレイヤーとの距離
 	float AttackTriggerDistance = 30.0f;	// 攻撃を開始するプレイヤーとの距離
 	float Accel = 0.03f;					// 移動加速度
 	float Decel = 0.1f;						// 移動減速度
-	float ChaseSpeed = 0.3f;				// 追跡速度
+	float ChaseSpeed = 0.5f;				// 追跡速度
 };
 
 // アニメーション番号

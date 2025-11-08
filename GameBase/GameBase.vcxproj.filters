@@ -173,6 +173,18 @@
     <Filter Include="ソース ファイル\State\Enemy\EnemySmallState\Attack">
       <UniqueIdentifier>{f189c35c-1225-4d48-8001-8d683f523dbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI">
+      <UniqueIdentifier>{59bfc2dd-c189-4a18-afee-b0a3f61502d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\HPBar_Player">
+      <UniqueIdentifier>{58f41203-b68b-4ce6-bdf7-224f9f925b84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\HPBar_Enemy">
+      <UniqueIdentifier>{0de4227f-8929-4262-86a5-e8fdd61b020f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UIManager">
+      <UniqueIdentifier>{d3e7c61e-bf0f-4550-a3fc-02aab8f60fa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -309,6 +321,15 @@
     </ClCompile>
     <ClCompile Include="Player_SwordRunState.cpp">
       <Filter>ソース ファイル\State\PlayerState\SwordRun</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySmall_AttackState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="HPBar_Enemy.cpp">
+      <Filter>ソース ファイル\UI\HPBar_Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>ソース ファイル\UIManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -464,6 +485,21 @@
     </ClInclude>
     <ClInclude Include="Player_SwordRunState.h">
       <Filter>ソース ファイル\State\PlayerState\SwordRun</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySmall_AttackState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemySmallState\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase.h">
+      <Filter>ソース ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HPBar_Player.h">
+      <Filter>ソース ファイル\UI\HPBar_Player</Filter>
+    </ClInclude>
+    <ClInclude Include="HPBar_Enemy.h">
+      <Filter>ソース ファイル\UI\HPBar_Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>ソース ファイル\UIManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

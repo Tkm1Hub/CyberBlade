@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EnemySmall_ChaseState.h"
 #include "EnemySmall_StandState.h"
+#include "EnemySmall_AttackState.h"
 #include "EnemySmall.h"
 
 void EnemySmall_ChaseState::OnStart()
@@ -19,11 +20,11 @@ void EnemySmall_ChaseState::OnUpdate()
 	VECTOR dir = m_pEnemySmall->GetToPlayerDirection();
 	m_pEnemySmall->SetMoveVec(dir);
 
-	// プレイヤーが一定範囲内に入ったらStandに戻す
+	// プレイヤーが一定範囲内に入ったら攻撃
 	if (m_pEnemySmall->IsPlayerInRange(m_pEnemySmall->GetParams().AttackTriggerDistance))
 	{
-		auto spStandState = std::make_shared<EnemySmall_StandState>();
-		m_pEnemySmall->ChangeState(spStandState);
+		auto spAttackState = std::make_shared<EnemySmall_AttackState>();
+		m_pEnemySmall->ChangeState(spAttackState);
 		return;
 	}
 

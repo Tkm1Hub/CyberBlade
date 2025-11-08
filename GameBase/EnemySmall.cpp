@@ -10,6 +10,8 @@ void EnemySmall::Init()
 	isCollisionEnabled = true;
 	isShadowEnabled = true;
 	hp = params.MaxHp;
+	MaxHp = params.MaxHp;
+	hpBarHeightOffset = params.HPBarHeight;
 
 	auto spStandState = std::make_shared<EnemySmall_StandState>();
 	ChangeState(spStandState);

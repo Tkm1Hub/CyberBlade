@@ -132,3 +132,11 @@ bool EnemyBase::IsPlayerInRange(float range)
 	// ƒvƒŒƒCƒ„[‚ª‘¶İ‚µ‚È‚¢ê‡
 	return false;
 }
+
+const VECTOR EnemyBase::GetHPBarPos() const
+{
+	VECTOR HPBarPos = pos;
+	HPBarPos.y += hpBarHeightOffset;
+
+	return HPBarPos;
+}

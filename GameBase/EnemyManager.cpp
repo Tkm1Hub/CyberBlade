@@ -1,11 +1,19 @@
 #include "stdafx.h"
 #include "EnemyManager.h"
 #include "EnemyBase.h"
+#include "UIManager.h"
+#include "HPBar_Enemy.h"
 
 void EnemyManager::AddEnemy(std::shared_ptr<EnemyBase> enemy,const VECTOR& initPos) 
 {
     enemies.push_back(enemy);
     enemy->SetPosition(initPos);
+    
+    // HPバーの生成
+    auto hpBar = std::make_shared<HPBar_Enemy>();
+    hpBar->Init();
+    hpBar->SetEnemy(enemy);
+    UIManager::GetUIManager().AddUI(hpBar);
 
     // プレイヤーが登録済みなら即セット
     if (auto p = m_pPlayer.lock())

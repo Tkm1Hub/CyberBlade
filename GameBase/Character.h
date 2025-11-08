@@ -10,7 +10,9 @@ public:
 	const float GetCurrentJumpPower() const { return currentJumpPower; }
 	const float GetCurrentMoveSpeed() const { return currentMoveSpeed; }
 
-
+	// UŒ‚ƒtƒ‰ƒO
+	void SetAttackFrag(bool flag) { isAttack = flag; }
+	const bool GetIsAttack()const { return isAttack; }
 
 	void SetMoveVec(VECTOR newMoveVec) { moveVec = newMoveVec; }
 	void SetJumpPower(float newJumpPower) { currentJumpPower = newJumpPower; }

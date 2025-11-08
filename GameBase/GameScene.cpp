@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "ShadowManager.h"
 #include "EnemyManager.h"
+#include "UIManager.h"
 #include "Debug.h"
 #include "Player.h"
 GameScene::GameScene(SceneManager& manager)
@@ -84,6 +85,9 @@ void GameScene::Update()
 	// カメラの更新
 	CameraManager::GetCameraManager().Update();
 
+	// UIの更新
+	UIManager::GetUIManager().Update();
+
 	// デバッグの更新
 	debug->Update();
 }
@@ -116,4 +120,7 @@ void GameScene::Draw()const
 
 	// 描画に使用するシャドウマップの設定を解除
 	SetUseShadowMap(0, -1);
+
+	// UIの描画
+	UIManager::GetUIManager().Draw();
 }

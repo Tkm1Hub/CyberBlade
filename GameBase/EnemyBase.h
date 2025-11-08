@@ -15,6 +15,7 @@ public:
 
 	void SetHp(int newHp) { hp = newHp; }
 	const int GetHp() const { return hp; }
+	const int GetMaxHp() const { return MaxHp; }
 
 	VECTOR GetKnockBackDir()const { return knockBackDir; }
 	void SetKnockBackDir(const VECTOR& direction) { knockBackDir = direction; }
@@ -22,6 +23,8 @@ public:
 	int GetHitPoint()const { return hp; }
 	int SetHitPoint(int newHp){ hp = newHp; }
 	void ApplyDamage(int damage) { hp -= damage; }
+
+	const VECTOR GetHPBarPos()const;
 
 	const bool GetIsDead()const { return isDead; }
 	void Kill() { isDead = true; }
@@ -55,6 +58,8 @@ protected:
 	bool isAlert = false;	// åxâ˙èÛë‘
 
 	int hp = 0;
+	int MaxHp = 0;
+	float hpBarHeightOffset = 0.0f;				// HPÉQÅ[ÉWÇï\é¶Ç∑ÇÈçÇÇ≥
 
 	std::weak_ptr<Player> m_pPlayer;
 
