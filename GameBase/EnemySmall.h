@@ -18,6 +18,16 @@ struct EnemySmall_Params
 	float ChaseSpeed = 0.3f;				// 追跡速度
 };
 
+// アニメーション番号
+enum class EnemySmallAnimState :int
+{
+	None = -1,			// なし
+	Idle = 0,			// 立ち止まり
+	Chase = 1,			// 追跡
+	Attack = 2,			// 攻撃
+};
+
+
 class EnemySmallStateBase;
 class EnemySmall :public EnemyBase
 {
@@ -38,6 +48,7 @@ public:
 	void OnFall() override;          // 落下が確定したとき
 
 	const EnemySmall_Params GetParams() const { return params; }
+
 private:
 	EnemySmall_Params params;	// パラメータ
 	StateMachine stateMachine;	// ステートマシン

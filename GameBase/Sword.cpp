@@ -27,11 +27,19 @@ void Sword::Update()
     MATRIX scaleMat = MGetScale(modelScale);
 
     // 行列を合成（スケール → 手の行列）
-    MATRIX finalMat = MMult(scaleMat, swordSocketMat);
+    MATRIX finalMat;
+
+    if (owner->GetIsSwordEpuipped())
+    {
+        finalMat = MMult(scaleMat, handMat);
+    }
+    else
+    {
+        finalMat = MMult(scaleMat, swordSocketMat);
+    }
 
     // 武器にセット
     MV1SetMatrix(modelHandle, finalMat);
-    
 }
 
 void Sword::Draw()

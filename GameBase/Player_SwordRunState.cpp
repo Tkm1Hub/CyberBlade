@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "Player_SwordRunState.h"
 #include "Input.h"
 #include "Player_SlowRunState.h"
 #include "Player_WalkState.h"
@@ -10,21 +11,20 @@
 #include "Player_FallState.h"
 #include "Player_DodgeState.h"
 
-
-
-
-void Player_SlowRunState::OnStart()
+void Player_SwordRunState::OnStart()
 {
 	// アニメーション再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::SlowRun),true);
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::RunSword), true);
 	// 移動フラグを立てる
 	m_pPlayer->SetMoveFlag(true);
+	// 装備フラグ
+	m_pPlayer->SetIsSwordEquipped(true);
 	// 移動速度を設定
 	m_pPlayer->SetMoveSpeed(m_pPlayer->GetParams().SlowRunSpeed);
 	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().SlowRunSpeed);
 }
 
-void Player_SlowRunState::OnUpdate()
+void Player_SwordRunState::OnUpdate()
 {
 	// 空中にいれば落下に移行
 	if (m_pPlayer->GetIsJumping())
@@ -76,8 +76,9 @@ void Player_SlowRunState::OnUpdate()
 
 }
 
-void Player_SlowRunState::OnExit()
+void Player_SwordRunState::OnExit()
 {
 	m_pPlayer->SetMoveFlag(false);
+	m_pPlayer->SetIsSwordEquipped(false);
 }
 

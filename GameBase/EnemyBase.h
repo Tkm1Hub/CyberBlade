@@ -26,20 +26,33 @@ public:
 	const bool GetIsDead()const { return isDead; }
 	void Kill() { isDead = true; }
 
+	const bool GetIsAlert() const { return isAlert;}
+	void SetIsAlert(bool flag) { isAlert = flag; }
+
 	VECTOR GetToPlayerDirection();
 	bool IsPlayerInRange(float range);
 
 	void SetPlayer(const std::weak_ptr<Player>& player) { m_pPlayer = player; }
 
+	// 手のボーン
+	const VECTOR GetHandPos()const { return handPos; }
+	const int GetHandBoneIndex() const { return handBoneIndex; }
+
 protected:
 	void Move();				// 移動処理
+	void UpdateAngle();			// モデルの角度更新
+	float angleSpeed = 0.2f;	// 角度更新速度
 
 	StateMachine stateMachine;	// ステートマシン
 
+	int handBoneIndex = -1;		// 手のボーンの番号
+
 	VECTOR knockBackDir = { 0.0f,0.0f,0.0f };	// ノックバックの方向
+	VECTOR handPos = { 0.0f,0.0f,0.0f };		// 手のボーンの座標
 
 	bool isDamage = false;
 	bool isDead = false;
+	bool isAlert = false;	// 警戒状態
 
 	int hp = 0;
 

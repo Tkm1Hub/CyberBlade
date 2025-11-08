@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Input.h"
+#include "Player_SwordRunState.h"
 #include "Player_Attack1State.h"
 #include "Player_Attack2State.h"
 #include "Player_AttackJump2State.h"
@@ -12,6 +13,8 @@
 
 void Player_Attack1State::OnStart()
 {
+	// 装備フラグ
+	m_pPlayer->SetIsSwordEquipped(true);
 	m_pPlayer->SetAttackFrag(true);
 
 	// 攻撃１アニメを再生
@@ -78,8 +81,8 @@ void Player_Attack1State::OnUpdate()
 
 		if (Input::GetInput().GetIsMoveLStick())
 		{
-			auto spWalkState = std::make_shared<Player_WalkState>();
-			m_pPlayer->ChangeState(spWalkState);	// スティック入力があれば歩きに戻す
+			auto spSwordRunState = std::make_shared<Player_SwordRunState>();
+			m_pPlayer->ChangeState(spSwordRunState);	// スティック入力があれば小走り（装備）に戻す
 			return;
 		}
 
@@ -112,4 +115,5 @@ void Player_Attack1State::OnUpdate()
 void Player_Attack1State::OnExit()
 {
 	m_pPlayer->SetAttackFrag(false);
+	m_pPlayer->SetIsSwordEquipped(false);
 }

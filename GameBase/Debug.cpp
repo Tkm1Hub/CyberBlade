@@ -45,9 +45,15 @@ void Debug::Draw()
 
     for (auto enemy : m_enemies)
     {
-        DrawCapsule(enemy);
-        DrawCylinder(enemy->GetPosition(), 60, 10, 32, GetColor(255, 255, 0));
-        DrawCylinder(enemy->GetPosition(), 30, 10, 32, GetColor(255, 0, 0));
+        if (!enemy->GetIsDead())
+        {
+            // 当たり判定カプセル
+            DrawCapsule(enemy);
+            // 攻撃（手）の当たり判定
+            DrawSphere3D(enemy->GetHandPos(), 2.0f, 16, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
+            DrawCylinder(enemy->GetPosition(), 60, 10, 32, GetColor(255, 255, 0));
+            DrawCylinder(enemy->GetPosition(), 30, 10, 32, GetColor(255, 0, 0));
+        }
     }
 
     printfDx("LeftStickX : %.0f \n", Input::GetInput().GetLeftStickX());

@@ -24,6 +24,71 @@ void EnemyBase::Move()
 
 }
 
+void EnemyBase::UpdateAngle()
+{
+	if (!isAlert && !isMove) return;
+	// プレイヤーの移動方向にモデルの方向を近づける
+	float targetAngle;			// 目標角度
+	float difference;			// 目標角度と現在の角度との差
+	float speed = angleSpeed;	// 角度変更速度
+
+
+	// 目標の方向ベクトルから角度値を算出する
+	if (isAlert)
+	{
+		VECTOR targetVec = GetToPlayerDirection();
+		targetAngle = static_cast<float>(atan2(targetVec.x, targetVec.z));
+	}
+	else
+	{
+		VECTOR targetVec = moveVec;
+		targetVec.y = 0.0f;
+		targetVec = VNorm(targetVec);
+
+		targetAngle = static_cast<float>(atan2(targetVec.x, targetVec.z));
+	}
+
+	// 目標の角度と現在の角度との差を割り出す
+	// 最初は単純に引き算
+	difference = targetAngle - angleH;
+
+	// ある方向からある方向の差が１８０度以上になることは無いので
+	// 差の値が１８０度以上になっていたら修正する
+	if (difference < -DX_PI_F)
+	{
+		difference += DX_TWO_PI_F;
+	}
+	else if (difference > DX_PI_F)
+	{
+		difference -= DX_TWO_PI_F;
+	}
+
+	// 角度の差が０に近づける
+	if (difference > 0.0f)
+	{
+		// 差がプラスの場合は引く
+		difference -= speed;
+		if (difference < 0.0f)
+		{
+			difference = 0.0f;
+		}
+	}
+	else
+	{
+		// 差がマイナスの場合は足す
+		difference += speed;
+		if (difference > 0.0f)
+		{
+			difference = 0.0f;
+		}
+	}
+
+	// モデルの角度を更新
+	angleH = targetAngle - difference;
+
+	MV1SetRotationXYZ(modelHandle, VGet(0.0f, angleH + DX_PI_F, 0.0f));
+}
+
 
 void EnemyBase::Draw()
 {

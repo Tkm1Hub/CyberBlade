@@ -167,6 +167,12 @@
     <Filter Include="ソース ファイル\Timer">
       <UniqueIdentifier>{e7f4490d-cdf0-4068-b622-229cfd301ab7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\SwordRun">
+      <UniqueIdentifier>{53cd0ccf-0dfc-4a66-b9ef-83560591beb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemySmallState\Attack">
+      <UniqueIdentifier>{f189c35c-1225-4d48-8001-8d683f523dbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -300,6 +306,9 @@
     </ClCompile>
     <ClCompile Include="Timercpp.cpp">
       <Filter>ソース ファイル\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_SwordRunState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\SwordRun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -452,6 +461,9 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>ソース ファイル\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_SwordRunState.h">
+      <Filter>ソース ファイル\State\PlayerState\SwordRun</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

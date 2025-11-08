@@ -43,6 +43,28 @@ void CollisionManager::Update()
         CheckSwordEnemyCollision();
     }
 
+    // オブジェクト同士の押し戻し
+    for (size_t i = 0; i < m_pEnemies.size(); i++)
+    {
+        for (size_t j = i + 1; j < m_pEnemies.size(); j++)
+        {
+            if (!m_pEnemies[i]->GetIsDead())
+            {
+                ResolveCapsuleCollision(m_pEnemies[i], m_pEnemies[j]);
+            }
+        }
+
+        // プレイヤーと敵の衝突
+        if (m_pPlayer)
+        {
+            if (!m_pEnemies[i]->GetIsDead())
+            {
+                ResolveCapsuleCollision(m_pPlayer, m_pEnemies[i]);
+            }
+        }
+    }
+
+    // ステージとの衝突
 	for (auto obj : objects)
 	{
 		if (obj->GetIsStageCollisionEnabled())
@@ -179,4 +201,49 @@ VECTOR CollisionManager::CulcKnockBackDirection(const std::shared_ptr<EnemyBase>
     
     VECTOR knockBackDirection = VScale(directionEnemyToPlayer, -1.0f);
     return knockBackDirection;
+}
+
+// カプセル同士の衝突をチェックして押し戻す
+bool CollisionManager::ResolveCapsuleCollision(std::shared_ptr<IGameObject> objA, std::shared_ptr<IGameObject> objB)
+{
+    float radiusA = objA->GetHitRadius();
+    float radiusB = objB->GetHitRadius();
+
+    VECTOR topA = objA->GetTopPos();
+    VECTOR bottomA = objA->GetBottomPos();
+
+    VECTOR topB = objB->GetTopPos();
+    VECTOR bottomB = objB->GetBottomPos();
+
+    // 各カプセルの中心を求める
+    VECTOR centerA = VScale(VAdd(topA, bottomA), 0.5f);
+    VECTOR centerB = VScale(VAdd(topB, bottomB), 0.5f);
+
+    // 2つの中心間のベクトル
+    VECTOR diff = VSub(centerB, centerA);
+    float dist = VSize(diff);
+    float minDist = radiusA + radiusB;
+
+    if (dist < minDist && dist > 0.0001f)
+    {
+        // 重なり量
+        float penetration = minDist - dist;
+
+        // 正規化
+        VECTOR pushDir = VNorm(diff);
+
+        // 双方を半分ずつ押し戻す（バランス型）
+        VECTOR pushA = VScale(pushDir, -penetration * 0.5f);
+        VECTOR pushB = VScale(pushDir, penetration * 0.5f);
+
+        VECTOR newPosA = VAdd(objA->GetNextPosition(), pushA);
+        VECTOR newPosB = VAdd(objB->GetNextPosition(), pushB);
+
+        objA->SetNextPosition(newPosA);
+        objB->SetNextPosition(newPosB);
+
+        return true;
+    }
+
+    return false;
 }

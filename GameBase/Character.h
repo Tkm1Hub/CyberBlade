@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Animation.h"
 
 class Character :public IGameObject
 {
@@ -29,6 +30,8 @@ public:
 	}
 
 	const VECTOR& GetModelForward() const { return modelForward; }
+
+	Animation animation;		// アニメーション
 
 protected:
 	// 定数

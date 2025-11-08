@@ -7,6 +7,10 @@ void EnemySmall_ChaseState::OnStart()
 {
 	// 移動速度を設定
 	m_pEnemySmall->SetMoveSpeed(m_pEnemySmall->GetParams().ChaseSpeed);
+	// アニメ再生
+	m_pEnemySmall->animation.Play(static_cast<int>(EnemySmallAnimState::Chase), true);
+	//警戒フラグ
+	m_pEnemySmall->SetIsAlert(true);
 }
 
 void EnemySmall_ChaseState::OnUpdate()
@@ -26,6 +30,9 @@ void EnemySmall_ChaseState::OnUpdate()
 	// プレイヤーが範囲外だと追跡をやめる
 	if (!m_pEnemySmall->IsPlayerInRange(m_pEnemySmall->GetParams().ChaseTriggerDistance))
 	{
+		//警戒フラグ
+		m_pEnemySmall->SetIsAlert(false);
+
 		auto spStandState = std::make_shared<EnemySmall_StandState>();
 		m_pEnemySmall->ChangeState(spStandState);
 		return;

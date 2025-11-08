@@ -9,6 +9,8 @@ void EnemySmall_StandState::OnStart()
 	// ˆÚ“®ƒxƒNƒgƒ‹‚Ì‰Šú‰»
 	m_pEnemySmall->SetMoveVec(VGet(0.0f, 0.0f, 0.0f));
 
+	m_pEnemySmall->animation.Play(static_cast<int>(EnemySmallAnimState::Idle), true);
+
 }
 
 void EnemySmall_StandState::OnUpdate()

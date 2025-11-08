@@ -43,4 +43,7 @@ private:
 
 	// 敵がノックバックする方向ベクトルを取得
 	VECTOR CulcKnockBackDirection(const std::shared_ptr<EnemyBase>& enemy);
+
+	// カプセル同士の衝突を判定して押し戻し
+	bool ResolveCapsuleCollision(std::shared_ptr<IGameObject> objA, std::shared_ptr<IGameObject> objB);
 };

@@ -166,6 +166,7 @@
     <ClCompile Include="Player_RunState.cpp" />
     <ClCompile Include="Player_SlowRunState.cpp" />
     <ClCompile Include="Player_StandState.cpp" />
+    <ClCompile Include="Player_SwordRunState.cpp" />
     <ClCompile Include="Player_WalkState.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Player_Jump1State.h" />
     <ClInclude Include="Player_RunState.h" />
     <ClInclude Include="Player_StandState.h" />
+    <ClInclude Include="Player_SwordRunState.h" />
     <ClInclude Include="Player_WalkState.h" />
     <ClInclude Include="ShadowManager.h" />
     <ClInclude Include="Player_SlowRunState.h" />

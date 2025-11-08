@@ -1,7 +1,6 @@
 #pragma once
 #include "Character.h"
 #include "StateMachine.h"
-#include "Animation.h"
 #include "PlayerStateBase.h"
 
 // パラメータ
@@ -148,7 +147,6 @@ public:
 	const VECTOR GetTargetMoveDirection() const { return targetMoveDirection; }	// モデルが向くべき方向を取得
 
 	VECTOR GetTargetDir();	// 一番近くの敵への方向ベクトル取得
-	Animation animation;		// アニメーション
 	const PlayerParams& GetParams() const { return params; }
 
 private:

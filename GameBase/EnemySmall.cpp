@@ -23,6 +23,12 @@ void EnemySmall::Load()
 	// モデルハンドル取得
 	modelHandle = MV1LoadModel("data/model/character/robot.mv1");
 	MV1SetScale(modelHandle, modelScale);
+	handBoneIndex = MV1SearchFrame(modelHandle, "mixamorig:LeftHand");
+
+	// アニメーションのロード
+	animation.LoadAnimation(modelHandle);
+	// アイドルを再生
+	animation.Play(static_cast<int>(EnemySmallAnimState::Idle), true);
 }
 
 void EnemySmall::Update()
@@ -39,6 +45,14 @@ void EnemySmall::Update()
 	{
 		isDead = true;
 	}
+
+	// アニメーションの更新
+	animation.Update();
+
+	// 角度更新
+	UpdateAngle();
+
+	handPos = MV1GetFramePosition(modelHandle, handBoneIndex);
 }
 
 

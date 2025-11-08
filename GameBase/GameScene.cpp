@@ -17,6 +17,8 @@ GameScene::~GameScene() {}
 
 void GameScene::Init()
 {
+	EnemyManager::GetEnemyManager().Clear();
+
 	//インスタンス化
 	objectMgr = std::make_shared<ObjectManager>();
 	collisionMgr = std::make_shared<CollisionManager>();

@@ -10,7 +10,9 @@ void Player_AttackJump1State::OnStart()
 {
 	// 攻撃フラグ
 	m_pPlayer->SetAttackFrag(true);
-	
+	// 装備フラグ
+	m_pPlayer->SetIsSwordEquipped(true);
+
 	// アニメ再生
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Attack1), false);
 
@@ -75,4 +77,6 @@ void Player_AttackJump1State::OnUpdate()
 void Player_AttackJump1State::OnExit()
 {
 	m_pPlayer->SetAttackFrag(false);
+	m_pPlayer->SetIsSwordEquipped(false);
+
 }
