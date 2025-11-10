@@ -2,6 +2,9 @@
 #include <memory>
 
 class UIBase;
+class IGameObject;
+class Marker;
+class Player;
 class UIManager
 {
 private:
@@ -23,9 +26,15 @@ public:
 	}
 
 	void AddUI(std::shared_ptr<UIBase> ui);
+	void Init();
+	void SetObjects(std::vector<std::weak_ptr<IGameObject>> owners) { m_objects = owners; }
+	void SetPlayer(const std::weak_ptr<Player>& player) { m_pPlayer = player; }
 	void Update();
 	void Draw();
 
 private:
 	std::vector<std::shared_ptr<UIBase>> m_uiList;
+	std::vector < std::weak_ptr<IGameObject>> m_objects;
+	std::weak_ptr<Player> m_pPlayer;
+	std::shared_ptr<Marker> marker;
 };

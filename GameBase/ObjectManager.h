@@ -15,6 +15,7 @@ class ObjectManager
 public:
 	void Create();
 	void AddObject(std::shared_ptr<IGameObject> obj);
+	void AddUIDisplayTarget(std::shared_ptr<IGameObject> obj);
 	std::shared_ptr<IGameObject> FindObject(std::string name);
 	void InitAll();
 	void LoadAll();
@@ -23,9 +24,11 @@ public:
 	void DrawAll();
 
 	const std::vector<std::shared_ptr<IGameObject>>& GetObjects() const { return objects; }
+	const std::vector<std::shared_ptr<IGameObject>>& GetUIDisplayTargets() const { return uiDisplayTargets; }
 
 private:
 	std::vector<std::shared_ptr<IGameObject>> objects;
+	std::vector<std::shared_ptr<IGameObject>> uiDisplayTargets;
 
 	std::shared_ptr<SkyDome> skyDome = nullptr;
 	std::shared_ptr<Stage> stage = nullptr;

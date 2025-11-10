@@ -185,6 +185,9 @@
     <Filter Include="ソース ファイル\UIManager">
       <UniqueIdentifier>{d3e7c61e-bf0f-4550-a3fc-02aab8f60fa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\Marker">
+      <UniqueIdentifier>{beaa5280-7d69-41ec-8b2b-6042741f6a9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -330,6 +333,9 @@
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>ソース ファイル\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Marker.cpp">
+      <Filter>ソース ファイル\UI\Marker</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -500,6 +506,9 @@
     </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>ソース ファイル\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Marker.h">
+      <Filter>ソース ファイル\UI\Marker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

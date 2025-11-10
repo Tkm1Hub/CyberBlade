@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include <iostream>
 
+class Player;
 class UIBase
 {
 public:
@@ -13,8 +14,12 @@ public:
 
 	const bool GetIsActive()const { return m_isActive; }
 
+	void SetPlayer(const std::weak_ptr<Player>& player) { m_pPlayer = player; }
+
 protected:
 	bool m_isActive = false;
 	VECTOR m_pos;				// À•W
 	int m_handle = -1;			// ‰æ‘œƒnƒ“ƒhƒ‹
+
+	std::weak_ptr<Player> m_pPlayer;
 };

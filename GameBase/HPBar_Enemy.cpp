@@ -21,11 +21,17 @@ void HPBar_Enemy::Update()
 			// スクリーン座標に変換
 			m_pos = ConvWorldPosToScreenPos(enemy->GetHPBarPos());
 
-			// カメラに映っているかどうかをチェック
-			bool isVisible = (CheckCameraViewClip(enemy->GetHPBarPos()) == FALSE);
-
-			// 結果を反映
-			m_isActive = isVisible;
+			// カメラに写っていない場合 → 非表示
+			if (CheckCameraViewClip(enemy->GetHPBarPos()))
+			{
+				// 見えない
+				m_isActive = false;
+			}
+			else
+			{
+				// 見えている
+				m_isActive = true;
+			}
 		}
 	}
 	else
@@ -36,7 +42,6 @@ void HPBar_Enemy::Update()
 
 void HPBar_Enemy::Draw()
 {
-	if (!m_isActive) return;
 
 	if (auto enemy = m_pEnemy.lock())
 	{

@@ -27,6 +27,7 @@ void ObjectManager::Create()
 	sword->SetOwner(player);
 	skyDome->SetOwner(player);
 
+	// オブジェクトリストに追加
 	AddObject(skyDome);
 	AddObject(stage);
 	AddObject(player);
@@ -34,15 +35,32 @@ void ObjectManager::Create()
 	AddObject(checkPoint);
 
 	// 敵の生成
-	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall1"), VGet(0, 0, 70));
-	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 50));
-	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 0));
-	EnemyManager::GetEnemyManager().AddEnemy(std::make_shared<EnemySmall>("EnemySmall2"), VGet(0, 0, 30));
+	auto Enemy1 = std::make_shared<EnemySmall>("EnemySmall1");
+	auto Enemy2 = std::make_shared<EnemySmall>("EnemySmall2");
+	auto Enemy3 = std::make_shared<EnemySmall>("EnemySmall3");
+	auto Enemy4 = std::make_shared<EnemySmall>("EnemySmall4");
+
+	EnemyManager::GetEnemyManager().AddEnemy(Enemy1, VGet(0, 0, 70));
+	EnemyManager::GetEnemyManager().AddEnemy(Enemy2, VGet(0, 0, 50));
+	EnemyManager::GetEnemyManager().AddEnemy(Enemy3, VGet(0, 0, 0));
+	EnemyManager::GetEnemyManager().AddEnemy(Enemy4, VGet(0, 0, 30));
+
+	// UI表示オブジェクトをリストに追加
+	AddUIDisplayTarget(Enemy1);
+	AddUIDisplayTarget(Enemy2);
+	AddUIDisplayTarget(Enemy3);
+	AddUIDisplayTarget(Enemy4);
+
 }
 
 void ObjectManager::AddObject(std::shared_ptr<IGameObject> obj)
 {
 	objects.push_back(obj);
+}
+
+void ObjectManager::AddUIDisplayTarget(std::shared_ptr<IGameObject> obj)
+{
+	uiDisplayTargets.push_back(obj);
 }
 
 /// <summary>

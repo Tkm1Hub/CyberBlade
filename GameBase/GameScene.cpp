@@ -41,6 +41,7 @@ void GameScene::Init()
 	if (player)
 	{
 		EnemyManager::GetEnemyManager().SetPlayer(player);
+		UIManager::GetUIManager().SetPlayer(player);
 	}
 
 	// shared_ptr -> weak_ptr ‚É•ÏŠ·
@@ -62,6 +63,8 @@ void GameScene::Init()
 	debug->SetEnemies(EnemyManager::GetEnemyManager().GetEnemies());
 
 	shadowMgr->Init();
+
+	UIManager::GetUIManager().Init();
 }
 
 void GameScene::Update()

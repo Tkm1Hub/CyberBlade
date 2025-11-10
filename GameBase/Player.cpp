@@ -46,6 +46,9 @@ void Player::Update()
 	}
 
 	// ロックオン切り替え
+	// 一番近くの敵を取得
+	lockOnTarget = EnemyManager::GetEnemyManager().GetNearestEnemy(pos);
+
 	// Lボタンで切り替え
 	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_5)
 	{
@@ -326,9 +329,6 @@ void Player::ToggleLockOn()
 
 	if (isLockOn)
 	{
-		// 一番近くの敵を取得
-		lockOnTarget = EnemyManager::GetEnemyManager().GetNearestEnemy(pos);
-
 		// 敵がいない場合はロックオン解除して終了
 		if (!lockOnTarget)
 		{
