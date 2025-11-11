@@ -5,12 +5,15 @@
 
 void UIManager::Init()
 {
-    marker = std::make_shared<Marker>();
-
-    if (auto p = m_pPlayer.lock())
+    if (!marker)  // ‚Ü‚¾ì‚ç‚ê‚Ä‚¢‚È‚¢‚Æ‚«‚¾‚¯¶¬
     {
-        marker->SetPlayer(p);
-        AddUI(marker);
+        marker = std::make_shared<Marker>();
+
+        if (auto p = m_pPlayer.lock())
+        {
+            marker->SetPlayer(p);
+            AddUI(marker);
+        }
     }
 }
 

@@ -25,7 +25,7 @@ void LockOnCamera::Update()
 		// ロックオン対象が死亡している場合はカメラ切り替えをして早期リターン
 		if (lockOnTarget->GetIsDead())
 		{
-			CameraManager::GetCameraManager().ChangeCamera(2);
+			CameraManager::GetCameraManager().ChangeCamera(0);
 			m_pPlayer->SetIsLockOn(false);	// ロックオンフラグをFalseに変更
 			return;
 		}

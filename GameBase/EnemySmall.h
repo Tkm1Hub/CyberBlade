@@ -5,7 +5,7 @@
 // パラメータ
 struct EnemySmall_Params
 {
-	int MaxHp = 320;						// 最大HP
+	int MaxHp = 120;						// 最大HP
 
 	float Gravity = 0.08f;					// 重力
 	float AttackMoveSpeed = 0.4f;			// 攻撃中前進速度
@@ -54,5 +54,7 @@ public:
 private:
 	EnemySmall_Params params;	// パラメータ
 	StateMachine stateMachine;	// ステートマシン
+
+	int headIndex = -1;
 
 };

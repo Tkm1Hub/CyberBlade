@@ -13,6 +13,8 @@
 void Player::Init()
 {
 	modelScale = VGet(0.1f, 0.1f, 0.1f);
+	pos = params.InitPos;
+	targetMoveDirection = VGet(-1.0f, 0.0f, 0.0f);
 	isStageCollisionEnabled = true;
 	isCollisionEnabled = true;
 	isShadowEnabled = true;
@@ -44,11 +46,6 @@ void Player::Update()
 		// スティックでの移動入力
 		moveVec = GetMoveInput();
 	}
-
-	// ロックオン切り替え
-	// 一番近くの敵を取得
-	lockOnTarget = EnemyManager::GetEnemyManager().GetNearestEnemy(pos);
-
 	// Lボタンで切り替え
 	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_5)
 	{
@@ -324,35 +321,42 @@ VECTOR Player::GetMoveInput()
 
 void Player::ToggleLockOn()
 {
-	// フラグ切り替え
 	isLockOn = !isLockOn;
 
 	if (isLockOn)
 	{
+		lockOnTarget = EnemyManager::GetEnemyManager().GetNearestEnemy(pos);
+
 		// 敵がいない場合はロックオン解除して終了
 		if (!lockOnTarget)
 		{
-			isLockOn = false;           // ロックオンを無効化
-			return;                     // 以降の処理をスキップ
+			isLockOn = false;
+			return;
 		}
 
-		CameraManager::GetCameraManager().ChangeCamera(3);
+		CameraManager::GetCameraManager().ChangeCamera(1);
 
-		// 攻撃の方向ベクトルをロックオン対象方向に変更
-		attackDir = GetTargetDir();
+		// lockOnTargetが有効なときのみ方向を更新
+		if (auto target = lockOnTarget)
+		{
+			attackDir = GetTargetDir();
+		}
 	}
 	else
 	{
 		lockOnTarget = nullptr;
-		CameraManager::GetCameraManager().ChangeCamera(2);
-
-		// 攻撃の方向ベクトルをモデルの向きに変更
+		CameraManager::GetCameraManager().ChangeCamera(0);
 		attackDir = targetMoveDirection;
 	}
 }
 
 VECTOR Player::GetTargetDir()
 {
+	if (!lockOnTarget)
+	{
+		return VGet(0.0f, 0.0f, 0.0f); // 無効ならゼロベクトル返す
+	}
+
 	VECTOR playerPos = pos;
 	VECTOR targetPos = lockOnTarget->GetPosition();
 

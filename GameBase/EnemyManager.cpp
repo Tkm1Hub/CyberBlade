@@ -4,11 +4,10 @@
 #include "UIManager.h"
 #include "HPBar_Enemy.h"
 
-void EnemyManager::AddEnemy(std::shared_ptr<EnemyBase> enemy,const VECTOR& initPos) 
+void EnemyManager::AddEnemy(std::shared_ptr<EnemyBase> enemy, const VECTOR& initPos)
 {
     enemies.push_back(enemy);
     enemy->SetPosition(initPos);
-    
     // HPÉoÅ[ÇÃê∂ê¨
     auto hpBar = std::make_shared<HPBar_Enemy>();
     hpBar->Init();
@@ -20,6 +19,7 @@ void EnemyManager::AddEnemy(std::shared_ptr<EnemyBase> enemy,const VECTOR& initP
     {
         enemy->SetPlayer(p);
     }
+
 }
 
 void EnemyManager::SetPlayer(const std::shared_ptr<Player>& player)
@@ -30,6 +30,11 @@ void EnemyManager::SetPlayer(const std::shared_ptr<Player>& player)
     for (auto& e : enemies)
     {
         if (e) e->SetPlayer(m_pPlayer);
+    }
+
+    for (auto& ui : UIManager::GetUIManager().GetUIList())
+    {
+        if (ui)ui->SetPlayer(m_pPlayer);
     }
 }
 

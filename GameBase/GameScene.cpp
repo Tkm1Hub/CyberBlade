@@ -11,7 +11,6 @@
 #include "Player.h"
 GameScene::GameScene(SceneManager& manager)
 	: Scene{manager}{
-	Init();
 }
 
 GameScene::~GameScene() {}

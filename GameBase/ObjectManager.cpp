@@ -22,7 +22,7 @@ void ObjectManager::Create()
 	stage = std::make_shared<Stage>("Stage");
 	player = std::make_shared<Player>("Player");
 	sword = std::make_shared<Sword>("Sword");
-	checkPoint = std::make_shared<CheckPoint>("CheckPoint");
+	checkPoint = std::make_shared<CheckPoint>("CheckPoint1");
 
 	sword->SetOwner(player);
 	skyDome->SetOwner(player);

@@ -10,7 +10,21 @@ void FreeCamera::SetPlayer(const std::weak_ptr<Player>& playerPtr)
 
 void FreeCamera::Init()
 {
-	angleV = 0.0f;
+	angleV = 0.0f; // 上下角度リセット
+	angleH = -3.14f; // 水平角度リセット（必要なら）
+
+	if (auto p = player.lock())
+	{
+		VECTOR playerPos = p->GetPosition();
+		VECTOR forward = p->GetModelForward(); // プレイヤーの前方向
+
+		// 注視点はプレイヤーの頭上
+		target = VAdd(playerPos, VGet(0.0f, LOOK_OFFSET_Y, 0.0f));
+
+		// カメラはプレイヤーの後ろにDISTANCE_OFFSETだけ離す
+		pos = VSub(target, VScale(forward, DISTANCE_OFFSET));
+
+	}
 }
 
 void FreeCamera::Update()
@@ -75,6 +89,9 @@ void FreeCamera::CalcCameraAngle()
 			angleV = -DX_PI_F * 0.5f + 0.6f;
 		}
 	}
+
+	printf("Camera.AngleH : %f\n", angleH);
+	printf("Camera.AngleV : %f\n", angleV);
 }
 
 float FreeCamera::CalcAngleSpeed()

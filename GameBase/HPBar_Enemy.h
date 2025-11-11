@@ -16,4 +16,6 @@ private:
 
     static constexpr int WIDTH = 130;   // ‰¡•
     static constexpr int HEIGHT = 8;   // c•
+
+    static constexpr float ACTIVE_RADIUS = 80.0f;   // •\¦‚·‚é”ÍˆÍ
 };

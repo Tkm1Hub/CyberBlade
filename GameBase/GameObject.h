@@ -39,10 +39,13 @@ public:
 	virtual const VECTOR GetTopPos() { return VGet(0.0f, 0.0f, 0.0f); }
 	virtual const VECTOR GetBottomPos(){ return VGet(0.0f, 0.0f, 0.0f); }
 
+	const VECTOR GetLockOnPos() { return lockOnPos; }
+
 protected:
 	std::string name = "null";
 	VECTOR pos = VGet(0.0f, 0.0f, 0.0f);
 	VECTOR nextPos = VGet(0.0f, 0.0f, 0.0f);
+	VECTOR lockOnPos = VGet(0.0f, 0.0f, 0.0f);
 	VECTOR rotate = VGet(0.0f, 0.0f, 0.0f);
 	VECTOR modelScale = VGet(0.0f, 0.0f, 0.0f);
 	int modelHandle = -1;

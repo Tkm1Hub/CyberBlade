@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "HPBar_Enemy.h"
 #include "EnemyBase.h"
+#include "Player.h"
 
 void HPBar_Enemy::Init()
 {
@@ -9,15 +10,29 @@ void HPBar_Enemy::Init()
 
 void HPBar_Enemy::Update()
 {
+
 	if (auto enemy = m_pEnemy.lock())
 	{
+		bool isActive = true;
+
 		// 死亡してたら非表示にして終了
 		if (enemy->GetIsDead())
 		{
-			m_isActive = false;
+			isActive = false;
 		}
 		else
 		{
+			// 距離チェック
+			if (auto p = m_pPlayer.lock())
+			{
+				VECTOR diff = VSub(p->GetPosition(), enemy->GetPosition());
+				float dist = VSize(diff);
+				if (dist > ACTIVE_RADIUS)
+				{
+					isActive = false;
+				}
+			}
+
 			// スクリーン座標に変換
 			m_pos = ConvWorldPosToScreenPos(enemy->GetHPBarPos());
 
@@ -25,14 +40,11 @@ void HPBar_Enemy::Update()
 			if (CheckCameraViewClip(enemy->GetHPBarPos()))
 			{
 				// 見えない
-				m_isActive = false;
-			}
-			else
-			{
-				// 見えている
-				m_isActive = true;
+				isActive = false;
 			}
 		}
+
+		m_isActive = isActive;
 	}
 	else
 	{

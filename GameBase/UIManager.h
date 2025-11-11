@@ -32,6 +32,8 @@ public:
 	void Update();
 	void Draw();
 
+	const std::vector<std::shared_ptr<UIBase>>& GetUIList() { return m_uiList; }
+	
 private:
 	std::vector<std::shared_ptr<UIBase>> m_uiList;
 	std::vector < std::weak_ptr<IGameObject>> m_objects;
