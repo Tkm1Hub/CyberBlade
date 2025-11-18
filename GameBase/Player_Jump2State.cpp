@@ -5,6 +5,7 @@
 #include "Player_Jump2State.h"
 #include "Player_AttackJump1State.h"
 #include "Player_DodgeState.h"
+#include "Player_DamageState.h"
 
 
 void Player_Jump2State::OnStart()
@@ -31,6 +32,14 @@ void Player_Jump2State::OnUpdate()
 		float currentJumpPower = m_pPlayer->GetCurrentJumpPower();
 		currentJumpPower -= m_pPlayer->GetParams().Gravity;
 		m_pPlayer->SetJumpPower(currentJumpPower);
+	}
+
+	// ダメージを食らったら状態変更
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
 	}
 
 	// 空中攻撃に移行

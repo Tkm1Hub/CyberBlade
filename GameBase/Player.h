@@ -33,6 +33,7 @@ struct PlayerParams
 	float SlowRunSpeed = 0.9f;			// 小走り最大移動速度
 	float RunSpeed = 1.5f;				// 走り最大移動速度
 	float FallMaxMoveSpeed = 1.5f;		// 落下中の最大移動速度
+	float DamageKnockBackSpeed = 0.4f;	// 被ダメージののけぞり速度
 	float DodgeStartSpeed = 1.8f;		// 回避開始速度
 	float DodgeSpeed = 2.0f;			// 回避最大速度
 	float DodgeSpeedDecel = 0.1f;		// 回避スピードの減速度

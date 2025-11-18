@@ -94,7 +94,7 @@ void Player::Move()
 	}
 
 	// ˆÚ“®‘¬“x‚ðŒvŽZ
-	if (!isAttack)
+	if (!isAttack && !isDamage)
 	{
 		CulcMoveSpeed();
 	}
@@ -108,7 +108,14 @@ void Player::Move()
 	}
 	else
 	{
-		moveVec = VScale(modelForward, currentMoveSpeed);
+		if (isDamage)
+		{
+			moveVec = VScale(knockBackDir, currentMoveSpeed);
+		}
+		else
+		{
+			moveVec = VScale(modelForward, currentMoveSpeed);
+		}
 	}
 	printf("dodgeDir[%f , %f , %f]\n", dodgeDir.x, dodgeDir.y, dodgeDir.z);
 

@@ -148,6 +148,7 @@
     <ClCompile Include="HPBar_Enemy.cpp" />
     <ClCompile Include="LockOnCamera.cpp" />
     <ClCompile Include="Marker.cpp" />
+    <ClCompile Include="Plaer_DamageState.cpp" />
     <ClCompile Include="Player_Attack1State.cpp" />
     <ClCompile Include="Player_Attack2State.cpp" />
     <ClCompile Include="Player_Attack3State.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Player_AttackDashState.h" />
     <ClInclude Include="Player_AttackJump1State.h" />
     <ClInclude Include="Player_AttackJump2State.h" />
+    <ClInclude Include="Player_DamageState.h" />
     <ClInclude Include="Player_DodgeState.h" />
     <ClInclude Include="Player_Jump2State.h" />
     <ClInclude Include="Player_Jump1State.h" />

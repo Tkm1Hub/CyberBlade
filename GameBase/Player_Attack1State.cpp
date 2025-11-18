@@ -10,6 +10,7 @@
 #include "Player_DodgeState.h"
 #include "Player_Jump1State.h"
 #include "Player_FallState.h"
+#include "Player_DamageState.h"
 
 void Player_Attack1State::OnStart()
 {
@@ -42,6 +43,14 @@ void Player_Attack1State::OnUpdate()
 		{
 			isInputAttack = true;
 		}
+	}
+
+	// ダメージを食らったら状態変更
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
 	}
 
 	// 攻撃の待機時間経過

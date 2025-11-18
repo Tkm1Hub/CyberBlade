@@ -8,6 +8,8 @@
 #include "Player_WalkState.h"
 #include "Player_DodgeState.h"
 #include "Player_Jump1State.h"
+#include "Player_DamageState.h"
+
 
 
 void Player_Attack2State::OnStart()
@@ -40,6 +42,14 @@ void Player_Attack2State::OnUpdate()
 		{
 			m_doNextAttack = true;
 		}
+	}
+
+	// ダメージを食らったら状態変更
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
 	}
 
 	// 18フレームで攻撃終了

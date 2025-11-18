@@ -43,6 +43,8 @@ void CollisionManager::Update()
         CheckSwordEnemyCollision();
     }
 
+    CheckEnemyHandPlayerCollision();
+
     // オブジェクト同士の押し戻し
     for (size_t i = 0; i < m_pEnemies.size(); i++)
     {
@@ -92,12 +94,34 @@ void CollisionManager::CheckSwordEnemyCollision()
             {
                 enemy->SetDamageFlag(true);
                 enemy->ApplyDamage(20);
-                VECTOR knockBackDirection = CulcKnockBackDirection(enemy);
+                VECTOR knockBackDirection = CulcKnockBackDirection(m_pPlayer,enemy);
                 enemy->SetKnockBackDir(knockBackDirection);
             }
         }
     }
 }
+
+// 敵の手とプレイヤーの当たり判定
+void CollisionManager::CheckEnemyHandPlayerCollision()
+{
+    if (!m_pPlayer->GetDamageFlag())
+    {
+        for (auto enemy : m_pEnemies)
+        {
+            if (enemy->GetIsAttack())
+            {
+                if (CheckCapsuleSphereCollision(m_pPlayer, enemy->GetHandPos(), enemy->GetHandHitRadius()))
+                {
+                    m_pPlayer->SetDamageFlag(true);
+                    m_pPlayer->ApplyDamage(20);
+                    VECTOR knockBackDirection = CulcKnockBackDirection(enemy, m_pPlayer);
+                    m_pPlayer->SetKnockBackDir(knockBackDirection);
+                }
+            }
+        }
+    }
+}
+
 
 // カプセル同士の当たり判定
 bool CollisionManager::CheckCapsuleCollision(const std::shared_ptr<IGameObject> objA, const std::shared_ptr<IGameObject> objB)
@@ -190,16 +214,15 @@ float CollisionManager::DistanceSegmentToSegment(VECTOR p1, VECTOR q1, VECTOR p2
     return VSize(VSub(c1, c2));
 }
 
-VECTOR CollisionManager::CulcKnockBackDirection(const std::shared_ptr<EnemyBase>& enemy)
+VECTOR CollisionManager::CulcKnockBackDirection(const std::shared_ptr<IGameObject>& attackObj, const std::shared_ptr<IGameObject>& damageObj)
 {
-    VECTOR playerPos = m_pPlayer->GetPosition();
-    VECTOR enemyPos = enemy->GetPosition();
+    VECTOR attackerPos = attackObj->GetPosition();
+    VECTOR damageObjPos = damageObj->GetPosition();
 
-    VECTOR directionEnemyToPlayer = VSub(playerPos, enemyPos);
-    directionEnemyToPlayer.y = 0.0f;
-    directionEnemyToPlayer = VNorm(directionEnemyToPlayer);
+    VECTOR knockBackDirection = VSub(attackerPos, damageObjPos);
+    knockBackDirection.y = 0.0f;
+    knockBackDirection = VNorm(knockBackDirection);
     
-    VECTOR knockBackDirection = VScale(directionEnemyToPlayer, -1.0f);
     return knockBackDirection;
 }
 
@@ -246,4 +269,34 @@ bool CollisionManager::ResolveCapsuleCollision(std::shared_ptr<IGameObject> objA
     }
 
     return false;
+}
+
+// カプセルと球の当たり判定
+bool CollisionManager::CheckCapsuleSphereCollision(const std::shared_ptr<IGameObject>& obj, const VECTOR& spherePos, float sphereRadius)
+{
+    VECTOR capTop = obj->GetTopPos();
+    VECTOR capBottom = obj->GetBottomPos();
+
+    VECTOR segment = VSub(capTop, capBottom);
+
+    VECTOR toCenter = VSub(spherePos, capBottom);
+
+    // 線分上のどの位置が最近接点になるか（0～1）
+    float t = VDot(toCenter, segment) / VDot(segment, segment);
+
+    // t を 0～1 にクランプ（はみ出し防止）
+    if (t < 0.0f) t = 0.0f;
+    if (t > 1.0f) t = 1.0f;
+
+    // 最近接点（カプセル軸上で球に一番近い点）
+    VECTOR nearest = VAdd(capBottom, VScale(segment, t));
+
+    // 最近接点と球の中心の距離
+    float dist = VSize(VSub(nearest, spherePos));
+
+    // 半径の合計
+    float capRadius = obj->GetHitRadius();
+    float hitDist = capRadius + sphereRadius;
+
+    return dist < hitDist;
 }

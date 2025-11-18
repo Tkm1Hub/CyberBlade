@@ -8,6 +8,7 @@
 #include "Player_StandState.h"
 #include "Player_DodgeState.h"
 #include "Player_Jump1State.h"
+#include "Player_DamageState.h"
 
 
 void Player_AttackDashState::OnStart()
@@ -33,6 +34,14 @@ void Player_AttackDashState::OnUpdate()
 		{
 			m_doNextAttack = true;
 		}
+	}
+
+	// ダメージを食らったら状態変更
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
 	}
 
 

@@ -1,0 +1,15 @@
+#pragma once
+#include "PlayerStateBase.h"
+
+class Player_DamageState : public PlayerStateBase
+{
+public:
+	void OnStart() override;
+	void OnUpdate() override;
+	void OnExit() override;
+
+private:
+	bool isInputDodge = false;
+	bool isInputJump = false;
+
+};

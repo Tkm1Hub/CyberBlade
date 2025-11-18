@@ -5,6 +5,8 @@
 #include "Player_DodgeState.h"
 #include "Player.h"
 #include "Input.h"
+#include "Player_DamageState.h"
+
 
 void Player_AttackJump2State::OnStart()
 {
@@ -41,6 +43,14 @@ void Player_AttackJump2State::OnUpdate()
 	if (!isInputAttack && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
 	{
 		isInputAttack = true;
+	}
+
+	// ダメージを食らったら状態変更
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
 	}
 
 	if (frameCount >= 15)

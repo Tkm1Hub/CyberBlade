@@ -6,6 +6,7 @@
 #include "Player_Jump2State.h"
 #include "Player_AttackJump1State.h"
 #include "Player_DodgeState.h"
+#include "Player_DamageState.h"
 
 
 void Player_Jump1State::OnStart()
@@ -29,7 +30,15 @@ void Player_Jump1State::OnUpdate()
 		// ジャンプ回数を加算
 		m_pPlayer->AddJumpCount();
 	}
-	
+
+	// ダメージを食らったら状態変更
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
+	}
+
 	if (frameCount > m_pPlayer->GetParams().JUMP_START_WAIT_FRAMES)
 	{
 		// ジャンプボタンが押されたか

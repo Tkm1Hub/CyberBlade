@@ -6,6 +6,7 @@
 #include "Player_AttackJump1State.h"
 #include "Player_DodgeState.h"
 #include "Player_StandState.h"
+#include "Player_DamageState.h"
 
 
 void Player_FallState::OnStart()
@@ -30,6 +31,14 @@ void Player_FallState::OnUpdate()
 	float currentJumpPower = m_pPlayer->GetCurrentJumpPower();
 	currentJumpPower -= m_pPlayer->GetParams().Gravity;
 	m_pPlayer->SetJumpPower(currentJumpPower);
+
+	// ダメージを食らったら状態変更
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
+	}
 
 	// ジャンプ2に移行
 	if (m_pPlayer->GetCurrentJumpCount() < m_pPlayer->GetParams().JUMP_MAX_COUNT)

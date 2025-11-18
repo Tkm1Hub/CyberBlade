@@ -7,6 +7,7 @@
 #include "Player_FallState.h"
 #include "Player.h"
 #include "Input.h"
+#include "Player_DamageState.h"
 
 void Player_StandState::OnStart()
 {
@@ -23,6 +24,15 @@ void Player_StandState::OnStart()
 
 void Player_StandState::OnUpdate()
 {
+
+	// ダメージを食らったら状態変更
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
+	}
+
 	// 空中にいれば落下に移行
 	if (m_pPlayer->GetIsJumping())
 	{

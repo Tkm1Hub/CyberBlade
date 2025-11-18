@@ -188,6 +188,9 @@
     <Filter Include="ソース ファイル\UI\Marker">
       <UniqueIdentifier>{beaa5280-7d69-41ec-8b2b-6042741f6a9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Damage">
+      <UniqueIdentifier>{eeab1d2b-4d84-486d-961c-5ef578bf7cba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -336,6 +339,9 @@
     </ClCompile>
     <ClCompile Include="Marker.cpp">
       <Filter>ソース ファイル\UI\Marker</Filter>
+    </ClCompile>
+    <ClCompile Include="Plaer_DamageState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Damage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -509,6 +515,9 @@
     </ClInclude>
     <ClInclude Include="Marker.h">
       <Filter>ソース ファイル\UI\Marker</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_DamageState.h">
+      <Filter>ソース ファイル\State\PlayerState\Damage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

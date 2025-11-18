@@ -7,6 +7,7 @@
 #include "Player_WalkState.h"
 #include "Player_DodgeState.h"
 #include "Player_Jump1State.h"
+#include "Player_DamageState.h"
 
 
 void Player_Attack3State::OnStart()
@@ -33,6 +34,15 @@ void Player_Attack3State::OnUpdate()
 	if(moveSpeed>0.0f) moveSpeed -= 0.02f;
 	moveSpeed = max(moveSpeed, 0.0f);
 	m_pPlayer->SetMoveSpeed(moveSpeed);
+
+	// ダメージを食らったら状態変更
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
+	}
+
 
 	// １４フレームで攻撃終了
 	if (frameCount >= 70)
