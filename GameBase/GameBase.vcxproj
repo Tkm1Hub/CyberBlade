@@ -146,6 +146,7 @@
     <ClCompile Include="EnemySmall_ChaseState.cpp" />
     <ClCompile Include="EnemySmall_StandState.cpp" />
     <ClCompile Include="HPBar_Enemy.cpp" />
+    <ClCompile Include="HPBar_Player.cpp" />
     <ClCompile Include="LockOnCamera.cpp" />
     <ClCompile Include="Marker.cpp" />
     <ClCompile Include="Plaer_DamageState.cpp" />

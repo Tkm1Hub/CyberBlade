@@ -219,7 +219,7 @@ VECTOR CollisionManager::CulcKnockBackDirection(const std::shared_ptr<IGameObjec
     VECTOR attackerPos = attackObj->GetPosition();
     VECTOR damageObjPos = damageObj->GetPosition();
 
-    VECTOR knockBackDirection = VSub(attackerPos, damageObjPos);
+    VECTOR knockBackDirection = VSub(damageObjPos, attackerPos);
     knockBackDirection.y = 0.0f;
     knockBackDirection = VNorm(knockBackDirection);
     

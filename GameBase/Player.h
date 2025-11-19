@@ -33,7 +33,7 @@ struct PlayerParams
 	float SlowRunSpeed = 0.9f;			// 小走り最大移動速度
 	float RunSpeed = 1.5f;				// 走り最大移動速度
 	float FallMaxMoveSpeed = 1.5f;		// 落下中の最大移動速度
-	float DamageKnockBackSpeed = 0.4f;	// 被ダメージののけぞり速度
+	float DamageKnockBackSpeed = 1.8f;	// 被ダメージののけぞり速度
 	float DodgeStartSpeed = 1.8f;		// 回避開始速度
 	float DodgeSpeed = 2.0f;			// 回避最大速度
 	float DodgeSpeedDecel = 0.1f;		// 回避スピードの減速度
@@ -52,6 +52,8 @@ struct PlayerParams
 	float HitRadius = 3.0f;				// 当たり判定半径
 	float HitHeight = 16.5f;			// 当たり判定高さ
 	VECTOR InitPos = { 240.0f,-9.89f,-167.0f };	// 初期座標
+
+	int InitHP = 500;					// 初期HP
 };
 
 // アニメーション番号

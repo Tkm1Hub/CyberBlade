@@ -14,13 +14,15 @@
 
 void Player_DamageState::OnStart()
 {
-	
+	moveSpeed = m_pPlayer->GetParams().DamageKnockBackSpeed;
 }
 
 void Player_DamageState::OnUpdate()
 {
 	frameCount++;
 	// ノックバック速度を設定
+	moveSpeed -= frameCount * DECEL;
+
 	m_pPlayer->SetMoveSpeed(m_pPlayer->GetParams().DamageKnockBackSpeed);
 
 	// のけぞり中攻撃ボタンが押されたらフラグを立てる

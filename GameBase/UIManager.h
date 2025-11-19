@@ -5,6 +5,7 @@ class UIBase;
 class IGameObject;
 class Marker;
 class Player;
+class HPBar_Player;
 class UIManager
 {
 private:
@@ -39,4 +40,5 @@ private:
 	std::vector < std::weak_ptr<IGameObject>> m_objects;
 	std::weak_ptr<Player> m_pPlayer;
 	std::shared_ptr<Marker> marker;
+	std::shared_ptr<HPBar_Player> hpBar_Player;
 };

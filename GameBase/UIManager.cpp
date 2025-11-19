@@ -2,18 +2,22 @@
 #include "UIManager.h"
 #include "UIBase.h"
 #include "Marker.h"
+#include "HPBar_Player.h"
 
 void UIManager::Init()
 {
-    if (!marker)  // ‚Ü‚¾ì‚ç‚ê‚Ä‚¢‚È‚¢‚Æ‚«‚¾‚¯¶¬
-    {
-        marker = std::make_shared<Marker>();
+    marker = std::make_shared<Marker>();
+    hpBar_Player = std::make_shared<HPBar_Player>();
 
-        if (auto p = m_pPlayer.lock())
-        {
-            marker->SetPlayer(p);
-            AddUI(marker);
-        }
+    if (auto p = m_pPlayer.lock())
+    {
+        marker->SetPlayer(p);
+        AddUI(marker);
+
+        hpBar_Player->SetPlayer(p);
+        AddUI(hpBar_Player);
+        hpBar_Player->Init();
+
     }
 }
 

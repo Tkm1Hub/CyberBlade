@@ -22,6 +22,8 @@ void Player::Init()
 	ChangeState(spStandState);
 	hitHeight = params.HitHeight;
 	hitRadius = params.HitRadius;
+	MaxHp = params.InitHP;
+	hp = MaxHp;
 }
 
 void Player::Load()
@@ -41,7 +43,7 @@ void Player::Load()
 
 void Player::Update()
 {
-	if (!isAttack&&!isDodge)
+	if (!isAttack&&!isDodge && !isDamage)
 	{
 		// スティックでの移動入力
 		moveVec = GetMoveInput();

@@ -343,6 +343,9 @@
     <ClCompile Include="Plaer_DamageState.cpp">
       <Filter>ソース ファイル\State\PlayerState\Damage</Filter>
     </ClCompile>
+    <ClCompile Include="HPBar_Player.cpp">
+      <Filter>ソース ファイル\UI\HPBar_Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
