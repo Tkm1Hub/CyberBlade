@@ -14,6 +14,6 @@ public:
 	void SetOwner(std::shared_ptr<Player> player) { owner = player; }
 
 private:
-	VECTOR scale = VGet(1.0f, 1.0f, 1.0f);
+	VECTOR scale = VGet(1.8f, 1.8f, 1.8f);
 	std::shared_ptr<Player> owner = nullptr;
 };
