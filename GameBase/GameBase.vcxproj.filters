@@ -191,6 +191,18 @@
     <Filter Include="ソース ファイル\State\PlayerState\Damage">
       <UniqueIdentifier>{eeab1d2b-4d84-486d-961c-5ef578bf7cba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameObject\Character\EnemyBig">
+      <UniqueIdentifier>{c734d84b-07b4-4b56-89d8-e0b5178d16c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState">
+      <UniqueIdentifier>{649a4d95-5a7f-43e9-bd3a-aa0098499e9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Stand">
+      <UniqueIdentifier>{78192ae1-50a6-406d-b70c-73239570610f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Fall">
+      <UniqueIdentifier>{66770651-efc8-40fa-bd67-809f0a3a1460}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -345,6 +357,15 @@
     </ClCompile>
     <ClCompile Include="HPBar_Player.cpp">
       <Filter>ソース ファイル\UI\HPBar_Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig.cpp">
+      <Filter>ソース ファイル\GameObject\Character\EnemyBig</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_StandState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Stand</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_FallState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Fall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -521,6 +542,18 @@
     </ClInclude>
     <ClInclude Include="Player_DamageState.h">
       <Filter>ソース ファイル\State\PlayerState\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig.h">
+      <Filter>ソース ファイル\GameObject\Character\EnemyBig</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBigStateBase.h">
+      <Filter>ソース ファイル\State\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_StandState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Stand</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_FallState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Fall</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 void ShadowManager::Init()
 {
 	shadowMapHandle = MakeShadowMap(SHADOW_QUALITY, SHADOW_QUALITY);
-	lightDirection = VGet(0.5f, -1.0f, -0.5f);
+	lightDirection = VGet(0.1f, -1.0f, -0.1f);
 
 	// ƒ‰ƒCƒg‚Ì•ûŒü‚ğİ’è
 	SetLightDirection(lightDirection);

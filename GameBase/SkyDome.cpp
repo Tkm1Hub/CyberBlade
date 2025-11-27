@@ -3,7 +3,7 @@
 #include "Player.h"
 void SkyDome::Init()
 {
-	modelScale = VGet(0.8f, 0.8f, 0.8f);
+	modelScale = scale;
 }
 
 void SkyDome::Load()

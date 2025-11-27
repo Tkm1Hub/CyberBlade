@@ -53,4 +53,6 @@ private:
 
 	// ƒJƒvƒZƒ‹“¯m‚ÌÕ“Ë‚ğ”»’è‚µ‚Ä‰Ÿ‚µ–ß‚µ
 	bool ResolveCapsuleCollision(std::shared_ptr<IGameObject> objA, std::shared_ptr<IGameObject> objB);
+
+	VECTOR ClosestPointOnSegment(const VECTOR& a, const VECTOR& b, const VECTOR& p);
 };

@@ -139,6 +139,9 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
+    <ClCompile Include="EnemyBig.cpp" />
+    <ClCompile Include="EnemyBig_FallState.cpp" />
+    <ClCompile Include="EnemyBig_StandState.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemySmall.cpp" />
     <ClCompile Include="EnemySmallDamageState.cpp" />
@@ -195,6 +198,9 @@
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="EnemyBase.h" />
+    <ClInclude Include="EnemyBig.h" />
+    <ClInclude Include="EnemyBig_FallState.h" />
+    <ClInclude Include="EnemyBig_StandState.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="EnemySmall.h" />
     <ClInclude Include="EnemySmallDamageState.h" />
@@ -203,6 +209,7 @@
     <ClInclude Include="EnemySmall_FallState.h" />
     <ClInclude Include="EnemySmall_ChaseState.h" />
     <ClInclude Include="EnemySmall_StandState.h" />
+    <ClInclude Include="EnemyBigStateBase.h" />
     <ClInclude Include="HPBar_Enemy.h" />
     <ClInclude Include="HPBar_Player.h" />
     <ClInclude Include="LockOnCamera.h" />

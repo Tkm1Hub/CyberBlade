@@ -238,32 +238,29 @@ bool CollisionManager::ResolveCapsuleCollision(std::shared_ptr<IGameObject> objA
     VECTOR topB = objB->GetTopPos();
     VECTOR bottomB = objB->GetBottomPos();
 
-    // 各カプセルの中心を求める
-    VECTOR centerA = VScale(VAdd(topA, bottomA), 0.5f);
-    VECTOR centerB = VScale(VAdd(topB, bottomB), 0.5f);
+    // --- カプセル B の軸に対する、カプセル A の最近接点 ---
+    VECTOR closestA = ClosestPointOnSegment(bottomA, topA, bottomB);  // A軸上のB下端に最も近い点
+    VECTOR closestB = ClosestPointOnSegment(bottomB, topB, bottomA);  // B軸上のA下端に最も近い点
 
-    // 2つの中心間のベクトル
-    VECTOR diff = VSub(centerB, centerA);
+    // A軸の最近接点 ＝ Bカプセルの最近接点
+    // B軸の最近接点 ＝ Aカプセルの最近接点
+    // → ２つの最も近い点同士で判定すればOK
+    VECTOR diff = VSub(closestB, closestA);
     float dist = VSize(diff);
     float minDist = radiusA + radiusB;
 
     if (dist < minDist && dist > 0.0001f)
     {
-        // 重なり量
         float penetration = minDist - dist;
 
-        // 正規化
         VECTOR pushDir = VNorm(diff);
 
-        // 双方を半分ずつ押し戻す（バランス型）
+        // 半分ずつ押し戻し
         VECTOR pushA = VScale(pushDir, -penetration * 0.5f);
         VECTOR pushB = VScale(pushDir, penetration * 0.5f);
 
-        VECTOR newPosA = VAdd(objA->GetNextPosition(), pushA);
-        VECTOR newPosB = VAdd(objB->GetNextPosition(), pushB);
-
-        objA->SetNextPosition(newPosA);
-        objB->SetNextPosition(newPosB);
+        objA->SetNextPosition(VAdd(objA->GetNextPosition(), pushA));
+        objB->SetNextPosition(VAdd(objB->GetNextPosition(), pushB));
 
         return true;
     }
@@ -299,4 +296,21 @@ bool CollisionManager::CheckCapsuleSphereCollision(const std::shared_ptr<IGameOb
     float hitDist = capRadius + sphereRadius;
 
     return dist < hitDist;
+}
+
+// 点p に対して、線分 ab 上の最近接点を求める
+VECTOR CollisionManager::ClosestPointOnSegment(const VECTOR& a, const VECTOR& b, const VECTOR& p)
+{
+    VECTOR ab = VSub(b, a);
+    VECTOR ap = VSub(p, a);
+
+    float abLenSq = VDot(ab, ab);
+    if (abLenSq <= 0.00001f) return a; // 長さ0対策
+
+    float t = VDot(ap, ab) / abLenSq;
+
+    if (t < 0.0f) t = 0.0f;
+    if (t > 1.0f) t = 1.0f;
+
+    return VAdd(a, VScale(ab, t));
 }
