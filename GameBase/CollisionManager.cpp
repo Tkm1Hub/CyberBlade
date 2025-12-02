@@ -6,7 +6,7 @@
 #include "EnemySmall.h"
 #include "Sword.h"
 #include "Stage.h"
-
+#include "Player_DodgeJustState.h"
 
 void CollisionManager::Init()
 {
@@ -110,12 +110,28 @@ void CollisionManager::CheckEnemyHandPlayerCollision()
         {
             if (enemy->GetIsAttack())
             {
-                if (CheckCapsuleSphereCollision(m_pPlayer, enemy->GetHandPos(), enemy->GetHandHitRadius()))
+                if (m_pPlayer->GetIsDodge())
                 {
-                    m_pPlayer->SetDamageFlag(true);
-                    m_pPlayer->ApplyDamage(20);
-                    VECTOR knockBackDirection = CulcKnockBackDirection(enemy, m_pPlayer);
-                    m_pPlayer->SetKnockBackDir(knockBackDirection);
+                    if (m_pPlayer->GetIsDodgeJust())return;
+
+                    if (CheckCapsuleSphereCollision(m_pPlayer->GetTopPos(), m_pPlayer->GetBottomPos(), m_pPlayer->GetDodgeHitRadius(), enemy->GetHandPos(), enemy->GetHandHitRadius()))
+                    {
+                        // ジャスト回避
+                        auto spDodgeJustState = std::make_shared<Player_DodgeJustState>();
+                        m_pPlayer->ChangeState(spDodgeJustState);
+                        return;
+                    }
+                }
+                else
+                {
+                    if (CheckCapsuleSphereCollision(m_pPlayer->GetTopPos(),m_pPlayer->GetBottomPos(),m_pPlayer->GetHitRadius(), enemy->GetHandPos(), enemy->GetHandHitRadius()))
+                    {
+                        m_pPlayer->SetDamageFlag(true);
+                        m_pPlayer->ApplyDamage(20);
+                        VECTOR knockBackDirection = CulcKnockBackDirection(enemy, m_pPlayer);
+                        m_pPlayer->SetKnockBackDir(knockBackDirection);
+
+                    }
                 }
             }
         }
@@ -269,11 +285,8 @@ bool CollisionManager::ResolveCapsuleCollision(std::shared_ptr<IGameObject> objA
 }
 
 // カプセルと球の当たり判定
-bool CollisionManager::CheckCapsuleSphereCollision(const std::shared_ptr<IGameObject>& obj, const VECTOR& spherePos, float sphereRadius)
+bool CollisionManager::CheckCapsuleSphereCollision(const VECTOR&capTop,const VECTOR& capBottom,const float capRadius, const VECTOR& spherePos, float sphereRadius)
 {
-    VECTOR capTop = obj->GetTopPos();
-    VECTOR capBottom = obj->GetBottomPos();
-
     VECTOR segment = VSub(capTop, capBottom);
 
     VECTOR toCenter = VSub(spherePos, capBottom);
@@ -292,7 +305,6 @@ bool CollisionManager::CheckCapsuleSphereCollision(const std::shared_ptr<IGameOb
     float dist = VSize(VSub(nearest, spherePos));
 
     // 半径の合計
-    float capRadius = obj->GetHitRadius();
     float hitDist = capRadius + sphereRadius;
 
     return dist < hitDist;

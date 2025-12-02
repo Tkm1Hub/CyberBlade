@@ -43,7 +43,7 @@ private:
 	// カプセル同士の当たり判定
 	bool CheckCapsuleCollision(const std::shared_ptr<IGameObject> obj1, const std::shared_ptr<IGameObject> obj2);
 	// カプセルと球の当たり判定
-	bool CheckCapsuleSphereCollision(const std::shared_ptr<IGameObject>& obj, const VECTOR& spherePos, float sphereRadius);
+	bool CheckCapsuleSphereCollision(const VECTOR& capTop, const VECTOR& capBottom, const float capRadius, const VECTOR& spherePos, float sphereRadius);
 
 	//カプセル同士の距離を求める
 	float DistanceSegmentToSegment(VECTOR p1, VECTOR q1, VECTOR p2, VECTOR q2);

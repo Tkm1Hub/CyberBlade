@@ -203,6 +203,21 @@
     <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Fall">
       <UniqueIdentifier>{66770651-efc8-40fa-bd67-809f0a3a1460}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Attack">
+      <UniqueIdentifier>{8142f662-7cba-4845-a201-1d4d5ae73f32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Chase">
+      <UniqueIdentifier>{b6ae40b5-6a7b-476c-9135-385236161e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Damage">
+      <UniqueIdentifier>{0865ffc7-8686-4e85-aee5-542d68fc2e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\TimeManager">
+      <UniqueIdentifier>{1984f97f-e6fa-4fcb-96df-51da635708c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\DodgeJust">
+      <UniqueIdentifier>{5fdf15d8-5e30-4584-a1e6-a0908e42914e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -366,6 +381,21 @@
     </ClCompile>
     <ClCompile Include="EnemyBig_FallState.cpp">
       <Filter>ソース ファイル\State\Enemy\EnemyBigState\Fall</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_AttackState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_DamageState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_ChaceState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Chase</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>ソース ファイル\TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_DodgeJustState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\DodgeJust</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -554,6 +584,21 @@
     </ClInclude>
     <ClInclude Include="EnemyBig_FallState.h">
       <Filter>ソース ファイル\State\Enemy\EnemyBigState\Fall</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_AttackState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_DamageState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_ChaseState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Chase</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>ソース ファイル\TimeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_DodgeJustState.h">
+      <Filter>ソース ファイル\State\PlayerState\DodgeJust</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

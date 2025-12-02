@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "TitleScene.h"
 #include "GameScene.h"
+#include "TimeManager.h"
 
 // 画面設定
 int constexpr SCREEN_WIDTH = 1600;
@@ -77,6 +78,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
         auto prevTime = GetNowHiPerformanceCount();  // フレーム開始時刻
 
+        TimeManager::GetInstance().Update();
 
         // 更新処理
         sceneManager->Update();

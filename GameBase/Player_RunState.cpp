@@ -22,7 +22,7 @@ void Player_RunState::OnStart()
 	m_pPlayer->SetMoveSpeed(currentMoveSpeed);
 	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().RunSpeed);
 
-	// 歩きアニメを再生
+	// 走りアニメを再生
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Run),true);
 }
 

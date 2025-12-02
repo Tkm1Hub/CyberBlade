@@ -7,12 +7,13 @@
 #include "Player_AttackJump1State.h"
 #include "Player_DodgeState.h"
 #include "Player_DamageState.h"
+#include "TimeManager.h"
 
 
 void Player_Jump1State::OnStart()
 {
 	// ジャンプアニメを再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Jump),false);
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Jump1),false);
 
 }
 
@@ -62,7 +63,7 @@ void Player_Jump1State::OnUpdate()
 	if (m_pPlayer->GetCurrentJumpPower() > 0.0f)
 	{
 		float currentJumpPower = m_pPlayer->GetCurrentJumpPower();
-		currentJumpPower -= m_pPlayer->GetParams().Gravity;
+		currentJumpPower -= m_pPlayer->GetParams().Gravity * TimeManager::GetInstance().GetTimeScale();
 		m_pPlayer->SetJumpPower(currentJumpPower);
 	}
 

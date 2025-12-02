@@ -44,9 +44,9 @@ void ObjectManager::Create()
 	auto EnemyBoss = std::make_shared<EnemyBig>("EnemyBoss");
 
 	EnemyManager::GetEnemyManager().AddEnemy(Enemy1, VGet(0, 0, 70));
-	EnemyManager::GetEnemyManager().AddEnemy(Enemy2, VGet(0, 0, 50));
-	EnemyManager::GetEnemyManager().AddEnemy(Enemy3, VGet(0, 0, 0));
-	EnemyManager::GetEnemyManager().AddEnemy(Enemy4, VGet(0, 0, 30));
+	//EnemyManager::GetEnemyManager().AddEnemy(Enemy2, VGet(0, 0, 50));
+	//EnemyManager::GetEnemyManager().AddEnemy(Enemy3, VGet(0, 0, 0));
+	//EnemyManager::GetEnemyManager().AddEnemy(Enemy4, VGet(0, 0, 30));
 	EnemyManager::GetEnemyManager().AddEnemy(EnemyBoss, VGet(1406, 16, 168));
 
 	// UI表示オブジェクトをリストに追加

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player_DodgeState.h"
+#include "Player_DodgeJustState.h"
 #include "Player_StandState.h"
 #include "Player_WalkState.h"
 #include "Player_RunState.h"
@@ -11,22 +12,29 @@
 #include "Player.h"
 #include "EnemyBase.h"
 #include "Input.h"
+#include "TimeManager.h"
 
-void Player_DodgeState::OnStart()
+void Player_DodgeJustState::OnStart()
 {
 	// 回避方向を計算
 	CulcDodgeDirection();
 
 	// 回避中フラグを立てる
 	m_pPlayer->SetIsDodge(true);
+	m_pPlayer->SetIsDodgeJust(true);
 
 	// ジャンプ力を0に設定
 	m_pPlayer->SetJumpPower(0.0f);
 
 	m_pPlayer->ResetDodgeFrameCount();
+	m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
+
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeJust), false);
+
+	TimeManager::GetInstance().SetTimeScale(0.3f);
 }
 
-void Player_DodgeState::OnUpdate()
+void Player_DodgeJustState::OnUpdate()
 {
 	frameCount++;
 
@@ -58,8 +66,9 @@ void Player_DodgeState::OnUpdate()
 	}
 
 	// 硬直終了
-	if (frameCount >= m_pPlayer->GetParams().DODGE_RECOVERY_FRAMES)
+	if (frameCount >= m_pPlayer->GetParams().DODGE_JUST_RECOVERY_FRAMES)
 	{
+		TimeManager::GetInstance().SetTimeScale(1.0f);
 		// 空中にいるかどうか
 		if (m_pPlayer->GetIsJumping())
 		{
@@ -148,13 +157,13 @@ void Player_DodgeState::OnUpdate()
 	}
 }
 
-void Player_DodgeState::OnExit()
+void Player_DodgeJustState::OnExit()
 {
 	m_pPlayer->SetIsDodge(false);
-	m_pPlayer->SetIsDodgeFront(false);
+	m_pPlayer->SetIsDodgeJust(false);
 }
 
-void Player_DodgeState::CulcDodgeDirection()
+void Player_DodgeJustState::CulcDodgeDirection()
 {
 	VECTOR StickDir = VGet(0.0f, 0.0f, 0.0f);	// スティックの方向
 	VECTOR modelForward = m_pPlayer->GetModelForward();	// モデルの方向
@@ -173,8 +182,7 @@ void Player_DodgeState::CulcDodgeDirection()
 
 		if (!Input::GetInput().GetIsMoveLStick())
 		{
-			m_pPlayer->SetDodgeDirection(VScale(dir,-1));
-			m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeBack), false);
+			m_pPlayer->SetDodgeDirection(VScale(dir, -1));
 		}
 		else
 		{
@@ -195,27 +203,18 @@ void Player_DodgeState::CulcDodgeDirection()
 			if (angle >= -DX_PI_F / 4 && angle <= DX_PI_F / 4) {
 				// 正面
 				m_pPlayer->SetDodgeDirection(dir);
-				m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::RunPose), false);
-				m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeSpeed);
-				m_pPlayer->SetIsDodgeFront(true);
 			}
 			else if (angle > DX_PI_F / 4 && angle <= 3 * DX_PI_F / 4) {
 				// 右
 				m_pPlayer->SetDodgeDirection(RotateY(dir, -DX_PI_F / 2));
-				m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeBack), false);
-				m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
 			}
 			else if (angle < -DX_PI_F / 4 && angle >= -3 * DX_PI_F / 4) {
 				// 左
 				m_pPlayer->SetDodgeDirection(RotateY(dir, DX_PI_F / 2));
-				m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeBack), false);
-				m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
 			}
 			else {
 				// 後ろ
 				m_pPlayer->SetDodgeDirection(VScale(dir, -1));
-				m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeBack), false);
-				m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
 			}
 
 		}
@@ -230,20 +229,15 @@ void Player_DodgeState::CulcDodgeDirection()
 			StickDir.y = 0.0f;
 			StickDir = VNorm(StickDir);
 			m_pPlayer->SetDodgeDirection(StickDir);
-			m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::RunPose), false);
-			m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeSpeed);
-			m_pPlayer->SetIsDodgeFront(true);
 		}
 		else
 		{
 			// スティックが操作されていなければモデルの逆方向に方向を設定
 			m_pPlayer->SetDodgeDirection(VScale(modelForward, -1));
-			m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeBack), false);
-			m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
 		}
 
 	}
-	
+
 
 
 }

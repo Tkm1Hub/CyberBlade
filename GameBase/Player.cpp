@@ -9,6 +9,7 @@
 #include "Player_RunState.h"
 #include "EnemyManager.h"
 #include "EnemyBase.h"
+#include "TimeManager.h"
 
 void Player::Init()
 {
@@ -125,7 +126,7 @@ void Player::Move()
 	// 移動ベクトルのＹ成分をＹ軸方向の速度にする
 	moveVec.y = currentJumpPower;
 
-	nextPos = VAdd(pos,moveVec);
+	nextPos = VAdd(pos, VScale(moveVec, TimeManager::GetInstance().GetTimeScale()));
 
 
 	//Y座標が-100以下になったら座標を初期化する
@@ -158,6 +159,8 @@ void Player::CulcMoveSpeed()
 	{
 		dodgeFrameCount++;
 
+		if (isDodgeFront) return;
+
 		if (dodgeFrameCount < params.DODGE_BACK_BOOST_WAIT_FRAMES)
 		{
 			currentDodgeSpeed = params.DodgeStartSpeed;
@@ -172,6 +175,7 @@ void Player::CulcMoveSpeed()
 			currentDodgeSpeed -= params.DodgeSpeedDecel;
 			currentDodgeSpeed = max(currentDodgeSpeed, 0.0f);
 		}
+
 	}
 	
 	// 限界値を超えたら修正

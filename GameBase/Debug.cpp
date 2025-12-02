@@ -5,6 +5,7 @@
 #include "EnemyBase.h"
 #include "EnemySmall.h"
 #include "ObjectManager.h"
+#include "TimeManager.h"
 
 void Debug::Update()
 {
@@ -13,6 +14,22 @@ void Debug::Update()
 	{
 		isDebugMode = !isDebugMode;
 	}
+
+    if (isDebugMode)
+    {
+        if (CheckHitKey(KEY_INPUT_UP))
+        {
+            float timeScale = TimeManager::GetInstance().GetTimeScale();
+            timeScale += 0.01f;
+            TimeManager::GetInstance().SetTimeScale(timeScale);
+        }
+        else if (CheckHitKey(KEY_INPUT_DOWN))
+        {
+            float timeScale = TimeManager::GetInstance().GetTimeScale();
+            timeScale -= 0.01f;
+            TimeManager::GetInstance().SetTimeScale(timeScale);
+        }
+    }
 
 	prevF1 = nowF1;
 }
@@ -33,7 +50,15 @@ void Debug::Draw()
 
         if (obj->GetName() == "Player")
         {
-            DrawCylinder(obj->GetPosition(), 30, 10, 32, GetColor(255, 0, 0));
+            auto player = std::dynamic_pointer_cast<Player>(obj);
+            DrawCylinder(player->GetPosition(), 30, 10, 32, GetColor(255, 0, 0));
+
+            // 回避中はジャスト回避用の当たり判定を描画
+            if (player->GetIsDodge())
+            {
+                DrawCapsule3D(player->GetTopPos(), player->GetBottomPos()
+                    , player->GetDodgeHitRadius(), 8, GetColor(0, 0, 180), GetColor(255, 255, 255), FALSE);
+            }
         }
 
         if (obj->GetName() == "CheckPoint")
@@ -59,7 +84,7 @@ void Debug::Draw()
     printfDx("LeftStickX : %.0f \n", Input::GetInput().GetLeftStickX());
     printfDx("LeftStickY : %.0f \n", Input::GetInput().GetLeftStickY());
     printfDx("LeftStickPower : %.0f \n", Input::GetInput().GetLeftStickPower());
-
+    printfDx("TimeScale : %.2f \n", TimeManager::GetInstance().GetTimeScale());
 
 }
 

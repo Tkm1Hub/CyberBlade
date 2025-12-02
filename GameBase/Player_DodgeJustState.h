@@ -1,7 +1,7 @@
 #pragma once
 #include "PlayerStateBase.h"
 
-class Player_DodgeState : public PlayerStateBase
+class Player_DodgeJustState : public PlayerStateBase
 {
 public:
 	void OnStart() override;

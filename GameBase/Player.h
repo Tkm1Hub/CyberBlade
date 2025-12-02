@@ -22,19 +22,21 @@ struct PlayerParams
 
 	static constexpr int ATTACK_DODGE_INPUT_WINDOW_FRAMES = 5;	// 回避攻撃の入力受付時間
 
-	static constexpr int DODGE_BACK_BOOST_WAIT_FRAMES = 14;	// 後方回避のブーストまでの待機時間
-	static constexpr int DODGE_RECOVERY_FRAMES = 24;		// 回避の硬直時間
+	static constexpr int DODGE_BACK_BOOST_WAIT_FRAMES = 14;		// 後方回避のブーストまでの待機時間
+	static constexpr int DODGE_RECOVERY_FRAMES = 24;			// 回避の硬直時間
+	static constexpr int DODGE_JUST_RECOVERY_FRAMES = 35;		// 回避の硬直時間
+	static constexpr float DODGE_HIT_RADIUS = 15.0f;			// 回避中の当たり判定（ジャスト回避に移行する
 
 	// パラメータ
 	float Jump1Power = 3.0f;			// ジャンプ力（1段目）
 	float Jump2Power = 3.5f;			// ジャンプ力（2段目）
-	float Gravity = 0.12f;				// 重力
+	float Gravity = 0.1f;				// 重力
 	float WalkSpeed = 0.4f;				// 歩き最大移動速度
 	float SlowRunSpeed = 0.9f;			// 小走り最大移動速度
 	float RunSpeed = 1.5f;				// 走り最大移動速度
 	float FallMaxMoveSpeed = 1.5f;		// 落下中の最大移動速度
 	float DamageKnockBackSpeed = 1.8f;	// 被ダメージののけぞり速度
-	float DodgeStartSpeed = 1.8f;		// 回避開始速度
+	float DodgeStartSpeed = 1.0f;		// 回避開始速度
 	float DodgeSpeed = 2.0f;			// 回避最大速度
 	float DodgeSpeedDecel = 0.1f;		// 回避スピードの減速度
 	float Attack1MoveSpeed = 0.7f;		// 攻撃1段階目での前方移動速度
@@ -67,7 +69,8 @@ enum class PlayerAnimState :int
 	Run = 4,			// ダッシュ
 	RunPose = 5,		// ダッシュポーズ
 	RunStop = 6,		// ストップ
-	Jump = 7,			// ジャンプ
+	Jump1 = 7,			// ジャンプ１
+	Jump2 = 19,			// ジャンプ２
 	Fall = 8,			// 落下中
 	Attack1 = 9,		// 通常攻撃（1段階）
 	Attack2 = 10,		// 通常攻撃（2段階）
@@ -76,6 +79,7 @@ enum class PlayerAnimState :int
 	RunSword = 13,		// 走り(刀を持った状態)
 	AttackJump1 = 14,	// ジャンプ攻撃（1段階）
 	AttackJump2 = 15,	// ジャンプ攻撃（2段階）
+	DodgeJust = 20,		// ジャスト回避
 	DodgeBack = 17,		// 後ろ回避
 };
 
@@ -109,6 +113,12 @@ public:
 	void SetDodgeSpeed(float speed) { currentDodgeSpeed = speed; }
 	void ResetDodgeFrameCount() { dodgeFrameCount = 0; }
 
+	const bool GetIsDodgeJust() const { return isDodgeJust; }
+	void SetIsDodgeJust(bool flag) { isDodgeJust = flag; }
+
+	const bool GetIsDodgeFront() const { return isDodgeFront; }
+	void SetIsDodgeFront(bool flag) { isDodgeFront = flag; }
+
 	// 装備フラグ
 	const bool GetIsSwordEpuipped() const { return isSwordEquipped; }
 	void SetIsSwordEquipped(bool frag) { isSwordEquipped = frag; }
@@ -120,6 +130,8 @@ public:
 
 	const float GetHitRadius() const override { return params.HitRadius; }
 	const float GetHitHeight() const override { return params.HitHeight; }
+
+	const float GetDodgeHitRadius() const { return params.DODGE_HIT_RADIUS; }
 
 	const float GetCurrentMaxSpeed()const { return currentMaxSpeed; }
 	const void SetCurrentMaxSpeed(float maxSpeed) { currentMaxSpeed = maxSpeed; }
@@ -174,7 +186,9 @@ private:
 	bool isRunning = false;		// 走っているか
 	bool isSlowRun = false;		// 小走り状態か
 	bool isLockOn = false;		// ロックオン状態か
+	bool isDodgeFront = false;	// 前方向回避か
 	bool isDodge = false;		// 回避中か
+	bool isDodgeJust = false;	// ジャスト回避中か
 	bool isSwordEquipped = false;	// 剣を手に持っているか
 
 	void Move();	// モデルの移動

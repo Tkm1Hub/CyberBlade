@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Animation.h"
+#include "TimeManager.h"
 
 void Animation::LoadAnimation(int mHandle)
 {
@@ -46,7 +47,7 @@ void Animation::Update()
 	// ブレンド率が１以下の場合は１に近づける
 	if (animBlendRate < 1.0f)
 	{
-		animBlendRate += ANIM_BLEND_SPEED;
+		animBlendRate += ANIM_BLEND_SPEED * TimeManager::GetInstance().GetTimeScale();
 		if (animBlendRate > 1.0f)
 		{
 			animBlendRate = 1.0f;
@@ -60,7 +61,7 @@ void Animation::Update()
 		animTotalTime = MV1GetAttachAnimTotalTime(modelHandle, currentPlayAnim);
 
 		// 再生時間を進める
-		currentAnimCount += ANIM_PLAY_SPEED;
+		currentAnimCount += ANIM_PLAY_SPEED * TimeManager::GetInstance().GetTimeScale();
 
 		if (currentAnimCount >= animTotalTime)
 		{
@@ -72,7 +73,7 @@ void Animation::Update()
 			else
 			{
 				// 再生終了フラグを立てて止める
-				currentAnimCount = animTotalTime - 3.0f;
+				currentAnimCount = animTotalTime;
 				isAnimFinished = true;
 			}
 		}
@@ -94,7 +95,7 @@ void Animation::Update()
 		animTotalTime = MV1GetAttachAnimTotalTime(modelHandle, prevPlayAnim);
 
 		// 再生時間を進める
-		prevAnimCount += ANIM_PLAY_SPEED;
+		currentAnimCount += ANIM_PLAY_SPEED * TimeManager::GetInstance().GetTimeScale();
 
 		// 再生時間が総時間に到達していたら再生時間をループさせる
 		if (prevAnimCount > animTotalTime)

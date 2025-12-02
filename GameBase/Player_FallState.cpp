@@ -7,7 +7,7 @@
 #include "Player_DodgeState.h"
 #include "Player_StandState.h"
 #include "Player_DamageState.h"
-
+#include "TimeManager.h"
 
 void Player_FallState::OnStart()
 {
@@ -29,7 +29,7 @@ void Player_FallState::OnUpdate()
 
 	// 重力を適応
 	float currentJumpPower = m_pPlayer->GetCurrentJumpPower();
-	currentJumpPower -= m_pPlayer->GetParams().Gravity;
+	currentJumpPower -= m_pPlayer->GetParams().Gravity * TimeManager::GetInstance().GetTimeScale();
 	m_pPlayer->SetJumpPower(currentJumpPower);
 
 	// ダメージを食らったら状態変更
