@@ -1,13 +1,10 @@
 #pragma once
 #include "EnemyBigStateBase.h"
 
-class EnemyBig_AttackState : public EnemyBigStateBase
+class EnemyBig_WarningState : public EnemyBigStateBase
 {
 public:
 	void OnStart() override;
 	void OnUpdate() override;
 	void OnExit() override;
-
-private:
-	VECTOR attackDir = { 0.0f,0.0f,0.0f };
 };

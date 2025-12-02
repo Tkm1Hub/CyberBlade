@@ -25,6 +25,7 @@ struct PlayerParams
 	static constexpr int DODGE_BACK_BOOST_WAIT_FRAMES = 14;		// 後方回避のブーストまでの待機時間
 	static constexpr int DODGE_RECOVERY_FRAMES = 24;			// 回避の硬直時間
 	static constexpr int DODGE_JUST_RECOVERY_FRAMES = 35;		// 回避の硬直時間
+	static constexpr int DODGE_JUST_INVINCIBLE_TIME = 180;		// ジャスト回避の無敵時間
 	static constexpr float DODGE_HIT_RADIUS = 15.0f;			// 回避中の当たり判定（ジャスト回避に移行する
 
 	// パラメータ
@@ -113,6 +114,8 @@ public:
 	void SetDodgeSpeed(float speed) { currentDodgeSpeed = speed; }
 	void ResetDodgeFrameCount() { dodgeFrameCount = 0; }
 
+	const bool GetIsInvincible() { return isInvincible; }
+
 	const bool GetIsDodgeJust() const { return isDodgeJust; }
 	void SetIsDodgeJust(bool flag) { isDodgeJust = flag; }
 
@@ -182,6 +185,7 @@ private:
 	int dodgeFrameCount = 0;	// 回避中のフレームカウント
 
 	int jumpCount = 0;			// ジャンプカウンター
+	int invincibleCount = 0;	// 無敵時間カウント
 
 	bool isRunning = false;		// 走っているか
 	bool isSlowRun = false;		// 小走り状態か
@@ -190,6 +194,7 @@ private:
 	bool isDodge = false;		// 回避中か
 	bool isDodgeJust = false;	// ジャスト回避中か
 	bool isSwordEquipped = false;	// 剣を手に持っているか
+	bool isInvincible = false;		// 無敵時間中
 
 	void Move();	// モデルの移動
 	void CulcMoveSpeed();	// 移動速度の計算
@@ -197,4 +202,5 @@ private:
 	void UpdateAngle();			// モデルの角度更新
 	void ToggleLockOn();		// ロックオン切り替え
 	void UpdateAttackDir();		// 攻撃の方向を更新
+	void UpdateInvincibleCount();	// 無敵時間の更新
 };

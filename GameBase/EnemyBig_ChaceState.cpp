@@ -28,16 +28,16 @@ void EnemyBig_ChaseState::OnUpdate()
 		return;
 	}
 
-	// プレイヤーが範囲外だと追跡をやめる
-	if (!m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().ChaseTriggerDistance))
-	{
-		//警戒フラグ
-		m_pEnemyBig->SetIsAlert(false);
+	//// プレイヤーが範囲外だと追跡をやめる
+	//if (!m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().ChaseTriggerDistance))
+	//{
+	//	//警戒フラグ
+	//	m_pEnemyBig->SetIsAlert(false);
 
-		auto spStandState = std::make_shared<EnemyBig_StandState>();
-		m_pEnemyBig->ChangeState(spStandState);
-		return;
-	}
+	//	auto spStandState = std::make_shared<EnemyBig_StandState>();
+	//	m_pEnemyBig->ChangeState(spStandState);
+	//	return;
+	//}
 
 }
 

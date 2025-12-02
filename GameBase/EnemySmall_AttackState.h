@@ -7,4 +7,6 @@ public:
 	void OnStart() override;
 	void OnUpdate() override;
 	void OnExit() override;
+private:
+	VECTOR attackDir = { 0.0f,0.0f,0.0f };
 };

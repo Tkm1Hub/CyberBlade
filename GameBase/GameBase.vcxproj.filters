@@ -218,6 +218,9 @@
     <Filter Include="ソース ファイル\State\PlayerState\DodgeJust">
       <UniqueIdentifier>{5fdf15d8-5e30-4584-a1e6-a0908e42914e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Warning">
+      <UniqueIdentifier>{f715e9c0-eeb1-4bce-9858-eabd34cc9408}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -396,6 +399,9 @@
     </ClCompile>
     <ClCompile Include="Player_DodgeJustState.cpp">
       <Filter>ソース ファイル\State\PlayerState\DodgeJust</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_WarningState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Warning</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -599,6 +605,9 @@
     </ClInclude>
     <ClInclude Include="Player_DodgeJustState.h">
       <Filter>ソース ファイル\State\PlayerState\DodgeJust</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_WarningState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Warning</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

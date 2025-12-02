@@ -57,6 +57,7 @@ void Player::Update()
 
 	// ステートの更新
 	stateMachine.Update();
+	UpdateInvincibleCount();
 
 	// モデルの方向更新
 	UpdateAngle();
@@ -405,4 +406,22 @@ void Player::AddJumpCount()
 void Player::ResetJumpCount()
 {
 	jumpCount = 0;
+}
+
+void Player::UpdateInvincibleCount()
+{
+	if (isDodgeJust && !isInvincible)
+	{
+		isInvincible = true; 
+	}
+
+	if (isInvincible)
+	{
+		invincibleCount++;
+		if (invincibleCount > params.DODGE_JUST_INVINCIBLE_TIME)
+		{
+			isInvincible = false;
+			invincibleCount = 0;
+		}
+	}
 }

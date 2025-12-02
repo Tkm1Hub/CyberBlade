@@ -13,7 +13,7 @@ struct EnemyBig_Params
 	float HitRadius = 20.0f;					// 当たり判定半径
 	float HitHeight = 50.0f;				// 当たり判定高さ
 	float HPBarHeight = 20.0f;				// HPバーを表示する高さ
-	float ChaseTriggerDistance = 80.0f;		// 追跡を開始するプレイヤーとの距離
+	float WarningDistance = 100.0f;	// 追跡を開始するプレイヤーとの距離
 	float AttackTriggerDistance = 30.0f;	// 攻撃を開始するプレイヤーとの距離
 	float Accel = 0.03f;					// 移動加速度
 	float Decel = 0.1f;						// 移動減速度
@@ -29,6 +29,7 @@ enum class EnemyBigAnimState :int
 	Idle = 0,			// 立ち止まり
 	Chase = 1,			// 追跡
 	Attack = 2,			// 攻撃
+	Warning = 7,		// 警戒
 };
 
 

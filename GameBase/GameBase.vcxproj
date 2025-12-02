@@ -145,6 +145,7 @@
     <ClCompile Include="EnemyBig_DamageState.cpp" />
     <ClCompile Include="EnemyBig_FallState.cpp" />
     <ClCompile Include="EnemyBig_StandState.cpp" />
+    <ClCompile Include="EnemyBig_WarningState.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemySmall.cpp" />
     <ClCompile Include="EnemySmallDamageState.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="EnemyBig_DamageState.h" />
     <ClInclude Include="EnemyBig_FallState.h" />
     <ClInclude Include="EnemyBig_StandState.h" />
+    <ClInclude Include="EnemyBig_WarningState.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="EnemySmall.h" />
     <ClInclude Include="EnemySmallDamageState.h" />

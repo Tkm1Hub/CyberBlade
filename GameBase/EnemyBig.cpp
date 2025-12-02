@@ -16,6 +16,9 @@ void EnemyBig::Init()
 	hitHeight = params.HitHeight;
 	hitRadius = params.HitRadius;
 
+	auto spStandState = std::make_shared<EnemyBig_StandState>();
+	ChangeState(spStandState);
+
 }
 
 void EnemyBig::Load()
@@ -24,12 +27,14 @@ void EnemyBig::Load()
 	modelHandle = MV1LoadModel("data/model/character/robot.mv1");
 	MV1SetScale(modelHandle, modelScale);
 	handBoneIndex = MV1SearchFrame(modelHandle, "mixamorig:LeftHand");
-	headIndex = MV1SearchFrame(modelHandle, "mixamorig:Head_Center");
+	headIndex = MV1SearchFrame(modelHandle, "mixamorig:Head");
 
 	// アニメーションのロード
 	animation.LoadAnimation(modelHandle);
 	// アイドルを再生
 	animation.Play(static_cast<int>(EnemyBigAnimState::Idle), true);
+
+
 }
 
 void EnemyBig::Update()

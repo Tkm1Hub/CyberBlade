@@ -31,7 +31,7 @@ void Player_DodgeJustState::OnStart()
 
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeJust), false);
 
-	TimeManager::GetInstance().SetTimeScale(0.3f);
+	TimeManager::GetInstance().SetTimeScale(0.5f);
 }
 
 void Player_DodgeJustState::OnUpdate()

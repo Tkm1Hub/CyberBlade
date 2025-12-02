@@ -104,7 +104,7 @@ void CollisionManager::CheckSwordEnemyCollision()
 // “G‚ÌŽè‚ÆƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
 void CollisionManager::CheckEnemyHandPlayerCollision()
 {
-    if (!m_pPlayer->GetDamageFlag())
+    if (!m_pPlayer->GetDamageFlag() && !m_pPlayer->GetIsInvincible())
     {
         for (auto enemy : m_pEnemies)
         {

@@ -14,13 +14,14 @@ void EnemyBig_AttackState::OnStart()
 
 	// 攻撃フラグ
 	m_pEnemyBig->SetAttackFrag(true);
+	attackDir = m_pEnemyBig->GetToPlayerDirection();
+
 }
 
 void EnemyBig_AttackState::OnUpdate()
 {
 	// 移動ベクトルをプレイヤーの方向に設定
-	VECTOR dir = m_pEnemyBig->GetToPlayerDirection();
-	m_pEnemyBig->SetMoveVec(dir);
+	m_pEnemyBig->SetMoveVec(attackDir);
 
 	// 攻撃モーションが終わるとStandに戻す
 	if (m_pEnemyBig->animation.GetIsAnimFinished())

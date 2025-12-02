@@ -59,6 +59,8 @@ void Debug::Draw()
                 DrawCapsule3D(player->GetTopPos(), player->GetBottomPos()
                     , player->GetDodgeHitRadius(), 8, GetColor(0, 0, 180), GetColor(255, 255, 255), FALSE);
             }
+
+            printfDx("isInvncible : %s \n", player->GetIsInvincible() ? "true" : "false");
         }
 
         if (obj->GetName() == "CheckPoint")

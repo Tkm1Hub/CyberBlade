@@ -14,13 +14,13 @@ void EnemySmall_AttackState::OnStart()
 
 	// 攻撃フラグ
 	m_pEnemySmall->SetAttackFrag(true);
+	attackDir = m_pEnemySmall->GetToPlayerDirection();
 }
 
 void EnemySmall_AttackState::OnUpdate()
 {
 	// 移動ベクトルをプレイヤーの方向に設定
-	VECTOR dir = m_pEnemySmall->GetToPlayerDirection();
-	m_pEnemySmall->SetMoveVec(dir);
+	m_pEnemySmall->SetMoveVec(attackDir);
 
 	// 攻撃モーションが終わるとStandに戻す
 	if (m_pEnemySmall->animation.GetIsAnimFinished())

@@ -26,7 +26,7 @@ void EnemySmall::Load()
 	modelHandle = MV1LoadModel("data/model/character/robot.mv1");
 	MV1SetScale(modelHandle, modelScale);
 	handBoneIndex = MV1SearchFrame(modelHandle, "mixamorig:LeftHand");
-	headIndex = MV1SearchFrame(modelHandle, "mixamorig:Head_Center");
+	headIndex = MV1SearchFrame(modelHandle, "mixamorig:Head");
 
 	// アニメーションのロード
 	animation.LoadAnimation(modelHandle);
