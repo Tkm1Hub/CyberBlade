@@ -55,6 +55,7 @@ struct PlayerParams
 	float HitRadius = 3.0f;				// “–‚½‚è”»’è”¼Œa
 	float HitHeight = 16.5f;			// “–‚½‚è”»’è‚‚³
 	VECTOR InitPos = { 0.0f,0.0f,0.0f };	// ‰ŠúÀ•W
+	VECTOR InitPosBossFront = { 1127,13,157 };
 
 	int InitHP = 500;					// ‰ŠúHP
 };

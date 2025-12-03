@@ -21,7 +21,7 @@ void EnemyBig_ChaseState::OnUpdate()
 	m_pEnemyBig->SetMoveVec(dir);
 
 	// ƒvƒŒƒCƒ„[‚ªˆê’è”ÍˆÍ“à‚É“ü‚Á‚½‚çUŒ‚
-	if (m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().AttackTriggerDistance))
+	if (m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().AttackTriggerRadius))
 	{
 		auto spAttackState = std::make_shared<EnemyBig_AttackState>();
 		m_pEnemyBig->ChangeState(spAttackState);

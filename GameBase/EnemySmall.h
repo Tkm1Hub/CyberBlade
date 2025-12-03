@@ -12,6 +12,7 @@ struct EnemySmall_Params
 	float DamageSpeed = 1.5f;				// ダメージ中ノックバックの速度
 	float HitRadius = 5.0f;					// 当たり判定半径
 	float HitHeight = 14.0f;				// 当たり判定高さ
+	float HandHitRadius = 2.0f;				// 手の当たり判定
 	float HPBarHeight = 20.0f;				// HPバーを表示する高さ
 	float ChaseTriggerDistance = 80.0f;		// 追跡を開始するプレイヤーとの距離
 	float AttackTriggerDistance = 30.0f;	// 攻撃を開始するプレイヤーとの距離

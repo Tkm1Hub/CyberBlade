@@ -6,6 +6,7 @@
 #include "EnemySmall.h"
 #include "ObjectManager.h"
 #include "TimeManager.h"
+#include "EnemyBig.h"
 
 void Debug::Update()
 {
@@ -77,10 +78,18 @@ void Debug::Draw()
             // 当たり判定カプセル
             DrawCapsule(enemy);
             // 攻撃（手）の当たり判定
-            DrawSphere3D(enemy->GetHandPos(), 2.0f, 16, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
-            DrawCylinder(enemy->GetPosition(), 60, 10, 32, GetColor(255, 255, 0));
-            DrawCylinder(enemy->GetPosition(), 30, 10, 32, GetColor(255, 0, 0));
+            DrawSphere3D(enemy->GetHandPos(), enemy->GetHandHitRadius(), 16, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
+            
+            if (enemy->GetName() == "EnemyBoss")
+            {
+                auto enemyBoss = std::dynamic_pointer_cast<EnemyBig>(enemy);
+
+                DrawCylinder(enemyBoss->GetPosition(), enemyBoss->GetWarningRadius(), 10.0f, 64, GetColor(255, 30, 30));
+                DrawCylinder(enemyBoss->GetPosition(), enemyBoss->GetAttack1TriggerRadius(), 10.0f, 64, GetColor(180, 180, 0));
+            }
         }
+
+
     }
 
     printfDx("LeftStickX : %.0f \n", Input::GetInput().GetLeftStickX());

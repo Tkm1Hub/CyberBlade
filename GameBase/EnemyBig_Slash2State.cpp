@@ -1,20 +1,20 @@
 #include "stdafx.h"
 #include "EnemyBig.h"
-#include "EnemyBig_AttackState.h"
+#include "EnemyBig_Slash2State.h"
 #include "EnemyBig_WarningState.h"
 #include "EnemyBig_DamageState.h"
 
-void EnemyBig_AttackState::OnStart()
+void EnemyBig_Slash2State::OnStart()
 {
 	// 移動速度の設定
 	m_pEnemyBig->SetMoveSpeed(0.0f);
 
 	// アニメーションの設定
-	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::Attack), false);
+	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::Slash2), false);
 
 }
 
-void EnemyBig_AttackState::OnUpdate()
+void EnemyBig_Slash2State::OnUpdate()
 {
 	// 攻撃中の移動の更新
 	AttackMove();
@@ -28,13 +28,13 @@ void EnemyBig_AttackState::OnUpdate()
 	}
 }
 
-void EnemyBig_AttackState::OnExit()
+void EnemyBig_Slash2State::OnExit()
 {
 	// 攻撃フラグ
 	m_pEnemyBig->SetAttackFrag(false);
 }
 
-void EnemyBig_AttackState::AttackMove()
+void EnemyBig_Slash2State::AttackMove()
 {
 	int currentAnimCount = m_pEnemyBig->animation.GetCurrentAnimCount();
 

@@ -221,6 +221,12 @@
     <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Warning">
       <UniqueIdentifier>{f715e9c0-eeb1-4bce-9858-eabd34cc9408}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Slash1">
+      <UniqueIdentifier>{c9eee94c-0fca-4022-9017-3de0bd8b61cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Slash2">
+      <UniqueIdentifier>{4b97911e-a76f-45ed-984c-edf2e6f70c09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -402,6 +408,12 @@
     </ClCompile>
     <ClCompile Include="EnemyBig_WarningState.cpp">
       <Filter>ソース ファイル\State\Enemy\EnemyBigState\Warning</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_Slash1State.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Slash1</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_Slash2State.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Slash2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -608,6 +620,12 @@
     </ClInclude>
     <ClInclude Include="EnemyBig_WarningState.h">
       <Filter>ソース ファイル\State\Enemy\EnemyBigState\Warning</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_Slash1State.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Slash1</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_Slash2State.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Slash2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

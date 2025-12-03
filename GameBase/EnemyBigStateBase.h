@@ -12,4 +12,7 @@ public:
 
 protected:
 	EnemyBig* m_pEnemyBig = nullptr;
+	VECTOR attackDir = { 0.0f,0.0f,0.0f };
+	float attackSpeed = 0.0f;
+
 };

@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "EnemyBig_WarningState.h"
+#include "EnemyBig_AttackState.h"
+#include "EnemyBig_Slash1State.h"
 #include "EnemyBig.h"
 
 void EnemyBig_WarningState::OnStart()
 {
-	// 移動ベクトルの初期化
-	m_pEnemyBig->SetMoveVec(VGet(0.0f, 0.0f, 0.0f));
-
+	// アニメ再生
 	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::Warning), true);
 
 	// 警戒フラグ
@@ -15,10 +15,37 @@ void EnemyBig_WarningState::OnStart()
 
 void EnemyBig_WarningState::OnUpdate()
 {
+	// 目標角度更新
+	m_pEnemyBig->SetTargetAngle(m_pEnemyBig->GetToPlayerDirection());
+
+	// 攻撃範囲に入ったら近距離行動
+	if (m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().AttackTriggerRadius))
+	{
+		int random = GetRand(1);
+
+		switch (random)
+		{
+		case 0:		// 攻撃
+		{
+			auto spAttackState = std::make_shared<EnemyBig_AttackState>();
+			m_pEnemyBig->ChangeState(spAttackState);
+			break;
+		}
+		case 1:		// 薙ぎ払い１
+		{
+			auto spSlash1State = std::make_shared<EnemyBig_Slash1State>();
+			m_pEnemyBig->ChangeState(spSlash1State);
+			break;
+		}
+
+		}
+	}
+
 
 }
 
 void EnemyBig_WarningState::OnExit()
 {
-
+	
 }
+

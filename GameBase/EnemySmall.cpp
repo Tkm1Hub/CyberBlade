@@ -12,6 +12,7 @@ void EnemySmall::Init()
 	hp = params.MaxHp;
 	MaxHp = params.MaxHp;
 	hpBarHeightOffset = params.HPBarHeight;
+	handHitRadius = params.HandHitRadius;
 
 	auto spStandState = std::make_shared<EnemySmall_StandState>();
 	ChangeState(spStandState);

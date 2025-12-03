@@ -12,6 +12,7 @@ void EnemyBig::Init()
 	hp = params.MaxHp;
 	MaxHp = params.MaxHp;
 	hpBarHeightOffset = params.HPBarHeight;
+	handHitRadius = params.HandHitRadius;
 
 	hitHeight = params.HitHeight;
 	hitRadius = params.HitRadius;
@@ -33,8 +34,6 @@ void EnemyBig::Load()
 	animation.LoadAnimation(modelHandle);
 	// アイドルを再生
 	animation.Play(static_cast<int>(EnemyBigAnimState::Idle), true);
-
-
 }
 
 void EnemyBig::Update()
@@ -60,6 +59,8 @@ void EnemyBig::Update()
 
 	handPos = MV1GetFramePosition(modelHandle, handBoneIndex);
 	lockOnPos = MV1GetFramePosition(modelHandle, headIndex);
+
+	UpdateDamageFlag();
 }
 
 
@@ -111,5 +112,19 @@ void EnemyBig::OnFall()
 
 		// ちょっとだけジャンプする
 		currentJumpPower = FallUpPower;
+	}
+}
+
+void EnemyBig::UpdateDamageFlag()
+{
+	if (isDamage)
+	{
+		damageFrameCount++;
+
+		if (damageFrameCount == 20)
+		{
+			damageFrameCount = 0;
+			isDamage = false;
+		}
 	}
 }

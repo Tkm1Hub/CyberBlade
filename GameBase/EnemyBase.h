@@ -18,6 +18,8 @@ public:
 
 	const VECTOR GetHPBarPos()const;
 
+	const VECTOR& GetTargetAngle() { return targetAngle; }
+	void SetTargetAngle(VECTOR dir) { targetAngle = dir; }
 
 	const bool GetIsAlert() const { return isAlert;}
 	void SetIsAlert(bool flag) { isAlert = flag; }
@@ -37,6 +39,7 @@ protected:
 	void Move();				// 移動処理
 	void UpdateAngle();			// モデルの角度更新
 	float angleSpeed = 0.2f;	// 角度更新速度
+	VECTOR targetAngle = { 0.0f,0.0f,0.0f };	// 目標方向ベクトル
 
 	StateMachine stateMachine;	// ステートマシン
 
@@ -46,6 +49,7 @@ protected:
 	VECTOR handPos = { 0.0f,0.0f,0.0f };		// 手のボーンの座標
 
 	bool isAlert = false;	// 警戒状態
+
 
 	float hpBarHeightOffset = 0.0f;				// HPゲージを表示する高さ
 

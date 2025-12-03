@@ -8,18 +8,19 @@ struct EnemyBig_Params
 	int MaxHp = 500;						// 最大HP
 
 	float Gravity = 0.08f;					// 重力
-	float AttackMoveSpeed = 0.4f;			// 攻撃中前進速度
+	float AttackMoveSpeed = 1.5f;			// 攻撃中前進速度
 	float DamageSpeed = 1.5f;				// ダメージ中ノックバックの速度
-	float HitRadius = 20.0f;					// 当たり判定半径
-	float HitHeight = 50.0f;				// 当たり判定高さ
+	float HitRadius = 25.0f;				// 当たり判定半径
+	float HitHeight = 40.0f;				// 当たり判定高さ
+	float HandHitRadius = 15.0f;			// 手の当たり判定
 	float HPBarHeight = 20.0f;				// HPバーを表示する高さ
-	float WarningDistance = 100.0f;	// 追跡を開始するプレイヤーとの距離
-	float AttackTriggerDistance = 30.0f;	// 攻撃を開始するプレイヤーとの距離
+	float WarningDistance = 150.0f;			// 警戒を開始するプレイヤーとの距離
+	float AttackTriggerRadius = 80.0f;		// Attackを開始するプレイヤーとの距離
 	float Accel = 0.03f;					// 移動加速度
 	float Decel = 0.1f;						// 移動減速度
 	float ChaseSpeed = 0.5f;				// 追跡速度
 
-	VECTOR scale = { 0.5,0.5,0.5 };
+	VECTOR scale = { 0.35,0.35,0.35 };
 };
 
 // アニメーション番号
@@ -29,7 +30,9 @@ enum class EnemyBigAnimState :int
 	Idle = 0,			// 立ち止まり
 	Chase = 1,			// 追跡
 	Attack = 2,			// 攻撃
-	Warning = 7,		// 警戒
+	Slash1 = 10,		// 薙ぎ払い１
+	Slash2 = 11,		// 薙ぎ払い２
+	Warning = 6,		// 警戒
 };
 
 
@@ -52,6 +55,9 @@ public:
 	void OnHitFloor() override;      // 床に当たった時
 	void OnFall() override;          // 落下が確定したとき
 
+	const float GetWarningRadius()const { return params.WarningDistance; }
+	const float GetAttack1TriggerRadius() const { return params.AttackTriggerRadius; }
+
 	const EnemyBig_Params GetParams() const { return params; }
 
 private:
@@ -60,4 +66,6 @@ private:
 
 	int headIndex = -1;
 
+	int damageFrameCount = 0;
+	void UpdateDamageFlag();
 };
