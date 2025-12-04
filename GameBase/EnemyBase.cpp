@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EnemyBase.h"
 #include "Player.h"
+#include "TimeManager.h"
 
 void EnemyBase::Move()
 {
@@ -16,12 +17,17 @@ void EnemyBase::Move()
 	}
 
 	moveVec = VScale(moveVec, currentMoveSpeed);
+		
+	// 重力を適応
+	if (currentJumpPower > 0.0f)
+	{
+		currentJumpPower -= m_Gravity * TimeManager::GetInstance().GetTimeScale();
+	}
 
 	// 移動ベクトルのＹ成分をＹ軸方向の速度にする
 	moveVec.y = currentJumpPower;
 
 	nextPos = VAdd(pos, moveVec);
-
 }
 
 void EnemyBase::UpdateAngle()
@@ -99,6 +105,20 @@ VECTOR EnemyBase::GetToPlayerDirection()
 	// プレイヤーが存在しない場合
 	return VGet(0.0f, 0.0f, 0.0f);
 }
+
+// プレイヤーの座標を取得
+VECTOR EnemyBase::GetPlayerPos()
+{
+	if (auto p = m_pPlayer.lock())
+	{
+		VECTOR PlayerPos = p->GetPosition();
+		return PlayerPos;
+	}
+
+	// プレイヤーが存在しない場合
+	return VGet(0.0f, 0.0f, 0.0f);
+}
+
 
 // プレイヤーが一定範囲内にいるかどうか取得
 bool EnemyBase::IsPlayerInRange(float range)

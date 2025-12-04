@@ -87,8 +87,8 @@ void EnemyBig::OnHitFloor()
 	// ステートの変更
 	if (isJumping)
 	{
-		auto spStandState = std::make_shared<EnemyBig_StandState>();
-		ChangeState(spStandState);
+		//auto spStandState = std::make_shared<EnemyBig_StandState>();
+		//ChangeState(spStandState);
 	}
 
 	// Ｙ軸方向の移動速度は０に
@@ -106,8 +106,6 @@ void EnemyBig::OnFall()
 	if (!isJumping)
 	{
 		// ジャンプ中(落下中）にする
-		auto spFallState = std::make_shared<EnemyBig_FallState>();
-		ChangeState(spFallState);
 		isJumping = true;
 
 		// ちょっとだけジャンプする

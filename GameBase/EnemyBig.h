@@ -7,9 +7,12 @@ struct EnemyBig_Params
 {
 	int MaxHp = 500;						// 最大HP
 
-	float Gravity = 0.08f;					// 重力
+	float Gravity = 0.2f;					// 重力
 	float AttackMoveSpeed = 1.5f;			// 攻撃中前進速度
+	float DodgeJumpPower = 1.0f;			// 回避中のジャンプ力
+	float DodgeMoveSpeed = 2.0f;			// 回避中の移動速度
 	float DamageSpeed = 1.5f;				// ダメージ中ノックバックの速度
+	float AttackJumpMaxHeight = 50.0f;		// ジャンプ攻撃の最高高度
 	float HitRadius = 25.0f;				// 当たり判定半径
 	float HitHeight = 40.0f;				// 当たり判定高さ
 	float HandHitRadius = 15.0f;			// 手の当たり判定
@@ -30,9 +33,11 @@ enum class EnemyBigAnimState :int
 	Idle = 0,			// 立ち止まり
 	Chase = 1,			// 追跡
 	Attack = 2,			// 攻撃
+	AttackJump = 4,		// ジャンプ攻撃
 	Slash1 = 10,		// 薙ぎ払い１
 	Slash2 = 11,		// 薙ぎ払い２
 	Warning = 6,		// 警戒
+	Dodge = 8,			// 回避
 };
 
 

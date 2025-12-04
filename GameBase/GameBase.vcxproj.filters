@@ -227,6 +227,12 @@
     <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Slash2">
       <UniqueIdentifier>{4b97911e-a76f-45ed-984c-edf2e6f70c09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Dodge">
+      <UniqueIdentifier>{a71c43c5-0dca-4347-9c2e-bb0016c32710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\JumpAttack">
+      <UniqueIdentifier>{03f122b7-6e30-49fe-b05b-c0d0f24c6747}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -414,6 +420,12 @@
     </ClCompile>
     <ClCompile Include="EnemyBig_Slash2State.cpp">
       <Filter>ソース ファイル\State\Enemy\EnemyBigState\Slash2</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_DodgeState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Dodge</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_JumpAttackState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\JumpAttack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -626,6 +638,12 @@
     </ClInclude>
     <ClInclude Include="EnemyBig_Slash2State.h">
       <Filter>ソース ファイル\State\Enemy\EnemyBigState\Slash2</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_DodgeState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Dodge</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_JumpAttackState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\JumpAttack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

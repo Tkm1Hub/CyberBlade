@@ -143,7 +143,9 @@
     <ClCompile Include="EnemyBig_AttackState.cpp" />
     <ClCompile Include="EnemyBig_ChaceState.cpp" />
     <ClCompile Include="EnemyBig_DamageState.cpp" />
+    <ClCompile Include="EnemyBig_DodgeState.cpp" />
     <ClCompile Include="EnemyBig_FallState.cpp" />
+    <ClCompile Include="EnemyBig_JumpAttackState.cpp" />
     <ClCompile Include="EnemyBig_Slash1State.cpp" />
     <ClCompile Include="EnemyBig_Slash2State.cpp" />
     <ClCompile Include="EnemyBig_StandState.cpp" />
@@ -210,7 +212,9 @@
     <ClInclude Include="EnemyBig_AttackState.h" />
     <ClInclude Include="EnemyBig_ChaseState.h" />
     <ClInclude Include="EnemyBig_DamageState.h" />
+    <ClInclude Include="EnemyBig_DodgeState.h" />
     <ClInclude Include="EnemyBig_FallState.h" />
+    <ClInclude Include="EnemyBig_JumpAttackState.h" />
     <ClInclude Include="EnemyBig_Slash1State.h" />
     <ClInclude Include="EnemyBig_Slash2State.h" />
     <ClInclude Include="EnemyBig_StandState.h" />

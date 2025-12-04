@@ -9,8 +9,6 @@ public:
 	void OnExit() override;
 
 private:
-	const int SelectRandomAction();
-
 	// ステート番号
 	enum class State : int
 	{

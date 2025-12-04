@@ -28,6 +28,7 @@ public:
 
 	VECTOR GetToPlayerDirection();
 	bool IsPlayerInRange(float range);
+	VECTOR GetPlayerPos();
 
 	void SetPlayer(const std::weak_ptr<Player>& player) { m_pPlayer = player; }
 
@@ -49,6 +50,8 @@ protected:
 	VECTOR handPos = { 0.0f,0.0f,0.0f };		// 手のボーンの座標
 
 	bool isAlert = false;	// 警戒状態
+
+	float m_Gravity = 0.2f;	// 重力
 
 
 	float hpBarHeightOffset = 0.0f;				// HPゲージを表示する高さ
