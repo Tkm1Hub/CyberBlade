@@ -44,37 +44,48 @@ void EnemyBig_JumpAttackState::AttackMove()
 	// 攻撃有効化（ジャンプ開始
 	if (currentAnimCount == JUMP_START_COUNT)
 	{
-		// 着地地点を設定
+		// 開始位置を固定
+		VECTOR startPos = m_pEnemyBig->GetPosition();
+
+		// 着地位置を固定（この瞬間のプレイヤー位置）
 		targetPos = m_pEnemyBig->GetPlayerPos();
-		targetPos.y = 0.0f;
+
+		// 方向を正しく固定
+		VECTOR diff = VSub(targetPos, startPos);
+		float dist = VSize(diff);
+
+		attackDir = VNorm(diff);      // 方向決定
+		float jumpFrames = JUMP_END_COUNT - JUMP_START_COUNT;
+
+		attackSpeed = dist / jumpFrames;
+
+		prevJumpHeight = 0.0f;
 	}
 
 	// ジャンプ中
 	if (currentAnimCount > JUMP_START_COUNT && currentAnimCount < JUMP_END_COUNT)
 	{
-		// 移動速度を計算
-		VECTOR diff = VSub(m_pEnemyBig->GetPosition(), targetPos);
-		float dist = VSize(diff);
-		attackSpeed = dist / (JUMP_END_COUNT - JUMP_START_COUNT);
-
 		// 高さ(JumpPower)を計算
-		float t = (float)(currentAnimCount - JUMP_START_COUNT) / (float)(JUMP_END_COUNT - JUMP_START_COUNT);
-		if (t > 0.0f || t < 1.0f)
-		{
-			float parabola = 4.0f * t * (1.0f - t);
-			float jumpPower = m_pEnemyBig->GetParams().AttackJumpMaxHeight * parabola;
-		}
+		float t = (currentAnimCount - JUMP_START_COUNT) / (JUMP_END_COUNT - JUMP_START_COUNT);
+		float parabola = 4.0f * t * (1.0f - t);
+		float newHeight = m_pEnemyBig->GetParams().AttackJumpMaxHeight * parabola;
 
+		// y速度 = 高さの差分
+		float jumpVelocity = newHeight - prevJumpHeight;
+
+		m_pEnemyBig->SetJumpPower(jumpVelocity);
+
+		// 次フレーム用に保持
+		prevJumpHeight = newHeight;
 	}
 
 	// 着地
 	if (currentAnimCount == JUMP_END_COUNT)
 	{
-		m_pEnemyBig->SetJumpPower(0.0f);
-
+		attackSpeed = 0.0f;
 	}
 
 	m_pEnemyBig->SetMoveSpeed(attackSpeed);
-	m_pEnemyBig->SetTargetAngle(targetDir);
-	m_pEnemyBig->SetMoveVec(dodgeDir);
+	m_pEnemyBig->SetTargetAngle(attackDir);
+	m_pEnemyBig->SetMoveVec(attackDir);
 }

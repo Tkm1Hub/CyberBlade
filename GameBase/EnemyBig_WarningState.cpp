@@ -4,12 +4,13 @@
 #include "EnemyBig_Slash1State.h"
 #include "EnemyBig_DodgeState.h"
 #include "EnemyBig_FallState.h"
+#include "EnemyBig_JumpAttackState.h"
 #include "EnemyBig.h"
 
 void EnemyBig_WarningState::OnStart()
 {
 	// アニメ再生
-	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::Warning), true);
+	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::Warning), false);
 
 	// 警戒フラグ
 	m_pEnemyBig->SetIsAlert(true);
@@ -47,14 +48,29 @@ void EnemyBig_WarningState::OnUpdate()
 		}
 
 		}
+	}
+	else
+	{
+		if (m_pEnemyBig->animation.GetIsAnimFinished())
+		{
+			int random = GetRand(1);
 
-		//// 空中にいれば落下
-		//if (m_pEnemyBig->GetIsJumping())
-		//{
-		//	auto spFallState = std::make_shared<EnemyBig_FallState>();
-		//	m_pEnemyBig->ChangeState(spFallState);
-		//	return;
-		//}
+			switch (random)
+			{
+			case 0:		// ジャンプ攻撃
+			{
+				auto spJumpAttackState = std::make_shared<EnemyBig_JumpAttackState>();
+				m_pEnemyBig->ChangeState(spJumpAttackState);
+				break;
+			}
+			case 1:		// 回避
+			{
+				auto spDodgeState = std::make_shared<EnemyBig_DodgeState>();
+				m_pEnemyBig->ChangeState(spDodgeState);
+				break;
+			}
+			}
+		}
 	}
 
 

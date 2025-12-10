@@ -12,7 +12,7 @@ struct EnemyBig_Params
 	float DodgeJumpPower = 1.0f;			// 回避中のジャンプ力
 	float DodgeMoveSpeed = 2.0f;			// 回避中の移動速度
 	float DamageSpeed = 1.5f;				// ダメージ中ノックバックの速度
-	float AttackJumpMaxHeight = 50.0f;		// ジャンプ攻撃の最高高度
+	float AttackJumpMaxHeight = 100.0f;		// ジャンプ攻撃の最高高度
 	float HitRadius = 25.0f;				// 当たり判定半径
 	float HitHeight = 40.0f;				// 当たり判定高さ
 	float HandHitRadius = 15.0f;			// 手の当たり判定

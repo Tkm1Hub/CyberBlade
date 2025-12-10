@@ -276,7 +276,7 @@ bool CollisionManager::ResolveCapsuleCollision(std::shared_ptr<IGameObject> objA
         VECTOR pushB = VScale(pushDir, penetration * 0.5f);
 
         objA->SetNextPosition(VAdd(objA->GetNextPosition(), pushA));
-        objB->SetNextPosition(VAdd(objB->GetNextPosition(), pushB));
+       // objB->SetNextPosition(VAdd(objB->GetNextPosition(), pushB));
 
         return true;
     }
