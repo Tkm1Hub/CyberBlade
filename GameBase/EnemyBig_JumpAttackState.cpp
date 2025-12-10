@@ -3,14 +3,22 @@
 #include "EnemyBig_JumpAttackState.h"
 #include "EnemyBig_WarningState.h"
 #include "TimeManager.h"
+#include "EffectManager.h"
 
 void EnemyBig_JumpAttackState::OnStart()
 {
+	// 着地位置を固定（この瞬間のプレイヤー位置）
+	targetPos = m_pEnemyBig->GetPlayerPos();
+	targetPos.y = 0.0f;
+
 	// 移動速度の設定
 	m_pEnemyBig->SetMoveSpeed(0.0f);
 
 	// アニメーションの設定
 	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::AttackJump), false);
+
+	// エフェクト再生
+	EffectManager::GetInstance().PlayEffect("Attack_Warning", m_pEnemyBig->GetHeadPos());
 }
 
 void EnemyBig_JumpAttackState::OnUpdate()
@@ -46,9 +54,8 @@ void EnemyBig_JumpAttackState::AttackMove()
 	{
 		// 開始位置を固定
 		VECTOR startPos = m_pEnemyBig->GetPosition();
+		startPos.y = 0.0f;
 
-		// 着地位置を固定（この瞬間のプレイヤー位置）
-		targetPos = m_pEnemyBig->GetPlayerPos();
 
 		// 方向を正しく固定
 		VECTOR diff = VSub(targetPos, startPos);
@@ -58,31 +65,30 @@ void EnemyBig_JumpAttackState::AttackMove()
 		float jumpFrames = JUMP_END_COUNT - JUMP_START_COUNT;
 
 		attackSpeed = dist / jumpFrames;
+		attackSpeed *= 0.5f;
 
-		prevJumpHeight = 0.0f;
+		m_pEnemyBig->SetJumpPower(m_pEnemyBig->GetParams().AttackJumpPower);
+
+		m_pEnemyBig->SetIsJumping(true);
+
+		//エフェクト再生
+		EffectManager::GetInstance().PlayEffect("Boss_JumpWave", m_pEnemyBig->GetPosition());
 	}
 
 	// ジャンプ中
 	if (currentAnimCount > JUMP_START_COUNT && currentAnimCount < JUMP_END_COUNT)
 	{
 		// 高さ(JumpPower)を計算
-		float t = (currentAnimCount - JUMP_START_COUNT) / (JUMP_END_COUNT - JUMP_START_COUNT);
-		float parabola = 4.0f * t * (1.0f - t);
-		float newHeight = m_pEnemyBig->GetParams().AttackJumpMaxHeight * parabola;
 
-		// y速度 = 高さの差分
-		float jumpVelocity = newHeight - prevJumpHeight;
-
-		m_pEnemyBig->SetJumpPower(jumpVelocity);
-
-		// 次フレーム用に保持
-		prevJumpHeight = newHeight;
 	}
 
 	// 着地
 	if (currentAnimCount == JUMP_END_COUNT)
 	{
 		attackSpeed = 0.0f;
+		
+		// エフェクト再生
+		EffectManager::GetInstance().PlayEffect("Boss_ShockWave",m_pEnemyBig->GetPosition());
 	}
 
 	m_pEnemyBig->SetMoveSpeed(attackSpeed);

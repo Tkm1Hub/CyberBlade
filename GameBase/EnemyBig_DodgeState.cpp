@@ -4,6 +4,7 @@
 #include "EnemyBig_WarningState.h"
 #include "EnemyBig_DamageState.h"
 #include "TimeManager.h"
+#include "EffectManager.h"
 
 void EnemyBig_DodgeState::OnStart()
 {
@@ -42,21 +43,24 @@ void EnemyBig_DodgeState::DodgeMove()
 	// 回避有効化
 	if (currentAnimCount == DODGE_ACTIVE_COUNT)
 	{
-		//m_pEnemyBig->SetIsJumping(true);
 		m_pEnemyBig->SetJumpPower(m_pEnemyBig->GetParams().DodgeJumpPower);
 		dodgeSpeed = m_pEnemyBig->GetParams().DodgeMoveSpeed;
 		
 		VECTOR toPlayer = m_pEnemyBig->GetToPlayerDirection();
 		dodgeDir = CulcDodgeDir(toPlayer);
+		m_pEnemyBig->SetIsJumping(true);
+
+		//エフェクト再生
+		EffectManager::GetInstance().PlayEffect("Boss_JumpWave", m_pEnemyBig->GetPosition());
 	}
 
-	// 攻撃中
+	// 回避中
 	if (currentAnimCount > DODGE_ACTIVE_COUNT && currentAnimCount < DODGE_DISABLE_COUNT)
 	{
 		dodgeSpeed -= DODGE_SPEED_DECEL;
 	}
 
-	// 攻撃終了
+	// 回避終了
 	if (currentAnimCount == DODGE_DISABLE_COUNT)
 	{
 		dodgeSpeed = 0.0f;

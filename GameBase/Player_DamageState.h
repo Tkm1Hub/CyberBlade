@@ -12,5 +12,7 @@ private:
 	bool isInputDodge = false;
 	bool isInputJump = false;
 	float moveSpeed = 0.0f;
-	static constexpr float DECEL = 0.2f;
+	float timeScale = 0.0f;
+	static constexpr float DECEL = 0.005f;
+	static constexpr float ACCEL = 0.002f;
 };

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "EnemyBig_StandState.h"
 #include "EnemyBig.h"
-#include "EnemyBig_WarningState.h"
+#include "EnemyBig_AlertState.h"
 
 void EnemyBig_StandState::OnStart()
 {
@@ -15,8 +15,8 @@ void EnemyBig_StandState::OnUpdate()
 {
 	if (m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().WarningDistance))
 	{
-		auto spWarningState = std::make_shared<EnemyBig_WarningState>();
-		m_pEnemyBig->ChangeState(spWarningState);
+		auto spAlertState = std::make_shared<EnemyBig_AlertState>();
+		m_pEnemyBig->ChangeState(spAlertState);
 		return;
 	}
 }

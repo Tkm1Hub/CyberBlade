@@ -5,6 +5,7 @@
 #include "EnemyBig_DodgeState.h"
 #include "EnemyBig_FallState.h"
 #include "EnemyBig_JumpAttackState.h"
+#include "EnemyBig_ChaseState.h"
 #include "EnemyBig.h"
 
 void EnemyBig_WarningState::OnStart()
@@ -51,29 +52,30 @@ void EnemyBig_WarningState::OnUpdate()
 	}
 	else
 	{
-		if (m_pEnemyBig->animation.GetIsAnimFinished())
-		{
-			int random = GetRand(1);
+		int random = GetRand(2);
 
-			switch (random)
-			{
-			case 0:		// ジャンプ攻撃
-			{
-				auto spJumpAttackState = std::make_shared<EnemyBig_JumpAttackState>();
-				m_pEnemyBig->ChangeState(spJumpAttackState);
-				break;
-			}
-			case 1:		// 回避
-			{
-				auto spDodgeState = std::make_shared<EnemyBig_DodgeState>();
-				m_pEnemyBig->ChangeState(spDodgeState);
-				break;
-			}
-			}
+		switch (random)
+		{
+		case 0:		// ジャンプ攻撃
+		{
+			auto spJumpAttackState = std::make_shared<EnemyBig_JumpAttackState>();
+			m_pEnemyBig->ChangeState(spJumpAttackState);
+			break;
+		}
+		case 1:		// 回避
+		{
+			auto spDodgeState = std::make_shared<EnemyBig_DodgeState>();
+			m_pEnemyBig->ChangeState(spDodgeState);
+			break;
+		}
+		case 2:		// 追跡
+		{
+			auto spChaseState = std::make_shared<EnemyBig_ChaseState>();
+			m_pEnemyBig->ChangeState(spChaseState);
+			break;
+		}
 		}
 	}
-
-
 }
 
 void EnemyBig_WarningState::OnExit()

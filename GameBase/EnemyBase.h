@@ -36,6 +36,9 @@ public:
 	const VECTOR GetHandPos()const { return handPos; }
 	const int GetHandBoneIndex() const { return handBoneIndex; }
 
+	// 頭のボーン
+	const VECTOR GetHeadPos()const { return headPos; }
+
 protected:
 	void Move();				// 移動処理
 	void UpdateAngle();			// モデルの角度更新
@@ -46,8 +49,13 @@ protected:
 
 	int handBoneIndex = -1;		// 手のボーンの番号
 	float handHitRadius = 0.0f;	// 手の当たり判定の半径
-
 	VECTOR handPos = { 0.0f,0.0f,0.0f };		// 手のボーンの座標
+
+	int headBoneIndex = -1;					// 頭のボーン番号
+	VECTOR headPos = { 0.0f,0.0f,0.0f };	// 頭の座標
+
+	float attackCollisionRadius = 0.0f;				// 攻撃の当たり判定の半径
+	VECTOR attackCollisionPos = { 0.0f,0.0f,0.0f };	// 攻撃の当たり判定の座標
 
 	bool isAlert = false;	// 警戒状態
 

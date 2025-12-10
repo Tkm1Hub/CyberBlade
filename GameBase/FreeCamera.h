@@ -20,7 +20,7 @@ private:
 	static constexpr float ACCEL = 0.01f;				// カメラ加速度
 	static constexpr float DECEL = 0.005f;				// カメラ減速度
 	static constexpr float LOOK_OFFSET_Y = 20.0f;		// 注視点の高さ
-	static constexpr float DISTANCE_OFFSET = 40.0f;		// プレイヤーからの距離
+	static constexpr float DISTANCE_OFFSET = 50.0f;		// プレイヤーからの距離
 
 	// 変数
 	float currentAngleSpeed = 0.0f;						// 現在のカメラ旋回速度

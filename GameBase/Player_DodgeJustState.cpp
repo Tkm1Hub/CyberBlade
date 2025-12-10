@@ -31,12 +31,19 @@ void Player_DodgeJustState::OnStart()
 
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeJust), false);
 
-	TimeManager::GetInstance().SetTimeScale(0.5f);
+	TimeManager::GetInstance().SetTimeScale(0.2f);
 }
 
 void Player_DodgeJustState::OnUpdate()
 {
+	// スロー演出
 	frameCount++;
+	timeScale += frameCount * TIMESCALE_ACCEL;
+	timeScale = std::clamp(timeScale, 0.0f, 1.0f);
+
+	TimeManager::GetInstance().SetTimeScale(timeScale);
+
+	int currentAnimCount = m_pPlayer->animation.GetCurrentAnimCount();
 
 	// 回避中攻撃ボタンが押されたらフラグを立てる
 	if (!isInputAttack && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
@@ -57,18 +64,8 @@ void Player_DodgeJustState::OnUpdate()
 	}
 
 	// 受付時間内に攻撃入力で回避攻撃発動
-	if (frameCount <= m_pPlayer->GetParams().ATTACK_DODGE_INPUT_WINDOW_FRAMES)
+	if (currentAnimCount >= DODGE_DISABLE_COUNT)
 	{
-		if (isInputAttack)
-		{
-
-		}
-	}
-
-	// 硬直終了
-	if (frameCount >= m_pPlayer->GetParams().DODGE_JUST_RECOVERY_FRAMES)
-	{
-		TimeManager::GetInstance().SetTimeScale(1.0f);
 		// 空中にいるかどうか
 		if (m_pPlayer->GetIsJumping())
 		{
@@ -101,19 +98,9 @@ void Player_DodgeJustState::OnUpdate()
 			// スティック入力があれば走り状態に変更
 			if (Input::GetInput().GetIsMoveLStick())
 			{
-				// 現在の回避速度が走り速度より小さければ小走り状態
-				if (m_pPlayer->GetCurrentDodgeSpeed() < m_pPlayer->GetParams().RunSpeed)
-				{
-					auto spSlowRunState = std::make_shared<Player_SlowRunState>();
-					m_pPlayer->ChangeState(spSlowRunState);
-					return;
-				}
-				else
-				{
-					auto spRunState = std::make_shared<Player_RunState>();
-					m_pPlayer->ChangeState(spRunState);
-					return;
-				}
+				auto spRunState = std::make_shared<Player_RunState>();
+				m_pPlayer->ChangeState(spRunState);
+				return;
 			}
 
 			// ジャンプボタンが押されていたらジャンプ
@@ -141,26 +128,27 @@ void Player_DodgeJustState::OnUpdate()
 			}
 
 		}
+	}
 
-
-		// アニメ終了
-		if (m_pPlayer->animation.GetIsAnimFinished())
+	// アニメ終了
+	if (m_pPlayer->animation.GetIsAnimFinished())
+	{
+		// スティック入力がなければStandに戻す
+		if (!Input::GetInput().GetIsMoveLStick())
 		{
-			// スティック入力がなければStandに戻す
-			if (!Input::GetInput().GetIsMoveLStick())
-			{
-				auto spStandState = std::make_shared<Player_StandState>();
-				m_pPlayer->ChangeState(spStandState);
-				return;
-			}
+			auto spStandState = std::make_shared<Player_StandState>();
+			m_pPlayer->ChangeState(spStandState);
+			return;
 		}
 	}
 }
+
 
 void Player_DodgeJustState::OnExit()
 {
 	m_pPlayer->SetIsDodge(false);
 	m_pPlayer->SetIsDodgeJust(false);
+	TimeManager::GetInstance().SetTimeScale(1.0f);
 }
 
 void Player_DodgeJustState::CulcDodgeDirection()

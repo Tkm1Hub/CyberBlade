@@ -7,6 +7,7 @@
 #include "Player_DodgeState.h"
 #include "Player_DamageState.h"
 #include "TimeManager.h"
+#include "EffectManager.h"
 
 void Player_Jump2State::OnStart()
 {
@@ -20,6 +21,9 @@ void Player_Jump2State::OnStart()
 
 	// ジャンプ回数を加算
 	m_pPlayer->AddJumpCount();
+	
+	// エフェクト再生
+	EffectManager::GetInstance().PlayEffect("Player_JumpWave", m_pPlayer->GetPosition());
 }
 
 void Player_Jump2State::OnUpdate()

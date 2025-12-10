@@ -3,6 +3,7 @@
 #include "EnemyBig_Slash2State.h"
 #include "EnemyBig_WarningState.h"
 #include "EnemyBig_DamageState.h"
+#include "EffectManager.h"
 
 void EnemyBig_Slash2State::OnStart()
 {
@@ -12,6 +13,8 @@ void EnemyBig_Slash2State::OnStart()
 	// アニメーションの設定
 	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::Slash2), false);
 
+	// エフェクト再生
+	EffectManager::GetInstance().PlayEffect("Attack_Warning", m_pEnemyBig->GetHeadPos());
 }
 
 void EnemyBig_Slash2State::OnUpdate()

@@ -9,6 +9,7 @@
 #include "UIManager.h"
 #include "Debug.h"
 #include "Player.h"
+#include "EffectManager.h"
 GameScene::GameScene(SceneManager& manager)
 	: Scene{manager}{
 }
@@ -64,6 +65,7 @@ void GameScene::Init()
 	shadowMgr->Init();
 
 	UIManager::GetUIManager().Init();
+	EffectManager::GetInstance().Init();
 }
 
 void GameScene::Update()
@@ -89,6 +91,9 @@ void GameScene::Update()
 
 	// UIの更新
 	UIManager::GetUIManager().Update();
+
+	// エフェクトの更新
+	EffectManager::GetInstance().Update();
 
 	// デバッグの更新
 	debug->Update();
@@ -117,12 +122,16 @@ void GameScene::Draw()const
 	// オブジェクトの描画
 	objectMgr->DrawAll();
 
-	// デバッグ情報の描画
-	debug->Draw();
 
 	// 描画に使用するシャドウマップの設定を解除
 	SetUseShadowMap(0, -1);
 
+	// デバッグ情報の描画
+	debug->Draw();
+
+	// エフェクトの描画
+	EffectManager::GetInstance().Draw();
+	
 	// UIの描画
 	UIManager::GetUIManager().Draw();
 }

@@ -5,14 +5,14 @@
 // パラメータ
 struct EnemyBig_Params
 {
-	int MaxHp = 500;						// 最大HP
+	int MaxHp = 1000;						// 最大HP
 
 	float Gravity = 0.2f;					// 重力
 	float AttackMoveSpeed = 1.5f;			// 攻撃中前進速度
-	float DodgeJumpPower = 1.0f;			// 回避中のジャンプ力
+	float DodgeJumpPower = 2.0f;			// 回避中のジャンプ力
 	float DodgeMoveSpeed = 2.0f;			// 回避中の移動速度
 	float DamageSpeed = 1.5f;				// ダメージ中ノックバックの速度
-	float AttackJumpMaxHeight = 100.0f;		// ジャンプ攻撃の最高高度
+	float AttackJumpPower = 5.3f;			// ジャンプ攻撃の高度
 	float HitRadius = 25.0f;				// 当たり判定半径
 	float HitHeight = 40.0f;				// 当たり判定高さ
 	float HandHitRadius = 15.0f;			// 手の当たり判定
@@ -21,7 +21,7 @@ struct EnemyBig_Params
 	float AttackTriggerRadius = 80.0f;		// Attackを開始するプレイヤーとの距離
 	float Accel = 0.03f;					// 移動加速度
 	float Decel = 0.1f;						// 移動減速度
-	float ChaseSpeed = 0.5f;				// 追跡速度
+	float ChaseSpeed = 2.0f;				// 追跡速度
 
 	VECTOR scale = { 0.35,0.35,0.35 };
 };
@@ -38,6 +38,7 @@ enum class EnemyBigAnimState :int
 	Slash2 = 11,		// 薙ぎ払い２
 	Warning = 6,		// 警戒
 	Dodge = 8,			// 回避
+	CastPose = 12,		// 弾幕中
 };
 
 
@@ -69,7 +70,6 @@ private:
 	EnemyBig_Params params;	// パラメータ
 	StateMachine stateMachine;	// ステートマシン
 
-	int headIndex = -1;
 
 	int damageFrameCount = 0;
 	void UpdateDamageFlag();

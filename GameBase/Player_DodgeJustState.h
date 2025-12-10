@@ -12,6 +12,11 @@ private:
 	bool isInputDodge = false;
 
 	float moveSpeed = 0.0f;
+	float timeScale = 0.0f;
+
+	static constexpr float TIMESCALE_ACCEL = 0.002f;
+	static constexpr int DODGE_DISABLE_COUNT = 23;
+
 
 	void CulcDodgeDirection();
 

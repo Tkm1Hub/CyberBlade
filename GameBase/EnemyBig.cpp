@@ -2,6 +2,7 @@
 #include "EnemyBig.h"
 #include "EnemyBig_StandState.h"
 #include "EnemyBig_FallState.h"
+#include "EffectManager.h"
 
 void EnemyBig::Init()
 {
@@ -28,7 +29,7 @@ void EnemyBig::Load()
 	modelHandle = MV1LoadModel("data/model/character/robot.mv1");
 	MV1SetScale(modelHandle, modelScale);
 	handBoneIndex = MV1SearchFrame(modelHandle, "mixamorig:LeftHand");
-	headIndex = MV1SearchFrame(modelHandle, "mixamorig:Head");
+	headBoneIndex = MV1SearchFrame(modelHandle, "mixamorig:Head");
 
 	// アニメーションのロード
 	animation.LoadAnimation(modelHandle);
@@ -58,7 +59,8 @@ void EnemyBig::Update()
 	UpdateAngle();
 
 	handPos = MV1GetFramePosition(modelHandle, handBoneIndex);
-	lockOnPos = MV1GetFramePosition(modelHandle, headIndex);
+	lockOnPos = MV1GetFramePosition(modelHandle, headBoneIndex);
+	headPos = MV1GetFramePosition(modelHandle, headBoneIndex);
 
 	UpdateDamageFlag();
 }

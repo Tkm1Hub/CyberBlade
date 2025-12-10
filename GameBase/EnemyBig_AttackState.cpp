@@ -3,6 +3,7 @@
 #include "EnemyBig_AttackState.h"
 #include "EnemyBig_WarningState.h"
 #include "EnemyBig_DamageState.h"
+#include "EffectManager.h"
 
 void EnemyBig_AttackState::OnStart()
 {
@@ -12,6 +13,8 @@ void EnemyBig_AttackState::OnStart()
 	// アニメーションの設定
 	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::Attack), false);
 
+	// エフェクト再生
+	EffectManager::GetInstance().PlayEffect("Attack_Warning", m_pEnemyBig->GetHeadPos());
 }
 
 void EnemyBig_AttackState::OnUpdate()
@@ -55,6 +58,7 @@ void EnemyBig_AttackState::AttackMove()
 	if (currentAnimCount > ATTACK_ACTIVE_COUNT && currentAnimCount < ATTACK_DISABLE_COUNT)
 	{
 		attackSpeed -= ATTACK_SPEED_DECEL;
+		attackSpeed = std::clamp(attackSpeed,0.0f,m_pEnemyBig->GetParams().AttackMoveSpeed);
 	}
 
 	// 攻撃終了

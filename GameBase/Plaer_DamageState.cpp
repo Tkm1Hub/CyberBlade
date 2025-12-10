@@ -8,13 +8,14 @@
 #include "Player_Attack3State.h"
 #include "Player_SlowRunState.h"
 #include "Player_StandState.h"
-#include "Player_DodgeState.h"
 #include "Player_Jump1State.h"
+#include "TimeManager.h"
 
 
 void Player_DamageState::OnStart()
 {
 	moveSpeed = m_pPlayer->GetParams().DamageKnockBackSpeed;
+	TimeManager::GetInstance().SetTimeScale(0.0f);
 }
 
 void Player_DamageState::OnUpdate()
@@ -22,8 +23,14 @@ void Player_DamageState::OnUpdate()
 	frameCount++;
 	// ノックバック速度を設定
 	moveSpeed -= frameCount * DECEL;
+	moveSpeed = std::clamp(moveSpeed, 0.0f, m_pPlayer->GetParams().DamageKnockBackSpeed);
 
-	m_pPlayer->SetMoveSpeed(m_pPlayer->GetParams().DamageKnockBackSpeed);
+	// だんだん加速
+	timeScale += frameCount * ACCEL;
+	timeScale = std::clamp(timeScale, 0.0f, 1.0f);
+	TimeManager::GetInstance().SetTimeScale(timeScale);
+
+	m_pPlayer->SetMoveSpeed(moveSpeed);
 
 	// のけぞり中攻撃ボタンが押されたらフラグを立てる
 	if (!isInputAttack && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
@@ -43,7 +50,7 @@ void Player_DamageState::OnUpdate()
 		isInputDodge = true;
 	}
 
-	if (frameCount > 22)
+	if (frameCount > 60)
 	{
 		if (isInputJump)
 		{
@@ -86,4 +93,5 @@ void Player_DamageState::OnUpdate()
 void Player_DamageState::OnExit()
 {
 	m_pPlayer->SetDamageFlag(false);
+	TimeManager::GetInstance().SetTimeScale(1.0f);
 }

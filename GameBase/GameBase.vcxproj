@@ -138,8 +138,10 @@
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
     <ClCompile Include="EnemyBig.cpp" />
+    <ClCompile Include="EnemyBig_AlertState.cpp" />
     <ClCompile Include="EnemyBig_AttackState.cpp" />
     <ClCompile Include="EnemyBig_ChaceState.cpp" />
     <ClCompile Include="EnemyBig_DamageState.cpp" />
@@ -207,8 +209,10 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="EffectManager.h" />
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="EnemyBig.h" />
+    <ClInclude Include="EnemyBig_AlertState.h" />
     <ClInclude Include="EnemyBig_AttackState.h" />
     <ClInclude Include="EnemyBig_ChaseState.h" />
     <ClInclude Include="EnemyBig_DamageState.h" />

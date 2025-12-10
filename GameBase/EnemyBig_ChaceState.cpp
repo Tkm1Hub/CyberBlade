@@ -10,8 +10,6 @@ void EnemyBig_ChaseState::OnStart()
 	m_pEnemyBig->SetMoveSpeed(m_pEnemyBig->GetParams().ChaseSpeed);
 	// アニメ再生
 	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::Chase), true);
-	//警戒フラグ
-	m_pEnemyBig->SetIsAlert(true);
 }
 
 void EnemyBig_ChaseState::OnUpdate()
@@ -19,6 +17,7 @@ void EnemyBig_ChaseState::OnUpdate()
 	// 移動ベクトルをプレイヤーの方向に設定
 	VECTOR dir = m_pEnemyBig->GetToPlayerDirection();
 	m_pEnemyBig->SetMoveVec(dir);
+	m_pEnemyBig->SetTargetAngle(dir);
 
 	// プレイヤーが一定範囲内に入ったら攻撃
 	if (m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().AttackTriggerRadius))
@@ -27,18 +26,6 @@ void EnemyBig_ChaseState::OnUpdate()
 		m_pEnemyBig->ChangeState(spAttackState);
 		return;
 	}
-
-	//// プレイヤーが範囲外だと追跡をやめる
-	//if (!m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().ChaseTriggerDistance))
-	//{
-	//	//警戒フラグ
-	//	m_pEnemyBig->SetIsAlert(false);
-
-	//	auto spStandState = std::make_shared<EnemyBig_StandState>();
-	//	m_pEnemyBig->ChangeState(spStandState);
-	//	return;
-	//}
-
 }
 
 void EnemyBig_ChaseState::OnExit()

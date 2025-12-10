@@ -7,6 +7,7 @@
 #include "ObjectManager.h"
 #include "TimeManager.h"
 #include "EnemyBig.h"
+#include "EffectManager.h"
 
 void Debug::Update()
 {
@@ -86,6 +87,15 @@ void Debug::Draw()
 
                 DrawCylinder(enemyBoss->GetPosition(), enemyBoss->GetWarningRadius(), 10.0f, 64, GetColor(255, 30, 30));
                 DrawCylinder(enemyBoss->GetPosition(), enemyBoss->GetAttack1TriggerRadius(), 10.0f, 64, GetColor(180, 180, 0));
+                
+                if (CheckHitKey(KEY_INPUT_F3))
+                {
+                    EffectManager::GetInstance().PlayEffect("Boss_Roar", enemyBoss->GetPosition());
+                }
+                if (CheckHitKey(KEY_INPUT_F4))
+                {
+                    EffectManager::GetInstance().PlayEffect("Attack_Warning", enemyBoss->GetPosition());
+                }
             }
         }
 

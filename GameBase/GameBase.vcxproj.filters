@@ -233,6 +233,12 @@
     <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\JumpAttack">
       <UniqueIdentifier>{03f122b7-6e30-49fe-b05b-c0d0f24c6747}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\State\Enemy\EnemyBigState\Alert">
+      <UniqueIdentifier>{2dc7dcf8-83c9-44e5-a4aa-cea2a5824e6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\EffectManager">
+      <UniqueIdentifier>{40d95025-7c36-4ae2-b47a-812f99ab3aa3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -426,6 +432,12 @@
     </ClCompile>
     <ClCompile Include="EnemyBig_JumpAttackState.cpp">
       <Filter>ソース ファイル\State\Enemy\EnemyBigState\JumpAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBig_AlertState.cpp">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Alert</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>ソース ファイル\EffectManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -644,6 +656,12 @@
     </ClInclude>
     <ClInclude Include="EnemyBig_JumpAttackState.h">
       <Filter>ソース ファイル\State\Enemy\EnemyBigState\JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBig_AlertState.h">
+      <Filter>ソース ファイル\State\Enemy\EnemyBigState\Alert</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>ソース ファイル\EffectManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

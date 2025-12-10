@@ -19,7 +19,7 @@ void EnemyBase::Move()
 	moveVec = VScale(moveVec, currentMoveSpeed);
 		
 	// 重力を適応
-	if (currentJumpPower > 0.0f)
+	if (isJumping)
 	{
 		currentJumpPower -= m_Gravity * TimeManager::GetInstance().GetTimeScale();
 	}
@@ -27,7 +27,7 @@ void EnemyBase::Move()
 	// 移動ベクトルのＹ成分をＹ軸方向の速度にする
 	moveVec.y = currentJumpPower;
 
-	nextPos = VAdd(pos, moveVec);
+	nextPos = VAdd(pos, VScale(moveVec,TimeManager::GetInstance().GetTimeScale()));
 }
 
 void EnemyBase::UpdateAngle()
