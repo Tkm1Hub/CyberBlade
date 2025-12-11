@@ -10,12 +10,14 @@ struct EnemyBig_Params
 	float Gravity = 0.2f;					// 重力
 	float AttackMoveSpeed = 1.5f;			// 攻撃中前進速度
 	float DodgeJumpPower = 2.0f;			// 回避中のジャンプ力
-	float DodgeMoveSpeed = 2.0f;			// 回避中の移動速度
+	float DodgeMoveSpeed = 4.0f;			// 回避中の移動速度
 	float DamageSpeed = 1.5f;				// ダメージ中ノックバックの速度
 	float AttackJumpPower = 5.3f;			// ジャンプ攻撃の高度
 	float HitRadius = 25.0f;				// 当たり判定半径
 	float HitHeight = 40.0f;				// 当たり判定高さ
-	float HandHitRadius = 15.0f;			// 手の当たり判定
+	float LeftHandHitRadius = 15.0f;		// 左手の当たり判定
+	float RightHandHitRadius = 30.0f;		// 右手の当たり判定
+	float HipHitRadius = 50.0f;				// 腰の当たり判定
 	float HPBarHeight = 20.0f;				// HPバーを表示する高さ
 	float WarningDistance = 150.0f;			// 警戒を開始するプレイヤーとの距離
 	float AttackTriggerRadius = 80.0f;		// Attackを開始するプレイヤーとの距離

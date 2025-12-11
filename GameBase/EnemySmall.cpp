@@ -12,7 +12,7 @@ void EnemySmall::Init()
 	hp = params.MaxHp;
 	MaxHp = params.MaxHp;
 	hpBarHeightOffset = params.HPBarHeight;
-	handHitRadius = params.HandHitRadius;
+	LeftHandHitRadius = params.HandHitRadius;
 
 	auto spStandState = std::make_shared<EnemySmall_StandState>();
 	ChangeState(spStandState);
@@ -26,7 +26,7 @@ void EnemySmall::Load()
 	// モデルハンドル取得
 	modelHandle = MV1LoadModel("data/model/character/robot.mv1");
 	MV1SetScale(modelHandle, modelScale);
-	handBoneIndex = MV1SearchFrame(modelHandle, "mixamorig:LeftHand");
+	LeftHandBoneIndex = MV1SearchFrame(modelHandle, "mixamorig:LeftHand");
 	headIndex = MV1SearchFrame(modelHandle, "mixamorig:Head");
 
 	// アニメーションのロード
@@ -56,7 +56,7 @@ void EnemySmall::Update()
 	// 角度更新
 	UpdateAngle();
 
-	handPos = MV1GetFramePosition(modelHandle, handBoneIndex);
+	LeftHandPos = MV1GetFramePosition(modelHandle, LeftHandBoneIndex);
 	lockOnPos = MV1GetFramePosition(modelHandle, headIndex);
 }
 

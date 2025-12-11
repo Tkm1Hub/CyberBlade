@@ -16,7 +16,6 @@ void EnemyBig_Slash1State::OnStart()
 
 	// エフェクト再生
 	EffectManager::GetInstance().PlayEffect("Attack_Warning", m_pEnemyBig->GetHeadPos());
-
 }
 
 void EnemyBig_Slash1State::OnUpdate()
@@ -24,8 +23,13 @@ void EnemyBig_Slash1State::OnUpdate()
 	// 攻撃中の移動の更新
 	AttackMove();
 
+	// 攻撃の当たり判定更新
+	VECTOR AtkCollPos = m_pEnemyBig->GetRightHandPos();
+	m_pEnemyBig->SetAttackCollisionPos(AtkCollPos);
+	m_pEnemyBig->SetAttackCollisionRadius(m_pEnemyBig->GetParams().RightHandHitRadius);
+
 	// コンボに移行するかどうか
-	if (ATTACK_NEXT_COUNT == m_pEnemyBig->animation.GetCurrentAnimCount()
+	if (ATTACK_NEXT_COUNT <= m_pEnemyBig->animation.GetCurrentAnimCount()
 		&& m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().AttackTriggerRadius))
 	{
 		auto spSlash2State = std::make_shared<EnemyBig_Slash2State>();

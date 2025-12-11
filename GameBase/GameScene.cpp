@@ -113,6 +113,8 @@ void GameScene::Draw()const
 		}
 	}
 
+	EnemyManager::GetEnemyManager().Draw();
+
 	//シャドウマップへの描画を終了
 	ShadowMap_DrawEnd();
 

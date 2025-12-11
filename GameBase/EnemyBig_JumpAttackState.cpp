@@ -26,6 +26,11 @@ void EnemyBig_JumpAttackState::OnUpdate()
 	// 攻撃中の移動の更新
 	AttackMove();
 
+	// 攻撃の当たり判定更新
+	VECTOR AtkCollPos = m_pEnemyBig->GetHipPos();
+	m_pEnemyBig->SetAttackCollisionPos(AtkCollPos);
+	m_pEnemyBig->SetAttackCollisionRadius(m_pEnemyBig->GetParams().HipHitRadius);
+
 	// モーションが終わるとWarningに戻す
 	if (m_pEnemyBig->animation.GetIsAnimFinished())
 	{
@@ -37,6 +42,7 @@ void EnemyBig_JumpAttackState::OnUpdate()
 
 void EnemyBig_JumpAttackState::OnExit()
 {
+	m_pEnemyBig->SetAttackFrag(false);
 }
 
 void EnemyBig_JumpAttackState::AttackMove()
@@ -86,9 +92,15 @@ void EnemyBig_JumpAttackState::AttackMove()
 	if (currentAnimCount == JUMP_END_COUNT)
 	{
 		attackSpeed = 0.0f;
-		
+		m_pEnemyBig->SetAttackFrag(true);
 		// エフェクト再生
 		EffectManager::GetInstance().PlayEffect("Boss_ShockWave",m_pEnemyBig->GetPosition());
+	}
+
+	// 攻撃無効化
+	if (currentAnimCount == ATTACK_DISABLE_COUNT)
+	{
+		m_pEnemyBig->SetAttackFrag(false);
 	}
 
 	m_pEnemyBig->SetMoveSpeed(attackSpeed);

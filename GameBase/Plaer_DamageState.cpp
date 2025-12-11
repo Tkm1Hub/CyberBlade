@@ -16,6 +16,7 @@ void Player_DamageState::OnStart()
 {
 	moveSpeed = m_pPlayer->GetParams().DamageKnockBackSpeed;
 	TimeManager::GetInstance().SetTimeScale(0.0f);
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Damage), false);
 }
 
 void Player_DamageState::OnUpdate()
@@ -30,6 +31,11 @@ void Player_DamageState::OnUpdate()
 	timeScale = std::clamp(timeScale, 0.0f, 1.0f);
 	TimeManager::GetInstance().SetTimeScale(timeScale);
 
+	VECTOR targetPos = m_pPlayer->GetDamageSourcePos();
+	targetPos = VSub(targetPos, m_pPlayer->GetPosition());
+	targetPos = VNorm(targetPos);
+
+	m_pPlayer->SetTargetMoveDirection(targetPos);
 	m_pPlayer->SetMoveSpeed(moveSpeed);
 
 	// のけぞり中攻撃ボタンが押されたらフラグを立てる
@@ -50,7 +56,7 @@ void Player_DamageState::OnUpdate()
 		isInputDodge = true;
 	}
 
-	if (frameCount > 60)
+	if (m_pPlayer->animation.GetIsAnimFinished())
 	{
 		if (isInputJump)
 		{

@@ -26,7 +26,7 @@ struct PlayerParams
 	static constexpr int DODGE_RECOVERY_FRAMES = 24;			// 回避の硬直時間
 	static constexpr int DODGE_JUST_RECOVERY_FRAMES = 35;		// 回避の硬直時間
 	static constexpr int DODGE_JUST_INVINCIBLE_TIME = 180;		// ジャスト回避の無敵時間
-	static constexpr float DODGE_HIT_RADIUS = 15.0f;			// 回避中の当たり判定（ジャスト回避に移行する
+	static constexpr float DODGE_HIT_RADIUS = 20.0f;			// 回避中の当たり判定（ジャスト回避に移行する
 
 	// パラメータ
 	float Jump1Power = 3.0f;			// ジャンプ力（1段目）
@@ -83,6 +83,7 @@ enum class PlayerAnimState :int
 	AttackJump2 = 15,	// ジャンプ攻撃（2段階）
 	DodgeJust = 20,		// ジャスト回避
 	DodgeBack = 17,		// 後ろ回避
+	Damage = 18,		// ダメージ
 };
 
 class EnemyBase;
@@ -150,6 +151,9 @@ public:
 
 	const VECTOR GetAttackDir() const { return attackDir; }
 
+	const VECTOR GetDamageSourcePos() const{ return damageSourcePos; }
+	void SetDamageSourcePos(VECTOR pos) { damageSourcePos = pos; }
+
 	void SetDodgeDirection(VECTOR dir) { dodgeDir = dir; }
 
 	const std::shared_ptr<EnemyBase> GetLockOnTarget() { return lockOnTarget; }
@@ -178,6 +182,8 @@ private:
 
 	VECTOR attackDir = { 0.0f,0.0f,0.0f };			// 攻撃の方向ベクトル
 	VECTOR dodgeDir = { 0.0f,0.0f,0.0f };			// 回避の方向ベクトル
+
+	VECTOR damageSourcePos = { 0.0f,0.0f,0.0f };	// 被ダメージ発生源の座標
 
 	float currentMaxSpeed = 0.0f;				// 最大移動速度
 	float currentDodgeSpeed = 0.0f;				// 現在の回避速度

@@ -16,7 +16,7 @@ private:
 
 	static constexpr float TIMESCALE_ACCEL = 0.002f;
 	static constexpr int DODGE_DISABLE_COUNT = 23;
-
+	static constexpr int SLOW_START_COUNT = 5;
 
 	void CulcDodgeDirection();
 

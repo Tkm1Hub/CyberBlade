@@ -78,8 +78,6 @@ void Debug::Draw()
         {
             // 当たり判定カプセル
             DrawCapsule(enemy);
-            // 攻撃（手）の当たり判定
-            DrawSphere3D(enemy->GetHandPos(), enemy->GetHandHitRadius(), 16, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
             
             if (enemy->GetName() == "EnemyBoss")
             {
@@ -88,6 +86,11 @@ void Debug::Draw()
                 DrawCylinder(enemyBoss->GetPosition(), enemyBoss->GetWarningRadius(), 10.0f, 64, GetColor(255, 30, 30));
                 DrawCylinder(enemyBoss->GetPosition(), enemyBoss->GetAttack1TriggerRadius(), 10.0f, 64, GetColor(180, 180, 0));
                 
+                if (enemyBoss->GetIsAttack())
+                {
+                    DrawSphere3D(enemy->GetAttackCollisionPos(), enemyBoss->GetAttackCollisionRadius(), 64, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
+                }
+
                 if (CheckHitKey(KEY_INPUT_F3))
                 {
                     EffectManager::GetInstance().PlayEffect("Boss_Roar", enemyBoss->GetPosition());

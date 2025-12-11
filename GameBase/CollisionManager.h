@@ -38,7 +38,7 @@ private:
 	void CheckSwordEnemyCollision();
 
 	// 敵の手とプレイヤーの当たり判定
-	void CheckEnemyHandPlayerCollision();
+	void CheckEnemyAttackPlayerCollision();
 
 	// カプセル同士の当たり判定
 	bool CheckCapsuleCollision(const std::shared_ptr<IGameObject> obj1, const std::shared_ptr<IGameObject> obj2);

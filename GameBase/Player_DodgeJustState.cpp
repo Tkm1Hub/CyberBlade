@@ -13,6 +13,7 @@
 #include "EnemyBase.h"
 #include "Input.h"
 #include "TimeManager.h"
+#include "EffectManager.h"
 
 void Player_DodgeJustState::OnStart()
 {
@@ -30,20 +31,29 @@ void Player_DodgeJustState::OnStart()
 	m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
 
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeJust), false);
-
-	TimeManager::GetInstance().SetTimeScale(0.2f);
+	EffectManager::GetInstance().PlayEffect("DodgeJust", m_pPlayer->GetPosition());
 }
 
 void Player_DodgeJustState::OnUpdate()
 {
 	// スロー演出
 	frameCount++;
-	timeScale += frameCount * TIMESCALE_ACCEL;
-	timeScale = std::clamp(timeScale, 0.0f, 1.0f);
-
-	TimeManager::GetInstance().SetTimeScale(timeScale);
-
 	int currentAnimCount = m_pPlayer->animation.GetCurrentAnimCount();
+
+	if (currentAnimCount == SLOW_START_COUNT)
+	{
+		TimeManager::GetInstance().SetTimeScale(0.2f);
+	}
+	else if (currentAnimCount > SLOW_START_COUNT)
+	{
+		timeScale += frameCount * TIMESCALE_ACCEL;
+		timeScale = std::clamp(timeScale, 0.0f, 1.0f);
+
+		TimeManager::GetInstance().SetTimeScale(timeScale);
+	}
+
+	// エフェクト追従
+	EffectManager::GetInstance().SetPosition("DodgeJust", m_pPlayer->GetPosition());
 
 	// 回避中攻撃ボタンが押されたらフラグを立てる
 	if (!isInputAttack && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)

@@ -39,7 +39,7 @@ public:
     void PositionUpdate(const VECTOR& objectPosition);
     void Update();
     void Draw();
-    void SetPosition(const VECTOR setPosition);
+    void SetPosition(const std::string& name, const VECTOR setPosition);
     void SetRotation(VECTOR setPosition);
     void SetScale(VECTOR scale);
     void SetSpeed(float speed);

@@ -43,7 +43,7 @@ void CollisionManager::Update()
         CheckSwordEnemyCollision();
     }
 
-    CheckEnemyHandPlayerCollision();
+    CheckEnemyAttackPlayerCollision();
 
     // オブジェクト同士の押し戻し
     for (size_t i = 0; i < m_pEnemies.size(); i++)
@@ -101,10 +101,10 @@ void CollisionManager::CheckSwordEnemyCollision()
     }
 }
 
-// 敵の手とプレイヤーの当たり判定
-void CollisionManager::CheckEnemyHandPlayerCollision()
+// 敵の攻撃とプレイヤーの当たり判定
+void CollisionManager::CheckEnemyAttackPlayerCollision()
 {
-    if (!m_pPlayer->GetDamageFlag() && !m_pPlayer->GetIsInvincible())
+    if (!m_pPlayer->GetDamageFlag())
     {
         for (auto enemy : m_pEnemies)
         {
@@ -114,7 +114,7 @@ void CollisionManager::CheckEnemyHandPlayerCollision()
                 {
                     if (m_pPlayer->GetIsDodgeJust())return;
 
-                    if (CheckCapsuleSphereCollision(m_pPlayer->GetTopPos(), m_pPlayer->GetBottomPos(), m_pPlayer->GetDodgeHitRadius(), enemy->GetHandPos(), enemy->GetHandHitRadius()))
+                    if (CheckCapsuleSphereCollision(m_pPlayer->GetTopPos(), m_pPlayer->GetBottomPos(), m_pPlayer->GetDodgeHitRadius(), enemy->GetAttackCollisionPos(), enemy->GetAttackCollisionRadius()))
                     {
                         // ジャスト回避
                         auto spDodgeJustState = std::make_shared<Player_DodgeJustState>();
@@ -124,13 +124,16 @@ void CollisionManager::CheckEnemyHandPlayerCollision()
                 }
                 else
                 {
-                    if (CheckCapsuleSphereCollision(m_pPlayer->GetTopPos(),m_pPlayer->GetBottomPos(),m_pPlayer->GetHitRadius(), enemy->GetHandPos(), enemy->GetHandHitRadius()))
+                    if (!m_pPlayer->GetIsInvincible())
                     {
-                        m_pPlayer->SetDamageFlag(true);
-                        m_pPlayer->ApplyDamage(20);
-                        VECTOR knockBackDirection = CulcKnockBackDirection(enemy, m_pPlayer);
-                        m_pPlayer->SetKnockBackDir(knockBackDirection);
-
+                        if (CheckCapsuleSphereCollision(m_pPlayer->GetTopPos(), m_pPlayer->GetBottomPos(), m_pPlayer->GetHitRadius(), enemy->GetAttackCollisionPos(), enemy->GetAttackCollisionRadius()))
+                        {
+                            m_pPlayer->SetDamageFlag(true);
+                            m_pPlayer->ApplyDamage(20);
+                            VECTOR knockBackDirection = CulcKnockBackDirection(enemy, m_pPlayer);
+                            m_pPlayer->SetKnockBackDir(knockBackDirection);
+                            m_pPlayer->SetDamageSourcePos(enemy->GetPosition());
+                        }
                     }
                 }
             }

@@ -8,6 +8,7 @@ void EffectManager::Init()
     LoadEffect("Boss_ShockWave", "data/effect/ShockWave_Enemy.efkefc", 50.0f);
     LoadEffect("Boss_JumpWave", "data/effect/JumpWave_Enemy.efkefc", 20.0f);
     LoadEffect("Player_JumpWave", "data/effect/ShockWave_Player.efkefc", 10.0f);
+    LoadEffect("DodgeJust", "data/effect/DodgeJust.efkefc", 10.0f);
 }
 
 /// <summary>
@@ -56,9 +57,14 @@ void EffectManager::Draw()
 /// ポジションを保存
 /// </summary>
 /// <param name="setPosition"></param>
-void EffectManager::SetPosition(const VECTOR setPosition)
+void EffectManager::SetPosition(const std::string& name, const VECTOR setPosition)
 {
-    position = VGet(setPosition.x, setPosition.y, setPosition.z);
+    // エフェクトの位置を更新
+    auto it = effectHandles.find(name);
+    if (it == effectHandles.end()) return;
+
+    int handle = it->second;
+    SetPosPlayingEffekseer3DEffect(handle, setPosition.x, setPosition.y, setPosition.z);
 }
 
 /// <summary>

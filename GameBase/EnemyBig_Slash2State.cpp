@@ -22,6 +22,11 @@ void EnemyBig_Slash2State::OnUpdate()
 	// 攻撃中の移動の更新
 	AttackMove();
 
+	// 攻撃の当たり判定更新
+	VECTOR AtkCollPos = m_pEnemyBig->GetRightHandPos();
+	m_pEnemyBig->SetAttackCollisionPos(AtkCollPos);
+	m_pEnemyBig->SetAttackCollisionRadius(m_pEnemyBig->GetParams().RightHandHitRadius);
+
 	// 攻撃モーションが終わるとWarningに戻す
 	if (m_pEnemyBig->animation.GetIsAnimFinished())
 	{

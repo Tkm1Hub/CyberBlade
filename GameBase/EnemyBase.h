@@ -24,7 +24,7 @@ public:
 	const bool GetIsAlert() const { return isAlert;}
 	void SetIsAlert(bool flag) { isAlert = flag; }
 
-	const float GetHandHitRadius() { return handHitRadius; }
+	const float GetHandHitRadius() { return LeftHandHitRadius; }
 
 	VECTOR GetToPlayerDirection();
 	bool IsPlayerInRange(float range);
@@ -33,11 +33,24 @@ public:
 	void SetPlayer(const std::weak_ptr<Player>& player) { m_pPlayer = player; }
 
 	// 手のボーン
-	const VECTOR GetHandPos()const { return handPos; }
-	const int GetHandBoneIndex() const { return handBoneIndex; }
+	const VECTOR GetLeftHandPos()const { return LeftHandPos; }
+	const int GetLeftHandBoneIndex() const { return LeftHandBoneIndex; }
+
+	const VECTOR GetRightHandPos()const { return RightHandPos; }
+	const int GetRightHandBoneIndex() const { return RightHandBoneIndex; }
 
 	// 頭のボーン
 	const VECTOR GetHeadPos()const { return headPos; }
+
+	// 腰のボーン
+	const VECTOR GetHipPos()const { return hipPos; }
+	const int GetHipBoneIndex() const { return hipBoneIndex; }
+
+	// 攻撃の当たり判定
+	const VECTOR GetAttackCollisionPos() const { return attackCollisionPos; }
+	void SetAttackCollisionPos(VECTOR pos) { attackCollisionPos = pos; }
+	const float GetAttackCollisionRadius()const { return attackCollisionRadius; }
+	void SetAttackCollisionRadius(float radius) { attackCollisionRadius = radius; }
 
 protected:
 	void Move();				// 移動処理
@@ -47,12 +60,20 @@ protected:
 
 	StateMachine stateMachine;	// ステートマシン
 
-	int handBoneIndex = -1;		// 手のボーンの番号
-	float handHitRadius = 0.0f;	// 手の当たり判定の半径
-	VECTOR handPos = { 0.0f,0.0f,0.0f };		// 手のボーンの座標
+	int LeftHandBoneIndex = -1;		// 左手のボーンの番号
+	float LeftHandHitRadius = 0.0f;	// 左手の当たり判定の半径
+	VECTOR LeftHandPos = { 0.0f,0.0f,0.0f };		// 左手のボーンの座標
+
+	int RightHandBoneIndex = -1;	// 右手のボーンの番号
+	float RightHandHitRadius = 0.0f;	// 右手の当たり判定の半径
+	VECTOR RightHandPos = { 0.0f,0.0f,0.0f };		// 右手のボーンの座標
 
 	int headBoneIndex = -1;					// 頭のボーン番号
 	VECTOR headPos = { 0.0f,0.0f,0.0f };	// 頭の座標
+
+	int hipBoneIndex = -1;					// 腰のボーン番号
+	float hipHitRadius = 0.0f;				// 腰の当たり判定
+	VECTOR hipPos = { 0.0f,0.0f,0.0f };		// 腰の座標
 
 	float attackCollisionRadius = 0.0f;				// 攻撃の当たり判定の半径
 	VECTOR attackCollisionPos = { 0.0f,0.0f,0.0f };	// 攻撃の当たり判定の座標
