@@ -35,6 +35,7 @@ struct PlayerParams
 	float WalkSpeed = 0.4f;				// 歩き最大移動速度
 	float SlowRunSpeed = 0.9f;			// 小走り最大移動速度
 	float RunSpeed = 1.5f;				// 走り最大移動速度
+	float RunSwordSpeed = 1.3f;			// 装備状態でのスピード
 	float FallMaxMoveSpeed = 1.5f;		// 落下中の最大移動速度
 	float DamageKnockBackSpeed = 5.0f;	// 被ダメージののけぞり速度
 	float DodgeStartSpeed = 1.0f;		// 回避開始速度
@@ -116,11 +117,18 @@ public:
 	void SetDodgeSpeed(float speed) { currentDodgeSpeed = speed; }
 	void ResetDodgeFrameCount() { dodgeFrameCount = 0; }
 
+	// 攻撃有効フラグ
+	const bool GetIsAttackEnabled() const { return isAttackEnabled; }
+	void SetIsAttackEnabled(bool flag) { isAttackEnabled = flag; }
+
+	// 無敵フラグ
 	const bool GetIsInvincible() { return isInvincible; }
 
+	// ジャスト回避フラグ
 	const bool GetIsDodgeJust() const { return isDodgeJust; }
 	void SetIsDodgeJust(bool flag) { isDodgeJust = flag; }
 
+	// 回避フラグ
 	const bool GetIsDodgeFront() const { return isDodgeFront; }
 	void SetIsDodgeFront(bool flag) { isDodgeFront = flag; }
 
@@ -202,6 +210,7 @@ private:
 	bool isDodgeJust = false;	// ジャスト回避中か
 	bool isSwordEquipped = false;	// 剣を手に持っているか
 	bool isInvincible = false;		// 無敵時間中
+	bool isAttackEnabled = false;	// 攻撃が有効化されているか
 
 	void Move();	// モデルの移動
 	void CulcMoveSpeed();	// 移動速度の計算

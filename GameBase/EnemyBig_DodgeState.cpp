@@ -5,6 +5,7 @@
 #include "EnemyBig_DamageState.h"
 #include "TimeManager.h"
 #include "EffectManager.h"
+#include "CameraManager.h"
 
 void EnemyBig_DodgeState::OnStart()
 {
@@ -64,6 +65,8 @@ void EnemyBig_DodgeState::DodgeMove()
 	if (currentAnimCount == DODGE_DISABLE_COUNT)
 	{
 		dodgeSpeed = 0.0f;
+		// ƒJƒƒ‰‚Ì—h‚ê
+		CameraManager::GetCameraManager().GetMainCamera()->StartShake(0.5f, 1.0f, 20.0f);
 	}
 
 	m_pEnemyBig->SetMoveSpeed(dodgeSpeed);

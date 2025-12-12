@@ -7,6 +7,7 @@
 #include "Sword.h"
 #include "Stage.h"
 #include "Player_DodgeJustState.h"
+#include "CameraManager.h"
 
 void CollisionManager::Init()
 {
@@ -90,12 +91,18 @@ void CollisionManager::CheckSwordEnemyCollision()
     {
         if (CheckCapsuleCollision(enemy, m_pSword))
         {
-            if (!enemy->GetDamageFlag())
+            if (!enemy->GetDamageFlag() && m_pPlayer->GetIsAttackEnabled())
             {
+                // カメラ揺れ
+                CameraManager::GetCameraManager().GetMainCamera()->StartShake(1.0f,0.0f, 10.0f);
+
                 enemy->SetDamageFlag(true);
                 enemy->ApplyDamage(20);
                 VECTOR knockBackDirection = CulcKnockBackDirection(m_pPlayer,enemy);
                 enemy->SetKnockBackDir(knockBackDirection);
+
+                // このモーションでの攻撃を無効化
+                m_pPlayer->SetIsAttackEnabled(false);
             }
         }
     }
@@ -128,11 +135,14 @@ void CollisionManager::CheckEnemyAttackPlayerCollision()
                     {
                         if (CheckCapsuleSphereCollision(m_pPlayer->GetTopPos(), m_pPlayer->GetBottomPos(), m_pPlayer->GetHitRadius(), enemy->GetAttackCollisionPos(), enemy->GetAttackCollisionRadius()))
                         {
+                            // ダメージ
                             m_pPlayer->SetDamageFlag(true);
                             m_pPlayer->ApplyDamage(20);
                             VECTOR knockBackDirection = CulcKnockBackDirection(enemy, m_pPlayer);
                             m_pPlayer->SetKnockBackDir(knockBackDirection);
                             m_pPlayer->SetDamageSourcePos(enemy->GetPosition());
+                            // カメラ揺れ
+                            CameraManager::GetCameraManager().GetMainCamera()->StartShake(1.5f, 1.5f, 25.0f);
                         }
                     }
                 }

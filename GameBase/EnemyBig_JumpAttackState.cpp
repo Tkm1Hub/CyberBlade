@@ -4,6 +4,7 @@
 #include "EnemyBig_WarningState.h"
 #include "TimeManager.h"
 #include "EffectManager.h"
+#include "CameraManager.h"
 
 void EnemyBig_JumpAttackState::OnStart()
 {
@@ -95,6 +96,8 @@ void EnemyBig_JumpAttackState::AttackMove()
 		m_pEnemyBig->SetAttackFrag(true);
 		// エフェクト再生
 		EffectManager::GetInstance().PlayEffect("Boss_ShockWave",m_pEnemyBig->GetPosition());
+		// カメラの揺れ
+		CameraManager::GetCameraManager().GetMainCamera()->StartShake(0.5f, 2.0f, 40.0f);
 	}
 
 	// 攻撃無効化

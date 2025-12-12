@@ -8,6 +8,7 @@
 #include "TimeManager.h"
 #include "EnemyBig.h"
 #include "EffectManager.h"
+#include "CameraManager.h"
 
 void Debug::Update()
 {
@@ -30,6 +31,10 @@ void Debug::Update()
             float timeScale = TimeManager::GetInstance().GetTimeScale();
             timeScale -= 0.01f;
             TimeManager::GetInstance().SetTimeScale(timeScale);
+        }
+        else if (CheckHitKey(KEY_INPUT_F5))
+        {
+            CameraManager::GetCameraManager().GetMainCamera()->StartShake(1.0f,0.0f, 10.0f);
         }
     }
 
@@ -61,6 +66,13 @@ void Debug::Draw()
                 DrawCapsule3D(player->GetTopPos(), player->GetBottomPos()
                     , player->GetDodgeHitRadius(), 8, GetColor(0, 0, 180), GetColor(255, 255, 255), FALSE);
             }
+
+            if (CheckHitKey(KEY_INPUT_F6))
+            {
+                EffectManager::GetInstance().PlayEffect("Test", player->GetPosition());
+            }
+
+            EffectManager::GetInstance().SetPosition("Test", player->GetTopPos());
 
             printfDx("isInvncible : %s \n", player->GetIsInvincible() ? "true" : "false");
         }

@@ -195,6 +195,7 @@ void Player_DodgeState::CulcDodgeDirection()
 			if (angle >= -DX_PI_F / 4 && angle <= DX_PI_F / 4) {
 				// ³–Ê
 				m_pPlayer->SetDodgeDirection(dir);
+				m_pPlayer->SetTargetMoveDirection(dir);
 				m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::RunPose), false);
 				m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeSpeed);
 				m_pPlayer->SetIsDodgeFront(true);
@@ -202,12 +203,14 @@ void Player_DodgeState::CulcDodgeDirection()
 			else if (angle > DX_PI_F / 4 && angle <= 3 * DX_PI_F / 4) {
 				// ‰E
 				m_pPlayer->SetDodgeDirection(RotateY(dir, -DX_PI_F / 2));
+				m_pPlayer->SetTargetMoveDirection(dir);
 				m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeBack), false);
 				m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
 			}
 			else if (angle < -DX_PI_F / 4 && angle >= -3 * DX_PI_F / 4) {
 				// ¶
 				m_pPlayer->SetDodgeDirection(RotateY(dir, DX_PI_F / 2));
+				m_pPlayer->SetTargetMoveDirection(dir);
 				m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeBack), false);
 				m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
 			}

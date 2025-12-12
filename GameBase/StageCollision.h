@@ -12,7 +12,7 @@ public:
 
 private:
 	static const int MaxHitColl = 2048;		// 処理するコリジョンポリゴンの最大数	
-	static constexpr int HitTryNum = 32;	// 壁押し出し処理の最大試行回数
+	static constexpr int HitTryNum = 64;	// 壁押し出し処理の最大試行回数
 	static constexpr float HitSlideLength = 0.1f;	// 一度の壁押し出し処理でスライドさせる距離
 	static constexpr float DefaultSize = 150.0f;	// 周囲のポリゴン検出に使用する球の初期サイズ
 

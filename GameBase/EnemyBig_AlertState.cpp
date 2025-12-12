@@ -3,6 +3,7 @@
 #include "EnemyBig_WarningState.h"
 #include "EnemyBig.h"
 #include "EffectManager.h"
+#include "CameraManager.h"
 
 void EnemyBig_AlertState::OnStart()
 {
@@ -11,6 +12,7 @@ void EnemyBig_AlertState::OnStart()
 
 	// 警戒フラグ
 	m_pEnemyBig->SetIsAlert(true);
+
 }
 
 void EnemyBig_AlertState::OnUpdate()
@@ -23,6 +25,8 @@ void EnemyBig_AlertState::OnUpdate()
 	if (currentAnimCount == EFFECT_START_COUNT)
 	{
 		EffectManager::GetInstance().PlayEffect("Boss_Roar", m_pEnemyBig->GetPosition());
+		// カメラの揺れ
+		CameraManager::GetCameraManager().GetMainCamera()->StartShake(2.5f, 2.5f, 120.0f);
 	}
 
 	// モーションが終わるとWarningに戻す

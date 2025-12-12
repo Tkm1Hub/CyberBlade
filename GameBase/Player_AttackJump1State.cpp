@@ -11,6 +11,8 @@ void Player_AttackJump1State::OnStart()
 {
 	// 攻撃フラグ
 	m_pPlayer->SetAttackFrag(true);
+	m_pPlayer->SetIsAttackEnabled(true);
+
 	// 装備フラグ
 	m_pPlayer->SetIsSwordEquipped(true);
 
@@ -88,5 +90,5 @@ void Player_AttackJump1State::OnExit()
 {
 	m_pPlayer->SetAttackFrag(false);
 	m_pPlayer->SetIsSwordEquipped(false);
-
+	m_pPlayer->SetIsAttackEnabled(false);
 }

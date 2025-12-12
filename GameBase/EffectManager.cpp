@@ -9,6 +9,7 @@ void EffectManager::Init()
     LoadEffect("Boss_JumpWave", "data/effect/JumpWave_Enemy.efkefc", 20.0f);
     LoadEffect("Player_JumpWave", "data/effect/ShockWave_Player.efkefc", 10.0f);
     LoadEffect("DodgeJust", "data/effect/DodgeJust.efkefc", 10.0f);
+    LoadEffect("Test", "data/effect/Blur.efkefc", 8.0f);
 }
 
 /// <summary>
@@ -22,10 +23,6 @@ void EffectManager::LoadEffect(const std::string& name, const std::string& path,
     }
 }
 
-/// <summary>
-/// 更新
-/// </summary>
-/// <param name="objectPosition"></param>
 void EffectManager::PositionUpdate(const VECTOR& objectPosition)
 {
     position = VGet(objectPosition.x, objectPosition.y, objectPosition.z);
@@ -36,6 +33,9 @@ void EffectManager::PositionUpdate(const VECTOR& objectPosition)
 
 }
 
+/// <summary>
+/// 更新
+/// </summary>
 void EffectManager::Update()
 {
     // Effekseerにより再生中のエフェクトを更新する。
@@ -60,11 +60,15 @@ void EffectManager::Draw()
 void EffectManager::SetPosition(const std::string& name, const VECTOR setPosition)
 {
     // エフェクトの位置を更新
-    auto it = effectHandles.find(name);
-    if (it == effectHandles.end()) return;
-
-    int handle = it->second;
-    SetPosPlayingEffekseer3DEffect(handle, setPosition.x, setPosition.y, setPosition.z);
+    for (auto& e : activeEffects) {
+        if (e.name == name && e.isActive) {
+            SetPosPlayingEffekseer3DEffect(e.handle,
+                setPosition.x,
+                setPosition.y,
+                setPosition.z);
+            e.position = setPosition;
+        }
+    }
 }
 
 /// <summary>
@@ -88,7 +92,7 @@ void EffectManager::PlayEffect(const std::string& name, const VECTOR& position)
     int handle = PlayEffekseer3DEffect(it->second);
     SetPosPlayingEffekseer3DEffect(handle, position.x, position.y, position.z);
 
-    activeEffects.push_back(EffectInstance{ handle, position, true });
+    activeEffects.push_back(EffectInstance{ name,handle, position, true });
 }
 
 /// <summary>

@@ -16,6 +16,7 @@ void Player_AttackDashState::OnStart()
 	// 装備フラグ
 	m_pPlayer->SetIsSwordEquipped(true);
 	m_pPlayer->SetAttackFrag(true);
+	m_pPlayer->SetIsAttackEnabled(true);
 
 	// アニメを再生
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackDash),false);
@@ -91,5 +92,5 @@ void Player_AttackDashState::OnExit()
 {
 	m_pPlayer->SetAttackFrag(false);
 	m_pPlayer->SetIsSwordEquipped(false);
-
+	m_pPlayer->SetIsAttackEnabled(false);
 }

@@ -22,8 +22,8 @@ void Player_SwordRunState::OnStart()
 	// ‘•”õƒtƒ‰ƒO
 	m_pPlayer->SetIsSwordEquipped(true);
 	// ˆÚ“®‘¬“x‚ðÝ’è
-	m_pPlayer->SetMoveSpeed(m_pPlayer->GetParams().SlowRunSpeed);
-	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().SlowRunSpeed);
+	m_pPlayer->SetMoveSpeed(m_pPlayer->GetParams().RunSwordSpeed);
+	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().RunSwordSpeed);
 }
 
 void Player_SwordRunState::OnUpdate()

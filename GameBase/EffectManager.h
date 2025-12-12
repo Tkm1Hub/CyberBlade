@@ -1,9 +1,10 @@
 #pragma once
 struct EffectInstance
 {
+    std::string name;
     int handle = -1;
     VECTOR position;
-    bool isPlaying = false;
+    bool isActive = false;
 };
 
 

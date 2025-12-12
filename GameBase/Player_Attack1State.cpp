@@ -17,6 +17,7 @@ void Player_Attack1State::OnStart()
 	// ‘•”õƒtƒ‰ƒO
 	m_pPlayer->SetIsSwordEquipped(true);
 	m_pPlayer->SetAttackFrag(true);
+	m_pPlayer->SetIsAttackEnabled(true);
 
 	// UŒ‚‚PƒAƒjƒ‚ðÄ¶
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackJump1),false);
@@ -125,4 +126,5 @@ void Player_Attack1State::OnExit()
 {
 	m_pPlayer->SetAttackFrag(false);
 	m_pPlayer->SetIsSwordEquipped(false);
+	m_pPlayer->SetIsAttackEnabled(false);
 }

@@ -11,6 +11,6 @@ public:
 
 private:
 
-    static constexpr float MARKER_VISIBLE_DISTANCE = 150.0f;
+    static constexpr float MARKER_VISIBLE_DISTANCE = 300.0f;
 
 };
