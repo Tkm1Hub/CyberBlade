@@ -38,6 +38,15 @@ void Sword::Update()
         finalMat = MMult(scaleMat, swordSocketMat);
     }
 
+    if (owner->GetIsAttackEnabled())
+    {
+        SetIsCollisionEnabled(true);
+    }
+    else
+    {
+        SetIsCollisionEnabled(false);
+    }
+
     // •Ší‚ÉƒZƒbƒg
     MV1SetMatrix(modelHandle, finalMat);
 }

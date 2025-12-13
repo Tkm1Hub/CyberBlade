@@ -94,7 +94,7 @@ void CollisionManager::CheckSwordEnemyCollision()
             if (!enemy->GetDamageFlag() && m_pPlayer->GetIsAttackEnabled())
             {
                 // ƒJƒƒ‰—h‚ê
-                CameraManager::GetCameraManager().GetMainCamera()->StartShake(1.0f,0.0f, 10.0f);
+                CameraManager::GetCameraManager().GetMainCamera()->StartShake(1.3f,0.0f, 15.0f);
 
                 enemy->SetDamageFlag(true);
                 enemy->ApplyDamage(20);

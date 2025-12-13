@@ -16,7 +16,6 @@ void Player_AttackDashState::OnStart()
 	// 装備フラグ
 	m_pPlayer->SetIsSwordEquipped(true);
 	m_pPlayer->SetAttackFrag(true);
-	m_pPlayer->SetIsAttackEnabled(true);
 
 	// アニメを再生
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackDash),false);
@@ -28,6 +27,16 @@ void Player_AttackDashState::OnStart()
 void Player_AttackDashState::OnUpdate()
 {
 	frameCount++;
+	float currentAnimCount = m_pPlayer->animation.GetCurrentAnimCount();
+
+	if (currentAnimCount == ATTACK_ENABLE_COUNT)
+	{
+		m_pPlayer->SetIsAttackEnabled(true);
+	}
+	else if (currentAnimCount == ATTACK_DISABLE_COUNT)
+	{
+		m_pPlayer->SetIsAttackEnabled(false);
+	}
 
 	if (!m_doNextAttack)
 	{
@@ -46,15 +55,16 @@ void Player_AttackDashState::OnUpdate()
 	}
 
 
-	if (frameCount >= 20)
+	if (currentAnimCount >= ATTACK_DISABLE_COUNT)
 	{
 		if (m_doNextAttack)
 		{
 			auto spAttack3State = std::make_shared<Player_Attack3State>();
 			m_pPlayer->ChangeState(spAttack3State);
+			return;
 		}
 
-		if (frameCount >= 30)
+		if (m_pPlayer->animation.GetIsAnimFinished())
 		{
 			if (Input::GetInput().GetIsMoveLStick())
 			{

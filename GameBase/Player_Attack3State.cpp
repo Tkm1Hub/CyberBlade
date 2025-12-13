@@ -15,7 +15,6 @@ void Player_Attack3State::OnStart()
 	// ‘•”õƒtƒ‰ƒO
 	m_pPlayer->SetIsSwordEquipped(true);
 	m_pPlayer->SetAttackFrag(true);
-	m_pPlayer->SetIsAttackEnabled(true);
 
 	// UŒ‚‚QƒAƒjƒ‚ðÄ¶
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Attack3),false);
@@ -27,6 +26,17 @@ void Player_Attack3State::OnStart()
 void Player_Attack3State::OnUpdate()
 {
 	frameCount++;
+	float currentAnimCount = m_pPlayer->animation.GetCurrentAnimCount();
+
+	if (currentAnimCount == ATTACK_ENABLE_COUNT)
+	{
+		m_pPlayer->SetIsAttackEnabled(true);
+	}
+	else if (currentAnimCount == ATTACK_DISABLE_COUNT)
+	{
+		m_pPlayer->SetIsAttackEnabled(false);
+	}
+
 
 	// Œü‚¢‚Ä‚¢‚é•ûŒü‚ðˆÚ“®ƒxƒNƒgƒ‹‚Æ‚µ‚Ä•Û‘¶
 	VECTOR moveVec = m_pPlayer->GetAttackDir();
@@ -45,8 +55,8 @@ void Player_Attack3State::OnUpdate()
 	}
 
 
-	// ‚P‚SƒtƒŒ[ƒ€‚ÅUŒ‚I—¹
-	if (frameCount >= 70)
+	// 
+	if (m_pPlayer->animation.GetIsAnimFinished())
 	{
 		if (Input::GetInput().GetIsMoveLStick())
 		{

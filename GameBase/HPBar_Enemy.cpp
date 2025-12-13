@@ -22,6 +22,10 @@ void HPBar_Enemy::Update()
 		}
 		else
 		{
+			//if (enemy->GetName() == "EnemyBoss")
+			//{
+			//	isActive = false;
+			//}
 			// 距離チェック
 			if (auto p = m_pPlayer.lock())
 			{

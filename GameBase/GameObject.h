@@ -25,6 +25,7 @@ public:
 	int GetModelHandle() const { return modelHandle; }
 	bool GetIsStageCollisionEnabled() const { return isStageCollisionEnabled; }
 	bool GetIsCollisionEnabled() const { return isCollisionEnabled; }
+	void SetIsCollisionEnabled(bool flag) { isCollisionEnabled = flag; }
 	bool GetIsShadowEnebled() const { return isShadowEnabled; }
 
 	virtual const float GetJumpPower() const { return 0; }

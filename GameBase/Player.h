@@ -28,6 +28,15 @@ struct PlayerParams
 	static constexpr int DODGE_JUST_INVINCIBLE_TIME = 180;		// ジャスト回避の無敵時間
 	static constexpr float DODGE_HIT_RADIUS = 20.0f;			// 回避中の当たり判定（ジャスト回避に移行する
 
+	// 攻撃力
+	static constexpr int POWER_ATTACK1 = 60;
+	static constexpr int POWER_ATTACK2 = 75;
+	static constexpr int POWER_ATTACK3 = 80;
+	static constexpr int POWER_ATTACK4 = 60;
+	static constexpr int POWER_ATTACK5 = 60;
+	static constexpr int POWER_ATTACK_JUMP1 = 60;
+	static constexpr int POWER_ATTACK_JUMP2 = 60;
+
 	// パラメータ
 	float Jump1Power = 3.0f;			// ジャンプ力（1段目）
 	float Jump2Power = 3.5f;			// ジャンプ力（2段目）

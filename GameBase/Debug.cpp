@@ -51,9 +51,17 @@ void Debug::Draw()
 	{
 		if (obj->GetIsCollisionEnabled())
 		{
-			DrawCapsule(obj);
-
+            if (obj->GetName() == "Sword")
+            {
+                DrawCapsule(obj, GetColor(255, 0, 0));
+            }
+            else
+            {
+			    DrawCapsule(obj, GetColor(0, 255, 0));
+            }
 		}
+
+        
 
         if (obj->GetName() == "Player")
         {
@@ -89,7 +97,7 @@ void Debug::Draw()
         if (!enemy->GetIsDead())
         {
             // 当たり判定カプセル
-            DrawCapsule(enemy);
+            DrawCapsule(enemy,GetColor(0, 255, 0));
             
             if (enemy->GetName() == "EnemyBoss")
             {
@@ -125,10 +133,10 @@ void Debug::Draw()
 }
 
 // カプセルの描画
-void Debug::DrawCapsule(const std::shared_ptr<IGameObject>& obj)
+void Debug::DrawCapsule(const std::shared_ptr<IGameObject>& obj, unsigned int color)
 {
 	DrawCapsule3D(obj->GetTopPos(), obj->GetBottomPos()
-		, obj->GetHitRadius(), 8, GetColor(0, 255, 0), GetColor(255, 255, 255), FALSE);
+		, obj->GetHitRadius(), 8, color, GetColor(255, 255, 255), FALSE);
 }
 
 // 円柱の描画

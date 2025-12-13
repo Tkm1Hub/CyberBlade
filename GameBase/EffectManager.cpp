@@ -9,7 +9,7 @@ void EffectManager::Init()
     LoadEffect("Boss_JumpWave", "data/effect/JumpWave_Enemy.efkefc", 20.0f);
     LoadEffect("Player_JumpWave", "data/effect/ShockWave_Player.efkefc", 10.0f);
     LoadEffect("DodgeJust", "data/effect/DodgeJust.efkefc", 10.0f);
-    LoadEffect("Test", "data/effect/Blur.efkefc", 8.0f);
+    LoadEffect("Test", "data/effect/Test.efkefc", 8.0f);
 }
 
 /// <summary>

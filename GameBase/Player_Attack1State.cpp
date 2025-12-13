@@ -17,7 +17,6 @@ void Player_Attack1State::OnStart()
 	// 装備フラグ
 	m_pPlayer->SetIsSwordEquipped(true);
 	m_pPlayer->SetAttackFrag(true);
-	m_pPlayer->SetIsAttackEnabled(true);
 
 	// 攻撃１アニメを再生
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackJump1),false);
@@ -29,6 +28,17 @@ void Player_Attack1State::OnStart()
 void Player_Attack1State::OnUpdate()
 {
 	frameCount++;
+
+	float currentAnimCount = m_pPlayer->animation.GetCurrentAnimCount();
+
+	if (currentAnimCount == ATTACK_ENABLE_COUNT)
+	{
+		m_pPlayer->SetIsAttackEnabled(true);
+	}
+	else if (currentAnimCount == ATTACK_DISABLE_COUNT)
+	{
+		m_pPlayer->SetIsAttackEnabled(false);
+	}
 
 	// 攻撃の方向ベクトルを適用
 	VECTOR moveVec = m_pPlayer->GetAttackDir();
@@ -55,7 +65,7 @@ void Player_Attack1State::OnUpdate()
 	}
 
 	// 攻撃の待機時間経過
-	if (frameCount >= m_pPlayer->GetParams().ATTACK_1_NEXT_ATTACK_WAIT_FRAMES)
+	if (currentAnimCount >= ATTACK_DISABLE_COUNT)
 	{
 		// 空中にいる場合
 		if (m_pPlayer->GetIsJumping())
@@ -79,7 +89,7 @@ void Player_Attack1State::OnUpdate()
 	}
 
 	// 移動硬直終了
-	if (frameCount >= m_pPlayer->GetParams().ATTACK_1_RECOVERY_FRAMES)
+	if (m_pPlayer->animation.GetIsAnimFinished())
 	{
 		// 空中にいれば落下に移行
 		if (m_pPlayer->GetIsJumping())

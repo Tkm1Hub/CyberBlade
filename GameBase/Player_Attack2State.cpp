@@ -17,7 +17,6 @@ void Player_Attack2State::OnStart()
 	// 装備フラグ
 	m_pPlayer->SetIsSwordEquipped(true);
 	m_pPlayer->SetAttackFrag(true);
-	m_pPlayer->SetIsAttackEnabled(true);
 
 	// 攻撃２アニメを再生
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackJump2),false);
@@ -28,6 +27,17 @@ void Player_Attack2State::OnStart()
 void Player_Attack2State::OnUpdate()
 {
 	frameCount++;
+	float currentAnimCount = m_pPlayer->animation.GetCurrentAnimCount();
+
+	if (currentAnimCount == ATTACK_ENABLE_COUNT)
+	{
+		m_pPlayer->SetIsAttackEnabled(true);
+	}
+	else if (currentAnimCount == ATTACK_DISABLE_COUNT)
+	{
+		m_pPlayer->SetIsAttackEnabled(false);
+	}
+
 
 	// 向いている方向を移動ベクトルとして保存
 	VECTOR moveVec = m_pPlayer->GetAttackDir();
@@ -54,7 +64,7 @@ void Player_Attack2State::OnUpdate()
 	}
 
 	// 18フレームで攻撃終了
-	if (frameCount >= 18)
+	if (currentAnimCount >= ATTACK_DISABLE_COUNT)
 	{
 		if (m_doNextAttack)
 		{

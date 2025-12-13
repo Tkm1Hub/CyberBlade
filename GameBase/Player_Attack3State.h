@@ -9,4 +9,6 @@ public:
 
 private:
 	float moveSpeed = 0.0f;
+	static constexpr int ATTACK_ENABLE_COUNT = 12;
+	static constexpr int ATTACK_DISABLE_COUNT = 21;
 };
