@@ -8,6 +8,7 @@
 #include "Stage.h"
 #include "Player_DodgeJustState.h"
 #include "CameraManager.h"
+#include "EffectManager.h"
 
 void CollisionManager::Init()
 {
@@ -95,6 +96,32 @@ void CollisionManager::CheckSwordEnemyCollision()
             {
                 // カメラ揺れ
                 CameraManager::GetCameraManager().GetMainCamera()->StartShake(1.3f,0.0f, 15.0f);
+
+                // 現在のアニメ番号によってエフェクトを再生
+                int currentAnimNum = m_pPlayer->animation.GetCurrentAnimNum();
+                switch (currentAnimNum)
+                {
+                case (static_cast<int>(PlayerAnimState::AttackJump1)):
+                {
+                    EffectManager::GetInstance().PlayEffect("Slash1", m_pSword->GetTopPos());
+                    EffectManager::GetInstance().SetRotation("Slash1", MV1GetRotationXYZ(m_pPlayer->GetModelHandle()));
+                    break;
+                }
+                case (static_cast<int>(PlayerAnimState::AttackJump2)):
+                {
+                    EffectManager::GetInstance().PlayEffect("Slash2", m_pSword->GetTopPos());
+                    EffectManager::GetInstance().SetRotation("Slash2", MV1GetRotationXYZ(m_pPlayer->GetModelHandle()));
+                    break;
+                }
+                case (static_cast<int>(PlayerAnimState::Attack3)):
+                {
+                    EffectManager::GetInstance().PlayEffect("Slash3", m_pSword->GetTopPos());
+                    EffectManager::GetInstance().SetRotation("Slash3", MV1GetRotationXYZ(m_pPlayer->GetModelHandle()));
+                    break;
+                }
+                default:
+                    return;
+                }
 
                 enemy->SetDamageFlag(true);
                 enemy->ApplyDamage(20);

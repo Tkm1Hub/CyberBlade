@@ -41,7 +41,7 @@ public:
     void Update();
     void Draw();
     void SetPosition(const std::string& name, const VECTOR setPosition);
-    void SetRotation(VECTOR setPosition);
+    void SetRotation(const std::string& name, VECTOR setPosition);
     void SetScale(VECTOR scale);
     void SetSpeed(float speed);
     void PlayEffect(const std::string& name, const VECTOR& position);

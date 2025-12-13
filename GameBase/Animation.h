@@ -12,9 +12,10 @@ public:
 
     float GetCurrentAnimTotalTime()const { return MV1GetAnimTotalTime(modelHandle, currentPlayAnim); }
 
-
+    int GetCurrentAnimNum() const { return currentAnimNum; }
 private:
     int modelHandle;
+    int currentAnimNum = -1;
     int currentPlayAnim = -1;
     int prevPlayAnim = -1;
     float currentAnimCount = 0.0f;

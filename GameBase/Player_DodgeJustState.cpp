@@ -31,7 +31,7 @@ void Player_DodgeJustState::OnStart()
 	m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
 
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeJust), false);
-	EffectManager::GetInstance().PlayEffect("DodgeJust", m_pPlayer->GetPosition());
+	EffectManager::GetInstance().PlayEffect("DodgeJust", m_pPlayer->GetTopPos());
 }
 
 void Player_DodgeJustState::OnUpdate()

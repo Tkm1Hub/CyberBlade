@@ -77,10 +77,10 @@ void Debug::Draw()
 
             if (CheckHitKey(KEY_INPUT_F6))
             {
-                EffectManager::GetInstance().PlayEffect("Test", player->GetPosition());
+                EffectManager::GetInstance().PlayEffect("Slash_Red", player->GetTopPos());
             }
 
-            EffectManager::GetInstance().SetPosition("Test", player->GetTopPos());
+            EffectManager::GetInstance().SetPosition("Slash_Red", player->GetTopPos());
 
             printfDx("isInvncible : %s \n", player->GetIsInvincible() ? "true" : "false");
         }

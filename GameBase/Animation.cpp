@@ -33,6 +33,8 @@ void Animation::Play(int animIndex,bool loop)
 	currentPlayAnim = MV1AttachAnim(modelHandle, animIndex);
 	currentAnimCount = 0.0f;
 
+	currentAnimNum = animIndex;
+
 	isLoop = loop;
 	isAnimFinished = false;
 

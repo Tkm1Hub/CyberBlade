@@ -130,6 +130,10 @@ public:
 	const bool GetIsAttackEnabled() const { return isAttackEnabled; }
 	void SetIsAttackEnabled(bool flag) { isAttackEnabled = flag; }
 
+	// 攻撃番号
+	const int GetCurrentAttackNum() const { return currentAttackNum; }
+	void SetCurrentAttackNum(int Num) { currentAttackNum = Num; }
+
 	// 無敵フラグ
 	const bool GetIsInvincible() { return isInvincible; }
 
@@ -210,6 +214,7 @@ private:
 
 	int jumpCount = 0;			// ジャンプカウンター
 	int invincibleCount = 0;	// 無敵時間カウント
+	int currentAttackNum = 0;	// 現在の攻撃番号
 
 	bool isRunning = false;		// 走っているか
 	bool isSlowRun = false;		// 小走り状態か

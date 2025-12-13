@@ -10,6 +10,9 @@ void EffectManager::Init()
     LoadEffect("Player_JumpWave", "data/effect/ShockWave_Player.efkefc", 10.0f);
     LoadEffect("DodgeJust", "data/effect/DodgeJust.efkefc", 10.0f);
     LoadEffect("Test", "data/effect/Test.efkefc", 8.0f);
+    LoadEffect("Slash1", "data/effect/Slash1_Player.efkefc", 8.0f);
+    LoadEffect("Slash2", "data/effect/Slash2_Player.efkefc", 8.0f);
+    LoadEffect("Slash3", "data/effect/Slash3_Player.efkefc", 4.0f);
 }
 
 /// <summary>
@@ -112,7 +115,16 @@ void EffectManager::SetSpeed(float speed)
 /// 角度
 /// </summary>
 /// <param name="setPosition"></param>
-void EffectManager::SetRotation(VECTOR setPosition)
+void EffectManager::SetRotation(const std::string& name, VECTOR setRotation)
 {
-    SetRotationPlayingEffekseer3DEffect(playingEffectHandle, setPosition.x, setPosition.y, setPosition.z);
+    // エフェクトの位置を更新
+    for (auto& e : activeEffects) {
+        if (e.name == name && e.isActive) {
+            SetRotationPlayingEffekseer3DEffect(e.handle,
+                setRotation.x,
+                setRotation.y,
+                setRotation.z);
+            e.position = setRotation;
+        }
+    }
 }
