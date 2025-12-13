@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Sword.h"
 #include "Player.h"
+#include "EffectManager.h"
 
 void Sword::Init()
 {
@@ -41,10 +42,43 @@ void Sword::Update()
     if (owner->GetIsAttackEnabled())
     {
         SetIsCollisionEnabled(true);
+
+        if (!isEnableEffect)
+        {
+            // 現在のアニメ番号によってエフェクトを再生
+            int currentAnimNum = owner->animation.GetCurrentAnimNum();
+            switch (currentAnimNum)
+            {
+            case (static_cast<int>(PlayerAnimState::AttackJump1)):
+            {
+                EffectManager::GetInstance().PlayEffect("SwordLine", owner->GetTopPos());
+                EffectManager::GetInstance().SetRotation("SwordLine", MV1GetRotationXYZ(owner->GetModelHandle()));
+                break;
+            }
+            case (static_cast<int>(PlayerAnimState::AttackJump2)):
+            {
+                EffectManager::GetInstance().PlayEffect("SwordLine2", owner->GetTopPos());
+                EffectManager::GetInstance().SetRotation("SwordLine2", MV1GetRotationXYZ(owner->GetModelHandle()));
+                break;
+            }
+            case (static_cast<int>(PlayerAnimState::Attack3)):
+            {
+                EffectManager::GetInstance().PlayEffect("SwordLine3", owner->GetTopPos());
+                EffectManager::GetInstance().SetRotation("SwordLine3", MV1GetRotationXYZ(owner->GetModelHandle()));
+                break;
+            }
+            default:
+                return;
+            }
+            isEnableEffect = true;
+        }
+        //EffectManager::GetInstance().SetPosition("SwordLine", owner->GetTopPos());
+        //EffectManager::GetInstance().SetRotation("SwordLine", MV1GetRotationXYZ(owner->GetModelHandle()));
     }
     else
     {
         SetIsCollisionEnabled(false);
+        isEnableEffect = false;
     }
 
     // 武器にセット
@@ -72,4 +106,43 @@ const VECTOR Sword::GetBottomPos()
     // 座標をベクトル型に変換
     VECTOR CapsuleBPos = VGet(BladeStartMatrix.m[3][0], BladeStartMatrix.m[3][1], BladeStartMatrix.m[3][2]);
     return CapsuleBPos;
+}
+
+VECTOR Sword::GetRotationXYZFromMatrix(const MATRIX& mat)
+{
+    // 各軸ベクトル取得
+    VECTOR x = VGet(mat.m[0][0], mat.m[0][1], mat.m[0][2]);
+    VECTOR y = VGet(mat.m[1][0], mat.m[1][1], mat.m[1][2]);
+    VECTOR z = VGet(mat.m[2][0], mat.m[2][1], mat.m[2][2]);
+
+    // スケール除去（正規化）
+    x = VNorm(x);
+    y = VNorm(y);
+    z = VNorm(z);
+
+    MATRIX r = mat;
+    r.m[0][0] = x.x; r.m[0][1] = x.y; r.m[0][2] = x.z;
+    r.m[1][0] = y.x; r.m[1][1] = y.y; r.m[1][2] = y.z;
+    r.m[2][0] = z.x; r.m[2][1] = z.y; r.m[2][2] = z.z;
+
+    VECTOR rot;
+
+    float sy = -r.m[2][0];
+    sy = max(-1.0f, min(1.0f, sy));
+
+    rot.y = asinf(sy);
+
+    if (fabsf(cosf(rot.y)) > 0.0001f)
+    {
+        rot.x = atan2f(r.m[2][1], r.m[2][2]);
+        rot.z = atan2f(r.m[1][0], r.m[0][0]);
+    }
+    else
+    {
+        // ジンバルロック
+        rot.x = atan2f(-r.m[1][2], r.m[1][1]);
+        rot.z = 0.0f;
+    }
+
+    return rot; // ラジアン}
 }

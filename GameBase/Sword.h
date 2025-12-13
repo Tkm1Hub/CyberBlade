@@ -27,9 +27,11 @@ private:
 	VECTOR offsetPos = { 0.0f,0.0f,0.0f };
 	VECTOR offsetRot = { 0.0f,0.0f,0.0f };
 	std::shared_ptr<Player> owner = nullptr;
+	VECTOR GetRotationXYZFromMatrix(const MATRIX& mat);
 
 	// “–‚½‚è”»’è
 	float HitRadius = 1.5f;
 	float HitHeight = 10.0f;
 
+	bool isEnableEffect = false;
 };

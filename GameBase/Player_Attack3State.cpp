@@ -28,11 +28,11 @@ void Player_Attack3State::OnUpdate()
 	frameCount++;
 	float currentAnimCount = m_pPlayer->animation.GetCurrentAnimCount();
 
-	if (currentAnimCount == ATTACK_ENABLE_COUNT)
+	if (currentAnimCount >= ATTACK_ENABLE_COUNT && currentAnimCount <= ATTACK_DISABLE_COUNT)
 	{
 		m_pPlayer->SetIsAttackEnabled(true);
 	}
-	else if (currentAnimCount == ATTACK_DISABLE_COUNT)
+	else if (currentAnimCount >= ATTACK_DISABLE_COUNT)
 	{
 		m_pPlayer->SetIsAttackEnabled(false);
 	}

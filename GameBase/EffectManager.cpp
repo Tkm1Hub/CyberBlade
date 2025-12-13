@@ -13,6 +13,9 @@ void EffectManager::Init()
     LoadEffect("Slash1", "data/effect/Slash1_Player.efkefc", 8.0f);
     LoadEffect("Slash2", "data/effect/Slash2_Player.efkefc", 8.0f);
     LoadEffect("Slash3", "data/effect/Slash3_Player.efkefc", 4.0f);
+    LoadEffect("SwordLine", "data/effect/SwordLine.efkefc", 6.0f);
+    LoadEffect("SwordLine2", "data/effect/SwordLine2.efkefc", 6.0f);
+    LoadEffect("SwordLine3", "data/effect/SwordLine3.efkefc", 6.0f);
 }
 
 /// <summary>
