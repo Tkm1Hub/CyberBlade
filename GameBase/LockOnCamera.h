@@ -14,7 +14,7 @@ public:
 
 private:
 	// 定数
-	static constexpr float DISTANCE_OFFSET = 50.0f;	// プレイヤーからの距離
+	static constexpr float DISTANCE_OFFSET = 65.0f;	// プレイヤーからの距離
 	static constexpr float HEIGHT_OFFSET = 8.0f;	// カメラの高さ
 
 	std::shared_ptr<Player> m_pPlayer;

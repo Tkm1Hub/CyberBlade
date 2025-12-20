@@ -5,8 +5,8 @@
 #include "TimeManager.h"
 
 // 画面設定
-int constexpr SCREEN_WIDTH = 1600;
-int constexpr SCREEN_HEIGHT = 900;
+int constexpr SCREEN_WIDTH = 1920;
+int constexpr SCREEN_HEIGHT = 1080;
 int constexpr SCREEN_COLOR = 32;
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
@@ -67,7 +67,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     std::shared_ptr<SceneManager> sceneManager = std::make_shared<SceneManager>();
 
-    //sceneManager->Add<TitleScene>("Title");
+    sceneManager->Add<TitleScene>("Title");
     sceneManager->Add<GameScene>("Game");
 
     // メインゲームループ（ESCキー or ウィンドウ閉じる まで続く）

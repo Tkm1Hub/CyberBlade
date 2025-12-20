@@ -31,7 +31,10 @@ void Player_DodgeJustState::OnStart()
 	m_pPlayer->SetDodgeSpeed(m_pPlayer->GetParams().DodgeStartSpeed);
 
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::DodgeJust), false);
-	EffectManager::GetInstance().PlayEffect("DodgeJust", m_pPlayer->GetTopPos());
+
+	VECTOR effectPos = m_pPlayer->GetPosition();
+	effectPos.y += EFFECT_DRAW_HEIGHT;
+	EffectManager::GetInstance().PlayEffect("DodgeJust", effectPos);
 }
 
 void Player_DodgeJustState::OnUpdate()
@@ -53,7 +56,7 @@ void Player_DodgeJustState::OnUpdate()
 	}
 
 	// エフェクト追従
-	EffectManager::GetInstance().SetPosition("DodgeJust", m_pPlayer->GetPosition());
+	//EffectManager::GetInstance().SetPosition("DodgeJust", m_pPlayer->GetTopPos());
 
 	// 回避中攻撃ボタンが押されたらフラグを立てる
 	if (!isInputAttack && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)

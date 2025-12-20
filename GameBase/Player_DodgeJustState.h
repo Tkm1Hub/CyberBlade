@@ -14,6 +14,7 @@ private:
 	float moveSpeed = 0.0f;
 	float timeScale = 0.0f;
 
+	static constexpr float EFFECT_DRAW_HEIGHT = 8.0f;
 	static constexpr float TIMESCALE_ACCEL = 0.002f;
 	static constexpr int DODGE_DISABLE_COUNT = 23;
 	static constexpr int SLOW_START_COUNT = 5;
