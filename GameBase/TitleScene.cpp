@@ -15,7 +15,7 @@ void TitleScene::Init()
 	titleBackHandle = LoadGraph("data/picture/Title_Back.png");
 	player_ModelHandle = MV1LoadModel("data/model/character/Hideron_Title.mv1");
 	sword_ModelHandle = MV1LoadModel("data/model/item/Heat-KatanaV2_Title.mv1");
-	movie_Handle = LoadGraph("data/movie/Title_Movie_2.mp4");
+	movie_Handle = LoadGraph("data/movie/TitleMovie.mp4");
 	PlayMovieToGraph(movie_Handle);
 
 	swordModelRot.y = DX_PI_F / 2;
