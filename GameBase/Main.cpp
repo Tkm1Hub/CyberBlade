@@ -26,7 +26,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 #endif	// _DEBUG
 
     // ウィンドウモードにする
-    ChangeWindowMode(TRUE);
+    ChangeWindowMode(FALSE);
 
 
     // DXライブラリの初期化（失敗時は終了）
@@ -65,6 +65,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     // 裏画面に描画
     SetDrawScreen(DX_SCREEN_BACK);
 
+    // ウィンドウズPCに一時的にフォントデータを読み込む(システム終了まで)
+    AddFontResourceExA("data/font/GenEiLateGoN_v2.ttf", FR_PRIVATE, NULL);
+
     std::shared_ptr<SceneManager> sceneManager = std::make_shared<SceneManager>();
 
     sceneManager->Add<TitleScene>("Title");
@@ -98,6 +101,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             afterTime = GetNowHiPerformanceCount();
         }
     }
+
+
+    // ウィンドウズに一時的に保持していたフォントデータを削除
+    RemoveFontResourceExA("", FR_PRIVATE, NULL);
 
     // Effekseerを終了する。
     Effkseer_End();
