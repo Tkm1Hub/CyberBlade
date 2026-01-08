@@ -14,7 +14,7 @@ private:
     static constexpr int HEIGHT = 30;   // ècïù
 
     static constexpr float OFFSET_X = 30.0f;            // Xç¿ïW
-    static constexpr float OFFSET_Y = 30.0f;            // Yç¿ïW
+    static constexpr float OFFSET_Y = 1000.0f;            // Yç¿ïW
 
     int frameCount = 0;
 

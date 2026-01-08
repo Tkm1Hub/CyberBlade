@@ -10,6 +10,7 @@
 #include "EnemySmall.h"
 #include "EnemyBig.h"
 #include "CheckPoint.h"
+#include "UIManager.h"
 void ObjectManager::Create()
 {
 	// “ñdì¬‚ğ–h‚®
@@ -42,6 +43,7 @@ void ObjectManager::Create()
 	auto Enemy4 = std::make_shared<EnemySmall>("EnemySmall4");
 
 	auto EnemyBoss = std::make_shared<EnemyBig>("EnemyBoss");
+	UIManager::GetUIManager().SetBoss(EnemyBoss);
 
 	EnemyManager::GetEnemyManager().AddEnemy(Enemy1, VGet(0, 0, 70));
 	//EnemyManager::GetEnemyManager().AddEnemy(Enemy2, VGet(0, 0, 50));

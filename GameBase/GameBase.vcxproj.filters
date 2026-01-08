@@ -239,6 +239,12 @@
     <Filter Include="ソース ファイル\EffectManager">
       <UniqueIdentifier>{40d95025-7c36-4ae2-b47a-812f99ab3aa3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\HPBar_Boss">
+      <UniqueIdentifier>{da662db8-3cbd-4c25-a22b-257c59ffb085}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Pause">
+      <UniqueIdentifier>{7d3b7da6-0106-4323-af16-a9a09b6c2740}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -438,6 +444,12 @@
     </ClCompile>
     <ClCompile Include="EffectManager.cpp">
       <Filter>ソース ファイル\EffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="HPBar_Boss.cpp">
+      <Filter>ソース ファイル\UI\HPBar_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Pause.cpp">
+      <Filter>ソース ファイル\Pause</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -662,6 +674,12 @@
     </ClInclude>
     <ClInclude Include="EffectManager.h">
       <Filter>ソース ファイル\EffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="HPBar_Boss.h">
+      <Filter>ソース ファイル\UI\HPBar_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
+      <Filter>ソース ファイル\Pause</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

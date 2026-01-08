@@ -3,11 +3,13 @@
 #include "UIBase.h"
 #include "Marker.h"
 #include "HPBar_Player.h"
+#include "HPBar_Boss.h"
 
 void UIManager::Init()
 {
     marker = std::make_shared<Marker>();
     hpBar_Player = std::make_shared<HPBar_Player>();
+    hpBar_Boss = std::make_shared<HPBar_Boss>();
 
     if (auto p = m_pPlayer.lock())
     {
@@ -19,6 +21,14 @@ void UIManager::Init()
         hpBar_Player->Init();
 
     }
+
+    if (auto e = m_pEnemyBig.lock())
+    {
+        hpBar_Boss->SetEnemy(e);
+        AddUI(hpBar_Boss);
+        hpBar_Boss->Init();
+    }
+
 }
 
 void UIManager::AddUI(std::shared_ptr<UIBase> ui)

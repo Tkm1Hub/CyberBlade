@@ -21,6 +21,8 @@ public:
 
 	void Update();
 
+	float GetDeltaTime() const { return deltaTime; }
+	float GetScaledDeltaTime() const { return scaledDeltaTime; }
 	const float GetTimeScale() { return timeScale; }
 	void SetTimeScale(float scale) { timeScale = scale; }
 

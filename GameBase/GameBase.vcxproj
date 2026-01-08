@@ -158,10 +158,12 @@
     <ClCompile Include="EnemySmall_FallState.cpp" />
     <ClCompile Include="EnemySmall_ChaseState.cpp" />
     <ClCompile Include="EnemySmall_StandState.cpp" />
+    <ClCompile Include="HPBar_Boss.cpp" />
     <ClCompile Include="HPBar_Enemy.cpp" />
     <ClCompile Include="HPBar_Player.cpp" />
     <ClCompile Include="LockOnCamera.cpp" />
     <ClCompile Include="Marker.cpp" />
+    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="Plaer_DamageState.cpp" />
     <ClCompile Include="Player_Attack1State.cpp" />
     <ClCompile Include="Player_Attack2State.cpp" />
@@ -232,10 +234,12 @@
     <ClInclude Include="EnemySmall_ChaseState.h" />
     <ClInclude Include="EnemySmall_StandState.h" />
     <ClInclude Include="EnemyBigStateBase.h" />
+    <ClInclude Include="HPBar_Boss.h" />
     <ClInclude Include="HPBar_Enemy.h" />
     <ClInclude Include="HPBar_Player.h" />
     <ClInclude Include="LockOnCamera.h" />
     <ClInclude Include="Marker.h" />
+    <ClInclude Include="Pause.h" />
     <ClInclude Include="PlayerStateBase.h" />
     <ClInclude Include="Player_Attack1State.h" />
     <ClInclude Include="Player_Attack2State.h" />

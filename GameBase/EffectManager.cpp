@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "EffectManager.h"
+#include "TimeManager.h"
 
 void EffectManager::Init()
 {
@@ -44,6 +45,17 @@ void EffectManager::PositionUpdate(const VECTOR& objectPosition)
 /// </summary>
 void EffectManager::Update()
 {
+    float timeScale = TimeManager::GetInstance().GetTimeScale();
+
+    // 再生中のエフェクト全てにスピードを反映
+    for (auto& e : activeEffects)
+    {
+        if (e.isActive)
+        {
+            SetSpeedPlayingEffekseer3DEffect(e.handle, timeScale);
+        }
+    }
+
     // Effekseerにより再生中のエフェクトを更新する。
     UpdateEffekseer3D();
 }
@@ -97,6 +109,9 @@ void EffectManager::PlayEffect(const std::string& name, const VECTOR& position)
 
     int handle = PlayEffekseer3DEffect(it->second);
     SetPosPlayingEffekseer3DEffect(handle, position.x, position.y, position.z);
+
+    float timeScale = TimeManager::GetInstance().GetTimeScale();
+    SetSpeedPlayingEffekseer3DEffect(handle, timeScale);
 
     activeEffects.push_back(EffectInstance{ name,handle, position, true });
 }

@@ -48,6 +48,11 @@ void HPBar_Enemy::Update()
 			}
 		}
 
+		if (enemy->GetName() == "EnemyBoss")
+		{
+			isActive = false;
+		}
+
 		m_isActive = isActive;
 	}
 	else
