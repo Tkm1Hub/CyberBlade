@@ -20,6 +20,8 @@ void GameScene::Init()
 {
 	EnemyManager::GetEnemyManager().Clear();
 
+	fade = 255;
+
 	//インスタンス化
 	objectMgr = std::make_shared<ObjectManager>();
 	collisionMgr = std::make_shared<CollisionManager>();
@@ -70,6 +72,17 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
+	if (!isChangeScene)
+	{
+		fade -= 3;
+		fade = max(fade, 0);
+	}
+	else
+	{
+		fade += 3;
+		fade = min(fade, 255);
+	}
+
 	// 入力の更新
 	Input::GetInput().Update();
 
@@ -136,4 +149,9 @@ void GameScene::Draw()const
 	
 	// UIの描画
 	UIManager::GetUIManager().Draw();
+
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade);
+	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
 }

@@ -23,6 +23,10 @@ public:
     void Draw() const override;
 
 private:
+    int fade = 0;
+
+    bool isChangeScene = false;
+
     std::shared_ptr<ObjectManager> objectMgr = nullptr;
     std::shared_ptr<CollisionManager> collisionMgr = nullptr;
     std::shared_ptr<ShadowManager> shadowMgr = nullptr;

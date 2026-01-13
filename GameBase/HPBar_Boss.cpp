@@ -32,6 +32,8 @@ void HPBar_Boss::Draw()
 
 	if (auto enemy = m_pEnemy.lock())
 	{
+		if (enemy->GetIsDead()) return;
+
 		// “G‚ÌHP‚ÆÅ‘åHP‚Í int ‚ð‘z’è
 		int hp = enemy->GetHp();
 		int maxHp = enemy->GetMaxHp();

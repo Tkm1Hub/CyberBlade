@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TitleScene.h"
 #include "Animation.h"
+#include "Input.h"
 
 TitleScene::TitleScene(SceneManager& manager)
 	: Scene(manager)
@@ -44,6 +45,9 @@ void TitleScene::Init()
 
 void TitleScene::Update()
 {
+	// 入力の更新
+	Input::GetInput().Update();
+
 	float distance = TITLE_Y_MAX - title_y;
 
 	if (distance > 0.0f)
@@ -65,7 +69,21 @@ void TitleScene::Update()
 
 	string_alpha += 1 * ALPHA_SPEED;
 
-	if (CheckHitKey(KEY_INPUT_RETURN))
+	int input = 0;
+	input = Input::GetInput().GetNowFrameNewInput();
+
+	if (16 <= input)
+	{
+		isChangeScene = true;
+	}
+
+	if (isChangeScene)
+	{
+		fade += 5;
+		fade = min(fade, 255);
+	}
+
+	if (fade >= 255)
 	{
 		// ゲームシーンに移行
 		ChangeScene("Game");
@@ -103,4 +121,9 @@ void TitleScene::Draw() const
 	DrawFormatStringToHandle(stringPos_x, stringPos_y, GetColor(200, 200, 200),fontHandle, "Press.Start");
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade);
+	DrawBox(0, 0, 1920, 1080, GetColor(255, 255,255), TRUE);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+	printfDx("nowFrameInput : %i", Input::GetInput().GetNowFrameInput());
 }

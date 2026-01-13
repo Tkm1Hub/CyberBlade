@@ -21,6 +21,9 @@ public:
 
 private:
 
+    bool isChangeScene = false;
+    int fade = 0;
+
     int fontHandle = -1;
 
     int titleHandle = -1;
