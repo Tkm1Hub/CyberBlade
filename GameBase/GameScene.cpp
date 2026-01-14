@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameScene.h"
+#include "ResultScene.h"
 #include "ObjectManager.h"
 #include "CollisionManager.h"
 #include "CameraManager.h"
@@ -53,6 +54,8 @@ void GameScene::Init()
 	}
 
 	// カメラマネージャーにオブジェのリストを渡す
+	CameraManager::GetCameraManager().Init();
+	CameraManager::GetCameraManager().SetPlayer(player);
 	CameraManager::GetCameraManager().SetObjects(weakObjects);
 	CameraManager::GetCameraManager().Create();
 
@@ -61,8 +64,10 @@ void GameScene::Init()
 	collisionMgr->SetEnemies(EnemyManager::GetEnemyManager().GetEnemies());
 	collisionMgr->Init();
 
+#if defined (_DEBUG)
 	debug->SetObjects(objectMgr->GetObjects());
 	debug->SetEnemies(EnemyManager::GetEnemyManager().GetEnemies());
+#endif
 
 	shadowMgr->Init();
 
@@ -89,6 +94,9 @@ void GameScene::Update()
 	// オブジェクトの更新
 	objectMgr->UpdateAll();
 
+	// ボスが死亡しているか確認
+	isChangeScene = EnemyManager::GetEnemyManager().GetIsBossDead();
+
 	// 当たり判定の更新
 	collisionMgr->Update();
 
@@ -108,8 +116,20 @@ void GameScene::Update()
 	// エフェクトの更新
 	EffectManager::GetInstance().Update();
 
+#if defined (_DEBUG)
 	// デバッグの更新
 	debug->Update();
+#endif
+
+	if (isChangeScene && fade == 255)
+	{
+		ChangeScene("Result");
+	}
+
+	if (CheckHitKey(KEY_INPUT_F10))
+	{
+		ChangeScene("Result");
+	}
 }
 
 void GameScene::Draw()const

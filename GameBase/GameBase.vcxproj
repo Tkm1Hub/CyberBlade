@@ -50,7 +50,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -126,10 +126,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../EffekseerForDXLib;include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../EffekseerForDXLib;include</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -188,6 +193,7 @@
     <ClCompile Include="Player_StandState.cpp" />
     <ClCompile Include="Player_SwordRunState.cpp" />
     <ClCompile Include="Player_WalkState.cpp" />
+    <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShadowManager.cpp" />
@@ -256,6 +262,7 @@
     <ClInclude Include="Player_StandState.h" />
     <ClInclude Include="Player_SwordRunState.h" />
     <ClInclude Include="Player_WalkState.h" />
+    <ClInclude Include="ResultScene.h" />
     <ClInclude Include="ShadowManager.h" />
     <ClInclude Include="Player_SlowRunState.h" />
     <ClInclude Include="StageCollision.h" />

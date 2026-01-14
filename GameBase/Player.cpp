@@ -121,7 +121,6 @@ void Player::Move()
 			moveVec = VScale(modelForward, currentMoveSpeed);
 		}
 	}
-	printf("dodgeDir[%f , %f , %f]\n", dodgeDir.x, dodgeDir.y, dodgeDir.z);
 
 
 	// 移動ベクトルのＹ成分をＹ軸方向の速度にする
@@ -137,10 +136,6 @@ void Player::Move()
 		nextPos = params.InitPos;
 	}
 
-	printf("targetMoveDirection [ %.2f,%.2f,%.2f ]\n", targetMoveDirection.x, targetMoveDirection.y, targetMoveDirection.z);
-	printf("currentMoveSpeed : %f\n", currentMoveSpeed);
-	printf("currentMaxSpeed : %f\n", currentMaxSpeed);
-	printf("currentDodgeSpeed : %f\n",currentDodgeSpeed);
 }
 
 void Player::CulcMoveSpeed()

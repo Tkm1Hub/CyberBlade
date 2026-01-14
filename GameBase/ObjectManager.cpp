@@ -16,7 +16,6 @@ void ObjectManager::Create()
 	// 二重作成を防ぐ
 	if (!objects.empty())
 	{
-		printf("ObjectManager::Create() が複数回呼ばれました！スキップします。\n");
 		return;
 	}
 
@@ -136,10 +135,6 @@ void ObjectManager::ApplyCollision()
 			obj->SetPosition(obj->GetNextPosition());
 			MV1SetPosition(obj->GetModelHandle(), obj->GetPosition());
 
-			if (obj->GetName() == "Player")
-			{
-				printf("PlayerPos [ %.2f,%.2f,%.2f ] \n", obj->GetPosition().x, obj->GetPosition().y, obj->GetPosition().z);
-			}
 		}
 	}
 

@@ -12,21 +12,21 @@ void LockOnCamera::Init()
 
 void LockOnCamera::Update()
 {
+	auto player = m_pPlayer.lock();
 	// プレイヤーがnullptrの場合早期リターン
-	if (!m_pPlayer)
+	if (!player)
 	{
-		printf("LockOnCamera: Player is nullptr!\n");
 		return;
 	}
 
-	if (m_pPlayer->GetIsLockOn())
+	if (player->GetIsLockOn())
 	{
-		lockOnTarget = m_pPlayer->GetLockOnTarget();
+		lockOnTarget = player->GetLockOnTarget();
 		// ロックオン対象が死亡している場合はカメラ切り替えをして早期リターン
 		if (lockOnTarget->GetIsDead())
 		{
 			CameraManager::GetCameraManager().ChangeCamera(0);
-			m_pPlayer->SetIsLockOn(false);	// ロックオンフラグをFalseに変更
+			player->SetIsLockOn(false);	// ロックオンフラグをFalseに変更
 			return;
 		}
 
@@ -35,15 +35,20 @@ void LockOnCamera::Update()
 		pos = CulcCameraPos();
 	}
 
-	printf("LockOnCamera Pos:(%.2f, %.2f, %.2f) Target:(%.2f, %.2f, %.2f)\n",
-		pos.x, pos.y, pos.z, target.x, target.y, target.z);
 }
 
 // 注視点を計算
 VECTOR LockOnCamera::CulcTargetPos()
 {
+	auto player = m_pPlayer.lock();
+	// プレイヤーがnullptrの場合早期リターン
+	if (!player)
+	{
+		return VGet(0.0f, 0.0f, 0.0f);
+	}
+
 	// プレイヤーと敵の座標を取得
-	VECTOR playerPos = m_pPlayer->GetTopPos();
+	VECTOR playerPos = player->GetTopPos();
 	VECTOR enemyPos = lockOnTarget->GetTopPos();
 
 	// 中点の座標
@@ -55,8 +60,14 @@ VECTOR LockOnCamera::CulcTargetPos()
 // カメラの座標を計算
 VECTOR LockOnCamera::CulcCameraPos()
 {
+	auto player = m_pPlayer.lock();
+	// プレイヤーがnullptrの場合早期リターン
+	if (!player)
+	{
+		return VGet(0.0f, 0.0f, 0.0f);
+	}
 	// プレイヤーと敵の座標を取得
-	VECTOR playerPos = m_pPlayer->GetTopPos();
+	VECTOR playerPos = player->GetTopPos();
 	VECTOR enemyPos = lockOnTarget->GetTopPos();
 
 	// 敵とプレイヤーの距離を計算

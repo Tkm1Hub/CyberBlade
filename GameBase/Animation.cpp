@@ -86,8 +86,6 @@ void Animation::Update()
 		// アニメーション１のモデルに対する反映率をセット
 		MV1SetAttachAnimBlendRate(modelHandle, currentPlayAnim, animBlendRate);
 
-		printf("currentAnimTotalTime : %f\n", animTotalTime);
-		printf("currentAnimCount : %f\n", currentAnimCount);
 	}
 
 	// 再生しているアニメーション２の処理

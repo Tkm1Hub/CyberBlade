@@ -41,6 +41,7 @@ void TitleScene::Init()
 
 	// ライトの方向指定
 	SetLightDirection(lightDir);
+	SetCameraPositionAndTarget_UpVecY(VGet(0.0f, 20.0f, 0.0f), VGet(0.0f, 20.0f, 10.0f));
 }
 
 void TitleScene::Update()
@@ -82,15 +83,21 @@ void TitleScene::Update()
 		fade += 5;
 		fade = min(fade, 255);
 	}
-
-	if (fade >= 255)
+	else
 	{
-		// ゲームシーンに移行
-		ChangeScene("Game");
+		fade -= 5;
+		fade = max(fade, 0);
+	}
+
+	if (isChangeScene && fade == 255)
+	{
 		SetupCamera_Perspective(60 * DX_PI_F / 180.0f);
+		isChangeScene = false;
 
 		// フォントハンドルを削除
 		DeleteFontToHandle(fontHandle);
+		// ゲームシーンに移行
+		ChangeScene("Game");
 	}
 
 
@@ -100,7 +107,6 @@ void TitleScene::Update()
 	MV1SetPosition(player_ModelHandle, playerModelPos);
 	MV1SetPosition(sword_ModelHandle, swordModelPos);
 	MV1SetRotationXYZ(sword_ModelHandle, swordModelRot);
-	SetCameraPositionAndTarget_UpVecY(VGet(0.0f, 20.0f, 0.0f), VGet(0.0f, 20.0f, 10.0f));
 }
 
 void TitleScene::Draw() const
@@ -125,5 +131,4 @@ void TitleScene::Draw() const
 	DrawBox(0, 0, 1920, 1080, GetColor(255, 255,255), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-	printfDx("nowFrameInput : %i", Input::GetInput().GetNowFrameInput());
 }

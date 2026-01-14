@@ -43,13 +43,20 @@ void CameraManager::AddCamera(std::shared_ptr<VirtualCameraBase> camera)
 
 void CameraManager::Init()
 {
+	objects.clear();
+	cameras.clear();
+
+	player.reset();
+	mainCamera.reset();
+	freeCamera.reset();
+	lockOnCamera.reset();
+	currentCamera.reset();
 }
 
 void CameraManager::Update()
 {
 	// 選択中のバーチャルカメラを更新
 	currentCamera->Update();
-	printf("currentCamera.angleH : %f\n", currentCamera->GetAngleH());
 
 	// メインカメラに選択中のカメラの座標を渡す
 	mainCamera->SetCameraPositionAndTarget(currentCamera->GetPosition(), currentCamera->GetTarget());

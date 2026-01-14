@@ -31,6 +31,7 @@ public:
 	void Draw();
 	void ApplyCollision();
 	void RemoveDeadEnemies();
+	bool GetIsBossDead();
 
 	void Clear()
 	{

@@ -7,7 +7,10 @@ class LockOnCamera :public VirtualCameraBase
 public:
 	LockOnCamera(const std::string):VirtualCameraBase(name) {}
 
-	void SetPlayer(const std::shared_ptr<Player>& playerPtr) { m_pPlayer = playerPtr; }
+	void SetPlayer(const std::weak_ptr<Player>& playerPtr)
+	{
+		m_pPlayer = playerPtr;
+	}
 
 	void Init();
 	void Update() override;
@@ -17,7 +20,7 @@ private:
 	static constexpr float DISTANCE_OFFSET = 65.0f;	// プレイヤーからの距離
 	static constexpr float HEIGHT_OFFSET = 8.0f;	// カメラの高さ
 
-	std::shared_ptr<Player> m_pPlayer;
+	std::weak_ptr<Player> m_pPlayer;
 	std::shared_ptr<EnemyBase> lockOnTarget = nullptr;
 
 	VECTOR CulcTargetPos();

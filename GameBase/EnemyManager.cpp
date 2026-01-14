@@ -64,6 +64,17 @@ void EnemyManager::ApplyCollision() {
     }
 }
 
+bool EnemyManager::GetIsBossDead()
+{
+    for (auto& e : enemies) {
+        if (e->GetName() == "EnemyBoss")
+        {
+            bool isDead = e->GetIsDead();
+            return isDead;
+        }
+    }
+}
+
 // €‚ñ‚Å‚¢‚é“G‚ğíœ
 void EnemyManager::RemoveDeadEnemies()
 {
@@ -74,6 +85,8 @@ void EnemyManager::RemoveDeadEnemies()
             }),
         enemies.end());
 }
+
+
 
 // Å’Z‹——£‚Ì“G‚ÌÀ•W‚ğæ“¾
 VECTOR EnemyManager::GetNearestEnemyPos(const VECTOR& playerPos)const

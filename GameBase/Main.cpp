@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "TitleScene.h"
 #include "GameScene.h"
+#include "ResultScene.h"
 #include "TimeManager.h"
 
 // 画面設定
@@ -11,20 +12,6 @@ int constexpr SCREEN_COLOR = 32;
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-
-#ifdef _DEBUG	// コンソールDebug用変数
-    FILE* _out;
-    FILE* _in;
-    // _DEBUG
-
-    // コンソールDebug用
-    AllocConsole();							// コンソール
-    _out = 0;
-    freopen_s(&_out, "CON", "w", stdout);	// stdout
-    _in = 0;
-    freopen_s(&_in, "CON", "r", stdin);		// stdin
-#endif	// _DEBUG
-
     // ウィンドウモードにする
     ChangeWindowMode(FALSE);
 
@@ -72,6 +59,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     sceneManager->Add<TitleScene>("Title");
     sceneManager->Add<GameScene>("Game");
+    sceneManager->Add<ResultScene>("Result");
 
     // メインゲームループ（ESCキー or ウィンドウ閉じる まで続く）
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -111,10 +99,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     // DXライブラリの終了処理
     DxLib_End();
-
-#ifdef _DEBUG	// コンソールDebug用
-    fclose(_out); fclose(_in); FreeConsole();//コンソール解放
-#endif	// _debug
 
     return 0; // 正常終了
 }
