@@ -55,9 +55,6 @@ void Player_DodgeJustState::OnUpdate()
 		TimeManager::GetInstance().SetTimeScale(timeScale);
 	}
 
-	// エフェクト追従
-	//EffectManager::GetInstance().SetPosition("DodgeJust", m_pPlayer->GetTopPos());
-
 	// 回避中攻撃ボタンが押されたらフラグを立てる
 	if (!isInputAttack && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
 	{

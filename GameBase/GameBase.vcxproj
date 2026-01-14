@@ -24,6 +24,7 @@
     <ProjectGuid>{14c82fc5-3ef1-4540-b9c0-ec3625ac71c2}</ProjectGuid>
     <RootNamespace>GameBase</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>CyberBlade</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -15,7 +15,7 @@ void Player::Init()
 {
 	modelScale = VGet(0.1f, 0.1f, 0.1f);
 	pos = params.InitPosBossFront;
-	targetMoveDirection = VGet(-1.0f, 0.0f, 0.0f);
+	targetMoveDirection = VGet(1.0f, 0.0f, 0.0f);
 	isStageCollisionEnabled = true;
 	isCollisionEnabled = true;
 	isShadowEnabled = true;
