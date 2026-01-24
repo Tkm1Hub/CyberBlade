@@ -11,6 +11,7 @@
 #include "Debug.h"
 #include "Player.h"
 #include "EffectManager.h"
+#include "Pause.h"
 GameScene::GameScene(SceneManager& manager)
 	: Scene{manager}{
 }
@@ -22,6 +23,9 @@ void GameScene::Init()
 	EnemyManager::GetEnemyManager().Clear();
 
 	fade = 255;
+
+	// フォントハンドルの作成
+	fontHandle = CreateFontToHandle("源暎ラテゴ v2", 50, -1, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 
 	//インスタンス化
 	objectMgr = std::make_shared<ObjectManager>();
@@ -91,8 +95,29 @@ void GameScene::Update()
 	// 入力の更新
 	Input::GetInput().Update();
 
-	// オブジェクトの更新
-	objectMgr->UpdateAll();
+	int input = Input::GetInput().GetNowFrameNewInput();
+
+	// ポーズ
+	if (input == 32768)
+	{
+		if (Pause::GetInstance().GetIsPause())
+		{
+			Pause::GetInstance().EndPause();
+		}
+		else
+		{
+			Pause::GetInstance().StartPause();
+		}
+	}
+
+	if (!Pause::GetInstance().GetIsPause())
+	{
+		// オブジェクトの更新
+		objectMgr->UpdateAll();
+
+		// カメラの更新
+		CameraManager::GetCameraManager().Update();
+	}
 
 	// ボスが死亡しているか確認
 	isChangeScene = EnemyManager::GetEnemyManager().GetIsBossDead();
@@ -106,9 +131,6 @@ void GameScene::Update()
 	// 影の描画範囲を更新
 	auto player = objectMgr->FindObject("Player");
 	shadowMgr->Update(player->GetPosition());
-
-	// カメラの更新
-	CameraManager::GetCameraManager().Update();
 
 	// UIの更新
 	UIManager::GetUIManager().Update();
@@ -157,7 +179,6 @@ void GameScene::Draw()const
 	// オブジェクトの描画
 	objectMgr->DrawAll();
 
-
 	// 描画に使用するシャドウマップの設定を解除
 	SetUseShadowMap(0, -1);
 
@@ -174,4 +195,9 @@ void GameScene::Draw()const
 	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
+	// ポーズ中は背景をぼかす
+	if (Pause::GetInstance().GetIsPause())
+	{
+		DrawGraph(0, 0, Pause::GetInstance().GetScreenHandle(), TRUE);
+	}
 }

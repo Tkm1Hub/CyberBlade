@@ -24,6 +24,7 @@ public:
 
 private:
     int fade = 0;
+    int fontHandle = -1;
 
     bool isChangeScene = false;
 

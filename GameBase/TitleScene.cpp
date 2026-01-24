@@ -131,4 +131,6 @@ void TitleScene::Draw() const
 	DrawBox(0, 0, 1920, 1080, GetColor(255, 255,255), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
+	printfDx("%i", Input::GetInput().GetNowFrameInput());
+
 }
