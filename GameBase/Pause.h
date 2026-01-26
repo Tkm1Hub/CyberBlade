@@ -19,6 +19,11 @@ public:
 		return instance;
 	}
 
+	void Init();		// 初期化
+	void Update();		// 更新
+	void Choice();		// 選択
+	void Draw();		// 描画
+
 	void StartPause();	// ポーズ開始
 	void EndPause();	// ポーズ終了
 	
@@ -27,6 +32,8 @@ public:
 	bool GetIsPause() const { return isPause; }
 
 private:
+
+	int imgHandle = -1;				// 画像ハンドル
 	int gaussianScreen = -1;		// スクリーンハンドル
 	int choiceNum = 0;				// 選択中のカーソル番号
 	float prevTimeScale = 0.0f;		// タイムスケールを保存

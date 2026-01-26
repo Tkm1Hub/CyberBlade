@@ -31,6 +31,12 @@ void Player_DamageState::OnUpdate()
 	timeScale = std::clamp(timeScale, 0.0f, 1.0f);
 	TimeManager::GetInstance().SetTimeScale(timeScale);
 
+	// d—Í‚ð“K‰ž
+	float currentJumpPower = m_pPlayer->GetCurrentJumpPower();
+	currentJumpPower -= m_pPlayer->GetParams().Gravity * TimeManager::GetInstance().GetTimeScale();
+	m_pPlayer->SetJumpPower(currentJumpPower);
+
+
 	VECTOR targetPos = m_pPlayer->GetDamageSourcePos();
 	targetPos = VSub(targetPos, m_pPlayer->GetPosition());
 	targetPos = VNorm(targetPos);

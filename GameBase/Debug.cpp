@@ -83,6 +83,7 @@ void Debug::Draw()
             EffectManager::GetInstance().SetPosition("Slash_Red", player->GetTopPos());
 
             printfDx("isInvncible : %s \n", player->GetIsInvincible() ? "true" : "false");
+            printfDx("IsSwordEpuipped : %s \n", player->GetIsSwordEpuipped() ? "true" : "false");
         }
 
         if (obj->GetName() == "CheckPoint")

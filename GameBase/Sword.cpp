@@ -68,7 +68,7 @@ void Sword::Update()
                 break;
             }
             default:
-                return;
+                break;
             }
             isEnableEffect = true;
         }

@@ -21,6 +21,7 @@ GameScene::~GameScene() {}
 void GameScene::Init()
 {
 	EnemyManager::GetEnemyManager().Clear();
+	Pause::GetInstance().Init();
 
 	fade = 255;
 
@@ -95,21 +96,6 @@ void GameScene::Update()
 	// 入力の更新
 	Input::GetInput().Update();
 
-	int input = Input::GetInput().GetNowFrameNewInput();
-
-	// ポーズ
-	if (input == 32768)
-	{
-		if (Pause::GetInstance().GetIsPause())
-		{
-			Pause::GetInstance().EndPause();
-		}
-		else
-		{
-			Pause::GetInstance().StartPause();
-		}
-	}
-
 	if (!Pause::GetInstance().GetIsPause())
 	{
 		// オブジェクトの更新
@@ -118,6 +104,8 @@ void GameScene::Update()
 		// カメラの更新
 		CameraManager::GetCameraManager().Update();
 	}
+
+	Pause::GetInstance().Update();
 
 	// ボスが死亡しているか確認
 	isChangeScene = EnemyManager::GetEnemyManager().GetIsBossDead();
@@ -191,13 +179,10 @@ void GameScene::Draw()const
 	// UIの描画
 	UIManager::GetUIManager().Draw();
 
+	Pause::GetInstance().Draw();
+
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade);
 	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-	// ポーズ中は背景をぼかす
-	if (Pause::GetInstance().GetIsPause())
-	{
-		DrawGraph(0, 0, Pause::GetInstance().GetScreenHandle(), TRUE);
-	}
 }
