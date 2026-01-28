@@ -125,10 +125,14 @@ void EnemyBig::UpdateDamageFlag()
 	{
 		damageFrameCount++;
 
+		MV1SetDifColorScale(modelHandle, GetColorF(1.0f, 0.0f, 0.0f, 1.0f));
+
 		if (damageFrameCount == 20)
 		{
 			damageFrameCount = 0;
 			isDamage = false;
+
+			MV1SetDifColorScale(modelHandle, GetColorF(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 	}
 }

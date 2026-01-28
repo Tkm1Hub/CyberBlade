@@ -11,7 +11,7 @@ void FreeCamera::SetPlayer(const std::weak_ptr<Player>& playerPtr)
 void FreeCamera::Init()
 {
 	angleV = 0.0f; // 上下角度リセット
-	angleH = -3.14f; // 水平角度リセット（必要なら）
+	angleH = 0.0f; // 水平角度リセット
 
 	if (auto p = player.lock())
 	{

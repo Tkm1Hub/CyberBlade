@@ -67,7 +67,7 @@ struct PlayerParams
 	VECTOR InitPos = { 0.0f,0.0f,0.0f };	// 初期座標
 	VECTOR InitPosBossFront = { 1127,13,157 };
 
-	int InitHP = 500;					// 初期HP
+	int InitHP = 100;					// 初期HP
 };
 
 // アニメーション番号

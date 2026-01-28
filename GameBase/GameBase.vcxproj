@@ -143,6 +143,7 @@
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="DamageManager.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EnemyBase.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="DamageManager.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="EnemyBase.h" />
     <ClInclude Include="EnemyBig.h" />

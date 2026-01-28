@@ -29,9 +29,9 @@ void ObjectManager::Create()
 	skyDome->SetOwner(player);
 
 	// オブジェクトリストに追加
+	AddObject(player);
 	AddObject(skyDome);
 	AddObject(stage);
-	AddObject(player);
 	AddObject(sword);
 	AddObject(checkPoint);
 
@@ -146,8 +146,28 @@ void ObjectManager::ApplyCollision()
 /// </summary>
 void ObjectManager::DrawAll()
 {
+	bool isDodgeJust = false;
+
 	for (auto obj : objects)
 	{
+
+		if (obj->GetName() == "Player")
+		{
+			auto player = std::dynamic_pointer_cast<Player>(obj);
+			isDodgeJust = player->GetIsDodgeJust();
+		}
+		else
+		{
+			if (isDodgeJust)
+			{
+				MV1SetDifColorScale(obj->GetModelHandle(), GetColorF(0.4f, 0.4f, 0.4f, 1.0f));
+			}
+			else
+			{
+				MV1SetDifColorScale(obj->GetModelHandle(), GetColorF(1.0f, 1.0f, 1.0f, 1.0f));
+			}
+		}
+
 		obj->Draw();
 	}
 

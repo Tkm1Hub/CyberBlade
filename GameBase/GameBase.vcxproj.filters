@@ -245,6 +245,9 @@
     <Filter Include="ソース ファイル\Pause">
       <UniqueIdentifier>{7d3b7da6-0106-4323-af16-a9a09b6c2740}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\DamageManager">
+      <UniqueIdentifier>{66de8a0e-6d3d-4e00-a357-d0253ce39424}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -453,6 +456,9 @@
     </ClCompile>
     <ClCompile Include="ResultScene.cpp">
       <Filter>ソース ファイル\Scenes\ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageManager.cpp">
+      <Filter>ソース ファイル\DamageManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -686,6 +692,9 @@
     </ClInclude>
     <ClInclude Include="ResultScene.h">
       <Filter>ソース ファイル\Scenes\ResultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageManager.h">
+      <Filter>ソース ファイル\DamageManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
