@@ -140,6 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletCreator.cpp" />
+    <ClCompile Include="BulletFire.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
@@ -215,6 +218,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletCreator.h" />
+    <ClInclude Include="BulletFire.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CheckPoint.h" />

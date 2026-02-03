@@ -248,6 +248,15 @@
     <Filter Include="ソース ファイル\DamageManager">
       <UniqueIdentifier>{66de8a0e-6d3d-4e00-a357-d0253ce39424}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameObject\Bullet">
+      <UniqueIdentifier>{b55d8494-7631-4ae5-bffd-704bb238c655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BulletCreator">
+      <UniqueIdentifier>{36d9b7c3-0907-4c09-9376-7b787fff1e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BulletFire">
+      <UniqueIdentifier>{c4c57ef5-a585-4db2-a070-e41c6b48788a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -459,6 +468,15 @@
     </ClCompile>
     <ClCompile Include="DamageManager.cpp">
       <Filter>ソース ファイル\DamageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ソース ファイル\GameObject\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletCreator.cpp">
+      <Filter>ソース ファイル\BulletCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletFire.cpp">
+      <Filter>ソース ファイル\BulletFire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -695,6 +713,15 @@
     </ClInclude>
     <ClInclude Include="DamageManager.h">
       <Filter>ソース ファイル\DamageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ソース ファイル\GameObject\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletCreator.h">
+      <Filter>ソース ファイル\BulletCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletFire.h">
+      <Filter>ソース ファイル\BulletFire</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
