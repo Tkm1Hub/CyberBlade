@@ -17,7 +17,7 @@ void Player_Attack1State::OnStart()
 	// 装備フラグ
 	m_pPlayer->SetIsSwordEquipped(true);
 	m_pPlayer->SetAttackFrag(true);
-	m_pPlayer->SetIsAttackEnabled(true);
+	m_pPlayer->SetIsAttackEnabled(false);
 
 
 	// 攻撃１アニメを再生

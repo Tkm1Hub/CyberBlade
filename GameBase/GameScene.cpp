@@ -27,6 +27,7 @@ void GameScene::Init()
 
 	// フォントハンドルの作成
 	fontHandle = CreateFontToHandle("源暎ラテゴ v2", 50, -1, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
+	UIHandle = LoadGraph("data/picture/UI.png");
 
 	//インスタンス化
 	objectMgr = std::make_shared<ObjectManager>();
@@ -178,6 +179,8 @@ void GameScene::Draw()const
 	
 	// UIの描画
 	UIManager::GetUIManager().Draw();
+
+	DrawGraph(0, 0, UIHandle, TRUE);
 
 	Pause::GetInstance().Draw();
 

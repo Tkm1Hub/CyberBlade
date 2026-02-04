@@ -51,15 +51,15 @@ void Player_Jump1State::OnUpdate()
 		}
 	}
 	
-	if (frameCount >= m_pPlayer->GetParams().JUMP_1_TO_2_WAIT_FRAMES)
-	{
-		if (isInputJump)
-		{
-			auto spJumpState = std::make_shared<Player_Jump2State>();
-			m_pPlayer->ChangeState(spJumpState);
-			return;
-		}
-	}
+	//if (frameCount >= m_pPlayer->GetParams().JUMP_1_TO_2_WAIT_FRAMES)
+	//{
+	//	if (isInputJump)
+	//	{
+	//		auto spJumpState = std::make_shared<Player_Jump2State>();
+	//		m_pPlayer->ChangeState(spJumpState);
+	//		return;
+	//	}
+	//}
 
 	// 重力を適応
 	if (m_pPlayer->GetCurrentJumpPower() > 0.0f)
@@ -70,12 +70,12 @@ void Player_Jump1State::OnUpdate()
 	}
 
 	// 空中攻撃に移行
-	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
-	{
-		auto spAttackJump1State = std::make_shared<Player_AttackJump1State>();
-		m_pPlayer->ChangeState(spAttackJump1State);
-		return;
-	}
+	//if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
+	//{
+	//	auto spAttackJump1State = std::make_shared<Player_AttackJump1State>();
+	//	m_pPlayer->ChangeState(spAttackJump1State);
+	//	return;
+	//}
 
 	// ジャンプ力が０以下だと落下中
 	if (m_pPlayer->GetCurrentJumpPower() < 0.0f)

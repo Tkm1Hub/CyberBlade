@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "EnemyBase.h"
 #include "Input.h"
+#include "EffectManager.h"
 
 void Player_DodgeState::OnStart()
 {
@@ -24,6 +25,10 @@ void Player_DodgeState::OnStart()
 	m_pPlayer->SetJumpPower(0.0f);
 
 	m_pPlayer->ResetDodgeFrameCount();
+
+	// エフェクト再生
+	EffectManager::GetInstance().PlayEffect("Player_JumpWave", m_pPlayer->GetPosition());
+
 }
 
 void Player_DodgeState::OnUpdate()
@@ -60,6 +65,9 @@ void Player_DodgeState::OnUpdate()
 	// 硬直終了
 	if (frameCount >= m_pPlayer->GetParams().DODGE_RECOVERY_FRAMES)
 	{
+		// 回避中フラグ
+		m_pPlayer->SetIsDodge(false);
+
 		// 空中にいるかどうか
 		if (m_pPlayer->GetIsJumping())
 		{

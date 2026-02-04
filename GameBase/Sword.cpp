@@ -43,7 +43,7 @@ void Sword::Update()
     {
         SetIsCollisionEnabled(true);
 
-        if (!isEnableEffect)
+        if (!isEnableEffect && owner->GetIsAttackEnabled())
         {
             // 現在のアニメ番号によってエフェクトを再生
             int currentAnimNum = owner->animation.GetCurrentAnimNum();
@@ -67,6 +67,13 @@ void Sword::Update()
                 EffectManager::GetInstance().SetRotation("SwordLine3", MV1GetRotationXYZ(owner->GetModelHandle()));
                 break;
             }
+            case (static_cast<int>(PlayerAnimState::AttackDash)):
+            {
+                EffectManager::GetInstance().PlayEffect("SwordLine2", owner->GetTopPos());
+                EffectManager::GetInstance().SetRotation("SwordLine2", MV1GetRotationXYZ(owner->GetModelHandle()));
+                break;
+            }
+
             default:
                 break;
             }

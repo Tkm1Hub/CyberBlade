@@ -26,6 +26,8 @@ private:
 
     int fontHandle = -1;
 
+    int imgHandle = -1;
+
     int titleHandle = -1;
     int titleBackHandle = -1;
 

@@ -14,6 +14,8 @@ void ResultScene::Init()
 {
 	isChangeScene = false;
 	fade = 255;
+
+	imgHandle = LoadGraph("data/picture/Result.png");
 }
 
 void ResultScene::Update()
@@ -47,6 +49,8 @@ void ResultScene::Draw() const
 	clsDx();
 
 	printfDx("A : Back To Title");
+
+	DrawGraph(0, 0, imgHandle, TRUE);
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade);
 	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);

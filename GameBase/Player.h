@@ -38,8 +38,8 @@ struct PlayerParams
 	static constexpr int POWER_ATTACK_JUMP2 = 60;
 
 	// パラメータ
-	float Jump1Power = 3.0f;			// ジャンプ力（1段目）
-	float Jump2Power = 3.5f;			// ジャンプ力（2段目）
+	float Jump1Power = 2.8f;			// ジャンプ力（1段目）
+	float Jump2Power = 3.0f;			// ジャンプ力（2段目）
 	float Gravity = 0.1f;				// 重力
 	float WalkSpeed = 0.4f;				// 歩き最大移動速度
 	float SlowRunSpeed = 0.9f;			// 小走り最大移動速度
@@ -60,7 +60,7 @@ struct PlayerParams
 	float StickMargin = 50.0f;			// スティックの傾きに使用するマージン
 	float Accel = 0.03f;				// 移動加速度
 	float Decel = 0.1f;				// 移動減速度
-	float AngleSpeed = 0.2f;			// 移動時のモデル回転速度
+	float AngleSpeed = 0.5f;			// 移動時のモデル回転速度
 	float lockOnRange = 60.0f;			// ロックオン可能距離
 	float HitRadius = 3.0f;				// 当たり判定半径
 	float HitHeight = 16.5f;			// 当たり判定高さ

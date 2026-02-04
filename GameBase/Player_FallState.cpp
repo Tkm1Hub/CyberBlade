@@ -41,23 +41,23 @@ void Player_FallState::OnUpdate()
 	}
 
 	// ジャンプ2に移行
-	if (m_pPlayer->GetCurrentJumpCount() < m_pPlayer->GetParams().JUMP_MAX_COUNT)
-	{
-		if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_3)
-		{
-			auto spJumpState = std::make_shared<Player_Jump2State>();
-			m_pPlayer->ChangeState(spJumpState);
-			return;
-		}
-	}
+	//if (m_pPlayer->GetCurrentJumpCount() < m_pPlayer->GetParams().JUMP_MAX_COUNT)
+	//{
+	//	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_3)
+	//	{
+	//		auto spJumpState = std::make_shared<Player_Jump2State>();
+	//		m_pPlayer->ChangeState(spJumpState);
+	//		return;
+	//	}
+	//}
 
 	// 空中攻撃に移行
-	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
-	{
-		auto spAttackJump1State = std::make_shared<Player_AttackJump1State>();
-		m_pPlayer->ChangeState(spAttackJump1State);
-		return;
-	}
+	//if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
+	//{
+	//	auto spAttackJump1State = std::make_shared<Player_AttackJump1State>();
+	//	m_pPlayer->ChangeState(spAttackJump1State);
+	//	return;
+	//}
 
 	// R（8）ボタンで回避
 	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_6)
