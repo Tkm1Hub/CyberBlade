@@ -14,7 +14,7 @@ public:
 private:
     std::weak_ptr<EnemyBig> m_pEnemy;  // “G‚ÌQÆ
 
-    static constexpr int WIDTH = 800;   // ‰¡•
-    static constexpr int HEIGHT = 10;   // c•
+    static constexpr int WIDTH = 878;   // ‰¡•
+    static constexpr int HEIGHT = 28;   // c•
 
 };

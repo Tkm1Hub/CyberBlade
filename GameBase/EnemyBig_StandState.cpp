@@ -13,6 +13,9 @@ void EnemyBig_StandState::OnStart()
 
 void EnemyBig_StandState::OnUpdate()
 {
+	// 目標角度更新
+	m_pEnemyBig->SetTargetAngle(m_pEnemyBig->GetToPlayerDirection());
+
 	if (m_pEnemyBig->IsPlayerInRange(m_pEnemyBig->GetParams().WarningDistance))
 	{
 		auto spAlertState = std::make_shared<EnemyBig_AlertState>();

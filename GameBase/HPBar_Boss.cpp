@@ -50,9 +50,9 @@ void HPBar_Boss::Draw()
 		// 現在の横幅（丸めて整数に）
 		int currentWidth = static_cast<int>(std::round(WIDTH * hpRate));
 		// ボックスを描画
-		DrawBox(960 - WIDTH / 2, 100 - HEIGHT / 2, 960 + WIDTH / 2, 100 + HEIGHT / 2, GetColor(56, 58, 53), TRUE);
+		DrawBox(960 - WIDTH / 2, 90 - HEIGHT / 2, 960 + WIDTH / 2, 90 + HEIGHT / 2, GetColor(56, 58, 53), TRUE);
 		// HPを描画
-		DrawBox(960 - WIDTH / 2, 100 - HEIGHT / 2, (960 - WIDTH / 2) + currentWidth, 100 + HEIGHT / 2, GetColor(204, 200, 175), TRUE);
+		DrawBox(960 - WIDTH / 2, 90 - HEIGHT / 2, (960 - WIDTH / 2) + currentWidth, 90 + HEIGHT / 2, GetColor(204, 200, 175), TRUE);
 	}
 
 }

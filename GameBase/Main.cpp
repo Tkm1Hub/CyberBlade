@@ -57,9 +57,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     std::shared_ptr<SceneManager> sceneManager = std::make_shared<SceneManager>();
 
+    sceneManager->Add<ResultScene>("Result");
     sceneManager->Add<TitleScene>("Title");
     sceneManager->Add<GameScene>("Game");
-    sceneManager->Add<ResultScene>("Result");
 
     // メインゲームループ（ESCキー or ウィンドウ閉じる まで続く）
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)

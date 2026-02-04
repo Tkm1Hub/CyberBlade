@@ -10,11 +10,11 @@ public:
     void Draw() override;
 
 private:
-    static constexpr int WIDTH = 400;   // 横幅
-    static constexpr int HEIGHT = 30;   // 縦幅
+    static constexpr int WIDTH = 452;   // 横幅
+    static constexpr int HEIGHT = 57;   // 縦幅
 
-    static constexpr float OFFSET_X = 30.0f;            // X座標
-    static constexpr float OFFSET_Y = 1000.0f;            // Y座標
+    static constexpr float OFFSET_X = 81.0f;            // X座標
+    static constexpr float OFFSET_Y = 944;            // Y座標
 
     int frameCount = 0;
 

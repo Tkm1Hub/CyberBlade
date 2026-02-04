@@ -177,10 +177,10 @@ void GameScene::Draw()const
 	// エフェクトの描画
 	EffectManager::GetInstance().Draw();
 	
+	DrawGraph(0, 0, UIHandle, TRUE);
+
 	// UIの描画
 	UIManager::GetUIManager().Draw();
-
-	DrawGraph(0, 0, UIHandle, TRUE);
 
 	Pause::GetInstance().Draw();
 

@@ -119,6 +119,12 @@ void CollisionManager::CheckSwordEnemyCollision()
                     EffectManager::GetInstance().SetRotation("Slash3", MV1GetRotationXYZ(m_pPlayer->GetModelHandle()));
                     break;
                 }
+                case (static_cast<int>(PlayerAnimState::AttackDash)):
+                {
+                    EffectManager::GetInstance().PlayEffect("Slash2", m_pSword->GetTopPos());
+                    EffectManager::GetInstance().SetRotation("Slash2", MV1GetRotationXYZ(m_pPlayer->GetModelHandle()));
+                    break;
+                }
                 default:
                     return;
                 }
