@@ -2,6 +2,7 @@
 #include "Pause.h"
 #include "TimeManager.h"
 #include "Input.h"
+#include "Sound.h"
 
 void Pause::Init()
 {
@@ -9,8 +10,11 @@ void Pause::Init()
 	choiceNum = 0;				// 選択中のカーソル番号
 	prevTimeScale = 0.0f;		// タイムスケールを保存
 	isPause = false;
+	isChangeScene = false;
 
-	imgHandle = LoadGraph("data/picture/PAUSE.png");
+	imgHandle1 = LoadGraph("data/picture/PAUSE_1.png");
+	imgHandle2 = LoadGraph("data/picture/PAUSE_2.png");
+
 }
 
 void Pause::Update()
@@ -33,10 +37,7 @@ void Pause::Update()
 				EndPause();
 				break;
 			case 1:
-
-				break;
-			case 2:
-
+				isChangeScene = true;
 				break;
 			}
 		}
@@ -49,22 +50,17 @@ void Pause::Update()
 
 void Pause::Choice()
 {
-	if (Input::GetInput().GetNowFrameNewInput() == 64)
+	if (Input::GetInput().GetNowFrameNewInput() == 8)
 	{
-		if (Input::GetInput().GetNowFrameNewInput() == 1)
-		{
-			choiceNum--;
-			choiceNum = max(choiceNum, 0);
-		}
-		else if (Input::GetInput().GetNowFrameNewInput() == 8)
-		{
-			choiceNum++;
-			choiceNum = min(choiceNum, 2);
-		}
+		choiceNum--;
+		choiceNum = max(choiceNum, 0);
+		SoundManager::GetInstance().Play_Sound("カーソル移動");
 	}
-	else if (Input::GetInput().GetNowFrameNewInput() == 128)
+	else if (Input::GetInput().GetNowFrameNewInput() == 1)
 	{
-
+		choiceNum++;
+		choiceNum = min(choiceNum, 1);
+		SoundManager::GetInstance().Play_Sound("カーソル移動");
 	}
 }
 
@@ -78,8 +74,14 @@ void Pause::Draw()
 	DrawBox(800, 0, 1920, 1080, GetColor(0, 0, 0), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-	DrawGraph(0, 0, imgHandle, TRUE);
-	printfDx("%i\n", choiceNum);
+	if (choiceNum == 0)
+	{
+		DrawGraph(0, 0, imgHandle1, TRUE);
+	}
+	else
+	{
+		DrawGraph(0, 0, imgHandle2, TRUE);
+	}
 }
 
 void Pause::StartPause()

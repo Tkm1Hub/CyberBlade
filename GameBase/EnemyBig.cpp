@@ -10,6 +10,7 @@ void EnemyBig::Init()
 	isStageCollisionEnabled = true;
 	isCollisionEnabled = true;
 	isShadowEnabled = true;
+	isDead = false;
 	hp = params.MaxHp;
 	MaxHp = params.MaxHp;
 	hpBarHeightOffset = params.HPBarHeight;

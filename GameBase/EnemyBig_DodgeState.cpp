@@ -6,6 +6,7 @@
 #include "TimeManager.h"
 #include "EffectManager.h"
 #include "CameraManager.h"
+#include "Sound.h"
 
 void EnemyBig_DodgeState::OnStart()
 {
@@ -53,6 +54,8 @@ void EnemyBig_DodgeState::DodgeMove()
 
 		//エフェクト再生
 		EffectManager::GetInstance().PlayEffect("Boss_JumpWave", m_pEnemyBig->GetPosition());
+		SoundManager::GetInstance().Play_Sound("SE_Enemy_Jump");
+		SoundManager::GetInstance().Play_Sound("SE_Enemy_Move");
 	}
 
 	// 回避中
@@ -67,6 +70,7 @@ void EnemyBig_DodgeState::DodgeMove()
 		dodgeSpeed = 0.0f;
 		// カメラの揺れ
 		CameraManager::GetCameraManager().GetMainCamera()->StartShake(0.5f, 1.0f, 20.0f);
+		SoundManager::GetInstance().Play_Sound("SE_Enemy_JumpAttack");
 	}
 
 	m_pEnemyBig->SetMoveSpeed(dodgeSpeed);

@@ -69,7 +69,7 @@ void Debug::Draw()
             DrawCylinder(player->GetPosition(), 30, 10, 32, GetColor(255, 0, 0));
 
             // 回避中はジャスト回避用の当たり判定を描画
-            if (player->GetIsDodge())
+            if (player->GetCanDodgeJust())
             {
                 DrawCapsule3D(player->GetTopPos(), player->GetBottomPos()
                     , player->GetDodgeHitRadius(), 8, GetColor(0, 0, 180), GetColor(255, 255, 255), FALSE);

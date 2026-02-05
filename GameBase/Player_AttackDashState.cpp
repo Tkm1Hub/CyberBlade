@@ -9,8 +9,7 @@
 #include "Player_DodgeState.h"
 #include "Player_Jump1State.h"
 #include "Player_DamageState.h"
-
-
+#include "Sound.h"
 void Player_AttackDashState::OnStart()
 {
 	// ‘•”õƒtƒ‰ƒO
@@ -31,7 +30,11 @@ void Player_AttackDashState::OnUpdate()
 
 	if (currentAnimCount >= ATTACK_ENABLE_COUNT && currentAnimCount <= ATTACK_DISABLE_COUNT)
 	{
-		m_pPlayer->SetIsAttackEnabled(true);
+		if (!m_pPlayer->GetIsAttackEnabled())
+		{
+			m_pPlayer->SetIsAttackEnabled(true);
+			SoundManager::GetInstance().Play_Sound("SE_SlashDash");
+		}
 	}
 	else if (currentAnimCount >= ATTACK_DISABLE_COUNT)
 	{

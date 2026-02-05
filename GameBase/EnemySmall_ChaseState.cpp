@@ -3,6 +3,7 @@
 #include "EnemySmall_StandState.h"
 #include "EnemySmall_AttackState.h"
 #include "EnemySmall.h"
+#include "Sound.h"
 
 void EnemySmall_ChaseState::OnStart()
 {
@@ -12,6 +13,8 @@ void EnemySmall_ChaseState::OnStart()
 	m_pEnemySmall->animation.Play(static_cast<int>(EnemySmallAnimState::Chase), true);
 	//Œx‰úƒtƒ‰ƒO
 	m_pEnemySmall->SetIsAlert(true);
+
+	SoundManager::GetInstance().Play_Sound("SE_Enemy_Walk");
 }
 
 void EnemySmall_ChaseState::OnUpdate()
@@ -43,4 +46,5 @@ void EnemySmall_ChaseState::OnUpdate()
 
 void EnemySmall_ChaseState::OnExit()
 {
+	SoundManager::GetInstance().StopSound("SE_Enemy_Walk");
 }

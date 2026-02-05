@@ -9,6 +9,7 @@
 #include "Player_DodgeJustState.h"
 #include "CameraManager.h"
 #include "EffectManager.h"
+#include "Sound.h"
 
 void CollisionManager::Init()
 {
@@ -105,24 +106,28 @@ void CollisionManager::CheckSwordEnemyCollision()
                 {
                     EffectManager::GetInstance().PlayEffect("Slash1", m_pSword->GetTopPos());
                     EffectManager::GetInstance().SetRotation("Slash1", MV1GetRotationXYZ(m_pPlayer->GetModelHandle()));
+                    SoundManager::GetInstance().Play_Sound("SE_Hit1");
                     break;
                 }
                 case (static_cast<int>(PlayerAnimState::AttackJump2)):
                 {
                     EffectManager::GetInstance().PlayEffect("Slash2", m_pSword->GetTopPos());
                     EffectManager::GetInstance().SetRotation("Slash2", MV1GetRotationXYZ(m_pPlayer->GetModelHandle()));
+                    SoundManager::GetInstance().Play_Sound("SE_Hit2");
                     break;
                 }
                 case (static_cast<int>(PlayerAnimState::Attack3)):
                 {
                     EffectManager::GetInstance().PlayEffect("Slash3", m_pSword->GetTopPos());
                     EffectManager::GetInstance().SetRotation("Slash3", MV1GetRotationXYZ(m_pPlayer->GetModelHandle()));
+                    SoundManager::GetInstance().Play_Sound("SE_Hit3");
                     break;
                 }
                 case (static_cast<int>(PlayerAnimState::AttackDash)):
                 {
                     EffectManager::GetInstance().PlayEffect("Slash2", m_pSword->GetTopPos());
                     EffectManager::GetInstance().SetRotation("Slash2", MV1GetRotationXYZ(m_pPlayer->GetModelHandle()));
+                    SoundManager::GetInstance().Play_Sound("SE_HitDash");
                     break;
                 }
                 default:
@@ -150,7 +155,7 @@ void CollisionManager::CheckEnemyAttackPlayerCollision()
         {
             if (enemy->GetIsAttack())
             {
-                if (m_pPlayer->GetIsDodge())
+                if (m_pPlayer->GetCanDodgeJust())
                 {
                     if (m_pPlayer->GetIsDodgeJust())return;
 

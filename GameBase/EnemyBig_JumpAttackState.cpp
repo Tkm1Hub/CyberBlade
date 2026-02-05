@@ -5,6 +5,7 @@
 #include "TimeManager.h"
 #include "EffectManager.h"
 #include "CameraManager.h"
+#include "Sound.h"
 
 void EnemyBig_JumpAttackState::OnStart()
 {
@@ -80,6 +81,8 @@ void EnemyBig_JumpAttackState::AttackMove()
 
 		//エフェクト再生
 		EffectManager::GetInstance().PlayEffect("Boss_JumpWave", m_pEnemyBig->GetPosition());
+		SoundManager::GetInstance().Play_Sound("SE_Enemy_Jump");
+		SoundManager::GetInstance().Play_Sound("SE_Enemy_Warning");
 	}
 
 	// ジャンプ中
@@ -98,6 +101,8 @@ void EnemyBig_JumpAttackState::AttackMove()
 		EffectManager::GetInstance().PlayEffect("Boss_ShockWave",m_pEnemyBig->GetPosition());
 		// カメラの揺れ
 		CameraManager::GetCameraManager().GetMainCamera()->StartShake(0.5f, 2.0f, 40.0f);
+
+		SoundManager::GetInstance().Play_Sound("SE_Enemy_JumpAttack");
 	}
 
 	// 攻撃無効化

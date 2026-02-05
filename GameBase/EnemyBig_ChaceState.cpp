@@ -3,6 +3,7 @@
 #include "EnemyBig_StandState.h"
 #include "EnemyBig_AttackState.h"
 #include "EnemyBig.h"
+#include "Sound.h"
 
 void EnemyBig_ChaseState::OnStart()
 {
@@ -10,6 +11,9 @@ void EnemyBig_ChaseState::OnStart()
 	m_pEnemyBig->SetMoveSpeed(m_pEnemyBig->GetParams().ChaseSpeed);
 	// ƒAƒjƒÄ¶
 	m_pEnemyBig->animation.Play(static_cast<int>(EnemyBigAnimState::Chase), true);
+
+	SoundManager::GetInstance().Play_Sound("SE_Enemy_Walk");
+	SoundManager::GetInstance().Play_Sound("SE_Enemy_Move");
 }
 
 void EnemyBig_ChaseState::OnUpdate()
@@ -30,4 +34,5 @@ void EnemyBig_ChaseState::OnUpdate()
 
 void EnemyBig_ChaseState::OnExit()
 {
+	SoundManager::GetInstance().StopSound("SE_Enemy_Walk");
 }

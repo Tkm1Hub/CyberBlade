@@ -2,6 +2,7 @@
 #include "ResultScene.h"
 #include "Animation.h"
 #include "Input.h"
+#include "Sound.h"
 
 ResultScene::ResultScene(SceneManager& manager)
 	: Scene(manager)
@@ -27,6 +28,8 @@ void ResultScene::Init()
 	animation->LoadAnimation(player_ModelHandle);
 	animation->Play(2, true);
 
+	SoundManager::GetInstance().Play_Sound("BGM_Result");
+
 	SetCameraNearFar(0.1f, 2500);
 
 	// ƒJƒƒ‰‚ð³ŽË‰e‚É•ÏX
@@ -42,7 +45,7 @@ void ResultScene::Update()
 
 	if (!isChangeScene)
 	{
-		if (Input::GetInput().GetNowFrameNewInput() >= 16)
+		if (Input::GetInput().GetNowFrameNewInput() == 128)
 		{
 			isChangeScene = true;
 		}
@@ -58,6 +61,7 @@ void ResultScene::Update()
 
 	if (isChangeScene && fade == 255)
 	{
+		SoundManager::GetInstance().StopSound("BGM_Result");
 		ChangeScene("Title");
 	}
 
@@ -70,8 +74,6 @@ void ResultScene::Update()
 void ResultScene::Draw() const
 {
 	clsDx();
-
-	printfDx("A : Back To Title");
 
 	DrawGraph(0, 0, imgHandle, TRUE);
 

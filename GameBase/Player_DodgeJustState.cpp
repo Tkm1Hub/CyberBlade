@@ -14,6 +14,7 @@
 #include "Input.h"
 #include "TimeManager.h"
 #include "EffectManager.h"
+#include "Sound.h"
 
 void Player_DodgeJustState::OnStart()
 {
@@ -23,6 +24,7 @@ void Player_DodgeJustState::OnStart()
 	// 回避中フラグを立てる
 	m_pPlayer->SetIsDodge(true);
 	m_pPlayer->SetIsDodgeJust(true);
+	m_pPlayer->SetIsInvincible(true);
 
 	// ジャンプ力を0に設定
 	m_pPlayer->SetJumpPower(0.0f);
@@ -35,6 +37,9 @@ void Player_DodgeJustState::OnStart()
 	VECTOR effectPos = m_pPlayer->GetPosition();
 	effectPos.y += EFFECT_DRAW_HEIGHT;
 	EffectManager::GetInstance().PlayEffect("DodgeJust", effectPos);
+
+	SoundManager::GetInstance().Play_Sound("SE_DodgeJust1");
+	SoundManager::GetInstance().Play_Sound("SE_DodgeJust2");
 }
 
 void Player_DodgeJustState::OnUpdate()
@@ -158,6 +163,7 @@ void Player_DodgeJustState::OnExit()
 {
 	m_pPlayer->SetIsDodge(false);
 	m_pPlayer->SetIsDodgeJust(false);
+	m_pPlayer->SetIsInvincible(false);
 	TimeManager::GetInstance().SetTimeScale(1.0f);
 }
 

@@ -13,6 +13,8 @@
 #include "EffectManager.h"
 #include "Pause.h"
 #include "Sound.h"
+#include "GameOver.h"
+#include "TimeManager.h"
 
 GameScene::GameScene(SceneManager& manager)
 	: Scene{manager}{
@@ -24,14 +26,18 @@ void GameScene::Init()
 {
 	EnemyManager::GetEnemyManager().Clear();
 	Pause::GetInstance().Init();
+	GameOver::GetInstance().Init();
+
+	TimeManager::GetInstance().SetTimeScale(1.0f);
 
 	fade = 255;
+	isChangeScene = false;
 
 	// フォントハンドルの作成
 	fontHandle = CreateFontToHandle("源暎ラテゴ v2", 50, -1, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 	UIHandle = LoadGraph("data/picture/UI.png");
 
-	SoundManager::GetInstance().Play_Sound("BGM_Game", true);
+	SoundManager::GetInstance().Play_Sound("BGM_Game");
 
 	//インスタンス化
 	objectMgr = std::make_shared<ObjectManager>();
@@ -110,10 +116,34 @@ void GameScene::Update()
 		CameraManager::GetCameraManager().Update();
 	}
 
-	Pause::GetInstance().Update();
+	if (!GameOver::GetInstance().GetIsGameOver())
+	{
+		Pause::GetInstance().Update();
+	}
+
+	GameOver::GetInstance().Update();
+
 
 	// ボスが死亡しているか確認
-	isChangeScene = EnemyManager::GetEnemyManager().GetIsBossDead();
+	if (EnemyManager::GetEnemyManager().GetIsBossDead())
+	{
+		isChangeScene = true;
+	}
+
+	if (GameOver::GetInstance().GetIsGameOver())
+	{
+		if (GameOver::GetInstance().GetIsChengeScene())
+		{
+			isChangeScene = true;
+		}
+	}
+	else
+	{
+		if(Pause::GetInstance().GetIsChangeScene())
+		{
+			isChangeScene = true;
+		}
+	}
 
 	// 当たり判定の更新
 	collisionMgr->Update();
@@ -138,8 +168,32 @@ void GameScene::Update()
 
 	if (isChangeScene && fade == 255)
 	{
-		ChangeScene("Result");
-		SoundManager::GetInstance().StopSound("BGM_Game");
+		if (GameOver::GetInstance().GetIsGameOver())
+		{
+			if (GameOver::GetInstance().GetChoiceNum() == 0)
+			{
+				SoundManager::GetInstance().StopSound("BGM_Game");
+				ChangeScene("Game");
+			}
+			else
+			{
+				SoundManager::GetInstance().StopSound("BGM_Game");
+				ChangeScene("Title");
+			}
+		}
+		else
+		{
+			if (Pause::GetInstance().GetIsChangeScene())
+			{
+				SoundManager::GetInstance().StopSound("BGM_Game");
+				ChangeScene("Title");
+			}
+			else
+			{
+				SoundManager::GetInstance().StopSound("BGM_Game");
+				ChangeScene("Result");
+			}
+		}
 	}
 }
 
@@ -183,6 +237,8 @@ void GameScene::Draw()const
 	UIManager::GetUIManager().Draw();
 
 	Pause::GetInstance().Draw();
+
+	GameOver::GetInstance().Draw();
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade);
 	DrawBox(0, 0, 1920, 1080, GetColor(255, 255, 255), TRUE);

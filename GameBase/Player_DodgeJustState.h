@@ -19,6 +19,7 @@ private:
 	static constexpr int DODGE_DISABLE_COUNT = 23;
 	static constexpr int SLOW_START_COUNT = 5;
 
+
 	void CulcDodgeDirection();
 
 	VECTOR RotateY(const VECTOR& dir, float rad)

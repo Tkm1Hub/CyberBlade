@@ -64,9 +64,9 @@ void EnemyBig_WarningState::OnUpdate()
 		}
 		case 1:		// ‰ñ”ğ
 		{
-			auto spDodgeState = std::make_shared<EnemyBig_DodgeState>();
-			m_pEnemyBig->ChangeState(spDodgeState);
-			break;
+			//auto spDodgeState = std::make_shared<EnemyBig_DodgeState>();
+			//m_pEnemyBig->ChangeState(spDodgeState);
+			//break;
 		}
 		case 2:		// ’ÇÕ
 		{

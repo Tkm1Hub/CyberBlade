@@ -8,6 +8,7 @@
 #include "Player_StandState.h"
 #include "Player_DamageState.h"
 #include "TimeManager.h"
+#include "Sound.h"
 
 void Player_FallState::OnStart()
 {
@@ -70,5 +71,5 @@ void Player_FallState::OnUpdate()
 
 void Player_FallState::OnExit()
 {
-
+	SoundManager::GetInstance().Play_Sound("SE_Landing");
 }

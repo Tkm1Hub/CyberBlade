@@ -8,7 +8,7 @@
 #include "Input.h"
 #include "Player_FallState.h"
 #include "Player_DamageState.h"
-
+#include "Sound.h"
 
 void Player_RunState::OnStart()
 {
@@ -24,6 +24,8 @@ void Player_RunState::OnStart()
 
 	// ‘–‚èƒAƒjƒ‚ðÄ¶
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Run),true);
+
+	SoundManager::GetInstance().Play_Sound("SE_Player_Run");
 }
 
 void Player_RunState::OnUpdate()
@@ -81,4 +83,5 @@ void Player_RunState::OnUpdate()
 void Player_RunState::OnExit()
 {
 	m_pPlayer->SetRunFlag(false);
+	SoundManager::GetInstance().StopSound("SE_Player_Run");
 }

@@ -10,19 +10,21 @@
 #include "Player_FallState.h"
 #include "Player_DodgeState.h"
 #include "Player_DamageState.h"
-
+#include "Sound.h"
 
 
 
 void Player_SlowRunState::OnStart()
 {
 	// アニメーション再生
-	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::SlowRun),true);
+	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::SlowRun), true);
 	// 移動フラグを立てる
 	m_pPlayer->SetMoveFlag(true);
 	// 移動速度を設定
 	m_pPlayer->SetMoveSpeed(m_pPlayer->GetParams().SlowRunSpeed);
 	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().SlowRunSpeed);
+
+	SoundManager::GetInstance().Play_Sound("SE_Player_SlowRun");
 }
 
 void Player_SlowRunState::OnUpdate()
@@ -89,5 +91,6 @@ void Player_SlowRunState::OnUpdate()
 void Player_SlowRunState::OnExit()
 {
 	m_pPlayer->SetMoveFlag(false);
+	SoundManager::GetInstance().StopSound("SE_Player_SlowRun");
 }
 

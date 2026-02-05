@@ -260,6 +260,12 @@
     <Filter Include="ソース ファイル\Sound">
       <UniqueIdentifier>{0230d4f4-816a-4d8e-94de-5edaf0fddfc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameOver">
+      <UniqueIdentifier>{c31c64cc-1f3e-4ff5-882f-4d566d1649d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\PlayerState\Death">
+      <UniqueIdentifier>{33894d81-27d1-4b31-a935-b2e0071f34af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -483,6 +489,12 @@
     </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>ソース ファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>ソース ファイル\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_DeathState.cpp">
+      <Filter>ソース ファイル\State\PlayerState\Death</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -731,6 +743,12 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>ソース ファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>ソース ファイル\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_DeathState.h">
+      <Filter>ソース ファイル\State\PlayerState\Death</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -30,14 +30,17 @@ public:
 	int GetScreenHandle() const { return gaussianScreen; }
 
 	bool GetIsPause() const { return isPause; }
+	bool GetIsChangeScene() const { return isChangeScene; }
 
 private:
 
-	int imgHandle = -1;				// 画像ハンドル
+	int imgHandle1 = -1;				// 画像ハンドル
+	int imgHandle2 = -1;				// 画像ハンドル
 	int gaussianScreen = -1;		// スクリーンハンドル
 	int choiceNum = 0;				// 選択中のカーソル番号
 	float prevTimeScale = 0.0f;		// タイムスケールを保存
 	bool isPause = false;
+	bool isChangeScene = false;
 
 	static constexpr int RESUME = 0;			// ゲームに戻る
 	static constexpr int RETURN_TO_TITLE = 1;	// タイトルに戻る

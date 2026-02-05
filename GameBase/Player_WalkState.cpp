@@ -9,7 +9,7 @@
 #include "Player.h"
 #include "Input.h"
 #include "Player_DamageState.h"
-
+#include "Sound.h"
 
 void Player_WalkState::OnStart()
 {
@@ -19,6 +19,8 @@ void Player_WalkState::OnStart()
 	m_pPlayer->SetMoveFlag(true);
 	// Å‘åˆÚ“®‘¬“x‚ðÝ’è
 	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().WalkSpeed);
+
+	SoundManager::GetInstance().Play_Sound("SE_Player_Walk");
 }
 
 void Player_WalkState::OnUpdate()
@@ -84,5 +86,6 @@ void Player_WalkState::OnUpdate()
 void Player_WalkState::OnExit()
 {
 	m_pPlayer->SetMoveFlag(false);
+	SoundManager::GetInstance().StopSound("SE_Player_Walk");
 }
 

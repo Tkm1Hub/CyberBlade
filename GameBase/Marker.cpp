@@ -45,7 +45,7 @@ void Marker::Update()
 		float dist = VSize(diff);
 
 		// ‹——£‚ª”ÍˆÍŠO‚È‚ç–³Œø‰»
-		if (dist > MARKER_VISIBLE_DISTANCE)
+		if (!p->GetIsLockOn() && dist > MARKER_VISIBLE_DISTANCE)
 		{
 			m_isActive = false;
 		}

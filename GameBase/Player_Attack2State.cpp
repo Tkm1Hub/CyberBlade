@@ -9,7 +9,7 @@
 #include "Player_DodgeState.h"
 #include "Player_Jump1State.h"
 #include "Player_DamageState.h"
-
+#include "Sound.h"
 
 
 void Player_Attack2State::OnStart()
@@ -22,6 +22,8 @@ void Player_Attack2State::OnStart()
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::AttackJump2),false);
 
 	moveSpeed = m_pPlayer->GetParams().Attack2MoveSpeed;
+
+	SoundManager::GetInstance().Play_Sound("SE_Slash2");
 }
 
 void Player_Attack2State::OnUpdate()

@@ -1,10 +1,11 @@
 #pragma once
-struct SoundInstance
-{
-    std::string name;
-    int handle = -1;
-};
 
+struct SoundData
+{
+    int handle = -1;        // 音声ハンドル
+    int volume = 100;       // 音量
+    bool isLoop = false;    // ループするか
+};
 
 class SoundManager
 {
@@ -22,7 +23,8 @@ private:
     int time = 0;
     int playingSoundHandle = -1;
     int resourceHandle = -1;
-    std::unordered_map<std::string, int> soundHandles;
+
+    std::unordered_map<std::string, SoundData> soundHandles;
 
     int BGM_Title = -1;
     int BGM_Game = -1;
@@ -40,8 +42,8 @@ public:
     }
 
     void Init();
-    void LoadSound(const std::string& name, const std::string& path);
-    void Play_Sound(const std::string& name, bool isLoop);
+    void LoadSound(const std::string& name, const std::string& path,int volume,bool isLoop);
+    void Play_Sound(const std::string& name);
     void StopSound(const std::string& name);
 };
 

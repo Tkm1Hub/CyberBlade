@@ -15,7 +15,7 @@ struct EnemyBig_Params
 	float AttackJumpPower = 5.3f;			// ジャンプ攻撃の高度
 	float HitRadius = 25.0f;				// 当たり判定半径
 	float HitHeight = 40.0f;				// 当たり判定高さ
-	float LeftHandHitRadius = 15.0f;		// 左手の当たり判定
+	float LeftHandHitRadius = 30.0f;		// 左手の当たり判定
 	float RightHandHitRadius = 30.0f;		// 右手の当たり判定
 	float HipHitRadius = 50.0f;				// 腰の当たり判定
 	float HPBarHeight = 20.0f;				// HPバーを表示する高さ

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player_DodgeState.h"
+#include "Player_DamageState.h"
 #include "Player_StandState.h"
 #include "Player_WalkState.h"
 #include "Player_RunState.h"
@@ -12,6 +13,8 @@
 #include "EnemyBase.h"
 #include "Input.h"
 #include "EffectManager.h"
+#include "Sound.h"
+#include "TimeManager.h"
 
 void Player_DodgeState::OnStart()
 {
@@ -20,15 +23,20 @@ void Player_DodgeState::OnStart()
 
 	// 回避中フラグを立てる
 	m_pPlayer->SetIsDodge(true);
+	m_pPlayer->SetCanDodgeJust(true);
 
 	// ジャンプ力を0に設定
 	m_pPlayer->SetJumpPower(0.0f);
 
 	m_pPlayer->ResetDodgeFrameCount();
 
+	justDodgeTimer = 0.0f;
+
 	// エフェクト再生
 	EffectManager::GetInstance().PlayEffect("Player_JumpWave", m_pPlayer->GetPosition());
 
+	// SE再生
+	SoundManager::GetInstance().Play_Sound("SE_Dodge");
 }
 
 void Player_DodgeState::OnUpdate()
@@ -62,12 +70,24 @@ void Player_DodgeState::OnUpdate()
 		}
 	}
 
+	justDodgeTimer += TimeManager::GetInstance().GetScaledDeltaTime();
+
+	if (justDodgeTimer >= m_pPlayer->GetParams().DODGE_JUST_WINDOW_TIME)
+	{
+		// 回避中フラグ
+		m_pPlayer->SetCanDodgeJust(false);
+	}
+
+	if (m_pPlayer->GetDamageFlag())
+	{
+		auto spDamageState = std::make_shared<Player_DamageState>();
+		m_pPlayer->ChangeState(spDamageState);
+		return;
+	}
+
 	// 硬直終了
 	if (frameCount >= m_pPlayer->GetParams().DODGE_RECOVERY_FRAMES)
 	{
-		// 回避中フラグ
-		m_pPlayer->SetIsDodge(false);
-
 		// 空中にいるかどうか
 		if (m_pPlayer->GetIsJumping())
 		{
@@ -160,6 +180,7 @@ void Player_DodgeState::OnExit()
 {
 	m_pPlayer->SetIsDodge(false);
 	m_pPlayer->SetIsDodgeFront(false);
+	m_pPlayer->SetCanDodgeJust(false);
 }
 
 void Player_DodgeState::CulcDodgeDirection()

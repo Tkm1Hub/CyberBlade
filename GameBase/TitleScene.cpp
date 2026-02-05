@@ -20,7 +20,7 @@ void TitleScene::Init()
 	movie_Handle = LoadGraph("data/movie/TitleMovie.mp4");
 	PlayMovieToGraph(movie_Handle);
 
-	SoundManager::GetInstance().Play_Sound("BGM_Title", true);
+	SoundManager::GetInstance().Play_Sound("BGM_Title");
 
 	swordModelRot.y = DX_PI_F / 2;
 
@@ -78,7 +78,11 @@ void TitleScene::Update()
 
 	if (16 <= input)
 	{
-		isChangeScene = true;
+		if (!isChangeScene)
+		{
+			SoundManager::GetInstance().Play_Sound("SE_Title");
+			isChangeScene = true;
+		}
 	}
 
 	if (isChangeScene)
@@ -135,7 +139,5 @@ void TitleScene::Draw() const
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade);
 	DrawBox(0, 0, 1920, 1080, GetColor(255, 255,255), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-
-	printfDx("%i", Input::GetInput().GetNowFrameInput());
 
 }

@@ -11,7 +11,7 @@
 #include "Player_FallState.h"
 #include "Player_DodgeState.h"
 #include "Player_DamageState.h"
-
+#include "Sound.h"
 
 void Player_SwordRunState::OnStart()
 {
@@ -24,6 +24,8 @@ void Player_SwordRunState::OnStart()
 	// ˆÚ“®‘¬“x‚ðÝ’è
 	m_pPlayer->SetMoveSpeed(m_pPlayer->GetParams().RunSwordSpeed);
 	m_pPlayer->SetCurrentMaxSpeed(m_pPlayer->GetParams().RunSwordSpeed);
+
+	SoundManager::GetInstance().Play_Sound("SE_Player_SlowRun");
 }
 
 void Player_SwordRunState::OnUpdate()
@@ -91,5 +93,6 @@ void Player_SwordRunState::OnExit()
 {
 	m_pPlayer->SetMoveFlag(false);
 	m_pPlayer->SetIsSwordEquipped(false);
+	SoundManager::GetInstance().StopSound("SE_Player_SlowRun");
 }
 

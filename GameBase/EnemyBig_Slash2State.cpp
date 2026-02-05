@@ -4,6 +4,7 @@
 #include "EnemyBig_WarningState.h"
 #include "EnemyBig_DamageState.h"
 #include "EffectManager.h"
+#include "Sound.h"
 
 void EnemyBig_Slash2State::OnStart()
 {
@@ -15,6 +16,8 @@ void EnemyBig_Slash2State::OnStart()
 
 	// エフェクト再生
 	EffectManager::GetInstance().PlayEffect("Attack_Warning", m_pEnemyBig->GetHeadPos());
+	SoundManager::GetInstance().Play_Sound("SE_Enemy_Move");
+	SoundManager::GetInstance().Play_Sound("SE_Enemy_Warning");
 }
 
 void EnemyBig_Slash2State::OnUpdate()

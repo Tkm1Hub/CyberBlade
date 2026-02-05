@@ -27,6 +27,7 @@ struct PlayerParams
 	static constexpr int DODGE_JUST_RECOVERY_FRAMES = 35;		// 回避の硬直時間
 	static constexpr int DODGE_JUST_INVINCIBLE_TIME = 180;		// ジャスト回避の無敵時間
 	static constexpr float DODGE_HIT_RADIUS = 20.0f;			// 回避中の当たり判定（ジャスト回避に移行する
+	static constexpr float DODGE_JUST_WINDOW_TIME = 15.0f / 60.0f;			// ジャスト回避受付時間
 
 	// 攻撃力
 	static constexpr int POWER_ATTACK1 = 60;
@@ -94,6 +95,7 @@ enum class PlayerAnimState :int
 	DodgeJust = 20,		// ジャスト回避
 	DodgeBack = 17,		// 後ろ回避
 	Damage = 18,		// ダメージ
+	Death = 21,			// 死亡
 };
 
 class EnemyBase;
@@ -136,10 +138,14 @@ public:
 
 	// 無敵フラグ
 	const bool GetIsInvincible() { return isInvincible; }
+	void SetIsInvincible(bool flag) { isInvincible = flag; }
 
 	// ジャスト回避フラグ
 	const bool GetIsDodgeJust() const { return isDodgeJust; }
 	void SetIsDodgeJust(bool flag) { isDodgeJust = flag; }
+
+	const bool GetCanDodgeJust() const { return canDodgeJust; }
+	void SetCanDodgeJust(bool flag) { canDodgeJust = flag; }
 
 	// 回避フラグ
 	const bool GetIsDodgeFront() const { return isDodgeFront; }
@@ -228,6 +234,7 @@ private:
 	bool isLockOn = false;		// ロックオン状態か
 	bool isDodgeFront = false;	// 前方向回避か
 	bool isDodge = false;		// 回避中か
+	bool canDodgeJust = false;	// ジャスト回避に移行できるかどうか
 	bool isDodgeJust = false;	// ジャスト回避中か
 	bool isSwordEquipped = false;	// 剣を手に持っているか
 	bool isInvincible = false;		// 無敵時間中

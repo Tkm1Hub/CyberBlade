@@ -4,6 +4,7 @@
 #include "EnemyBig.h"
 #include "EffectManager.h"
 #include "CameraManager.h"
+#include "Sound.h"
 
 void EnemyBig_AlertState::OnStart()
 {
@@ -27,6 +28,10 @@ void EnemyBig_AlertState::OnUpdate()
 		EffectManager::GetInstance().PlayEffect("Boss_Roar", m_pEnemyBig->GetPosition());
 		// カメラの揺れ
 		CameraManager::GetCameraManager().GetMainCamera()->StartShake(2.5f, 2.5f, 120.0f);
+
+		SoundManager::GetInstance().Play_Sound("SE_Enemy_Alert1");
+		SoundManager::GetInstance().Play_Sound("SE_Enemy_Alert2");
+		SoundManager::GetInstance().Play_Sound("SE_Enemy_Alert3");
 	}
 
 	// モーションが終わるとWarningに戻す
@@ -41,6 +46,8 @@ void EnemyBig_AlertState::OnUpdate()
 
 void EnemyBig_AlertState::OnExit()
 {
-
+	SoundManager::GetInstance().StopSound("SE_Enemy_Alert1");
+	SoundManager::GetInstance().StopSound("SE_Enemy_Alert2");
+	SoundManager::GetInstance().StopSound("SE_Enemy_Alert3");
 }
 

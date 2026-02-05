@@ -10,6 +10,7 @@
 #include "EnemyManager.h"
 #include "EnemyBase.h"
 #include "TimeManager.h"
+#include "Sound.h"
 
 void Player::Init()
 {
@@ -19,6 +20,7 @@ void Player::Init()
 	isStageCollisionEnabled = true;
 	isCollisionEnabled = true;
 	isShadowEnabled = true;
+	isDead = false;
 	auto spStandState = std::make_shared<Player_StandState>();
 	ChangeState(spStandState);
 	hitHeight = params.HitHeight;
@@ -44,20 +46,24 @@ void Player::Load()
 
 void Player::Update()
 {
-	if (!isAttack&&!isDodge && !isDamage)
+	if (!isAttack&&!isDodge && !isDamage && !isDead)
 	{
 		// スティックでの移動入力
 		moveVec = GetMoveInput();
 	}
 	// Lボタンで切り替え
-	if (Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_5)
+	if (!isDead && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_5)
 	{
 		ToggleLockOn();
 	}
 
+	if (hp <= 0)
+	{
+		isDead = true;
+	}
+
 	// ステートの更新
 	stateMachine.Update();
-	UpdateInvincibleCount();
 
 	// モデルの方向更新
 	UpdateAngle();
@@ -334,6 +340,7 @@ void Player::ToggleLockOn()
 
 	if (isLockOn)
 	{
+		SoundManager::GetInstance().Play_Sound("SE_LockOn");
 		lockOnTarget = EnemyManager::GetEnemyManager().GetNearestEnemy(pos);
 
 		// 敵がいない場合はロックオン解除して終了

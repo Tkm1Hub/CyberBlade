@@ -11,6 +11,7 @@
 #include "Player_Jump1State.h"
 #include "Player_FallState.h"
 #include "Player_DamageState.h"
+#include "Sound.h"
 
 void Player_Attack1State::OnStart()
 {
@@ -25,6 +26,7 @@ void Player_Attack1State::OnStart()
 
 	moveSpeed = m_pPlayer->GetParams().Attack1MoveSpeed;
 
+	SoundManager::GetInstance().Play_Sound("SE_Slash1");
 }
 
 void Player_Attack1State::OnUpdate()

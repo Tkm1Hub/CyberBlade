@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "Player_DamageState.h"
 #include "Player_DodgeState.h"
+#include "Player_DeathState.h"
 #include "Player_Attack1State.h"
 #include "Player_SwordRunState.h"
 #include "Player_Attack3State.h"
@@ -10,17 +11,25 @@
 #include "Player_StandState.h"
 #include "Player_Jump1State.h"
 #include "TimeManager.h"
-
+#include "Sound.h"
 
 void Player_DamageState::OnStart()
 {
 	moveSpeed = m_pPlayer->GetParams().DamageKnockBackSpeed;
 	TimeManager::GetInstance().SetTimeScale(0.0f);
 	m_pPlayer->animation.Play(static_cast<int>(PlayerAnimState::Damage), false);
+	SoundManager::GetInstance().Play_Sound("SE_Player_Damage");
 }
 
 void Player_DamageState::OnUpdate()
 {
+	if (m_pPlayer->GetIsDead())
+	{
+		auto spDeathState = std::make_shared<Player_DeathState>();
+		m_pPlayer->ChangeState(spDeathState);
+		return;
+	}
+
 	frameCount++;
 	// ノックバック速度を設定
 	moveSpeed -= frameCount * DECEL;
@@ -44,48 +53,9 @@ void Player_DamageState::OnUpdate()
 	m_pPlayer->SetTargetMoveDirection(targetPos);
 	m_pPlayer->SetMoveSpeed(moveSpeed);
 
-	// のけぞり中攻撃ボタンが押されたらフラグを立てる
-	if (!isInputAttack && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_1)
-	{
-		isInputAttack = true;
-	}
-
-	// のけぞり中ジャンプボタンが押されたらフラグを立てる
-	if (!isInputJump && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_3)
-	{
-		isInputJump = true;
-	}
-
-	// のけぞり中回避が押されたらフラグを立てる
-	if (!isInputDodge && Input::GetInput().GetNowFrameNewInput() & PAD_INPUT_6)
-	{
-		isInputDodge = true;
-	}
 
 	if (m_pPlayer->animation.GetIsAnimFinished())
 	{
-		if (isInputJump)
-		{
-			auto spJumpState = std::make_shared<Player_Jump1State>();
-			m_pPlayer->ChangeState(spJumpState);
-			return;
-		}
-
-		if (isInputDodge)
-		{
-			// 回避に移行
-			auto spDodgeState = std::make_shared<Player_DodgeState>();
-			m_pPlayer->ChangeState(spDodgeState);
-			return;
-		}
-
-		if (isInputAttack)
-		{
-			auto spAttack1State = std::make_shared<Player_Attack1State>();
-			m_pPlayer->ChangeState(spAttack1State);
-			return;
-		}
-
 		// スティック入力があれば走り状態に変更
 		if (Input::GetInput().GetIsMoveLStick())
 		{

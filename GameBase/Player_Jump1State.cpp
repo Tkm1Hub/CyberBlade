@@ -9,6 +9,7 @@
 #include "Player_DamageState.h"
 #include "TimeManager.h"
 #include "EffectManager.h"
+#include "Sound.h"
 
 void Player_Jump1State::OnStart()
 {
@@ -32,6 +33,8 @@ void Player_Jump1State::OnUpdate()
 		m_pPlayer->AddJumpCount();
 		// エフェクト再生
 		EffectManager::GetInstance().PlayEffect("Player_JumpWave", m_pPlayer->GetPosition());
+		//SE再生
+		SoundManager::GetInstance().Play_Sound("SE_Jump");
 	}
 
 	// ダメージを食らったら状態変更
