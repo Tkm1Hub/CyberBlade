@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "ResultScene.h"
 #include "TimeManager.h"
+#include "Sound.h"
 
 // 画面設定
 int constexpr SCREEN_WIDTH = 1920;
@@ -55,11 +56,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     // ウィンドウズPCに一時的にフォントデータを読み込む(システム終了まで)
     AddFontResourceExA("data/font/GenEiLateGoN_v2.ttf", FR_PRIVATE, NULL);
 
+    SoundManager::GetInstance().Init();
+
     std::shared_ptr<SceneManager> sceneManager = std::make_shared<SceneManager>();
 
-    sceneManager->Add<ResultScene>("Result");
     sceneManager->Add<TitleScene>("Title");
     sceneManager->Add<GameScene>("Game");
+    sceneManager->Add<ResultScene>("Result");
+
 
     // メインゲームループ（ESCキー or ウィンドウ閉じる まで続く）
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)

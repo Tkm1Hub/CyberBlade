@@ -20,6 +20,7 @@ void ResultScene::Init()
 
 	MV1SetPosition(player_ModelHandle, playerModelPos);
 	MV1SetScale(player_ModelHandle, playerModelScale);
+	MV1SetRotationXYZ(player_ModelHandle, playerModelRot);
 
 	animation = std::make_shared<Animation>();
 
@@ -54,15 +55,6 @@ void ResultScene::Update()
 		fade = min(fade, 255);
 	}
 
-	if (CheckHitKey(KEY_INPUT_UP))
-	{
-		playerModelScale = VAdd(playerModelScale, VGet(1.0f, 1.0f, 1.0f));
-	}
-	else if (CheckHitKey(KEY_INPUT_DOWN))
-	{
-		playerModelScale = VSub(playerModelScale, VGet(1.0f, 1.0f, 1.0f));
-	}
-
 
 	if (isChangeScene && fade == 255)
 	{
@@ -72,7 +64,7 @@ void ResultScene::Update()
 	animation->Update();
 
 	MV1SetPosition(player_ModelHandle, playerModelPos);
-
+	MV1SetScale(player_ModelHandle, playerModelScale);
 }
 
 void ResultScene::Draw() const

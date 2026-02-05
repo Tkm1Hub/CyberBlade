@@ -12,6 +12,8 @@
 #include "Player.h"
 #include "EffectManager.h"
 #include "Pause.h"
+#include "Sound.h"
+
 GameScene::GameScene(SceneManager& manager)
 	: Scene{manager}{
 }
@@ -28,6 +30,8 @@ void GameScene::Init()
 	// フォントハンドルの作成
 	fontHandle = CreateFontToHandle("源暎ラテゴ v2", 50, -1, DX_FONTTYPE_ANTIALIASING_EDGE_4X4);
 	UIHandle = LoadGraph("data/picture/UI.png");
+
+	SoundManager::GetInstance().Play_Sound("BGM_Game", true);
 
 	//インスタンス化
 	objectMgr = std::make_shared<ObjectManager>();
@@ -135,11 +139,7 @@ void GameScene::Update()
 	if (isChangeScene && fade == 255)
 	{
 		ChangeScene("Result");
-	}
-
-	if (CheckHitKey(KEY_INPUT_F10))
-	{
-		ChangeScene("Result");
+		SoundManager::GetInstance().StopSound("BGM_Game");
 	}
 }
 

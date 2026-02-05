@@ -257,6 +257,9 @@
     <Filter Include="ソース ファイル\BulletFire">
       <UniqueIdentifier>{c4c57ef5-a585-4db2-a070-e41c6b48788a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Sound">
+      <UniqueIdentifier>{0230d4f4-816a-4d8e-94de-5edaf0fddfc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -477,6 +480,9 @@
     </ClCompile>
     <ClCompile Include="BulletFire.cpp">
       <Filter>ソース ファイル\BulletFire</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>ソース ファイル\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -722,6 +728,9 @@
     </ClInclude>
     <ClInclude Include="BulletFire.h">
       <Filter>ソース ファイル\BulletFire</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>ソース ファイル\Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

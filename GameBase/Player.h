@@ -216,6 +216,13 @@ private:
 	int invincibleCount = 0;	// 無敵時間カウント
 	int currentAttackNum = 0;	// 現在の攻撃番号
 
+	// 効果音
+	int se_Attack = -1;			// 攻撃
+	int se_jump = -1;			// ジャンプ
+	int se_damage = -1;			// ダメージ
+	int se_dodge = -1;
+	int se_dodgeJust = -1;
+
 	bool isRunning = false;		// 走っているか
 	bool isSlowRun = false;		// 小走り状態か
 	bool isLockOn = false;		// ロックオン状態か

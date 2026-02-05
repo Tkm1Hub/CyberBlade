@@ -35,8 +35,9 @@ private:
 
     int ALPHA_SPEED = 2;
 
-    VECTOR playerModelPos = { -770.0f,-9020.0f,2000.0f };
-    VECTOR playerModelScale = { 50.0f,50.0f,50.0f };
+    VECTOR playerModelPos = { -1100,-4200,1500 };
+    VECTOR playerModelScale = { 25.0f,25.0f,25.0f };
+    VECTOR playerModelRot = { 0.0f,-0.5,0.0f };
 
     std::shared_ptr<Animation> animation = nullptr;
 };

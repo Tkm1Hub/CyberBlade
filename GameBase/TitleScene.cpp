@@ -2,6 +2,7 @@
 #include "TitleScene.h"
 #include "Animation.h"
 #include "Input.h"
+#include "Sound.h"
 
 TitleScene::TitleScene(SceneManager& manager)
 	: Scene(manager)
@@ -18,6 +19,8 @@ void TitleScene::Init()
 	sword_ModelHandle = MV1LoadModel("data/model/item/Heat-KatanaV2_Title.mv1");
 	movie_Handle = LoadGraph("data/movie/TitleMovie.mp4");
 	PlayMovieToGraph(movie_Handle);
+
+	SoundManager::GetInstance().Play_Sound("BGM_Title", true);
 
 	swordModelRot.y = DX_PI_F / 2;
 
@@ -93,6 +96,8 @@ void TitleScene::Update()
 	{
 		SetupCamera_Perspective(60 * DX_PI_F / 180.0f);
 		isChangeScene = false;
+
+		SoundManager::GetInstance().StopSound("BGM_Title");
 
 		// フォントハンドルを削除
 		DeleteFontToHandle(fontHandle);

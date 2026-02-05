@@ -203,6 +203,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShadowManager.cpp" />
     <ClCompile Include="SkyDome.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageCollision.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -274,6 +275,7 @@
     <ClInclude Include="ResultScene.h" />
     <ClInclude Include="ShadowManager.h" />
     <ClInclude Include="Player_SlowRunState.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="StageCollision.h" />
     <ClInclude Include="StateBase.h" />
     <ClInclude Include="Debug.h" />
