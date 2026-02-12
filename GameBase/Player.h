@@ -63,6 +63,7 @@ struct PlayerParams
 	float Decel = 0.1f;				// 移動減速度
 	float AngleSpeed = 0.5f;			// 移動時のモデル回転速度
 	float lockOnRange = 60.0f;			// ロックオン可能距離
+	float ATTACK_TARGET_RADIUS = 100.0f;	// 攻撃補正半径
 	float HitRadius = 3.0f;				// 当たり判定半径
 	float HitHeight = 16.5f;			// 当たり判定高さ
 	VECTOR InitPos = { 0.0f,0.0f,0.0f };	// 初期座標

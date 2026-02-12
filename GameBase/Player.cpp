@@ -337,18 +337,18 @@ VECTOR Player::GetMoveInput()
 void Player::ToggleLockOn()
 {
 	isLockOn = !isLockOn;
+	lockOnTarget = EnemyManager::GetEnemyManager().GetNearestEnemy(pos);
+
+	// 敵がいない場合はロックオン解除して終了
+	if (!lockOnTarget)
+	{
+		isLockOn = false;
+		return;
+	}
 
 	if (isLockOn)
 	{
 		SoundManager::GetInstance().Play_Sound("SE_LockOn");
-		lockOnTarget = EnemyManager::GetEnemyManager().GetNearestEnemy(pos);
-
-		// 敵がいない場合はロックオン解除して終了
-		if (!lockOnTarget)
-		{
-			isLockOn = false;
-			return;
-		}
 
 		CameraManager::GetCameraManager().ChangeCamera(1);
 
@@ -360,7 +360,6 @@ void Player::ToggleLockOn()
 	}
 	else
 	{
-		lockOnTarget = nullptr;
 		CameraManager::GetCameraManager().ChangeCamera(0);
 		attackDir = targetMoveDirection;
 	}
@@ -391,7 +390,26 @@ void Player::UpdateAttackDir()
 	}
 	else
 	{
-		attackDir = targetMoveDirection;
+		// 最短距離の敵座標
+		VECTOR enemyPos = EnemyManager::GetEnemyManager().GetNearestEnemyPos(pos);
+
+		// プレイヤーの座標から距離を計算
+		VECTOR diff = VSub(enemyPos, pos);
+		float dist = VSize(diff);
+
+		if (dist < 100.0f)
+		{
+			// lockOnTargetが有効なときのみ方向を更新
+			if (auto target = lockOnTarget)
+			{
+				CameraManager::GetCameraManager().ChangeCamera(0);
+				attackDir = GetTargetDir();
+			}
+		}
+		else
+		{
+			attackDir = targetMoveDirection;
+		}
 	}
 }
 
